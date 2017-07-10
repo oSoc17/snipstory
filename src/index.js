@@ -1,9 +1,16 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './containers/App';
+import store from './redux/store';
 import registerServiceWorker from './registerServiceWorker';
-import {ref, firebaseStorage, firebaseAuth} from './helpers/firebase';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
 registerServiceWorker();

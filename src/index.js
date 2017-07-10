@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {ref, firebaseStorage, firebaseAuth} from './helpers/firebase';
+import { firebaseDatabase, firebaseStorage, firebaseAuth } from './helpers/firebase';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { test } from '../redux/actions';
-import logo from './logo.svg';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import Home from './Home';
+import Story from './Story';
 import './App.css';
 
 class App extends Component {
@@ -10,12 +13,24 @@ class App extends Component {
   }
 
   render() {
+    const { history, user } = this.props;
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>iShare</h2>
-        </div>
+      <div className="app">
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={props => <Home user={user} {...props} />}
+            />
+            <Route
+              path="/story/:storyId"
+              render={props => <Story user={user} {...props} />}
+            />
+            <Route render={() => <Redirect to="/" />} />
+          </Switch>
+        </ConnectedRouter>
       </div>
     );
   }

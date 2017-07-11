@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { test } from '../redux/actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home';
 import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';

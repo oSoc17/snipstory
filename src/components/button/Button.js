@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { SIZES } from '../../constants';
 import './Button.css';
 
 const Button = ({
   primary = false,
-  style = {},
   size = SIZES.MEDIUM,
-  children = ''
+  children = '',
+  to,
+  ...props
 }) => {
   const classes = ['button', `button--${size}`];
 
@@ -14,8 +16,16 @@ const Button = ({
     classes.push('primary');
   }
 
+  if (to) {
+    return (
+      <Link className={classes.join(' ')} to={to} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button className={classes.join(' ')} style={style}>
+    <button className={classes.join(' ')} {...props}>
       {children}
     </button>
   );

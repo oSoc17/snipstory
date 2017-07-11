@@ -2,20 +2,27 @@
 
 .button {
   font-size: 16px;
-  padding: 2em 1em;
+  padding: 1em 2em;
   background-color: #000;
+  border-radius: 2em;
   color: #fff;
   box-shadow: 0 2px 6px 0 $brand-blue--light;
   transition: box-shadow .2s;
-  &:hover {
+  border: none;
+
+  &:hover,
+  &:focus {
+    outline: none;
     box-shadow: 0 4px 12px $brand-blue--light;
   }
   &--small {
     font-size: 12px;
+    padding: 0.75em 1.5em;
   }
 
   &--large {
     font-size: 24px;
+    padding: 1.5em 3em;
   }
 
   &--extra-large {

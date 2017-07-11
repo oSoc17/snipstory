@@ -4,9 +4,9 @@ import './Button.css';
 
 const Button = ({
   primary = false,
-  text = '',
   style = {},
-  size = SIZES.MEDIUM
+  size = SIZES.MEDIUM,
+  children = ''
 }) => {
   const classes = ['button', `button--${size}`];
 
@@ -16,7 +16,7 @@ const Button = ({
 
   return (
     <button className={classes.join(' ')} style={style}>
-      {text}
+      {children}
     </button>
   );
 };

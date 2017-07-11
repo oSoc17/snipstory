@@ -1,6 +1,6 @@
 # iShare
 
-[![Build Status](https://travis-ci.org/oSoc17/ishare.svg?branch=develop)](https://travis-ci.org/oSoc17/istwaar)
+[![Build Status](https://travis-ci.org/oSoc17/ishare.svg?branch=develop)](https://travis-ci.org/oSoc17/ishare)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ![Dependencies Status](https://david-dm.org/osoc17/ishare.svg)
 

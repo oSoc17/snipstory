@@ -3,30 +3,39 @@ import React from 'react';
 class QuizModule extends React.Component {
   state = {
     answer: null
-  }
+  };
 
   selectAnswer(event) {
-
+    this.answer = event.target.value;
+    if (this.confirmAnswer) {
+      console.log('green');
+    } else {
+      console.log('red');
+    }
   }
 
-  confirmAnswer() {
-    if(this.answer == this.props.correction) return true;
-    return false;
+  get confirmAnswer() {
+    return this.answer === this.props.correction;
   }
 
   render() {
-    {if(this.props.resources.length == 1) this.props.resources[0]}
-    <div>
-      <p>{this.props.text}</p>
+    return (
       <div>
-        <button value="Y">
-          Yes
-        </button>
-        <button value="N">
-          No
-        </button>
+        {this.props.resources &&
+          <img src={this.props.resources[0]} alt="QuizImage" />}
+        <p>
+          {this.props.text}
+        </p>
+        <div>
+          <button value="Y" onClick={this.selectAnswer.bind(this)}>
+            Yes
+          </button>
+          <button value="N" onClick={this.selectAnswer.bind(this)}>
+            No
+          </button>
+        </div>
       </div>
-    </div>
+    );
   }
 }
 

@@ -1,5 +1,9 @@
-export const ImageModule = ({resources}) => (
+export const ImageModule = ({ resources, text }) =>
   <div>
-    <img src={resources[0]} />
-  </div>
-);
+    <figure>
+      <img src={resources[0]} />
+      <figcaption>
+        {text}
+      </figcaption>
+    </figure>
+  </div>;

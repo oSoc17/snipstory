@@ -1,30 +1,48 @@
-import React from 'React';
+import React from 'react';
 
 class ImageQuizModule extends React.Component {
   state = {
     answer: null
-  }
+  };
 
   selectAnswer(event) {
-    // add vote
-    // Check if all users voted
-    // Show right answer when all users voted
+    console.log(event.target);
+    this.answer = parseInt(event.target.id, 10);
+    if (this.confirmAnswer) {
+      // green border
+      console.log('green');
+    } else {
+      // red border
+      console.log('red');
+    }
   }
 
-  confirmAnswer() {
-    if(this.answer == this.props.correction) return true;
-    return false;
+  get confirmAnswer() {
+    return this.answer === this.props.correction;
   }
 
   render() {
-    <div>
-      <p>{this.props.text}</p>
-      <div class="images">
-        <div>
-          {this.props.resources.map((resource, i) => <img class="image" key={i} id={i} src={resource} onClick={this.selectAnswer}/>)}
+    return (
+      <div>
+        <p>
+          {this.props.text}
+        </p>
+        <div className="images">
+          <div>
+            {this.props.resources.map((resource, i) =>
+              <img
+                className="image"
+                key={i}
+                id={i}
+                src={resource}
+                onClick={this.selectAnswer.bind(this)}
+                alt={'ImageQuiz' + i}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    );
   }
 }
 

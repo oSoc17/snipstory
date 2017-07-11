@@ -1,10 +1,9 @@
-export const TextblockModule = ({resources, text}) => (
+export const TextblockModule = ({ resources, text }) =>
   <div>
-    <img src={resources[0]} alt=""/>
+    <img src={resources[0]} alt="TextBlockImage" />
     <div>
       <p>
         {text}
       </p>
     </div>
-  </div>
-);
+  </div>;

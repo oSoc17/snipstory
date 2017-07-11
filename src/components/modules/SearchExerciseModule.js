@@ -1,8 +1,9 @@
-export const ImageSearchExerciseModule = ({text}) => (
+export const ImageSearchExerciseModule = ({ text }) =>
   <div>
-    <span>{text}</span>
+    <span>
+      {text}
+    </span>
     <div className="image-drop-box">
-
+      {/* Uplaod box for image (drag & drop) */}
     </div>
-  </div>
-);
+  </div>;

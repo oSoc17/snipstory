@@ -3,11 +3,9 @@ import React from 'react';
 class MapModule extends React.Component {
   state = {
     // hold placed markers + locations
-  }
+  };
 
-  render() {
-
-  }
+  render() {}
 }
 
 export default MapModule;

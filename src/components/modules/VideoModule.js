@@ -1,5 +1,4 @@
-export const VideoModule = ({resources}) => (
+export const VideoModule = ({ resources }) =>
   <video controls>
-    <source src={resources[0]}></source>
-  </video>
-);
+    <source src={resources[0]} />
+  </video>;

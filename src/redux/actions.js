@@ -1,11 +1,13 @@
 import { firebaseDatabase } from '../helpers/firebase';
-import { browserHistory } from 'react-router';
 
 export const actionTypes = {
   fetchRandomStoriesFulfilled: 'FETCH_RANDOM_STORIES_FULFILLED',
   fetchRandomStoriesRejected: 'FETCH_RANDOM_STORIES_REJECTED',
   fetchRandomStoriesStarted: 'FETCH_RANDOM_STORIES_STARTED',
-  selectStory: 'SELECT_STORY'
+  selectStory: 'SELECT_STORY',
+  checkTeacherCodeRejected: 'CHECK_TEACHER_CODE_REJECTED',
+  checkTeacherCodeFulfilled: 'CHECK_TEACHER_CODE_FULFILLED',
+  checkingTeacherCode: 'CHECKING_TEACHER_CODE'
 };
 
 export const fetchRandomStoriesStarted = () => ({
@@ -37,4 +39,38 @@ export const fetchRandomStories = () => {
 export const selectStory = story => ({
   type: actionTypes.selectStory,
   story
+});
+
+export const checkTeacherCode = event => {
+  return dispatch => {
+    dispatch(checkingTeacherCode());
+    const code = event.target.value;
+    if (code === '')
+      return dispatch(checkTeacherCodeRejected('No empty string allowed'));
+    firebaseDatabase
+      .ref('/tokens')
+      .child(code)
+      .once('value')
+      .then(snapshot => {
+        dispatch(checkTeacherCodeFulfilled(snapshot.val()));
+      })
+      .catch(err => {
+        dispatch(checkTeacherCodeRejected('No such code'));
+      });
+  };
+};
+
+export const checkingTeacherCode = () => ({
+  type: actionTypes.checkingTeacherCode
+});
+
+export const checkTeacherCodeFulfilled = ({ classId, userId }) => ({
+  type: actionTypes.checkTeacherCodeFulfilled,
+  classId,
+  userId
+});
+
+export const checkTeacherCodeRejected = errorString => ({
+  type: actionTypes.checkTeacherCodeFulfilled,
+  error: errorString
 });

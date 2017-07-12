@@ -7,6 +7,7 @@ import Home from './views/Home';
 import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';
 import CreateRoom from './views/CreateRoom';
+import StorySelect from './views/StorySelect';
 import './App.css';
 
 class App extends Component {
@@ -28,6 +29,11 @@ class App extends Component {
               path="/quiz"
               exact
               render={props => <CharacterQuiz user={user} {...props} />}
+            />
+            <Route
+              path="/story/select"
+              exact
+              render={props => <StorySelect user={user} {...props} />}
             />
             <Route
               path="/rooms/create"

@@ -8,9 +8,9 @@ class QuizModule extends React.Component {
   selectAnswer(event) {
     this.answer = event.target.value;
     if (this.confirmAnswer) {
-      console.log('green');
+      // green border
     } else {
-      console.log('red');
+      // red border
     }
   }
 

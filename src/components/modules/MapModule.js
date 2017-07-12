@@ -9,7 +9,6 @@ class MapModule extends React.Component {
   };
 
   render() {
-    console.log('Rendering map');
     const Markers =
       this.props.markers &&
       this.props.markers.map((marker, index) => {

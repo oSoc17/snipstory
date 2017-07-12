@@ -6,14 +6,11 @@ class ImageQuizModule extends React.Component {
   };
 
   selectAnswer(event) {
-    console.log(event.target);
     this.answer = parseInt(event.target.id, 10);
     if (this.confirmAnswer) {
       // green border
-      console.log('green');
     } else {
       // red border
-      console.log('red');
     }
   }
 

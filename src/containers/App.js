@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { test } from '../redux/actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
@@ -10,9 +9,7 @@ import TeacherArea from './views/TeacherArea';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.test();
-  }
+  componentDidMount() {}
 
   render() {
     const { history, user } = this.props;
@@ -50,4 +47,4 @@ const mapStateToProps = state => ({
   room: state.room
 });
 
-export default connect(mapStateToProps, { test })(App);
+export default connect(mapStateToProps)(App);

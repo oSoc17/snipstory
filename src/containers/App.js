@@ -16,6 +16,7 @@ class App extends Component {
 
   render() {
     const { history, user } = this.props;
+    const isAuthorizedTeacher = user.isAuthorized && user.token;
 
     return (
       <div className="app">
@@ -33,9 +34,16 @@ class App extends Component {
             />
             <ProtectedRoute
               path="/teacher"
-              isAuthorized={user.isAuthorized && user.token}
+              isAuthorized={isAuthorizedTeacher}
+              redirectUrl="/teacher/login"
               exact
               render={props => <TeacherArea user={user} {...props} />}
+            />
+            <ProtectedRoute
+              path="/teacher/login"
+              isAuthorized={!isAuthorizedTeacher}
+              exact
+              render={() => <div>login</div>}
             />
             <Route render={() => <Redirect to="/" />} />
           </Switch>

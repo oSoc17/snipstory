@@ -1,9 +1,10 @@
 import React from 'react';
+import Button from '../button/Button';
 
-const selectAnswer = (e, module, handleChange) => {
+const selectAnswer = (module, index, handleChange) => {
   handleChange(
     Object.assign({}, module, {
-      answer: parseInt(e.target.id, 10)
+      answer: parseInt(index, 10)
     })
   );
 };
@@ -17,14 +18,11 @@ const QuizModule = ({ module, handleChange }) => {
       <p>
         {module.text}
       </p>
-      <div>
-        <button value="Y" onClick={e => selectAnswer(e, module, handleChange)}>
-          Yes
-        </button>
-        <button value="N" onClick={e => selectAnswer(e, module, handleChange)}>
-          No
-        </button>
-      </div>
+      {module.options.map((option, i) =>
+        <Button onClick={_ => selectAnswer(module, i, handleChange)}>
+          {option.value}
+        </Button>
+      )}
     </div>
   );
 };

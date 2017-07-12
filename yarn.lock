@@ -5235,6 +5235,10 @@ react-error-overlay@^1.0.9:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-feather@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.0.4.tgz#36eba1878c8f316cb91bf236016f9d934505ff3e"
+
 react-redux@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"

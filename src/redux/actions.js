@@ -1,9 +1,11 @@
 import { firebaseDatabase } from '../helpers/firebase';
+import { browserHistory } from 'react-router';
 
 export const actionTypes = {
   fetchRandomStoriesFulfilled: 'FETCH_RANDOM_STORIES_FULFILLED',
   fetchRandomStoriesRejected: 'FETCH_RANDOM_STORIES_REJECTED',
-  fetchRandomStoriesStarted: 'FETCH_RANDOM_STORIES_STARTED'
+  fetchRandomStoriesStarted: 'FETCH_RANDOM_STORIES_STARTED',
+  selectStory: 'SELECT_STORY'
 };
 
 export const fetchRandomStoriesStarted = () => ({
@@ -31,3 +33,8 @@ export const fetchRandomStories = () => {
       });
   };
 };
+
+export const selectStory = story => ({
+  type: actionTypes.selectStory,
+  story
+});

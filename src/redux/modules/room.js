@@ -11,6 +11,8 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.selectStory:
+      return Object.assign({}, state, action.story);
     default:
       return state;
   }

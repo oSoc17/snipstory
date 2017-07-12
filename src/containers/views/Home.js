@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../components/button/Button';
 import { MapPin } from 'react-feather';
-import { fetchRandomStories } from '../../redux/actions';
+import { fetchRandomStories, selectStory } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ConfirmTeacher from './ConfirmTeacher';
@@ -12,7 +12,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const { isLoading, randomStories, error } = this.props;
+    const {
+      isLoading,
+      randomStories,
+      error,
+      history,
+      selectStory
+    } = this.props;
 
     if (isLoading) {
       return <div>Loading...</div>;
@@ -30,7 +36,16 @@ class Home extends React.Component {
             {randomStories &&
               randomStories.map(story =>
                 <div key={story.id} className="story">
-                  {story.name}
+                  <a
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault();
+                      selectStory(story);
+                      history.push('/rooms/create');
+                    }}
+                  >
+                    {story.name}
+                  </a>
                 </div>
               )}
           </div>
@@ -48,4 +63,6 @@ const mapStateToProps = state => ({
   ...state.home
 });
 
-export default connect(mapStateToProps, { fetchRandomStories })(Home);
+export default connect(mapStateToProps, { fetchRandomStories, selectStory })(
+  Home
+);

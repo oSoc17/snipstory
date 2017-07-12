@@ -1,42 +1,32 @@
 import React from 'react';
 
-class QuizModule extends React.Component {
-  state = {
-    answer: null
-  };
+const selectAnswer = (e, module, handleChange) => {
+  handleChange(
+    Object.assign({}, module, {
+      answer: parseInt(e.target.id, 10)
+    })
+  );
+};
 
-  selectAnswer(event) {
-    this.answer = event.target.value;
-    if (this.confirmAnswer) {
-      // green border
-    } else {
-      // red border
-    }
-  }
+const QuizModule = ({ module, handleChange }) => {
+  const confirmAnswer = module.answer === module.correction;
 
-  get confirmAnswer() {
-    return this.answer === this.props.correction;
-  }
-
-  render() {
-    return (
+  return (
+    <div>
+      {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
+      <p>
+        {module.text}
+      </p>
       <div>
-        {this.props.resources &&
-          <img src={this.props.resources[0]} alt="QuizImage" />}
-        <p>
-          {this.props.text}
-        </p>
-        <div>
-          <button value="Y" onClick={this.selectAnswer.bind(this)}>
-            Yes
-          </button>
-          <button value="N" onClick={this.selectAnswer.bind(this)}>
-            No
-          </button>
-        </div>
+        <button value="Y" onClick={e => selectAnswer(e, module, handleChange)}>
+          Yes
+        </button>
+        <button value="N" onClick={e => selectAnswer(e, module, handleChange)}>
+          No
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default QuizModule;

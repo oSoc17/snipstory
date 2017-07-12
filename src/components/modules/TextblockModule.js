@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TextblockModule = ({ resources, text }) =>
+export const TextblockModule = ({ module: { resources, text } }) =>
   <div>
     <img src={resources[0]} alt="TextBlockImage" />
     <div>

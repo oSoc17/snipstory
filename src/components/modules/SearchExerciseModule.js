@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ImageSearchExerciseModule = ({ text }) =>
+export const ImageSearchExerciseModule = ({ module: { text } }) =>
   <div>
     <span>
       {text}

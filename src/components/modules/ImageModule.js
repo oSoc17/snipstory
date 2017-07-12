@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ImageModule = ({ resources, text }) =>
+export const ImageModule = ({ module: { resources, text } }) =>
   <div>
     <figure>
       <img src={resources[0]} />

@@ -6,12 +6,16 @@
   font-weight: 600;
   font-family: $brand-font-stack;
   padding: .8em 2.4em;
-  background-color: #000;
+  background-color: $primary-color;
   border-radius: 4em;
   color: #fff;
   box-shadow: 0 0 10px 2px rgba($brand-blue--light, .8);
   transition: box-shadow $transition-timing;
   border: none;
+  &--inverted {
+    color: $primary-color;
+    background-color: #fff;
+  }
 
   &:hover,
   &:focus {

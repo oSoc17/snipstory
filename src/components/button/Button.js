@@ -4,7 +4,7 @@ import { SIZES } from '../../constants';
 import './Button.css';
 
 const Button = ({
-  primary = false,
+  inverted = true,
   size = SIZES.MEDIUM,
   children = '',
   to,
@@ -12,8 +12,8 @@ const Button = ({
 }) => {
   const classes = ['button', `button--${size}`];
 
-  if (primary) {
-    classes.push('primary');
+  if (inverted) {
+    classes.push('button--inverted');
   }
 
   if (to) {

@@ -1,10 +1,12 @@
 import React from 'react';
-import FirebaseHelper from '../../helpers/FirebaseHelper';
+import { firebaseDatabase } from '../../helpers/firebase';
 
 class ConfirmTeacher extends React.Component {
   state = {
     username: '',
-    teacherCode: ''
+    teacherCode: '',
+    classId: '',
+    teacherId: ''
   };
 
   updateName(event) {
@@ -17,36 +19,40 @@ class ConfirmTeacher extends React.Component {
 
   checkTeacherCode(event) {
     event.preventDefault();
-    FirebaseHelper.isValidTeacherCode(this.state.teacherCode);
+    firebaseDatabase
+      .ref('/tokens/' + this.state.teacherCode)
+      .once('value')
+      .then(snapshot => {
+        const classId = snapshot.val().classId;
+        const userId = snapshot.val().userId;
+        this.setState({ classId: classId, teacherId: userId });
+      });
   }
 
   render() {
     return (
       <div>
-        <form>
-          <label htmlFor="username">Gebruikersnaam: </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            required
-            onChange={this.updateName.bind(this)}
-          />
-          <input type="submit" value="Ok" />
-        </form>
+        <form onSubmit={this.checkTeacherCode.bind(this)}>
+          <div className="form-group">
+            <label htmlFor="username">Gebruikersnaam: </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              onChange={this.updateName.bind(this)}
+            />
+          </div>
 
-        <form>
-          <label htmlFor="teacher-code">Vul Leerkrachtscode in: </label>
-          <input
-            type="text"
-            name="teacher-code"
-            onChange={this.changeTeacherCode.bind(this)}
-          />
-          <input
-            type="submit"
-            value="Activeer code"
-            onClick={this.checkTeacherCode.bind(this)}
-          />
+          <div className="form-group">
+            <label htmlFor="teacher-code">Vul Leerkrachtscode in: </label>
+            <input
+              type="text"
+              name="teacher-code"
+              onChange={this.changeTeacherCode.bind(this)}
+            />
+            <input type="submit" value="Activeer code" />
+          </div>
         </form>
       </div>
     );

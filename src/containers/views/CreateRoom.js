@@ -1,9 +1,6 @@
 import React from 'react';
 
 class CreateRoom extends React.Component {
-  // Room creation handled by next component => componentWillMount
-  // --> firebase create a room and return that room identifier/key
-
   render() {
     return (
       <div>

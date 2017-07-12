@@ -23,9 +23,12 @@ class ConfirmTeacher extends React.Component {
       .ref('/tokens/' + this.state.teacherCode)
       .once('value')
       .then(snapshot => {
-        const classId = snapshot.val().classId;
-        const userId = snapshot.val().userId;
-        this.setState({ classId: classId, teacherId: userId });
+        if (snapshot.val()) {
+          const classId = snapshot.val().classId;
+          const userId = snapshot.val().userId;
+          return this.setState({ classId: classId, teacherId: userId });
+        }
+        return;
       });
   }
 

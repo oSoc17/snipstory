@@ -1,15 +1,20 @@
 import React from 'react';
-import { firebaseDatabase } from '../../helpers/firebase';
+import { fetchRandomStories } from '../../redux/actions';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
-  loadRandomStories() {
-    firebaseDatabase.ref('/stories').once('value').then(snapshot => {
-      snapshot.val();
-    });
+  componentWillMount() {
+    this.props.fetchRandomStories();
   }
 
   render() {
+    const { isLoading, randomStories, error } = this.props;
+
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div>
         <div className="page">
@@ -17,10 +22,27 @@ class Home extends React.Component {
           <Link to="/quiz">Start</Link>
           <div className="filters" />
         </div>
-        <div className="page">loadRandomStories().map(story => )</div>
+        <div className="page">
+          <div className="random-stories">
+            {randomStories &&
+              randomStories.map(story =>
+                <div key={story.id} className="story">
+                  {story.name}
+                </div>
+              )}
+          </div>
+          {error &&
+            <div className="error">
+              {error}
+            </div>}
+        </div>
       </div>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  ...state.home
+});
+
+export default connect(mapStateToProps, { fetchRandomStories })(Home);

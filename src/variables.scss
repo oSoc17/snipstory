@@ -1,3 +1,24 @@
 $font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
   Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji",
   "Segoe UI Emoji", "Segoe UI Symbol";
+
+$brand-font-stack: Poppins, $font-stack;
+
+$brand-blue: #1157d7;
+$brand-blue--light: #3778fb;
+$brand-blue--lighter: #6381fc;
+$brand-red: #fc6560;
+$brand-red--light: #fd7f7e;
+$brand-red--lighter: #fdaaa6;
+$brand-orange: #fd734f;
+$brand-yellow: #fdae3f;
+$brand-yellow--light: #fed278;
+
+$primary-color: $brand-blue;
+$secondary-color: $brand-blue--light;
+$alert-color: $brand-red;
+$warning-color: $brand-yellow;
+$info-color: $brand-blue--lighter;
+$success-color: $brand-blue; // should be a green?
+
+$transition-timing: .2s;

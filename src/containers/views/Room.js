@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ImageModule from '../../components/modules/ImageModule';
 import ImageQuizModule from '../../components/modules/ImageQuizModule';
 import MapModule from '../../components/modules/MapModule';
@@ -7,6 +8,7 @@ import SearchExerciseModule from '../../components/modules/SearchExerciseModule'
 import TextblockModule from '../../components/modules/TextblockModule';
 import VideoModule from '../../components/modules/VideoModule';
 import YoutubeModule from '../../components/modules/YoutubeModule';
+import { test } from '../../redux/actions';
 
 class Room extends React.Component {
   handleChange(module, index) {
@@ -118,3 +120,10 @@ class Room extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  room: state.room,
+  user: state.user
+});
+
+export default connect(mapStateToProps, { test })(Room);

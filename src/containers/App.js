@@ -7,6 +7,8 @@ import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home';
 import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';
+import Login from './views/Login';
+import Register from './views/Register';
 import './App.css';
 
 class App extends Component {
@@ -32,6 +34,11 @@ class App extends Component {
               exact
               render={props => <CharacterQuiz user={user} {...props} />}
             />
+            <Route
+              path="/teacher/register"
+              exact
+              render={props => <Register user={user} {...props} />}
+            />
             <ProtectedRoute
               path="/teacher"
               isAuthorized={isAuthorizedTeacher}
@@ -42,8 +49,9 @@ class App extends Component {
             <ProtectedRoute
               path="/teacher/login"
               isAuthorized={!isAuthorizedTeacher}
+              redirectUrl="/teacher"
               exact
-              render={() => <div>login</div>}
+              render={props => <Login user={user} {...props} />}
             />
             <Route render={() => <Redirect to="/" />} />
           </Switch>

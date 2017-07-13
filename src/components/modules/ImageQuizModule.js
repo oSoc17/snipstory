@@ -34,5 +34,4 @@ const ImageQuizModule = ({ module, handleChange }) => {
     </div>
   );
 };
-
 export default ImageQuizModule;

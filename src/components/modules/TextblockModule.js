@@ -9,5 +9,4 @@ const TextblockModule = ({ module: { resources, text } }) =>
       </p>
     </div>
   </div>;
-
 export default TextblockModule;

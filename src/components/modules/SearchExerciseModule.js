@@ -9,5 +9,4 @@ const ImageSearchExerciseModule = ({ module: { text } }) =>
       {/* Uplaod box for image (drag & drop) */}
     </div>
   </div>;
-
 export default ImageSearchExerciseModule;

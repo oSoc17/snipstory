@@ -9,5 +9,4 @@ const ImageModule = ({ module: { resources, text } }) =>
       </figcaption>
     </figure>
   </div>;
-
 export default ImageModule;

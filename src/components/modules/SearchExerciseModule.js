@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ImageSearchExerciseModule = ({ text }) =>
+const ImageSearchExerciseModule = ({ module: { text } }) =>
   <div>
     <span>
       {text}
@@ -9,3 +9,4 @@ export const ImageSearchExerciseModule = ({ text }) =>
       {/* Uplaod box for image (drag & drop) */}
     </div>
   </div>;
+export default ImageSearchExerciseModule;

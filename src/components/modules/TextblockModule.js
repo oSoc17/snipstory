@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TextblockModule = ({ resources, text }) =>
+const TextblockModule = ({ module: { resources, text } }) =>
   <div>
     <img src={resources[0]} alt="TextBlockImage" />
     <div>
@@ -9,3 +9,4 @@ export const TextblockModule = ({ resources, text }) =>
       </p>
     </div>
   </div>;
+export default TextblockModule;

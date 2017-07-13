@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ImageModule = ({ resources, text }) =>
+const ImageModule = ({ module: { resources, text } }) =>
   <div>
     <figure>
       <img src={resources[0]} />
@@ -9,3 +9,4 @@ export const ImageModule = ({ resources, text }) =>
       </figcaption>
     </figure>
   </div>;
+export default ImageModule;

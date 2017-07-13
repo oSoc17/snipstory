@@ -25,7 +25,7 @@ class StorySelect extends React.Component {
         <div className="random-stories">
           {randomStories &&
             randomStories.map(story =>
-              <div key={story.id} className="story">
+              <div key={story.storyId} className="story">
                 <a
                   href=""
                   onClick={e => {

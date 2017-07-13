@@ -1,14 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkTeacherCode } from '../../redux/actions';
+import { checkTeacherCode, createRoom } from '../../redux/actions';
 
 class CreateRoom extends React.Component {
   render() {
-    const { isValidCode, checkTeacherCode } = this.props;
+    const {
+      error,
+      isLoading,
+      isValidCode,
+      checkTeacherCode,
+      createRoom
+    } = this.props;
 
+    if (isLoading) return <div>Creating room...</div>;
     return (
       <div>
-        <form>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            createRoom();
+          }}
+        >
           <h1>Maak een nieuwe ruimte</h1>
           <div className="form-group">
             <label htmlFor="username">Voor- en Achternaam: </label>
@@ -24,10 +36,11 @@ class CreateRoom extends React.Component {
               defaultValue="public"
               onChange={checkTeacherCode}
             />
-            {!isValidCode && <div>checking...</div>}
+            {!isValidCode && <span>checking...</span>}
           </div>
           <div className="form-group">
-            <input type="submit" value="Maak" />
+            {!isValidCode && <input type="submit" value="Maak" disabled />}
+            {isValidCode && <input type="submit" value="Maak" />}
           </div>
         </form>
       </div>
@@ -39,4 +52,6 @@ const mapStateToProps = state => ({
   ...state.room
 });
 
-export default connect(mapStateToProps, { checkTeacherCode })(CreateRoom);
+export default connect(mapStateToProps, { checkTeacherCode, createRoom })(
+  CreateRoom
+);

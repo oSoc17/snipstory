@@ -1,4 +1,5 @@
-import { firebaseDatabase } from '../helpers/firebase';
+import { firebaseDatabase, firebaseAuth } from '../helpers/firebase';
+import { push } from 'connected-react-router';
 
 export const actionTypes = {
   fetchRandomStoriesFulfilled: 'FETCH_RANDOM_STORIES_FULFILLED',
@@ -7,7 +8,13 @@ export const actionTypes = {
   selectStory: 'SELECT_STORY',
   checkTeacherCodeRejected: 'CHECK_TEACHER_CODE_REJECTED',
   checkTeacherCodeFulfilled: 'CHECK_TEACHER_CODE_FULFILLED',
-  checkingTeacherCode: 'CHECKING_TEACHER_CODE'
+  checkingTeacherCode: 'CHECKING_TEACHER_CODE',
+  createRoomStarted: 'CREATE_ROOM_STARTED',
+  createRoomFulfilled: 'CREATE_ROOM_FULFILLED',
+  createRoomRejected: 'CREATE_ROOM_REJECTED',
+  fetchRoomDataStarted: 'FETCH_ROOM_DATA_STARTED',
+  fetchRoomDataFulfilled: 'FETCH_ROOM_DATA_FULFILLED',
+  fetchRoomDataRejected: 'FETCH_ROOM_DATA_REJECTED'
 };
 
 export const fetchRandomStoriesStarted = () => ({
@@ -68,6 +75,7 @@ export const checkingTeacherCode = () => ({
 
 export const checkTeacherCodeFulfilled = ({ classId, userId }) => ({
   type: actionTypes.checkTeacherCodeFulfilled,
+  error: '',
   classId,
   userId
 });
@@ -75,4 +83,84 @@ export const checkTeacherCodeFulfilled = ({ classId, userId }) => ({
 export const checkTeacherCodeRejected = errorString => ({
   type: actionTypes.checkTeacherCodeRejected,
   error: errorString
+});
+
+export const createRoom = () => {
+  return (dispatch, getState) => {
+    dispatch(createRoomStarted());
+
+    firebaseAuth().signInAnonymously().then(user => {}).catch(err => {
+      console.log('auth failed', err);
+      dispatch(createRoomRejected(err.message));
+    });
+
+    const roomKey = firebaseDatabase.ref().child('rooms').push().key;
+
+    const data = {
+      id: roomKey,
+      ...getState().room,
+      users: [getState().user]
+    };
+
+    let updates = {};
+    updates['/rooms/' + roomKey] = data;
+    firebaseDatabase
+      .ref()
+      .update(updates)
+      .then(result => {
+        dispatch(createRoomFulfilled(data));
+        dispatch(push(`/rooms/${roomKey}`));
+      })
+      .catch(err => {
+        dispatch(createRoomRejected(err.message));
+      });
+  };
+};
+
+export const createRoomStarted = () => ({
+  type: actionTypes.createRoomStarted
+});
+
+export const createRoomFulfilled = newRoom => ({
+  type: actionTypes.createRoomFulfilled,
+  newRoom: newRoom
+});
+
+export const createRoomRejected = err => ({
+  type: actionTypes.createRoomRejected,
+  error: err
+});
+
+export const fetchRoomData = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchRoomDataStarted());
+    const roomId = getState().router.location.pathname.split('/rooms/')[1];
+
+    firebaseDatabase
+      .ref()
+      .child('rooms')
+      .child(roomId)
+      .once('value')
+      .then(response => {
+        console.log('room data:', response.val());
+        dispatch(fetchRoomDataFulfilled(response.val()));
+      })
+      .catch(err => {
+        dispatch(fetchRoomDataRejected(err));
+      });
+  };
+};
+
+export const fetchRoomDataStarted = () => ({
+  type: actionTypes.fetchRoomDataStarted
+});
+
+export const fetchRoomDataFulfilled = data => ({
+  type: actionTypes.fetchRoomDataFulfilled,
+  newRoom: data
+});
+
+export const fetchRoomDataRejected = err => ({
+  type: actionTypes.fetchRoomDataRejected,
+  error: err
 });

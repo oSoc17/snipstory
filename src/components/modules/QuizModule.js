@@ -14,6 +14,7 @@ const QuizModule = ({ module, handleChange }) => {
 
   return (
     <div>
+      <span>Hello QuizModule</span>
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
       <p>
         {module.text}

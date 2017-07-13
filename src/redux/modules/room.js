@@ -7,7 +7,8 @@ const initialState = {
   modules: null,
   tags: null,
   isLoading: false,
-  isValidCode: false
+  isValidCode: false,
+  isFetchingData: true
 };
 
 export const reducer = (state = initialState, action) => {
@@ -26,6 +27,34 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         isValidCode: false,
         error: action.error
+      });
+    case actionTypes.createRoomStarted:
+      return Object.assign({}, state, {
+        isLoading: true
+      });
+    case actionTypes.createRoomFulfilled:
+      return Object.assign({}, state, {
+        id: action.id
+      });
+    case actionTypes.createRoomRejected:
+      return Object.assign({}, state, {
+        isLoading: false,
+        error: action.error
+      });
+    case actionTypes.fetchRoomDataStarted:
+      return Object.assign({}, state, {
+        isFetchingData: true,
+        error: ''
+      });
+    case actionTypes.fetchRoomDataFulfilled:
+      return Object.assign({}, state, {
+        isFetchingData: false,
+        ...action.newRoom
+      });
+    case actionTypes.fetchRoomDataRejected:
+      return Object.assign({}, state, {
+        isFetchingData: false,
+        error: action.error.message
       });
     default:
       return state;

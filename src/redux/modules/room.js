@@ -7,7 +7,7 @@ const initialState = {
   modules: null,
   tags: null,
   isLoading: false,
-  isCheckingCode: false
+  isValidCode: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -18,13 +18,13 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { isCheckingCode: true });
     case actionTypes.checkTeacherCodeFulfilled:
       return Object.assign({}, state, {
-        isCheckingCode: false,
+        isValidCode: true,
         classId: action.classId,
         userId: action.userId
       });
     case actionTypes.checkTeacherCodeRejected:
       return Object.assign({}, state, {
-        isCheckingCode: false,
+        isValidCode: false,
         error: action.error
       });
     default:

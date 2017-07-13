@@ -4,7 +4,7 @@ import { checkTeacherCode } from '../../redux/actions';
 
 class CreateRoom extends React.Component {
   render() {
-    const { isCheckingCode, checkTeacherCode } = this.props;
+    const { isValidCode, checkTeacherCode } = this.props;
 
     return (
       <div>
@@ -24,6 +24,7 @@ class CreateRoom extends React.Component {
               defaultValue="public"
               onChange={checkTeacherCode}
             />
+            {!isValidCode && <div>checking...</div>}
           </div>
           <div className="form-group">
             <input type="submit" value="Maak" />

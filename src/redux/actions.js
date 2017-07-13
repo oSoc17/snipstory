@@ -18,7 +18,7 @@ export const fetchRandomStoriesFulfilled = stories => ({
   stories
 });
 export const fetchRandomStoriesRejected = error => ({
-  type: actionTypes.fetchRandomStoriesFulfilled,
+  type: actionTypes.fetchRandomStoriesRejected,
   error
 });
 export const fetchRandomStories = () => {
@@ -52,7 +52,9 @@ export const checkTeacherCode = event => {
       .child(code)
       .once('value')
       .then(snapshot => {
-        dispatch(checkTeacherCodeFulfilled(snapshot.val()));
+        const val = snapshot.val();
+        if (val) dispatch(checkTeacherCodeFulfilled(snapshot.val()));
+        else dispatch(checkTeacherCodeRejected('No such code'));
       })
       .catch(err => {
         dispatch(checkTeacherCodeRejected('No such code'));
@@ -71,6 +73,6 @@ export const checkTeacherCodeFulfilled = ({ classId, userId }) => ({
 });
 
 export const checkTeacherCodeRejected = errorString => ({
-  type: actionTypes.checkTeacherCodeFulfilled,
+  type: actionTypes.checkTeacherCodeRejected,
   error: errorString
 });

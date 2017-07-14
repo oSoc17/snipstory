@@ -4,7 +4,7 @@ import { SIZES } from '../../constants';
 import './Button.css';
 
 const Button = ({
-  inverted = true,
+  inverted = false,
   size = SIZES.MEDIUM,
   children = '',
   to,

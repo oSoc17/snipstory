@@ -1,5 +1,5 @@
 import React from 'react';
-import { firebaseDatabase, firebaseAuth } from '../../helpers/firebase';
+import { firebaseAuth } from '../../helpers/firebase';
 import { connect } from 'react-redux';
 import {
   fetchRoomData,
@@ -132,7 +132,7 @@ class Room extends React.Component {
                     />
                   );
                 default:
-                  <div />;
+                  return <div />;
               }
             })}
         </div>

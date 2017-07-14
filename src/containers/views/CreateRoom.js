@@ -43,6 +43,10 @@ class CreateRoom extends React.Component {
             {isValidCode && <input type="submit" value="Maak" />}
           </div>
         </form>
+        {error &&
+          <div>
+            {error}
+          </div>}
       </div>
     );
   }

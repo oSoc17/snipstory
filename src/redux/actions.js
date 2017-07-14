@@ -14,7 +14,10 @@ export const actionTypes = {
   createRoomRejected: 'CREATE_ROOM_REJECTED',
   fetchRoomDataStarted: 'FETCH_ROOM_DATA_STARTED',
   fetchRoomDataFulfilled: 'FETCH_ROOM_DATA_FULFILLED',
-  fetchRoomDataRejected: 'FETCH_ROOM_DATA_REJECTED'
+  fetchRoomDataRejected: 'FETCH_ROOM_DATA_REJECTED',
+  listenForRoomChangeStarted: 'LISTEN_FOR_ROOM_CHANGE_STARTED',
+  listenForRoomChangeFulfilled: 'LISTEN_FOR_ROOM_CHANGE_FULFILLED',
+  listenForRoomChangeRejected: 'LISTEN_FOR_ROOM_CHANGER_REJECTED'
 };
 
 export const fetchRandomStoriesStarted = () => ({
@@ -90,18 +93,15 @@ export const createRoom = () => {
     dispatch(createRoomStarted());
 
     firebaseAuth().signInAnonymously().then(user => {}).catch(err => {
-      console.log('auth failed', err);
       dispatch(createRoomRejected(err.message));
     });
 
     const roomKey = firebaseDatabase.ref().child('rooms').push().key;
-
     const data = {
-      id: roomKey,
       ...getState().room,
       users: [getState().user]
     };
-
+    data.id = roomKey;
     let updates = {};
     updates['/rooms/' + roomKey] = data;
     firebaseDatabase
@@ -142,7 +142,6 @@ export const fetchRoomData = () => {
       .child(roomId)
       .once('value')
       .then(response => {
-        console.log('room data:', response.val());
         dispatch(fetchRoomDataFulfilled(response.val()));
       })
       .catch(err => {
@@ -163,4 +162,28 @@ export const fetchRoomDataFulfilled = data => ({
 export const fetchRoomDataRejected = err => ({
   type: actionTypes.fetchRoomDataRejected,
   error: err
+});
+
+export const listenForRoomChange = () => {
+  return (dispatch, getState) => {
+    dispatch(listenForRoomChangeStarted());
+    const roomId = getState().router.location.pathname.split('/rooms/')[1];
+    firebaseDatabase.ref('/rooms/' + roomId).on('value', snapshot => {
+      dispatch(listenForRoomChangeFulfilled(snapshot.val()));
+    });
+  };
+};
+
+export const listenForRoomChangeStarted = () => ({
+  type: actionTypes.listenForRoomChangeStarted
+});
+
+export const listenForRoomChangeFulfilled = data => ({
+  type: actionTypes.listenForRoomChangeFulfilled,
+  newRoomData: data
+});
+
+export const listenForRoomChangeRejected = errorMessage => ({
+  type: actionTypes.listenForRoomChangeRejected,
+  error: errorMessage
 });

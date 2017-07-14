@@ -20,7 +20,7 @@ const QuizModule = ({ module, handleChange }) => {
         {module.text}
       </p>
       {module.options.map((option, i) =>
-        <Button onClick={_ => selectAnswer(module, i, handleChange)}>
+        <Button key={i} onClick={_ => selectAnswer(module, i, handleChange)}>
           {option.value}
         </Button>
       )}

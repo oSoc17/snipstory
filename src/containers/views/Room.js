@@ -1,7 +1,7 @@
 import React from 'react';
-import { firebaseDatabase } from '../../helpers/firebase';
+import { firebaseDatabase, firebaseAuth } from '../../helpers/firebase';
 import { connect } from 'react-redux';
-import { fetchRoomData } from '../../redux/actions';
+import { fetchRoomData, listenForRoomChange } from '../../redux/actions';
 import ImageModule from '../../components/modules/ImageModule';
 import ImageQuizModule from '../../components/modules/ImageQuizModule';
 import MapModule from '../../components/modules/MapModule';
@@ -17,7 +17,15 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
+    const user = firebaseAuth().currentUser;
+    if (!user) {
+      firebaseAuth().signInAnonymously().then(user => {}).catch(err => {});
+    }
     this.props.fetchRoomData();
+  }
+
+  componentDidMount() {
+    this.props.listenForRoomChange();
   }
 
   render() {
@@ -35,7 +43,6 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
-              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (
@@ -135,4 +142,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { fetchRoomData })(Room);
+export default connect(mapStateToProps, { fetchRoomData, listenForRoomChange })(
+  Room
+);

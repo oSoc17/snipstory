@@ -8,7 +8,8 @@ const initialState = {
   tags: null,
   isLoading: false,
   isValidCode: false,
-  isFetchingData: true
+  isFetchingData: true,
+  isFetchingChanges: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -29,23 +30,16 @@ export const reducer = (state = initialState, action) => {
         error: action.error
       });
     case actionTypes.createRoomStarted:
-      return Object.assign({}, state, {
-        isLoading: true
-      });
+      return Object.assign({}, state, { isLoading: true });
     case actionTypes.createRoomFulfilled:
-      return Object.assign({}, state, {
-        id: action.id
-      });
+      return Object.assign({}, state, { id: action.id });
     case actionTypes.createRoomRejected:
       return Object.assign({}, state, {
         isLoading: false,
         error: action.error
       });
     case actionTypes.fetchRoomDataStarted:
-      return Object.assign({}, state, {
-        isFetchingData: true,
-        error: ''
-      });
+      return Object.assign({}, state, { isFetchingData: true, error: '' });
     case actionTypes.fetchRoomDataFulfilled:
       return Object.assign({}, state, {
         isFetchingData: false,
@@ -55,6 +49,19 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetchingData: false,
         error: action.error.message
+      });
+    case actionTypes.listenForRoomChangeStarted:
+      return Object.assign({}, state, { isFetchingChanges: true });
+    case actionTypes.listenForRoomChangeFulfilled:
+      return Object.assign({}, state, {
+        error: '',
+        isFetchingChanges: false,
+        ...action.newRoomData
+      });
+    case actionTypes.listenForRoomChangeRejected:
+      return Object.assign({}, state, {
+        isFetchingChanges: false,
+        error: action.error
       });
     default:
       return state;

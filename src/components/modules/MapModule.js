@@ -22,7 +22,7 @@ const MapModule = (
         defaultCenter={center}
         defaultZoom={zoom}
         onClick={e => {
-          this.addMarker(e, module, handleChange, index);
+          addMarker(e, module, handleChange, index);
         }}
       >
         {module.markers &&

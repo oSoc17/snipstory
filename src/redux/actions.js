@@ -17,7 +17,10 @@ export const actionTypes = {
   fetchRoomDataRejected: 'FETCH_ROOM_DATA_REJECTED',
   listenForRoomChangeStarted: 'LISTEN_FOR_ROOM_CHANGE_STARTED',
   listenForRoomChangeFulfilled: 'LISTEN_FOR_ROOM_CHANGE_FULFILLED',
-  listenForRoomChangeRejected: 'LISTEN_FOR_ROOM_CHANGER_REJECTED'
+  listenForRoomChangeRejected: 'LISTEN_FOR_ROOM_CHANGER_REJECTED',
+  updateModuleStarted: 'UPDATE_MODULE_STARTED',
+  updateModuleFulfilled: 'UPDATE_MODULE_FULFILLED',
+  updateModuleRejected: 'UPDATE_MODULE_REJECTED'
 };
 
 export const fetchRandomStoriesStarted = () => ({
@@ -185,5 +188,42 @@ export const listenForRoomChangeFulfilled = data => ({
 
 export const listenForRoomChangeRejected = errorMessage => ({
   type: actionTypes.listenForRoomChangeRejected,
+  error: errorMessage
+});
+
+export const updateModule = module => {
+  return (dispatch, getState) => {
+    console.log('Updating module: ', module.id);
+    console.log('Current state:', getState());
+    dispatch(updateModuleStarted());
+    firebaseDatabase
+      .ref()
+      .child('rooms')
+      .child(getState().room.id)
+      .child('modules')
+      .child(module.id)
+      .set({
+        ...module
+      })
+      .then(snapshot => {
+        console.log('Retrieved snapshot:', snapshot.val());
+        dispatch(updateModuleFulfilled());
+      })
+      .catch(err => {
+        dispatch(updateModuleRejected(err.message));
+      });
+  };
+};
+
+export const updateModuleStarted = () => ({
+  type: actionTypes.updateModuleStarted
+});
+
+export const updateModuleFulfilled = () => ({
+  type: actionTypes.updateModuleFulfilled
+});
+
+export const updateModuleRejected = errorMessage => ({
+  type: actionTypes.updateModuleRejected,
   error: errorMessage
 });

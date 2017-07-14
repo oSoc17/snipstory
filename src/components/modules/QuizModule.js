@@ -19,6 +19,7 @@ const QuizModule = ({ module, handleChange }) => {
       <p>
         {module.text}
       </p>
+      {confirmAnswer && 'The right answer has been chosen'}
       {module.options.map((option, i) =>
         <Button key={i} onClick={_ => selectAnswer(module, i, handleChange)}>
           {option.value}

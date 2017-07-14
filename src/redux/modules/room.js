@@ -4,6 +4,7 @@ const initialState = {
   id: '',
   name: '',
   period: '',
+  error: '',
   modules: null,
   tags: null,
   isLoading: false,
@@ -61,6 +62,14 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.listenForRoomChangeRejected:
       return Object.assign({}, state, {
         isFetchingChanges: false,
+        error: action.error
+      });
+    case actionTypes.updateModuleStarted:
+      return Object.assign({}, state, {});
+    case actionTypes.updateModuleFulfilled:
+      return Object.assign({}, state, {});
+    case actionTypes.updateModuleRejected:
+      return Object.assign({}, state, {
         error: action.error
       });
     default:

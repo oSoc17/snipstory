@@ -9,7 +9,7 @@ const selectAnswer = (event, module, handleChange) => {
 };
 
 const ImageQuizModule = ({ module, handleChange }) => {
-  const confirmAnswer = module.answer === module.correction;
+  // const confirmAnswer = module.answer === module.correction;
   return (
     <div>
       <p>

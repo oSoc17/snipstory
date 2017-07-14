@@ -1,17 +1,26 @@
 import React from 'react';
 import Button from '../../components/button/Button';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {
   firebaseAuth,
   googleAuthProvider,
   firebaseDatabase
 } from '../../helpers/firebase';
 import GoogleLogo from './google.svg';
-const Register = ({ pristine, submitting, handleSubmit, history }) => {
+import FormField from '../../components/form/FormField';
+
+const Register = ({
+  pristine,
+  submitting,
+  handleSubmit,
+  history,
+  error,
+  ...props
+}) => {
   return (
     <div>
-      <h1>Register</h1>
+      <h1>Registreer</h1>
       <div>
         <Button
           onClick={() => {
@@ -24,46 +33,73 @@ const Register = ({ pristine, submitting, handleSubmit, history }) => {
         </Button>
         <form
           onSubmit={handleSubmit(({ name, email, password }) => {
-            firebaseAuth
+            return firebaseAuth
               .createUserWithEmailAndPassword(email, password)
               .then(user => {
-                firebaseDatabase
+                return firebaseDatabase
                   .ref(`/users/${user.uid}`)
                   .set({ ...user.providerData[0], displayName: name })
                   .then(_ => {
-                    history.push('/login');
+                    history.push('/teacher');
                   });
+              })
+              .catch(err => {
+                if (err.code === 400 || err.code === 'auth/weak-password') {
+                  throw new SubmissionError({
+                    _error: 'Paswoord is niet sterk genoeg'
+                  });
+                } else if (err.code === 'auth/email-already-in-use') {
+                  throw new SubmissionError({
+                    email:
+                      'Er is al een account geregistreerd met dit e-mailadres'
+                  });
+                }
+                throw new SubmissionError({
+                  _error: 'Er is iets fout gegaan, probeer het opnieuw'
+                });
               });
           })}
         >
           <div>
-            <label htmlFor="name">Naam</label>
             <Field
               name="name"
-              component="input"
-              type="name"
-              placeholder="Jane Doe"
+              component={FormField}
+              type="text"
+              label="Naam"
+              required
             />
           </div>
           <div>
-            <label htmlFor="email">E-mail</label>
             <Field
               name="email"
-              component="input"
+              component={FormField}
               type="email"
-              placeholder="jane@example.com"
+              label="Email"
+              required
             />
           </div>
           <div>
-            <label htmlFor="password">Paswoord</label>
-            <Field name="password" component="input" type="password" />
+            <Field
+              name="password"
+              component={FormField}
+              type="password"
+              label="Paswoord"
+            />
           </div>
           <div>
-            <label htmlFor="password1">Herhaal paswoord</label>
-            <Field name="password1" component="input" type="password" />
+            <Field
+              name="password1"
+              component={FormField}
+              type="password"
+              label="Herhaal paswoord"
+            />
           </div>
+          {error &&
+            <div>
+              {error}
+            </div>}
           <Button type="submit" disabled={pristine || submitting}>
-            Register
+            Registreer
           </Button>
         </form>
       </div>
@@ -80,5 +116,6 @@ const validate = ({ password, password1, email }) => {
   if (password !== password1) {
     errors.password1 = 'Paswoorden zijn niet gelijk';
   }
+  return errors;
 };
 export default reduxForm({ form: 'login', validate })(Register);

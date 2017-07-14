@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { LogIn } from 'react-feather';
 import GoogleLogo from './google.svg';
+import FormField from '../../components/form/FormField';
 
 const Login = ({ pristine, submitting, handleSubmit, error }) => {
   return (
@@ -14,9 +15,7 @@ const Login = ({ pristine, submitting, handleSubmit, error }) => {
         <Button
           onClick={() => {
             firebaseAuth.signInWithPopup(googleAuthProvider).catch(err => {
-              throw new SubmissionError({
-                _error: 'Login with Google failed'
-              });
+              // error toast?
             });
           }}
         >
@@ -29,24 +28,26 @@ const Login = ({ pristine, submitting, handleSubmit, error }) => {
               .signInWithEmailAndPassword(email, password)
               .catch(_ => {
                 throw new SubmissionError({
-                  _error:
-                    'Sorry, you entered an incorrect email address or password.'
+                  _error: 'Sorry, e-mailadres of paswoord is niet correct'
                 });
               });
           })}
         >
           <div>
-            <label htmlFor="email">Email</label>
             <Field
               name="email"
-              component="input"
+              component={FormField}
               type="email"
-              placeholder="jane@example.com"
+              label="E-mailadres"
             />
           </div>
           <div>
-            <label htmlFor="password">Paswoord</label>
-            <Field name="password" component="input" type="password" />
+            <Field
+              name="password"
+              component={FormField}
+              type="password"
+              label="Paswoord"
+            />
           </div>
           {error &&
             <div>

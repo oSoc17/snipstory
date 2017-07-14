@@ -1,7 +1,11 @@
 import React from 'react';
-import { firebaseDatabase } from '../../helpers/firebase';
+import { firebaseDatabase, firebaseAuth } from '../../helpers/firebase';
 import { connect } from 'react-redux';
-import { fetchRoomData } from '../../redux/actions';
+import {
+  fetchRoomData,
+  listenForRoomChange,
+  updateModule
+} from '../../redux/actions';
 import ImageModule from '../../components/modules/ImageModule';
 import ImageQuizModule from '../../components/modules/ImageQuizModule';
 import MapModule from '../../components/modules/MapModule';
@@ -12,12 +16,20 @@ import VideoModule from '../../components/modules/VideoModule';
 import YoutubeModule from '../../components/modules/YoutubeModule';
 
 class Room extends React.Component {
-  handleChange(module, index) {
-    console.log('module ', index, ':', module);
+  handleChange(module) {
+    this.props.updateModule(module);
   }
 
   componentWillMount() {
+    const user = firebaseAuth().currentUser;
+    if (!user) {
+      firebaseAuth().signInAnonymously().then(user => {}).catch(err => {});
+    }
     this.props.fetchRoomData();
+  }
+
+  componentDidMount() {
+    this.props.listenForRoomChange();
   }
 
   render() {
@@ -35,7 +47,6 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
-              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (
@@ -135,4 +146,8 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { fetchRoomData })(Room);
+export default connect(mapStateToProps, {
+  fetchRoomData,
+  listenForRoomChange,
+  updateModule
+})(Room);

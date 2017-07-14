@@ -1,6 +1,5 @@
 import React from 'react';
-import Button from '../../components/button/Button';
-import { MapPin } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   render() {
@@ -9,11 +8,9 @@ class Home extends React.Component {
         <Button inverted to="/teacher">
           Leerkracht
         </Button>
-        <Button to="/quiz" size="large">
+        <Button to="/story/select" size="large">
           Ontdek een verhaal
         </Button>
-        <div className="filters" />
-        <MapPin size="48" />
       </div>
     );
   }

@@ -9,6 +9,9 @@ import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';
 import Login from './views/Login';
 import Register from './views/Register';
+import CreateRoom from './views/CreateRoom';
+import StorySelect from './views/StorySelect';
+import Room from './views/Room';
 import './App.css';
 
 class App extends Component {
@@ -42,6 +45,21 @@ class App extends Component {
               path="/teacher/register"
               exact
               render={props => <Register user={user} {...props} />}
+            />
+            <Route
+              path="/story/select"
+              exact
+              render={props => <StorySelect user={user} {...props} />}
+            />
+            <Route
+              path="/rooms/create"
+              exact
+              render={props => <CreateRoom user={user} {...props} />}
+            />
+            <Route
+              path="/rooms/:roomId"
+              exact
+              render={props => <Room user={user} {...props} />}
             />
             <ProtectedRoute
               path="/teacher"

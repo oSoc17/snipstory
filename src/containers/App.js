@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { test } from '../redux/actions';
+import { listenToFirebaseAuth } from '../redux/actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
@@ -12,13 +12,17 @@ import Register from './views/Register';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.test();
+  componentWillMount() {
+    this.props.listenToFirebaseAuth();
   }
 
   render() {
     const { history, user } = this.props;
-    const isAuthorizedTeacher = user.isAuthorized && user.token;
+    const isAuthorizedTeacher = user.isAuthorized && !user.authPending;
+
+    if (user.authPending) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <div className="app">
@@ -66,4 +70,4 @@ const mapStateToProps = state => ({
   room: state.room
 });
 
-export default connect(mapStateToProps, { test })(App);
+export default connect(mapStateToProps, { listenToFirebaseAuth })(App);

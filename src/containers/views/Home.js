@@ -6,7 +6,9 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page">
-        <Button to="/teacher">Leerkracht</Button>
+        <Button inverted to="/teacher">
+          Leerkracht
+        </Button>
         <Button to="/quiz" size="large">
           Ontdek een verhaal
         </Button>

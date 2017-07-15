@@ -34,7 +34,6 @@ class App extends Component {
       destroyModal
     } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
-    console.log(activeModalId);
 
     return (
       <div id="app" className="app">

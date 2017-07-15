@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { listenToFirebaseAuth } from '../redux/actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import {
@@ -41,7 +40,7 @@ class App extends Component {
       destroyModal
     } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
-    
+
     if (user.authPending) {
       return <Spinner page size="large" />;
     }

@@ -11,6 +11,6 @@ export const rootReducer = combineReducers({
   room,
   storyselect,
   toast,
-  modal
+  modal,
   form
 });

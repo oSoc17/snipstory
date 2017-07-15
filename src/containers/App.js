@@ -21,7 +21,7 @@ class App extends Component {
       history,
       user,
       toast: { toastActive, ...toast },
-      showToast,
+      // showToast,
       destroyToast
     } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
@@ -71,19 +71,6 @@ class App extends Component {
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </ConnectedRouter>
-        <button
-          onClick={() =>
-            showToast({
-              text: 'toast text hahah ahah ahah',
-              status: 'error',
-              actionText: 'go',
-              onAction: () => console.log('action done'),
-              timeout: 5000
-            })}
-        >
-          Toast
-        </button>
-        <button onClick={() => destroyToast()}>Toast</button>
         {toastActive && <Toast destroyToast={destroyToast} {...toast} />}
       </div>
     );

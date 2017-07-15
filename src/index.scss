@@ -7,10 +7,12 @@
   font-family: $font-stack;
   font-display: swap;
   box-sizing: border-box;
+  color: $text-color;
 }
 
 a {
   text-decoration: none;
+  color: $primary-color;
 }
 
 .primary {

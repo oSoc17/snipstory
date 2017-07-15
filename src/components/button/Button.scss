@@ -28,4 +28,21 @@
   &--extra-large {
     font-size: 36px;
   }
+  &--flat {
+    @include button-reset();
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: .6em;
+    min-width: 2em;
+
+    &:hover,
+    &:focus {
+      border-radius: $material-border-radius;
+      background-color: rgba(#999, .26);
+    }
+
+    &:disabled {
+      color: rgba(#000, .26);
+    }
+  }
 }

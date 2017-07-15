@@ -22,11 +22,16 @@ export const actionTypes = {
   updateModuleFulfilled: 'UPDATE_MODULE_FULFILLED',
   updateModuleRejected: 'UPDATE_MODULE_REJECTED',
   showToast: 'SHOW_TOAST',
-  destroyToast: 'DESTROY_TOAST'
+  destroyToast: 'DESTROY_TOAST',
+  showModal: 'SHOW_MODAL',
+  destroyModal: 'DESTROY_MODAL'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
 export const destroyToast = () => ({ type: actionTypes.destroyToast });
+export const showModal = id => ({ type: actionTypes.showModal, id });
+export const destroyModal = () => ({ type: actionTypes.destroyModal });
+
 export const fetchRandomStoriesStarted = () => ({
   type: actionTypes.fetchRandomStoriesStarted
 });

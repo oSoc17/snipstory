@@ -22,3 +22,11 @@ $info-color: $brand-blue--lighter;
 $success-color: $brand-blue; // should be a green?
 
 $transition-timing: .2s;
+
+@mixin button-reset() {
+  border: none;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+}

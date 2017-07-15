@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import { showToast, destroyToast } from '../redux/actions';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home';
 import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';
 import CreateRoom from './views/CreateRoom';
 import StorySelect from './views/StorySelect';
+import Toast from '../components/toast/Toast';
 import Room from './views/Room';
 import './App.css';
 
@@ -15,7 +17,13 @@ class App extends Component {
   componentDidMount() {}
 
   render() {
-    const { history, user } = this.props;
+    const {
+      history,
+      user,
+      toast: { toastActive, ...toast },
+      showToast,
+      destroyToast
+    } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
 
     return (
@@ -63,6 +71,20 @@ class App extends Component {
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </ConnectedRouter>
+        <button
+          onClick={() =>
+            showToast({
+              text: 'toast text hahah ahah ahah',
+              status: 'error',
+              actionText: 'go',
+              onAction: () => console.log('action done'),
+              timeout: 5000
+            })}
+        >
+          Toast
+        </button>
+        <button onClick={() => destroyToast()}>Toast</button>
+        {toastActive && <Toast destroyToast={destroyToast} {...toast} />}
       </div>
     );
   }
@@ -70,7 +92,8 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  room: state.room
+  room: state.room,
+  toast: state.toast
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { showToast, destroyToast })(App);

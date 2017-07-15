@@ -20,9 +20,13 @@ export const actionTypes = {
   listenForRoomChangeRejected: 'LISTEN_FOR_ROOM_CHANGER_REJECTED',
   updateModuleStarted: 'UPDATE_MODULE_STARTED',
   updateModuleFulfilled: 'UPDATE_MODULE_FULFILLED',
-  updateModuleRejected: 'UPDATE_MODULE_REJECTED'
+  updateModuleRejected: 'UPDATE_MODULE_REJECTED',
+  showToast: 'SHOW_TOAST',
+  destroyToast: 'DESTROY_TOAST'
 };
 
+export const showToast = toast => ({ type: actionTypes.showToast, toast });
+export const destroyToast = () => ({ type: actionTypes.destroyToast });
 export const fetchRandomStoriesStarted = () => ({
   type: actionTypes.fetchRandomStoriesStarted
 });

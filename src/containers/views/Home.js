@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from '../../components/button/Button';
 
 class Home extends React.Component {
   render() {
     return (
-      <div>
-        <div className="page">
-          <button value="teacher">Teacher</button>
-          <Link to="/story/select">Ontdek een verhaal</Link>
-        </div>
+      <div className="page">
+        <Button inverted to="/teacher">
+          Leerkracht
+        </Button>
+        <Button to="/story/select" size="large">
+          Ontdek een verhaal
+        </Button>
       </div>
     );
   }

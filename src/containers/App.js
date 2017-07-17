@@ -8,7 +8,7 @@ import {
   listenToFirebaseAuth
 } from '../redux/actions';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
-import Home from './views/Home';
+import Home from './views/Home/Home';
 import TeacherArea from './views/TeacherArea';
 import Login from './views/Login';
 import Register from './views/Register';

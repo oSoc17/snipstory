@@ -1,4 +1,4 @@
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans,
   Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji",
   "Segoe UI Emoji", "Segoe UI Symbol";
 
@@ -10,7 +10,7 @@ $brand-blue--darker: #0552d6;
 $brand-blue: #3274ff;
 $brand-blue--light: #5faaff;
 $brand-red: #fc6560;
-$brand-red--light: #fd7f7e;
+$brand-red--light: #ff7e7b;
 $brand-red--lighter: #fdaaa6;
 $brand-orange: #fd734f;
 $brand-yellow: #fdae3f;
@@ -30,6 +30,8 @@ $z-index-modal: 1000;
 
 $material-box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
 $material-border-radius: 2px;
+
+$nav-bar-height: 9.2rem;
 
 @mixin button-reset() {
   border: none;

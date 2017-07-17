@@ -18,11 +18,17 @@ import StorySelect from './views/StorySelect';
 import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room';
+import CreateStory from './views/CreateStory';
+import deepEqual from 'deep-equal';
 import './App.css';
 
 class App extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.listenToFirebaseAuth();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !deepEqual(this.props, nextProps, { strict: true });
   }
 
   render() {
@@ -33,12 +39,11 @@ class App extends Component {
       // showToast,
       destroyToast
     } = this.props;
-    const isAuthorizedTeacher = user.isAuthorized && user.token;
+    const isAuthorized = user.isAuthorized;
 
-    if (user.authPending) {
+    if (user.authPending || !user || user.initial) {
       return <Spinner page size="large" />;
     }
-
     return (
       <div id="app" className="app">
         <ConnectedRouter history={history}>
@@ -74,15 +79,22 @@ class App extends Component {
               render={props => <Room user={user} {...props} />}
             />
             <ProtectedRoute
+              path="/teacher/stories/create"
+              isAuthorized={isAuthorized}
+              redirectUrl="/teacher/login"
+              exact
+              render={props => <CreateStory user={user} {...props} />}
+            />
+            <ProtectedRoute
               path="/teacher"
-              isAuthorized={isAuthorizedTeacher}
+              isAuthorized={isAuthorized}
               redirectUrl="/teacher/login"
               exact
               render={props => <TeacherArea user={user} {...props} />}
             />
             <ProtectedRoute
               path="/teacher/login"
-              isAuthorized={!isAuthorizedTeacher}
+              isAuthorized={!isAuthorized}
               redirectUrl="/teacher"
               exact
               render={props => <Login user={user} {...props} />}

@@ -33,11 +33,8 @@ class App extends Component {
       history,
       user,
       toast: { toastActive, ...toast },
-      modal: { activeModalId },
       // showToast,
-      destroyToast,
-      showModal,
-      destroyModal
+      destroyToast
     } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
 

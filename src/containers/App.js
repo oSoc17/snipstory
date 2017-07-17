@@ -11,7 +11,6 @@ import {
 } from '../redux/actions';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home';
-import CharacterQuiz from './views/CharacterQuiz';
 import TeacherArea from './views/TeacherArea';
 import Login from './views/Login';
 import Register from './views/Register';
@@ -53,11 +52,6 @@ class App extends Component {
               path="/"
               exact
               render={props => <Home user={user} {...props} />}
-            />
-            <Route
-              path="/quiz"
-              exact
-              render={props => <CharacterQuiz user={user} {...props} />}
             />
             <Route
               path="/teacher/register"

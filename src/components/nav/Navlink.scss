@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.navlink {
+  color: $brand-blue;
+  font-family: $brand-font-stack;
+  font-weight: 600;
+
+  &:hover {
+    border-bottom: 0.1em solid $brand-blue;
+  }
+}

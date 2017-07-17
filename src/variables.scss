@@ -6,7 +6,9 @@ $brand-font-stack: Poppins, $font-stack;
 $text-color: rgba(#000, .87);
 $text-color--light: rgba(#000, .54);
 
+$brand-blue--darker: #0552d6;
 $brand-blue: #3274ff;
+$brand-blue--light: #5faaff;
 $brand-red: #fc6560;
 $brand-red--light: #fd7f7e;
 $brand-red--lighter: #fdaaa6;
@@ -15,10 +17,9 @@ $brand-yellow: #fdae3f;
 $brand-yellow--light: #fed278;
 
 $primary-color: $brand-blue;
-$secondary-color: $brand-blue--light;
 $alert-color: $brand-red;
 $warning-color: $brand-yellow;
-$info-color: $brand-blue--lighter;
+$info-color: $brand-blue;
 $success-color: $brand-blue; // should be a green?
 
 $transition-timing: .2s;

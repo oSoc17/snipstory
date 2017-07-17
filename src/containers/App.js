@@ -96,29 +96,6 @@ class App extends Component {
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </ConnectedRouter>
-        {true && // this is an example of how to use Modals, delete later
-          <div>
-            <button onClick={() => showModal('confirm-modal')}>
-              Show modal
-            </button>
-            <Modal
-              isOpen={activeModalId === 'confirm-modal'}
-              onRequestClose={destroyModal}
-              title="Do you want to confirm your action?"
-              actions={[
-                { text: 'confirm', action: () => console.log('confirm') },
-                { text: 'cancel', action: () => console.log('cancel') }
-              ]}
-            >
-              <div>
-                Dolor excepteur minim incididunt non qui qui cillum dolor
-                officia ad enim cillum ea. In est culpa proident ex consequat eu
-                cupidatat nostrud dolor mollit mollit elit aliqua tempor. Nisi
-                sint proident ipsum officia mollit dolore ad ad laboris
-                reprehenderit sit quis.
-              </div>
-            </Modal>
-          </div>}
         {toastActive && <Toast destroyToast={destroyToast} {...toast} />}
       </div>
     );

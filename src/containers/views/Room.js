@@ -71,6 +71,7 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
+              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (

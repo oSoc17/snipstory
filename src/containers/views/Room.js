@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import {
   fetchRoomData,
   listenForRoomChange,
-  updateModule
+  updateModule,
+  getRandomSuggestions
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -65,6 +66,7 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
+              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (
@@ -179,5 +181,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   fetchRoomData,
   listenForRoomChange,
-  updateModule
+  updateModule,
+  getRandomSuggestions
 })(Room);

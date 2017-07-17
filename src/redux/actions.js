@@ -31,7 +31,9 @@ export const actionTypes = {
   showModal: 'SHOW_MODAL',
   destroyModal: 'DESTROY_MODAL',
   fetchSuggestionsFulfilled: 'FETCH_SUGGESTIONS_FULFILLED',
-  fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED'
+  fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED',
+  getRandomSuggestionsFulfilled: 'GET_RANDOM_SUGGESTIONS_FULFILLED',
+  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -215,8 +217,10 @@ export const fetchRoomData = () => {
       .then(response => {
         dispatch(fetchSuggestionsFulfilled(response.val()));
       })
+      .then(r => {
+        dispatch(getRandomSuggestions());
+      })
       .catch(err => {
-        console.log(err);
         dispatch(fetchSuggestionsRejected(err));
       });
   };
@@ -262,8 +266,6 @@ export const listenForRoomChangeRejected = errorMessage => ({
 
 export const updateModule = module => {
   return (dispatch, getState) => {
-    console.log('Updating module: ', module.id);
-    console.log('Current state:', getState());
     dispatch(updateModuleStarted());
     firebaseDatabase
       .ref()
@@ -275,7 +277,6 @@ export const updateModule = module => {
         ...module
       })
       .then(snapshot => {
-        console.log('Retrieved snapshot:', snapshot.val());
         dispatch(updateModuleFulfilled());
       })
       .catch(err => {
@@ -305,4 +306,46 @@ export const fetchSuggestionsFulfilled = data => ({
 export const fetchSuggestionsRejected = err => ({
   type: actionTypes.fetchSuggestionsRejected,
   error: err.message
+});
+
+export const getRandomSuggestions = () => {
+  return (dispatch, getState) => {
+    dispatch(getRandomSuggestionsStarted());
+    let randomNumbers = [];
+    let randomSuggestions = [];
+
+    if (getState().suggestions.suggestions.length < 4) {
+      return dispatch(
+        getRandomSuggestionsFulfilled(getState().suggestions.suggestions)
+      );
+    }
+
+    while (randomNumbers.length !== 4) {
+      let n = Math.floor(
+        Math.random() * getState().suggestions.suggestions.length
+      );
+      if (randomNumbers.indexOf(n) === -1) {
+        randomNumbers.push(n);
+      }
+    }
+
+    let i = 0;
+    while (randomSuggestions.length !== 4) {
+      randomSuggestions.push(
+        getState().suggestions.suggestions[randomNumbers[i]]
+      );
+      i++;
+    }
+
+    dispatch(getRandomSuggestionsFulfilled(randomSuggestions));
+  };
+};
+
+export const getRandomSuggestionsStarted = () => ({
+  type: actionTypes.getRandomSuggestionsStarted
+});
+
+export const getRandomSuggestionsFulfilled = suggestions => ({
+  type: actionTypes.getRandomSuggestionsFulfilled,
+  suggestions: suggestions
 });

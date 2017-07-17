@@ -2,7 +2,7 @@ import React from 'react';
 
 const selectAnswer = (event, module, handleChange) => {
   handleChange(
-    Object.assing({}, module, {
+    Object.assign({}, module, {
       answer: parseInt(event.target.id, 10)
     })
   );

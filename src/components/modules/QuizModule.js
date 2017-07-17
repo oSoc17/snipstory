@@ -14,7 +14,6 @@ const QuizModule = ({ module, handleChange }) => {
 
   return (
     <div>
-      <span>Hello QuizModule</span>
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
       <p>
         {module.text}
@@ -22,7 +21,7 @@ const QuizModule = ({ module, handleChange }) => {
       {confirmAnswer && 'The right answer has been chosen'}
       {module.options.map((option, i) =>
         <Button key={i} onClick={_ => selectAnswer(module, i, handleChange)}>
-          {option.value}
+          {option}
         </Button>
       )}
     </div>

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import {
   fetchRoomData,
   listenForRoomChange,
-  updateModule
+  updateModule,
+  getRandomSuggestions
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -17,6 +18,7 @@ import TextblockModule from '../../components/modules/TextblockModule';
 import VideoModule from '../../components/modules/VideoModule';
 import YoutubeModule from '../../components/modules/YoutubeModule';
 import FunFactModule from '../../components/modules/FunFactModule';
+import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -31,15 +33,8 @@ class Room extends React.Component {
     this.props.fetchRoomData();
   }
 
-  // componentDidMount() {
-  //   this.props.listenForRoomChange();
-  // }
-
   render() {
-    const { room, user, isFetchingData } = this.props;
-
-    console.log('Timestamp: ', moment());
-    console.log('Current data: ', room);
+    const { room, user, isFetchingData, suggestions } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -171,6 +166,7 @@ class Room extends React.Component {
               }
             })}
         </div>
+        <AppSuggestions {...suggestions} />
       </div>
     );
   }
@@ -178,11 +174,13 @@ class Room extends React.Component {
 
 const mapStateToProps = state => ({
   room: state.room,
-  user: state.user
+  user: state.user,
+  suggestions: state.suggestions
 });
 
 export default connect(mapStateToProps, {
   fetchRoomData,
   listenForRoomChange,
-  updateModule
+  updateModule,
+  getRandomSuggestions
 })(Room);

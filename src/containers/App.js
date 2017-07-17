@@ -20,7 +20,6 @@ import StorySelect from './views/StorySelect';
 import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room';
-import Modal from '../components/modal/Modal';
 import './App.css';
 
 class App extends Component {

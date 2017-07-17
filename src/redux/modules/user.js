@@ -6,13 +6,14 @@ const initialState = {
   uid: '',
   displayName: '',
   email: '',
-  error: null
+  error: null,
+  initial: true
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.authStarted:
-      return Object.assign({}, state, { authPending: true });
+      return Object.assign({}, state, { authPending: true, initial: false });
     case actionTypes.logout:
       return Object.assign({}, initialState);
     case actionTypes.authFulfilled:

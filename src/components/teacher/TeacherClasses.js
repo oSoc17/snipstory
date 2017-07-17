@@ -28,7 +28,11 @@ class TeacherClasses extends React.Component {
                 </span>
               </div>}
         </div>
-        <Button onClick={this.setState({ addClassFormExpanded: true })}>
+        <Button
+          onClick={() => {
+            this.setState({ addClassFormExpanded: true });
+          }}
+        >
           Voeg een klas toe
         </Button>
         {addClassFormExpanded && <div>add class form goes here</div>}

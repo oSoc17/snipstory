@@ -15,7 +15,7 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.authStarted:
       return Object.assign({}, state, { authPending: true, initial: false });
     case actionTypes.logout:
-      return Object.assign({}, initialState);
+      return { ...initialState, initial: false };
     case actionTypes.authFulfilled:
       return Object.assign({}, state, {
         ...action.user,

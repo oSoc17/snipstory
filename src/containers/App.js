@@ -5,8 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import {
   showToast,
   destroyToast,
-  showModal,
-  destroyModal,
   listenToFirebaseAuth
 } from '../redux/actions';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
@@ -19,7 +17,6 @@ import StorySelect from './views/StorySelect';
 import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room';
-import Modal from '../components/modal/Modal';
 import './App.css';
 
 class App extends Component {
@@ -32,11 +29,8 @@ class App extends Component {
       history,
       user,
       toast: { toastActive, ...toast },
-      modal: { activeModalId },
       // showToast,
-      destroyToast,
-      showModal,
-      destroyModal
+      destroyToast
     } = this.props;
     const isAuthorizedTeacher = user.isAuthorized && user.token;
 
@@ -90,29 +84,6 @@ class App extends Component {
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </ConnectedRouter>
-        {true && // this is an example of how to use Modals, delete later
-          <div>
-            <button onClick={() => showModal('confirm-modal')}>
-              Show modal
-            </button>
-            <Modal
-              isOpen={activeModalId === 'confirm-modal'}
-              onRequestClose={destroyModal}
-              title="Do you want to confirm your action?"
-              actions={[
-                { text: 'confirm', action: () => console.log('confirm') },
-                { text: 'cancel', action: () => console.log('cancel') }
-              ]}
-            >
-              <div>
-                Dolor excepteur minim incididunt non qui qui cillum dolor
-                officia ad enim cillum ea. In est culpa proident ex consequat eu
-                cupidatat nostrud dolor mollit mollit elit aliqua tempor. Nisi
-                sint proident ipsum officia mollit dolore ad ad laboris
-                reprehenderit sit quis.
-              </div>
-            </Modal>
-          </div>}
         {toastActive && <Toast destroyToast={destroyToast} {...toast} />}
       </div>
     );
@@ -129,7 +100,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   showToast,
   destroyToast,
-  showModal,
-  destroyModal,
   listenToFirebaseAuth
 })(App);

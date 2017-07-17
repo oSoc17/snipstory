@@ -7,6 +7,7 @@ import {
   listenForRoomChange,
   updateModule
 } from '../../redux/actions';
+import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
 import ImageQuizModule from '../../components/modules/ImageQuizModule';
 import MapModule from '../../components/modules/MapModule';
@@ -30,14 +31,18 @@ class Room extends React.Component {
     this.props.fetchRoomData();
   }
 
-  componentDidMount() {
-    this.props.listenForRoomChange();
-  }
+  // componentDidMount() {
+  //   this.props.listenForRoomChange();
+  // }
 
   render() {
     const { room, user, isFetchingData } = this.props;
 
-    if (isFetchingData) return <div>Fetching data...</div>;
+    console.log('Timestamp: ', moment());
+    console.log('Current data: ', room);
+
+    if (isFetchingData || !room.modules) return <Spinner page size="large" />;
+
     return (
       <div className="room">
         <div className="story-information">
@@ -66,7 +71,6 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
-              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (

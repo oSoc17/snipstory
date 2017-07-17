@@ -29,7 +29,9 @@ export const actionTypes = {
   showToast: 'SHOW_TOAST',
   destroyToast: 'DESTROY_TOAST',
   showModal: 'SHOW_MODAL',
-  destroyModal: 'DESTROY_MODAL'
+  destroyModal: 'DESTROY_MODAL',
+  fetchSuggestionsFulfilled: 'FETCH_SUGGESTIONS_FULFILLED',
+  fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -205,6 +207,18 @@ export const fetchRoomData = () => {
       .catch(err => {
         dispatch(fetchRoomDataRejected(err));
       });
+
+    firebaseDatabase
+      .ref()
+      .child('appsuggestions')
+      .once('value')
+      .then(response => {
+        dispatch(fetchSuggestionsFulfilled(response.val()));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(fetchSuggestionsRejected(err));
+      });
   };
 };
 
@@ -281,4 +295,14 @@ export const updateModuleFulfilled = () => ({
 export const updateModuleRejected = errorMessage => ({
   type: actionTypes.updateModuleRejected,
   error: errorMessage
+});
+
+export const fetchSuggestionsFulfilled = data => ({
+  type: actionTypes.fetchSuggestionsFulfilled,
+  data: data
+});
+
+export const fetchSuggestionsRejected = err => ({
+  type: actionTypes.fetchSuggestionsRejected,
+  error: err.message
 });

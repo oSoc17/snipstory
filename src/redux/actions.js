@@ -1,35 +1,35 @@
-import { firebaseAuth, firebaseDatabase } from "../helpers/firebase";
-import { push } from "connected-react-router";
+import { firebaseAuth, firebaseDatabase } from '../helpers/firebase';
+import { push } from 'connected-react-router';
 
 export const actionTypes = {
-  listenToFirebaseAuth: "LISTEN_FIREBASE_AUTH",
-  authStarted: "AUTH_STARTED",
-  authFulfilled: "AUTH_FULFILLED",
-  authRejected: "AUTH_REJECTED",
-  logout: "LOGOUT",
-  fetchRandomStoriesFulfilled: "FETCH_RANDOM_STORIES_FULFILLED",
-  fetchRandomStoriesRejected: "FETCH_RANDOM_STORIES_REJECTED",
-  fetchRandomStoriesStarted: "FETCH_RANDOM_STORIES_STARTED",
-  selectStory: "SELECT_STORY",
-  checkTeacherCodeRejected: "CHECK_TEACHER_CODE_REJECTED",
-  checkTeacherCodeFulfilled: "CHECK_TEACHER_CODE_FULFILLED",
-  checkingTeacherCode: "CHECKING_TEACHER_CODE",
-  createRoomStarted: "CREATE_ROOM_STARTED",
-  createRoomFulfilled: "CREATE_ROOM_FULFILLED",
-  createRoomRejected: "CREATE_ROOM_REJECTED",
-  fetchRoomDataStarted: "FETCH_ROOM_DATA_STARTED",
-  fetchRoomDataFulfilled: "FETCH_ROOM_DATA_FULFILLED",
-  fetchRoomDataRejected: "FETCH_ROOM_DATA_REJECTED",
-  listenForRoomChangeStarted: "LISTEN_FOR_ROOM_CHANGE_STARTED",
-  listenForRoomChangeFulfilled: "LISTEN_FOR_ROOM_CHANGE_FULFILLED",
-  listenForRoomChangeRejected: "LISTEN_FOR_ROOM_CHANGER_REJECTED",
-  updateModuleStarted: "UPDATE_MODULE_STARTED",
-  updateModuleFulfilled: "UPDATE_MODULE_FULFILLED",
-  updateModuleRejected: "UPDATE_MODULE_REJECTED",
-  showToast: "SHOW_TOAST",
-  destroyToast: "DESTROY_TOAST",
-  showModal: "SHOW_MODAL",
-  destroyModal: "DESTROY_MODAL"
+  listenToFirebaseAuth: 'LISTEN_FIREBASE_AUTH',
+  authStarted: 'AUTH_STARTED',
+  authFulfilled: 'AUTH_FULFILLED',
+  authRejected: 'AUTH_REJECTED',
+  logout: 'LOGOUT',
+  fetchRandomStoriesFulfilled: 'FETCH_RANDOM_STORIES_FULFILLED',
+  fetchRandomStoriesRejected: 'FETCH_RANDOM_STORIES_REJECTED',
+  fetchRandomStoriesStarted: 'FETCH_RANDOM_STORIES_STARTED',
+  selectStory: 'SELECT_STORY',
+  checkTeacherCodeRejected: 'CHECK_TEACHER_CODE_REJECTED',
+  checkTeacherCodeFulfilled: 'CHECK_TEACHER_CODE_FULFILLED',
+  checkingTeacherCode: 'CHECKING_TEACHER_CODE',
+  createRoomStarted: 'CREATE_ROOM_STARTED',
+  createRoomFulfilled: 'CREATE_ROOM_FULFILLED',
+  createRoomRejected: 'CREATE_ROOM_REJECTED',
+  fetchRoomDataStarted: 'FETCH_ROOM_DATA_STARTED',
+  fetchRoomDataFulfilled: 'FETCH_ROOM_DATA_FULFILLED',
+  fetchRoomDataRejected: 'FETCH_ROOM_DATA_REJECTED',
+  listenForRoomChangeStarted: 'LISTEN_FOR_ROOM_CHANGE_STARTED',
+  listenForRoomChangeFulfilled: 'LISTEN_FOR_ROOM_CHANGE_FULFILLED',
+  listenForRoomChangeRejected: 'LISTEN_FOR_ROOM_CHANGER_REJECTED',
+  updateModuleStarted: 'UPDATE_MODULE_STARTED',
+  updateModuleFulfilled: 'UPDATE_MODULE_FULFILLED',
+  updateModuleRejected: 'UPDATE_MODULE_REJECTED',
+  showToast: 'SHOW_TOAST',
+  destroyToast: 'DESTROY_TOAST',
+  showModal: 'SHOW_MODAL',
+  destroyModal: 'DESTROY_MODAL'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -52,8 +52,8 @@ export const fetchRandomStories = () => {
   return dispatch => {
     dispatch(fetchRandomStoriesStarted());
     firebaseDatabase
-      .ref("/stories")
-      .once("value")
+      .ref('/stories')
+      .once('value')
       .then(snapshot => {
         dispatch(fetchRandomStoriesFulfilled(snapshot.val()));
       })
@@ -72,19 +72,19 @@ export const checkTeacherCode = event => {
   return dispatch => {
     dispatch(checkingTeacherCode());
     const code = event.target.value;
-    if (code === "")
-      return dispatch(checkTeacherCodeRejected("No empty string allowed"));
+    if (code === '')
+      return dispatch(checkTeacherCodeRejected('No empty string allowed'));
     firebaseDatabase
-      .ref("/tokens")
+      .ref('/tokens')
       .child(code)
-      .once("value")
+      .once('value')
       .then(snapshot => {
         const val = snapshot.val();
         if (val) dispatch(checkTeacherCodeFulfilled(snapshot.val()));
-        else dispatch(checkTeacherCodeRejected("No such code"));
+        else dispatch(checkTeacherCodeRejected('No such code'));
       })
       .catch(err => {
-        dispatch(checkTeacherCodeRejected("No such code"));
+        dispatch(checkTeacherCodeRejected('No such code'));
       });
   };
 };
@@ -95,7 +95,7 @@ export const checkingTeacherCode = () => ({
 
 export const checkTeacherCodeFulfilled = ({ classId, userId }) => ({
   type: actionTypes.checkTeacherCodeFulfilled,
-  error: "",
+  error: '',
   classId,
   userId
 });
@@ -113,14 +113,14 @@ export const createRoom = () => {
       dispatch(createRoomRejected(err.message));
     });
 
-    const roomKey = firebaseDatabase.ref().child("rooms").push().key;
+    const roomKey = firebaseDatabase.ref().child('rooms').push().key;
     const data = {
       ...getState().room,
       users: [getState().user]
     };
     data.id = roomKey;
     let updates = {};
-    updates["/rooms/" + roomKey] = data;
+    updates['/rooms/' + roomKey] = data;
     firebaseDatabase
       .ref()
       .update(updates)
@@ -161,12 +161,12 @@ export const listenToFirebaseAuth = () => {
         const userRef = firebaseDatabase.ref(path);
         dispatch(authFulfilled(userData));
 
-        userRef.once("value").then(snapshot => {
+        userRef.once('value').then(snapshot => {
           const val = snapshot.val();
           userRef.set({ ...val, ...userData });
         });
       } else {
-        dispatch(authRejected(""));
+        dispatch(authRejected(''));
       }
     });
   };
@@ -189,15 +189,18 @@ export const createRoomRejected = err => ({
 export const fetchRoomData = () => {
   return (dispatch, getState) => {
     dispatch(fetchRoomDataStarted());
-    const roomId = getState().router.location.pathname.split("/rooms/")[1];
+    const roomId = getState().router.location.pathname.split('/rooms/')[1];
 
     firebaseDatabase
       .ref()
-      .child("rooms")
+      .child('rooms')
       .child(roomId)
-      .once("value")
+      .once('value')
       .then(response => {
         dispatch(fetchRoomDataFulfilled(response.val()));
+      })
+      .then(r => {
+        dispatch(listenForRoomChange());
       })
       .catch(err => {
         dispatch(fetchRoomDataRejected(err));
@@ -222,8 +225,8 @@ export const fetchRoomDataRejected = err => ({
 export const listenForRoomChange = () => {
   return (dispatch, getState) => {
     dispatch(listenForRoomChangeStarted());
-    const roomId = getState().router.location.pathname.split("/rooms/")[1];
-    firebaseDatabase.ref("/rooms/" + roomId).on("value", snapshot => {
+    const roomId = getState().router.location.pathname.split('/rooms/')[1];
+    firebaseDatabase.ref('/rooms/' + roomId).on('value', snapshot => {
       dispatch(listenForRoomChangeFulfilled(snapshot.val()));
     });
   };
@@ -245,20 +248,20 @@ export const listenForRoomChangeRejected = errorMessage => ({
 
 export const updateModule = module => {
   return (dispatch, getState) => {
-    console.log("Updating module: ", module.id);
-    console.log("Current state:", getState());
+    console.log('Updating module: ', module.id);
+    console.log('Current state:', getState());
     dispatch(updateModuleStarted());
     firebaseDatabase
       .ref()
-      .child("rooms")
+      .child('rooms')
       .child(getState().room.id)
-      .child("modules")
+      .child('modules')
       .child(module.id)
       .set({
         ...module
       })
       .then(snapshot => {
-        console.log("Retrieved snapshot:", snapshot.val());
+        console.log('Retrieved snapshot:', snapshot.val());
         dispatch(updateModuleFulfilled());
       })
       .catch(err => {

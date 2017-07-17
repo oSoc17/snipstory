@@ -1,19 +1,19 @@
-import React from 'react';
-import { firebaseAuth } from '../../helpers/firebase';
-import { connect } from 'react-redux';
+import React from "react";
+import { firebaseAuth } from "../../helpers/firebase";
+import { connect } from "react-redux";
 import {
   fetchRoomData,
   listenForRoomChange,
   updateModule
-} from '../../redux/actions';
-import ImageModule from '../../components/modules/ImageModule';
-import ImageQuizModule from '../../components/modules/ImageQuizModule';
-import MapModule from '../../components/modules/MapModule';
-import QuizModule from '../../components/modules/QuizModule';
-import SearchExerciseModule from '../../components/modules/SearchExerciseModule';
-import TextblockModule from '../../components/modules/TextblockModule';
-import VideoModule from '../../components/modules/VideoModule';
-import YoutubeModule from '../../components/modules/YoutubeModule';
+} from "../../redux/actions";
+import ImageModule from "../../components/modules/ImageModule";
+import ImageQuizModule from "../../components/modules/ImageQuizModule";
+import MapModule from "../../components/modules/MapModule";
+import QuizModule from "../../components/modules/QuizModule";
+import SearchExerciseModule from "../../components/modules/SearchExerciseModule";
+import TextblockModule from "../../components/modules/TextblockModule";
+import VideoModule from "../../components/modules/VideoModule";
+import YoutubeModule from "../../components/modules/YoutubeModule";
 
 class Room extends React.Component {
   handleChange(module) {
@@ -21,9 +21,9 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    const user = firebaseAuth().currentUser;
+    const user = firebaseAuth.currentUser;
     if (!user) {
-      firebaseAuth().signInAnonymously().then(user => {}).catch(err => {});
+      firebaseAuth.signInAnonymously().then(user => {}).catch(err => {});
     }
     this.props.fetchRoomData();
   }
@@ -48,7 +48,7 @@ class Room extends React.Component {
           {room.modules &&
             room.modules.map((module, i) => {
               switch (module.contentType.toLowerCase()) {
-                case 'image':
+                case "image":
                   return (
                     <ImageModule
                       index={i}
@@ -58,7 +58,7 @@ class Room extends React.Component {
                       user={user}
                     />
                   );
-                case 'imagequiz':
+                case "imagequiz":
                   return (
                     <ImageQuizModule
                       index={i}
@@ -69,7 +69,7 @@ class Room extends React.Component {
                       handleChange={this.handleChange.bind(this)}
                     />
                   );
-                case 'map':
+                case "map":
                   return (
                     <MapModule
                       index={i}
@@ -80,7 +80,7 @@ class Room extends React.Component {
                       handleChange={this.handleChange.bind(this)}
                     />
                   );
-                case 'quiz':
+                case "quiz":
                   return (
                     <QuizModule
                       index={i}
@@ -91,7 +91,7 @@ class Room extends React.Component {
                       handleChange={this.handleChange.bind(this)}
                     />
                   );
-                case 'searchex':
+                case "searchex":
                   return (
                     <SearchExerciseModule
                       index={i}
@@ -101,7 +101,7 @@ class Room extends React.Component {
                       user={user}
                     />
                   );
-                case 'textblock':
+                case "textblock":
                   return (
                     <TextblockModule
                       index={i}
@@ -111,7 +111,7 @@ class Room extends React.Component {
                       user={user}
                     />
                   );
-                case 'video':
+                case "video":
                   return (
                     <VideoModule
                       index={i}
@@ -121,7 +121,7 @@ class Room extends React.Component {
                       user={user}
                     />
                   );
-                case 'youtube':
+                case "youtube":
                   return (
                     <YoutubeModule
                       index={i}

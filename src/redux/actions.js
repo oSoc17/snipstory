@@ -125,28 +125,34 @@ export const checkTeacherCodeRejected = errorString => ({
 export const createRoom = form => {
   return (dispatch, getState) => {
     dispatch(createRoomStarted());
-    firebaseAuth.signInAnonymously().then(user => {}).catch(err => {
-      dispatch(createRoomRejected(err.message));
-    });
-
-    const roomKey = firebaseDatabase.ref().child('rooms').push().key;
-    const data = {
-      ...getState().room,
-      users: [getState().user]
-    };
-    data.id = roomKey;
-    let updates = {};
-    updates['/rooms/' + roomKey] = data;
-    firebaseDatabase
-      .ref()
-      .update(updates)
-      .then(result => {
-        dispatch(createRoomFulfilled(data));
-        dispatch(push(`/rooms/${roomKey}`));
-      })
-      .then(resp => {
-        dispatch(setUserDisplayName(form['name'].value));
-        dispatch(pushModifiedUserToFirebase());
+    firebaseAuth
+      .signInAnonymously()
+      .then(user => {})
+      .then(() => {
+        const roomKey = firebaseDatabase.ref().child('rooms').push().key;
+        const data = {
+          ...getState().room,
+          users: [getState().user]
+        };
+        data.id = roomKey;
+        let updates = {};
+        updates['/rooms/' + roomKey] = data;
+        firebaseDatabase
+          .ref()
+          .update(updates)
+          .then(result => {
+            dispatch(createRoomFulfilled(data));
+            dispatch(push(`/rooms/${roomKey}`));
+          })
+          .then(() => {
+            dispatch(setUserDisplayName(form['name'].value));
+          })
+          .then(() => {
+            dispatch(pushModifiedUserToFirebase());
+          })
+          .catch(err => {
+            dispatch(createRoomRejected(err.message));
+          });
       })
       .catch(err => {
         dispatch(createRoomRejected(err.message));
@@ -414,18 +420,14 @@ export const pushModifiedUserToFirebase = () => {
   return (dispatch, getState) => {
     console.log('Push modified user to firebase');
     dispatch(pushModifiedUserToFirebaseStarted());
-    const userRef = firebaseDatabase.ref('users').child(getState().user.uid);
-    userRef
-      .once('value')
-      .then(snapshot => {
-        const val = snapshot.val();
-        const newVal = { ...val, displayName: getState().user.displayName };
-        userRef.set(newVal);
-        dispatch(pushModifiedUserToFirebaseFulfilled());
-      })
-      .catch(err => {
-        dispatch(pushModifiedUserToFirebaseRejected());
-      });
+    const val = {
+      uid: getState().user.uid,
+      displayName: getState().user.displayName
+    };
+    firebaseDatabase.ref('users').child(getState().user.uid).set(val, () => {
+      return dispatch(pushModifiedUserToFirebaseFulfilled());
+    });
+    return dispatch(pushModifiedUserToFirebaseRejected());
   };
 };
 

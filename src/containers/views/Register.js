@@ -7,7 +7,7 @@ import {
   googleAuthProvider,
   firebaseDatabase
 } from '../../helpers/firebase';
-import GoogleLogo from './google.svg';
+import GoogleLogo from '../views/Login/assets/google.svg';
 import FormField from '../../components/form/FormField';
 
 const Register = ({

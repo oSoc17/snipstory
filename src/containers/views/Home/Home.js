@@ -36,7 +36,7 @@ class Home extends React.Component {
 
           <Navlink to="/#inspo">Snippers bekijken</Navlink>
 
-          <Navlink to="TeacherArea">Leerkracht</Navlink>
+          <Navlink to="/teacher">Leerkracht</Navlink>
         </nav>
 
         <header className="header-container">
@@ -95,7 +95,7 @@ class Home extends React.Component {
           </section>
 
           <section id="inspo" className="creations-container">
-            <h2 className="creation-title">Creaties</h2>
+            <h2 className="creation-title">Snippers</h2>
             <div className="creations-1">
               <Creations1 />
               <Creations2 />

@@ -1,41 +1,32 @@
 import React from 'react';
 import Class from './Class';
-import Button from '../button/Button';
+import AddClassForm from './AddClassForm';
 
 class TeacherClasses extends React.Component {
-  state = {
-    addClassFormExpanded: false
-  };
-
   render() {
-    const { classes, showToast } = this.props;
-    const { addClassFormExpanded } = this.state;
+    const { classes, showToast, addClass, deleteClass } = this.props;
     return (
       <div className="teacher-classes">
         <div className="teacher-classes-list">
-          {classes && classes.length > 0
-            ? classes.map(currentClass =>
+          {classes.classes && classes.classes.length > 0
+            ? classes.classes.map(currentClass =>
                 <Class
                   showToast={showToast}
-                  key={currentClass.code}
+                  key={currentClass.id}
+                  onDelete={() => {
+                    deleteClass(currentClass);
+                  }}
                   {...currentClass}
                 />
               )
             : <div>
-                Je hebt nog geen klassen toegevoegd {' '}
+                Je hebt nog geen klassen toegevoegd{' '}
                 <span role="img" aria-label="Crying face">
                   😢
                 </span>
               </div>}
         </div>
-        <Button
-          onClick={() => {
-            this.setState({ addClassFormExpanded: true });
-          }}
-        >
-          Voeg een klas toe
-        </Button>
-        {addClassFormExpanded && <div>add class form goes here</div>}
+        <AddClassForm addClass={addClass} />
       </div>
     );
   }

@@ -41,7 +41,12 @@ export const actionTypes = {
   getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED',
   uploadFileStarted: 'UPLOAD_FILE_STARTED',
   uploadFileRejected: 'UPLOAD_FILE_REJECTED',
-  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED'
+  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED',
+  setUserDisplayName: 'SET_USER_DISPLAY_NAME',
+  pushModifiedUserToFirebaseFulfilled:
+    'PUSH_MODIFIED_USER_TO_FIREBASE_FULFILLED',
+  pushModifiedUserToFirebaseRejected: 'PUSH_MODIFIED_USER_TO_FIREBASE_REJECTED',
+  pushModifiedUserToFirebaseStarted: 'PUSH_MODIFIED_USER_TO_FIREBASE_STARTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -117,10 +122,9 @@ export const checkTeacherCodeRejected = errorString => ({
   error: errorString
 });
 
-export const createRoom = () => {
+export const createRoom = form => {
   return (dispatch, getState) => {
     dispatch(createRoomStarted());
-
     firebaseAuth.signInAnonymously().then(user => {}).catch(err => {
       dispatch(createRoomRejected(err.message));
     });
@@ -139,6 +143,10 @@ export const createRoom = () => {
       .then(result => {
         dispatch(createRoomFulfilled(data));
         dispatch(push(`/rooms/${roomKey}`));
+      })
+      .then(resp => {
+        dispatch(setUserDisplayName(form['name'].value));
+        dispatch(pushModifiedUserToFirebase());
       })
       .catch(err => {
         dispatch(createRoomRejected(err.message));
@@ -395,4 +403,40 @@ export const uploadFileFulfilled = snapshot => ({
 export const uploadFileRejected = error => ({
   type: actionTypes.uploadFileRejected,
   error: error.message
+});
+
+export const setUserDisplayName = displayName => ({
+  type: actionTypes.setUserDisplayName,
+  displayName: displayName
+});
+
+export const pushModifiedUserToFirebase = () => {
+  return (dispatch, getState) => {
+    console.log('Push modified user to firebase');
+    dispatch(pushModifiedUserToFirebaseStarted());
+    const userRef = firebaseDatabase.ref('users').child(getState().user.uid);
+    userRef
+      .once('value')
+      .then(snapshot => {
+        const val = snapshot.val();
+        const newVal = { ...val, displayName: getState().user.displayName };
+        userRef.set(newVal);
+        dispatch(pushModifiedUserToFirebaseFulfilled());
+      })
+      .catch(err => {
+        dispatch(pushModifiedUserToFirebaseRejected());
+      });
+  };
+};
+
+export const pushModifiedUserToFirebaseStarted = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseStarted
+});
+
+export const pushModifiedUserToFirebaseFulfilled = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseFulfilled
+});
+
+export const pushModifiedUserToFirebaseRejected = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseRejected
 });

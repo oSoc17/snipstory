@@ -28,6 +28,11 @@ export const reducer = (state = initialState, action) => {
         isAuthorized: false,
         authPending: false
       });
+    case actionTypes.setUserDisplayName:
+      console.log(state);
+      return Object.assign({}, state, {
+        displayName: action.displayName
+      });
     default:
       return state;
   }

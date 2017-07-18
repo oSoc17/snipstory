@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../button/Button';
-import { RoomIdGenerator } from '../../helpers/RoomIdGenerator';
 import { reduxForm, Field } from 'redux-form';
 import FormField from '../form/FormField';
 

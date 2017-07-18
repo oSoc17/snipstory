@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { checkTeacherCode, createRoom } from '../../redux/actions';
+import { Field, reduxForm } from 'redux-form';
+import FormField from '../../components/form/FormField';
+import Button from '../../components/button/Button';
 
 class CreateRoom extends React.Component {
   render() {
@@ -16,28 +19,27 @@ class CreateRoom extends React.Component {
           }}
         >
           <h1>Maak een nieuwe ruimte</h1>
-          <div className="form-group">
-            <label htmlFor="username">Voor- en Achternaam: </label>
-            <input type="text" name="name" id="name" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="teachersCode">Code van de leerkracht: </label>
-            <input
-              type="text"
-              name="teachersCode"
-              id="teachersCode"
-              required
-              defaultValue="public"
-              onChange={checkTeacherCode}
-            />
-            {!this.props.state.isValidCode && <span>checking...</span>}
-          </div>
-          <div className="form-group">
-            {!this.props.state.isValidCode &&
-              <input type="submit" value="Maak" disabled />}
-            {this.props.state.isValidCode &&
-              <input type="submit" value="Maak" />}
-          </div>
+          <Field
+            name="name"
+            component={FormField}
+            type="text"
+            label="Voor- en achternaam"
+            required
+          />
+          <Field
+            name="teachersCode"
+            type="text"
+            component={FormField}
+            id="teachersCode"
+            label="Vul de leerkracht's code in"
+            required
+            onChange={checkTeacherCode}
+          />
+          {this.props.room.isValidCode && <Button type="submit">Maak</Button>}
+          {!this.props.room.isValidCode &&
+            <Button type="submit" disabled>
+              Maak
+            </Button>}
         </form>
         {error &&
           <div>
@@ -49,10 +51,14 @@ class CreateRoom extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  state: state.room,
+  room: state.room,
   user: state.user
 });
 
-export default connect(mapStateToProps, { checkTeacherCode, createRoom })(
+CreateRoom = connect(mapStateToProps, { checkTeacherCode, createRoom })(
   CreateRoom
 );
+
+export default reduxForm({
+  form: 'create-room-form'
+})(CreateRoom);

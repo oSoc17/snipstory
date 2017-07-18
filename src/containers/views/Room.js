@@ -19,6 +19,7 @@ import VideoModule from '../../components/modules/VideoModule';
 import YoutubeModule from '../../components/modules/YoutubeModule';
 import FunFactModule from '../../components/modules/FunFactModule';
 import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
+import UploadBox from '../../components/uploadbox/UploadBox';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -66,7 +67,6 @@ class Room extends React.Component {
         <div className="modules">
           {room.modules &&
             room.modules.map((module, i) => {
-              console.log(module);
               switch (module.contentType.toLowerCase()) {
                 case 'image':
                   return (
@@ -167,6 +167,7 @@ class Room extends React.Component {
             })}
         </div>
         <AppSuggestions {...suggestions} />
+        <UploadBox />
       </div>
     );
   }

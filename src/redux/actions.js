@@ -1,5 +1,10 @@
-import { firebaseAuth, firebaseDatabase } from '../helpers/firebase';
+import {
+  firebaseAuth,
+  firebaseDatabase,
+  firebaseStorage
+} from '../helpers/firebase';
 import { push } from 'connected-react-router';
+import moment from 'moment';
 
 export const actionTypes = {
   listenToFirebaseAuth: 'LISTEN_FIREBASE_AUTH',
@@ -29,7 +34,14 @@ export const actionTypes = {
   showToast: 'SHOW_TOAST',
   destroyToast: 'DESTROY_TOAST',
   showModal: 'SHOW_MODAL',
-  destroyModal: 'DESTROY_MODAL'
+  destroyModal: 'DESTROY_MODAL',
+  fetchSuggestionsFulfilled: 'FETCH_SUGGESTIONS_FULFILLED',
+  fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED',
+  getRandomSuggestionsFulfilled: 'GET_RANDOM_SUGGESTIONS_FULFILLED',
+  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED',
+  uploadFileStarted: 'UPLOAD_FILE_STARTED',
+  uploadFileRejected: 'UPLOAD_FILE_REJECTED',
+  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -159,11 +171,14 @@ export const listenToFirebaseAuth = () => {
           uid: user.uid
         });
         const userRef = firebaseDatabase.ref(path);
+
         dispatch(authFulfilled(userData));
 
         userRef.once('value').then(snapshot => {
           const val = snapshot.val();
-          userRef.set({ ...val, ...userData });
+          const newVal = { ...val, ...userData };
+          userRef.set(newVal);
+          dispatch(authFulfilled(newVal));
         });
       } else {
         dispatch(authRejected(''));
@@ -204,6 +219,20 @@ export const fetchRoomData = () => {
       })
       .catch(err => {
         dispatch(fetchRoomDataRejected(err));
+      });
+
+    firebaseDatabase
+      .ref()
+      .child('appsuggestions')
+      .once('value')
+      .then(response => {
+        dispatch(fetchSuggestionsFulfilled(response.val()));
+      })
+      .then(r => {
+        dispatch(getRandomSuggestions());
+      })
+      .catch(err => {
+        dispatch(fetchSuggestionsRejected(err));
       });
   };
 };
@@ -248,8 +277,6 @@ export const listenForRoomChangeRejected = errorMessage => ({
 
 export const updateModule = module => {
   return (dispatch, getState) => {
-    console.log('Updating module: ', module.id);
-    console.log('Current state:', getState());
     dispatch(updateModuleStarted());
     firebaseDatabase
       .ref()
@@ -261,7 +288,6 @@ export const updateModule = module => {
         ...module
       })
       .then(snapshot => {
-        console.log('Retrieved snapshot:', snapshot.val());
         dispatch(updateModuleFulfilled());
       })
       .catch(err => {
@@ -281,4 +307,92 @@ export const updateModuleFulfilled = () => ({
 export const updateModuleRejected = errorMessage => ({
   type: actionTypes.updateModuleRejected,
   error: errorMessage
+});
+
+export const fetchSuggestionsFulfilled = data => ({
+  type: actionTypes.fetchSuggestionsFulfilled,
+  data: data
+});
+
+export const fetchSuggestionsRejected = err => ({
+  type: actionTypes.fetchSuggestionsRejected,
+  error: err.message
+});
+
+export const getRandomSuggestions = () => {
+  return (dispatch, getState) => {
+    dispatch(getRandomSuggestionsStarted());
+    let randomNumbers = [];
+    let randomSuggestions = [];
+
+    if (getState().suggestions.suggestions.length < 4) {
+      return dispatch(
+        getRandomSuggestionsFulfilled(getState().suggestions.suggestions)
+      );
+    }
+
+    while (randomNumbers.length !== 4) {
+      let n = Math.floor(
+        Math.random() * getState().suggestions.suggestions.length
+      );
+      if (randomNumbers.indexOf(n) === -1) {
+        randomNumbers.push(n);
+      }
+    }
+
+    let i = 0;
+    while (randomSuggestions.length !== 4) {
+      randomSuggestions.push(
+        getState().suggestions.suggestions[randomNumbers[i]]
+      );
+      i++;
+    }
+
+    dispatch(getRandomSuggestionsFulfilled(randomSuggestions));
+  };
+};
+
+export const getRandomSuggestionsStarted = () => ({
+  type: actionTypes.getRandomSuggestionsStarted
+});
+
+export const getRandomSuggestionsFulfilled = suggestions => ({
+  type: actionTypes.getRandomSuggestionsFulfilled,
+  suggestions: suggestions
+});
+
+export const uploadFile = file => {
+  return (dispatch, getState) => {
+    dispatch(uploadFileStarted());
+    console.log(getState());
+    firebaseStorage()
+      .ref()
+      .child('creations')
+      .child('' + getState().room.classId)
+      .child(
+        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
+      )
+      .put(file)
+      .then(snapshot => {
+        console.log('Upload file snapshot:', snapshot);
+        dispatch(uploadFileFulfilled(snapshot));
+      })
+      .catch(err => {
+        dispatch(uploadFileRejected(err));
+      });
+  };
+};
+
+export const uploadFileStarted = () => ({
+  type: actionTypes.uploadFileStarted
+});
+
+export const uploadFileFulfilled = snapshot => ({
+  type: actionTypes.uploadFileFulfilled,
+  downloadURLs: snapshot.metadata.downloadURLs
+});
+
+export const uploadFileRejected = error => ({
+  type: actionTypes.uploadFileRejected,
+  error: error.message
 });

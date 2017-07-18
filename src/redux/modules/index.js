@@ -5,6 +5,8 @@ import { reducer as form } from 'redux-form';
 import { reducer as storyselect } from './home';
 import { reducer as toast } from './toast';
 import { reducer as modal } from './modal';
+import { reducer as suggestions } from './suggestions';
+import { reducer as upload } from './upload';
 
 export const rootReducer = combineReducers({
   user,
@@ -12,5 +14,7 @@ export const rootReducer = combineReducers({
   storyselect,
   toast,
   modal,
-  form
+  form,
+  suggestions,
+  upload
 });

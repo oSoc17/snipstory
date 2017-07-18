@@ -7,15 +7,18 @@ import { LogIn } from 'react-feather';
 import GoogleLogo from './google.svg';
 import FormField from '../../components/form/FormField';
 
-const Login = ({ pristine, submitting, handleSubmit, error }) => {
+const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
   return (
     <div>
       <h1>Login</h1>
       <div>
         <Button
           onClick={() => {
-            firebaseAuth.signInWithPopup(googleAuthProvider).catch(err => {
-              // error toast?
+            firebaseAuth.signInWithPopup(googleAuthProvider).catch(_ => {
+              showToast({
+                text: 'Inloggen met Google is mislukt, probeer het opnieuw',
+                status: 'error'
+              });
             });
           }}
         >

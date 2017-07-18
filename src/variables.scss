@@ -1,4 +1,4 @@
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans,
   Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji",
   "Segoe UI Emoji", "Segoe UI Symbol";
 
@@ -6,21 +6,20 @@ $brand-font-stack: Poppins, $font-stack;
 $text-color: rgba(#000, .87);
 $text-color--light: rgba(#000, .54);
 
-$brand-blue: #1157d7;
-$brand-blue--light: #3778fb;
-$brand-blue--lighter: #6381fc;
+$brand-blue--darker: #0552d6;
+$brand-blue: #3274ff;
+$brand-blue--light: #5faaff;
 $brand-red: #fc6560;
-$brand-red--light: #fd7f7e;
-$brand-red--lighter: #fdaaa6;
-$brand-orange: #fd734f;
-$brand-yellow: #fdae3f;
+$brand-red--light: #ff7e7b;
+$brand-red--lighter: #ffa59f;
+$brand-orange: #ffaa2e;
+$brand-yellow: #ffce71;
 $brand-yellow--light: #fed278;
 
 $primary-color: $brand-blue;
-$secondary-color: $brand-blue--light;
 $alert-color: $brand-red;
 $warning-color: $brand-yellow;
-$info-color: $brand-blue--lighter;
+$info-color: $brand-blue;
 $success-color: $brand-blue; // should be a green?
 
 $transition-timing: .2s;
@@ -31,6 +30,8 @@ $z-index-modal: 1000;
 
 $material-box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
 $material-border-radius: 2px;
+
+$nav-bar-height: 9.2rem;
 
 @mixin button-reset() {
   border: none;

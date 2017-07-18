@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.article-container-1 {
+  width: 62.4rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.creations-container-1 {
+  background-color: $brand-blue;
+  border-radius: 5rem;
+  width: 62.4rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.img-mapping-1 {
+  width: 60rem;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  margin-top: 1.5rem;
+}
+
+.article-title {
+  font-family: $font-stack;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  width: 50rem;
+  margin-left: -7rem;
+  margin-top: 5rem;
+}
+
+.article-para {
+  font-family: $font-stack;
+  font-size: 2.2rem;
+  color: white;
+  width: 35rem;
+  margin-left: -7rem;
+  margin-bottom: 5rem;
+  margin-top: 3rem;
+}

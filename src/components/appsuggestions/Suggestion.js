@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from '../modal/Modal';
 
 const Suggestion = props =>
   <div>

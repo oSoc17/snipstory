@@ -122,7 +122,7 @@ export const listenForClassesChange = () => {
 
 export const stopListeningForClassesChange = () => {
   return (dispatch, getState) => {
-    firebaseDatabase.ref().off(getState().classes.listener);
+    firebaseDatabase.ref().off('value', getState().classes.listener);
   };
 };
 

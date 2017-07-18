@@ -415,7 +415,7 @@ export const uploadFileRejected = error => ({
   error: error.message
 });
 
-export const setUserDisplayName = displayName => ({
+export const setUserDisplayName = (displayName = 'newUser') => ({
   type: actionTypes.setUserDisplayName,
   displayName: displayName
 });
@@ -454,12 +454,15 @@ export const joinRoom = () => {
       firebaseAuth
         .signInAnonymously()
         .then(user => {
-          console.log('user sign in:', getState());
           dispatch(setLocalUID(user.uid));
         })
         .then(() => {
-          console.log('set name:', getState());
-          dispatch(setUserDisplayName('newuser'));
+          let username = prompt('Vul uw naam in');
+          console.log(username);
+          return username;
+        })
+        .then(nameValue => {
+          dispatch(setUserDisplayName(nameValue));
         })
         .then(() => {
           dispatch(pushModifiedUserToFirebase());

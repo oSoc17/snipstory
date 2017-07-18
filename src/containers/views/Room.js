@@ -20,6 +20,7 @@ import YoutubeModule from '../../components/modules/YoutubeModule';
 import FunFactModule from '../../components/modules/FunFactModule';
 import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
 import UploadBox from '../../components/uploadbox/UploadBox';
+import Modal from '../../components/modal/Modal';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -173,7 +174,8 @@ class Room extends React.Component {
 const mapStateToProps = state => ({
   room: state.room,
   user: state.user,
-  suggestions: state.suggestions
+  suggestions: state.suggestions,
+  modal: state.modal
 });
 
 export default connect(mapStateToProps, {

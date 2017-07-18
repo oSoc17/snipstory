@@ -163,11 +163,14 @@ export const listenToFirebaseAuth = () => {
           uid: user.uid
         });
         const userRef = firebaseDatabase.ref(path);
+
         dispatch(authFulfilled(userData));
 
         userRef.once('value').then(snapshot => {
           const val = snapshot.val();
-          userRef.set({ ...val, ...userData });
+          const newVal = { ...val, ...userData };
+          userRef.set(newVal);
+          dispatch(authFulfilled(newVal));
         });
       } else {
         dispatch(authRejected(''));

@@ -427,7 +427,6 @@ export const pushModifiedUserToFirebase = () => {
     firebaseDatabase.ref('users').child(getState().user.uid).set(val, () => {
       return dispatch(pushModifiedUserToFirebaseFulfilled());
     });
-    return dispatch(pushModifiedUserToFirebaseRejected());
   };
 };
 

@@ -4,13 +4,7 @@ import { checkTeacherCode, createRoom } from '../../redux/actions';
 
 class CreateRoom extends React.Component {
   render() {
-    const {
-      error,
-      isLoading,
-      isValidCode,
-      checkTeacherCode,
-      createRoom
-    } = this.props;
+    const { error, isLoading, checkTeacherCode, createRoom } = this.props;
 
     if (isLoading) return <div>Creating room...</div>;
     return (
@@ -18,7 +12,7 @@ class CreateRoom extends React.Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            createRoom();
+            createRoom(e.target['name'].value);
           }}
         >
           <h1>Maak een nieuwe ruimte</h1>
@@ -36,11 +30,13 @@ class CreateRoom extends React.Component {
               defaultValue="public"
               onChange={checkTeacherCode}
             />
-            {!isValidCode && <span>checking...</span>}
+            {!this.props.state.isValidCode && <span>checking...</span>}
           </div>
           <div className="form-group">
-            {!isValidCode && <input type="submit" value="Maak" disabled />}
-            {isValidCode && <input type="submit" value="Maak" />}
+            {!this.props.state.isValidCode &&
+              <input type="submit" value="Maak" disabled />}
+            {this.props.state.isValidCode &&
+              <input type="submit" value="Maak" />}
           </div>
         </form>
         {error &&
@@ -53,7 +49,8 @@ class CreateRoom extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ...state.room
+  state: state.room,
+  user: state.user
 });
 
 export default connect(mapStateToProps, { checkTeacherCode, createRoom })(

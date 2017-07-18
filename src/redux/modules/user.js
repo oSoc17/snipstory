@@ -28,6 +28,14 @@ export const reducer = (state = initialState, action) => {
         isAuthorized: false,
         authPending: false
       });
+    case actionTypes.setUserDisplayName:
+      return Object.assign({}, state, {
+        displayName: action.displayName
+      });
+    case actionTypes.setLocalUID:
+      return Object.assign({}, state, {
+        uid: action.uid
+      });
     default:
       return state;
   }

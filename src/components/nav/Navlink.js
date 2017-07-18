@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import './Navlink.css';
 
 const Navlink = ({ children = '', ...props }) => {

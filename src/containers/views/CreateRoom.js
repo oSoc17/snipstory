@@ -7,13 +7,7 @@ import Button from '../../components/button/Button';
 
 class CreateRoom extends React.Component {
   render() {
-    const {
-      error,
-      isLoading,
-      isValidCode,
-      checkTeacherCode,
-      createRoom
-    } = this.props;
+    const { error, isLoading, checkTeacherCode, createRoom } = this.props;
 
     if (isLoading) return <div>Creating room...</div>;
     return (
@@ -21,7 +15,7 @@ class CreateRoom extends React.Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            createRoom();
+            createRoom(e.target['name'].value);
           }}
         >
           <h1>Maak een nieuwe ruimte</h1>
@@ -57,7 +51,8 @@ class CreateRoom extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ...state.room
+  state: state.room,
+  user: state.user
 });
 
 CreateRoom = connect(mapStateToProps, { checkTeacherCode, createRoom })(

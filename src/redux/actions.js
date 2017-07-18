@@ -41,7 +41,16 @@ export const actionTypes = {
   getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED',
   uploadFileStarted: 'UPLOAD_FILE_STARTED',
   uploadFileRejected: 'UPLOAD_FILE_REJECTED',
-  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED'
+  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED',
+  setUserDisplayName: 'SET_USER_DISPLAY_NAME',
+  pushModifiedUserToFirebaseFulfilled:
+    'PUSH_MODIFIED_USER_TO_FIREBASE_FULFILLED',
+  pushModifiedUserToFirebaseRejected: 'PUSH_MODIFIED_USER_TO_FIREBASE_REJECTED',
+  pushModifiedUserToFirebaseStarted: 'PUSH_MODIFIED_USER_TO_FIREBASE_STARTED',
+  joinRoomStarted: 'JOIN_ROOM_STARTED',
+  joinRoomFulfilled: 'JOIN_ROOM_FULFILLED',
+  joinRoomRejected: 'JOIN_ROOM_REJECTED',
+  setLocalUID: 'SET_LOCAL_UID'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -117,28 +126,39 @@ export const checkTeacherCodeRejected = errorString => ({
   error: errorString
 });
 
-export const createRoom = () => {
+export const createRoom = userName => {
   return (dispatch, getState) => {
+    console.log(getState());
     dispatch(createRoomStarted());
-
-    firebaseAuth.signInAnonymously().then(user => {}).catch(err => {
-      dispatch(createRoomRejected(err.message));
-    });
-
-    const roomKey = firebaseDatabase.ref().child('rooms').push().key;
-    const data = {
-      ...getState().room,
-      users: [getState().user]
-    };
-    data.id = roomKey;
-    let updates = {};
-    updates['/rooms/' + roomKey] = data;
-    firebaseDatabase
-      .ref()
-      .update(updates)
-      .then(result => {
-        dispatch(createRoomFulfilled(data));
-        dispatch(push(`/rooms/${roomKey}`));
+    firebaseAuth
+      .signInAnonymously()
+      .then(user => {})
+      .then(() => {
+        const roomKey = firebaseDatabase.ref().child('rooms').push().key;
+        const data = {
+          ...getState().room,
+          users: [getState().user]
+        };
+        data.id = roomKey;
+        let updates = {};
+        updates['/rooms/' + roomKey] = data;
+        firebaseDatabase
+          .ref()
+          .update(updates)
+          .then(result => {
+            console.log(getState());
+            dispatch(createRoomFulfilled(data));
+            dispatch(push(`/rooms/${roomKey}`));
+          })
+          .then(() => {
+            dispatch(setUserDisplayName(userName));
+          })
+          .then(() => {
+            dispatch(pushModifiedUserToFirebase());
+          })
+          .catch(err => {
+            dispatch(createRoomRejected(err.message));
+          });
       })
       .catch(err => {
         dispatch(createRoomRejected(err.message));
@@ -395,4 +415,82 @@ export const uploadFileFulfilled = snapshot => ({
 export const uploadFileRejected = error => ({
   type: actionTypes.uploadFileRejected,
   error: error.message
+});
+
+export const setUserDisplayName = (displayName = 'newUser') => ({
+  type: actionTypes.setUserDisplayName,
+  displayName: displayName
+});
+
+export const pushModifiedUserToFirebase = () => {
+  return (dispatch, getState) => {
+    console.log('Push modified user to firebase state:', getState());
+    dispatch(pushModifiedUserToFirebaseStarted());
+    const val = {
+      uid: getState().user.uid,
+      displayName: getState().user.displayName
+    };
+    firebaseDatabase.ref('users').child(getState().user.uid).set(val, () => {
+      return dispatch(pushModifiedUserToFirebaseFulfilled());
+    });
+  };
+};
+
+export const pushModifiedUserToFirebaseStarted = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseStarted
+});
+
+export const pushModifiedUserToFirebaseFulfilled = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseFulfilled
+});
+
+export const pushModifiedUserToFirebaseRejected = () => ({
+  type: actionTypes.pushModifiedUserToFirebaseRejected
+});
+
+export const joinRoom = () => {
+  return (dispatch, getState) => {
+    dispatch(joinRoomStarted());
+    if (!getState().user.isAuthorized) {
+      console.log('No user authorized');
+      firebaseAuth
+        .signInAnonymously()
+        .then(user => {
+          dispatch(setLocalUID(user.uid));
+        })
+        .then(() => {
+          let username = prompt('Vul uw naam in');
+          console.log(username);
+          return username;
+        })
+        .then(nameValue => {
+          dispatch(setUserDisplayName(nameValue));
+        })
+        .then(() => {
+          dispatch(pushModifiedUserToFirebase());
+        })
+        .then(() => {
+          dispatch(joinRoomFulfilled());
+        })
+        .catch(err => {
+          dispatch(joinRoomRejected(err));
+        });
+    }
+  };
+};
+
+export const joinRoomStarted = () => ({
+  type: actionTypes.joinRoomStarted
+});
+export const joinRoomFulfilled = () => ({
+  type: actionTypes.joinRoomFulfilled
+});
+export const joinRoomRejected = err => ({
+  type: actionTypes.joinRoomRejected,
+  error: err.message
+});
+
+export const setLocalUID = userId => ({
+  type: actionTypes.setLocalUID,
+  uid: userId
 });

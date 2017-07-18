@@ -26,15 +26,15 @@ class Home extends React.Component {
     return (
       <div className="page">
         <nav className="nav-container">
-          <Navlink to="TeacherArea">Inspiratie</Navlink>
+          <Navlink to="">Inspiratie</Navlink>
 
-          <Navlink to="TeacherArea">Hoe werkt Snipstory?</Navlink>
+          <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
 
           <Button to="/story/select" size="small">
             Start je verhaal hier
           </Button>
 
-          <Navlink to="TeacherArea">Snippers bekijken</Navlink>
+          <Navlink to="/#inspo">Snippers bekijken</Navlink>
 
           <Navlink to="TeacherArea">Leerkracht</Navlink>
         </nav>
@@ -53,7 +53,7 @@ class Home extends React.Component {
         </header>
 
         <main>
-          <section className="how-to-container">
+          <section id="howTo" className="how-to-container">
             <div className="how-to-2-container">
               <div className="ht-mini-container">
                 <img src={ht1} className="ht-1-img" alt="how-to-1" />
@@ -94,7 +94,7 @@ class Home extends React.Component {
             </div>
           </section>
 
-          <section className="creations-container">
+          <section id="inspo" className="creations-container">
             <h2 className="creation-title">Creaties</h2>
             <div className="creations-1">
               <Creations1 />

@@ -23,7 +23,8 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         isValidCode: true,
         classId: action.classId,
-        userId: action.userId
+        teacherId: action.userId,
+        isCheckingCode: false
       });
     case actionTypes.checkTeacherCodeRejected:
       return Object.assign({}, state, {
@@ -69,6 +70,10 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.updateModuleFulfilled:
       return Object.assign({}, state, {});
     case actionTypes.updateModuleRejected:
+      return Object.assign({}, state, {
+        error: action.error
+      });
+    case actionTypes.joinRoomRejected:
       return Object.assign({}, state, {
         error: action.error
       });

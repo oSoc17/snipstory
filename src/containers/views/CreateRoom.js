@@ -35,8 +35,8 @@ class CreateRoom extends React.Component {
             required
             onChange={checkTeacherCode}
           />
-          {isValidCode && <Button type="submit">Maak</Button>}
-          {!isValidCode &&
+          {this.props.room.isValidCode && <Button type="submit">Maak</Button>}
+          {!this.props.room.isValidCode &&
             <Button type="submit" disabled>
               Maak
             </Button>}
@@ -51,7 +51,7 @@ class CreateRoom extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  state: state.room,
+  room: state.room,
   user: state.user
 });
 

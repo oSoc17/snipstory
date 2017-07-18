@@ -20,7 +20,7 @@ class UploadBox extends React.Component {
     return (
       <div>
         {this.props.upload.downloadURLs &&
-          <img src={this.props.upload.downloadURLs[0]} />}
+          <img src={this.props.upload.downloadURLs[0]} alt="upload" />}
       </div>
     );
   }

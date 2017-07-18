@@ -56,7 +56,7 @@ class Home extends React.Component {
           <section className="how-to-container">
             <div className="how-to-2-container">
               <div className="ht-mini-container">
-                <img src={ht1} className="ht-1-img" alt="how-to-photo-1" />
+                <img src={ht1} className="ht-1-img" alt="how-to-1" />
                 <div className="ht-1-border">
                   <h2 className="ht-title">Ontdek</h2>
                   <p className="ht-paraf">
@@ -67,7 +67,7 @@ class Home extends React.Component {
               </div>
 
               <div className="ht-mini-2-container">
-                <img src={ht2} className="ht-2-img" alt="how-to-photo-2" />
+                <img src={ht2} className="ht-2-img" alt="how-to-2" />
                 <div className="ht-2-border">
                   <h2 className="ht-title">Leer</h2>
                   <p className="ht-paraf">
@@ -77,7 +77,7 @@ class Home extends React.Component {
               </div>
 
               <div className="ht-mini-container">
-                <img src={ht3} className="ht-3-img" alt="how-to-photo-3" />
+                <img src={ht3} className="ht-3-img" alt="how-to-3" />
                 <div className="ht-3-border">
                   <h2 className="ht-title">Maak</h2>
                   <p className="ht-paraf">Maak je eigen werkjes</p>
@@ -85,7 +85,7 @@ class Home extends React.Component {
               </div>
 
               <div className="ht-mini-2-container">
-                <img src={ht4} className="ht-4-img" alt="how-to-photo-4" />
+                <img src={ht4} className="ht-4-img" alt="how-to-4" />
                 <div className="ht-4-border">
                   <h2 className="ht-title">Deel</h2>
                   <p className="ht-paraf">Deel je creaties met de wereld</p>
@@ -111,16 +111,16 @@ class Home extends React.Component {
         <footer>
           <div className="partner-container">
             <div className="partner-mini-container">
-              <img className="effect logo1" src={logo1} alt="" />
-              <img className="effect logo2" src={logo2} alt="" />
-              <img className="effect logo3" src={logo3} alt="" />
-              <img className="effect logo7" src={logo8} alt="" />
+              <img className="effect logo1" src={logo1} alt="logo-1" />
+              <img className="effect logo2" src={logo2} alt="logo-2" />
+              <img className="effect logo3" src={logo3} alt="logo-3" />
+              <img className="effect logo7" src={logo8} alt="logo-4" />
             </div>
 
             <div className="partner-mini-container">
-              <img className="effect logo6" src={logo7} alt="" />
-              <img className="effect logo4" src={logo5} alt="" />
-              <img className="effect logo5" src={logo6} alt="" />
+              <img className="effect logo6" src={logo7} alt="logo-5" />
+              <img className="effect logo4" src={logo5} alt="logo-6" />
+              <img className="effect logo5" src={logo6} alt="logo-7" />
             </div>
           </div>
         </footer>

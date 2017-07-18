@@ -36,7 +36,7 @@ class App extends Component {
       history,
       user,
       toast: { toastActive, ...toast },
-      // showToast,
+      showToast,
       destroyToast
     } = this.props;
     const isAuthorized = user.isAuthorized;
@@ -97,7 +97,8 @@ class App extends Component {
               isAuthorized={!isAuthorized}
               redirectUrl="/teacher"
               exact
-              render={props => <Login user={user} {...props} />}
+              render={props =>
+                <Login user={user} showToast={showToast} {...props} />}
             />
             <Route render={() => <Redirect to="/" />} />
           </Switch>

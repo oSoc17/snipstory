@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from '../button/Button';
+import { Delete } from 'react-feather';
 
 class Class extends React.Component {
   render() {
-    const { name, code, showToast } = this.props;
+    const { name, token, showToast, onDelete } = this.props;
     return (
       <div className="teacher-class" style={{ outline: '1px blue solid' }}>
         <div className="teacher-classe__name">
@@ -15,7 +16,7 @@ class Class extends React.Component {
           }}
           type="text"
           readOnly
-          value={code}
+          value={token}
           onClick={e => e.target.select()}
         />
         <Button
@@ -28,6 +29,9 @@ class Class extends React.Component {
           }}
         >
           Kopieer code
+        </Button>
+        <Button inverted onClick={onDelete}>
+          <Delete />
         </Button>
       </div>
     );

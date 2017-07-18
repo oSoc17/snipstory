@@ -33,7 +33,12 @@ export const actionTypes = {
   fetchSuggestionsFulfilled: 'FETCH_SUGGESTIONS_FULFILLED',
   fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED',
   getRandomSuggestionsFulfilled: 'GET_RANDOM_SUGGESTIONS_FULFILLED',
-  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED'
+  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED',
+  startListenForClassesChange: 'START_LISTEN_FOR_CLASSES_CHANGE',
+  receiveClasses: 'RECEIVE_CLASSES',
+  receiveClassesError: 'RECEIVE_CLASSES_ERROR',
+  setClassesListener: 'SET_CLASSES_LISTENER',
+  addClass: 'ADD_CLASS'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -52,6 +57,7 @@ export const fetchRandomStoriesRejected = error => ({
   type: actionTypes.fetchRandomStoriesRejected,
   error
 });
+
 export const fetchRandomStories = () => {
   return dispatch => {
     dispatch(fetchRandomStoriesStarted());
@@ -64,6 +70,108 @@ export const fetchRandomStories = () => {
       .catch(err => {
         dispatch(fetchRandomStoriesRejected(err));
       });
+  };
+};
+
+export const receiveClasses = classes => ({
+  type: actionTypes.receiveClasses,
+  classes
+});
+export const receiveClassesError = error => ({
+  type: actionTypes.receiveClassesError,
+  error
+});
+
+export const setClassesListener = listener => ({
+  type: actionTypes.setClassesListener,
+  listener
+});
+
+export const startListenForClassesChange = () => ({
+  type: actionTypes.startListenForClassesChange
+});
+
+export const listenForClassesChange = () => {
+  return (dispatch, getState) => {
+    dispatch(startListenForClassesChange());
+    const listener = firebaseDatabase
+      .ref(`/users/${getState().user.uid}/classes`)
+      .on('value', snapshot => {
+        const classes = Object.keys(snapshot.val() || {}) || [];
+        if (!classes || !classes.length) {
+          dispatch(receiveClasses([]));
+          return;
+        }
+
+        const classPromises = classes.map(classId =>
+          firebaseDatabase.ref(`/classes/${classId}`).once('value')
+        );
+
+        Promise.all(classPromises)
+          .then(classes => {
+            dispatch(receiveClasses(classes.map(c => c.val())));
+          })
+          .catch(err => {
+            dispatch(receiveClassesError(err));
+          });
+      });
+
+    dispatch(setClassesListener(listener));
+  };
+};
+
+export const stopListeningForClassesChange = () => {
+  return (dispatch, getState) => {
+    firebaseDatabase.ref().off(getState().classes.listener);
+  };
+};
+
+export const addClass = newClass => {
+  return (dispatch, getState) => {
+    const oldClasses = getState().classes.classes;
+    const userId = getState().user.uid;
+    const newClassKey = firebaseDatabase.ref('/classes').push().key;
+    newClass = { ...newClass, id: newClassKey, code: newClassKey };
+    const newClasses = oldClasses ? [...oldClasses, newClass] : [newClass];
+    const newClassIds = newClasses.reduce((acc, c) => {
+      acc[c.id] = true;
+      return acc;
+    }, {});
+
+    dispatch(receiveClasses(newClasses));
+    const updates = {
+      [`/tokens/${newClass.code}`]: { classId: newClassKey, userId },
+      [`/classes/${newClassKey}`]: {
+        id: newClassKey,
+        token: newClass.code,
+        userId,
+        name: newClass.name
+      },
+      [`/users/${getState().user.uid}/classes`]: newClassIds
+    };
+    firebaseDatabase.ref().update(updates);
+  };
+};
+
+export const deleteClass = classObj => {
+  return (dispatch, getState) => {
+    Promise.all([
+      firebaseDatabase.ref(`/classes/${classObj.id}`).remove(),
+      firebaseDatabase.ref(`/tokens/${classObj.token}`).remove(),
+      firebaseDatabase
+        .ref(`/users/${getState().user.uid}/classes/${classObj.id}`)
+        .remove()
+    ])
+      .then(() => {
+        dispatch(
+          showToast({ text: `Klas "${classObj.name}" werd verwijderd` })
+        );
+      })
+      .catch(_ =>
+        showToast({
+          text: `Klas kon niet verwijderd worden, probeer het opnieuw`
+        })
+      );
   };
 };
 

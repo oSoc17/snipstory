@@ -73,6 +73,10 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         error: action.error
       });
+    case actionTypes.joinRoomRejected:
+      return Object.assign({}, state, {
+        error: action.error
+      });
     default:
       return state;
   }

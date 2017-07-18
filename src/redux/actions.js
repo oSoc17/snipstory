@@ -46,7 +46,11 @@ export const actionTypes = {
   pushModifiedUserToFirebaseFulfilled:
     'PUSH_MODIFIED_USER_TO_FIREBASE_FULFILLED',
   pushModifiedUserToFirebaseRejected: 'PUSH_MODIFIED_USER_TO_FIREBASE_REJECTED',
-  pushModifiedUserToFirebaseStarted: 'PUSH_MODIFIED_USER_TO_FIREBASE_STARTED'
+  pushModifiedUserToFirebaseStarted: 'PUSH_MODIFIED_USER_TO_FIREBASE_STARTED',
+  joinRoomStarted: 'JOIN_ROOM_STARTED',
+  joinRoomFulfilled: 'JOIN_ROOM_FULFILLED',
+  joinRoomRejected: 'JOIN_ROOM_REJECTED',
+  setLocalUID: 'SET_LOCAL_UID'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -418,7 +422,7 @@ export const setUserDisplayName = displayName => ({
 
 export const pushModifiedUserToFirebase = () => {
   return (dispatch, getState) => {
-    console.log('Push modified user to firebase');
+    console.log('Push modified user to firebase state:', getState());
     dispatch(pushModifiedUserToFirebaseStarted());
     const val = {
       uid: getState().user.uid,
@@ -440,4 +444,48 @@ export const pushModifiedUserToFirebaseFulfilled = () => ({
 
 export const pushModifiedUserToFirebaseRejected = () => ({
   type: actionTypes.pushModifiedUserToFirebaseRejected
+});
+
+export const joinRoom = () => {
+  return (dispatch, getState) => {
+    dispatch(joinRoomStarted());
+    if (!getState().user.isAuthorized) {
+      console.log('No user authorized');
+      firebaseAuth
+        .signInAnonymously()
+        .then(user => {
+          console.log('user sign in:', getState());
+          dispatch(setLocalUID(user.uid));
+        })
+        .then(() => {
+          console.log('set name:', getState());
+          dispatch(setUserDisplayName('newuser'));
+        })
+        .then(() => {
+          dispatch(pushModifiedUserToFirebase());
+        })
+        .then(() => {
+          dispatch(joinRoomFulfilled());
+        })
+        .catch(err => {
+          dispatch(joinRoomRejected(err));
+        });
+    }
+  };
+};
+
+export const joinRoomStarted = () => ({
+  type: actionTypes.joinRoomStarted
+});
+export const joinRoomFulfilled = () => ({
+  type: actionTypes.joinRoomFulfilled
+});
+export const joinRoomRejected = err => ({
+  type: actionTypes.joinRoomRejected,
+  error: err.message
+});
+
+export const setLocalUID = userId => ({
+  type: actionTypes.setLocalUID,
+  uid: userId
 });

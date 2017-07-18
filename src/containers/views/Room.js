@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { firebaseAuth } from '../../helpers/firebase';
 import { connect } from 'react-redux';
 import {
   fetchRoomData,
   listenForRoomChange,
   updateModule,
-  getRandomSuggestions
+  getRandomSuggestions,
+  joinRoom
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -27,10 +27,7 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    const user = firebaseAuth.currentUser;
-    if (!user) {
-      firebaseAuth.signInAnonymously().then(user => {}).catch(err => {});
-    }
+    this.props.joinRoom();
     this.props.fetchRoomData();
   }
 
@@ -183,5 +180,6 @@ export default connect(mapStateToProps, {
   fetchRoomData,
   listenForRoomChange,
   updateModule,
-  getRandomSuggestions
+  getRandomSuggestions,
+  joinRoom
 })(Room);

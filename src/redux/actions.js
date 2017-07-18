@@ -1,5 +1,10 @@
-import { firebaseAuth, firebaseDatabase } from '../helpers/firebase';
+import {
+  firebaseAuth,
+  firebaseDatabase,
+  firebaseStorage
+} from '../helpers/firebase';
 import { push } from 'connected-react-router';
+import moment from 'moment';
 
 export const actionTypes = {
   listenToFirebaseAuth: 'LISTEN_FIREBASE_AUTH',
@@ -33,7 +38,10 @@ export const actionTypes = {
   fetchSuggestionsFulfilled: 'FETCH_SUGGESTIONS_FULFILLED',
   fetchSuggestionsRejected: 'FETCH_SUGGESTIONS_REJECTED',
   getRandomSuggestionsFulfilled: 'GET_RANDOM_SUGGESTIONS_FULFILLED',
-  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED'
+  getRandomSuggestionsStarted: 'GET_RANDOM_SUGGESTIONS_STARTED',
+  uploadFileStarted: 'UPLOAD_FILE_STARTED',
+  uploadFileRejected: 'UPLOAD_FILE_REJECTED',
+  uploadFileFulfilled: 'UPLOAD_FILE_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -351,4 +359,40 @@ export const getRandomSuggestionsStarted = () => ({
 export const getRandomSuggestionsFulfilled = suggestions => ({
   type: actionTypes.getRandomSuggestionsFulfilled,
   suggestions: suggestions
+});
+
+export const uploadFile = file => {
+  return (dispatch, getState) => {
+    dispatch(uploadFileStarted());
+    console.log(getState());
+    firebaseStorage()
+      .ref()
+      .child('creations')
+      .child('' + getState().room.classId)
+      .child(
+        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
+      )
+      .put(file)
+      .then(snapshot => {
+        console.log('Upload file snapshot:', snapshot);
+        dispatch(uploadFileFulfilled(snapshot));
+      })
+      .catch(err => {
+        dispatch(uploadFileRejected(err));
+      });
+  };
+};
+
+export const uploadFileStarted = () => ({
+  type: actionTypes.uploadFileStarted
+});
+
+export const uploadFileFulfilled = snapshot => ({
+  type: actionTypes.uploadFileFulfilled,
+  downloadURLs: snapshot.metadata.downloadURLs
+});
+
+export const uploadFileRejected = error => ({
+  type: actionTypes.uploadFileRejected,
+  error: error.message
 });

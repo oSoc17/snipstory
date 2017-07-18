@@ -126,8 +126,9 @@ export const checkTeacherCodeRejected = errorString => ({
   error: errorString
 });
 
-export const createRoom = form => {
+export const createRoom = userName => {
   return (dispatch, getState) => {
+    console.log(getState());
     dispatch(createRoomStarted());
     firebaseAuth
       .signInAnonymously()
@@ -145,11 +146,12 @@ export const createRoom = form => {
           .ref()
           .update(updates)
           .then(result => {
+            console.log(getState());
             dispatch(createRoomFulfilled(data));
             dispatch(push(`/rooms/${roomKey}`));
           })
           .then(() => {
-            dispatch(setUserDisplayName(form['name'].value));
+            dispatch(setUserDisplayName(userName));
           })
           .then(() => {
             dispatch(pushModifiedUserToFirebase());

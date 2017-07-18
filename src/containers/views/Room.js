@@ -20,7 +20,6 @@ import YoutubeModule from '../../components/modules/YoutubeModule';
 import FunFactModule from '../../components/modules/FunFactModule';
 import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
 import UploadBox from '../../components/uploadbox/UploadBox';
-import Modal from '../../components/modal/Modal';
 
 class Room extends React.Component {
   handleChange(module) {

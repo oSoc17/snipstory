@@ -12,7 +12,7 @@ class CreateRoom extends React.Component {
         <form
           onSubmit={e => {
             e.preventDefault();
-            createRoom(e.target);
+            createRoom(e.target['name'].value);
           }}
         >
           <h1>Maak een nieuwe ruimte</h1>

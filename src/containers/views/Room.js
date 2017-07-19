@@ -6,10 +6,7 @@ import {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom,
-  sendCreation,
-  addDescriptionToCreation,
-  showToast
+  joinRoom
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -36,16 +33,7 @@ class Room extends React.Component {
   }
 
   render() {
-    const {
-      room,
-      user,
-      creation,
-      isFetchingData,
-      suggestions,
-      sendCreation,
-      addDescriptionToCreation,
-      showToast
-    } = this.props;
+    const { room, user, creation, isFetchingData, suggestions } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -178,41 +166,11 @@ class Room extends React.Component {
         </div>
         <AppSuggestions {...suggestions} />
         <UploadBox />
-        <textarea
-          name="creation-description"
-          onChange={addDescriptionToCreation}
-          id="creation-description"
-          cols="30"
-          rows="10"
-        />
         {creation.photoURL &&
           !room.isSubmitted &&
-          <Button onClick={sendCreation}>Verzend</Button>}
-        {room.isSubmitted &&
-          <div>
-            <input
-              type="text"
-              ref={creationUrlInput => {
-                this.creationUrlInput = creationUrlInput;
-              }}
-              id="creation-url"
-              name="creation-url"
-              value={creation.photoURL}
-              readOnly
-            />
-            <Button
-              onClick={_ => {
-                this.creationUrlInput.select();
-                document.execCommand('copy');
-                showToast({
-                  text:
-                    'De link naar jouw snipper is gekopieërd naar jouw klembord'
-                });
-              }}
-            >
-              Share
-            </Button>
-          </div>}
+          <Button onClick={_ => {} /* redirect to detail page*/}>
+            Verzend
+          </Button>}
       </div>
     );
   }
@@ -232,8 +190,5 @@ export default connect(mapStateToProps, {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom,
-  sendCreation,
-  addDescriptionToCreation,
-  showToast
+  joinRoom
 })(Room);

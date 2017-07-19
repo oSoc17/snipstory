@@ -8,7 +8,8 @@ import {
   getRandomSuggestions,
   joinRoom,
   sendCreation,
-  addDescriptionToCreation
+  addDescriptionToCreation,
+  showToast
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -42,7 +43,8 @@ class Room extends React.Component {
       isFetchingData,
       suggestions,
       sendCreation,
-      addDescriptionToCreation
+      addDescriptionToCreation,
+      showToast
     } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
@@ -186,7 +188,31 @@ class Room extends React.Component {
         {creation.photoURL &&
           !room.isSubmitted &&
           <Button onClick={sendCreation}>Verzend</Button>}
-        {room.isSubmitted && <Button>Share</Button>}
+        {room.isSubmitted &&
+          <div>
+            <input
+              type="text"
+              ref={creationUrlInput => {
+                this.creationUrlInput = creationUrlInput;
+              }}
+              id="creation-url"
+              name="creation-url"
+              value={creation.photoURL}
+              readOnly
+            />
+            <Button
+              onClick={_ => {
+                this.creationUrlInput.select();
+                document.execCommand('copy');
+                showToast({
+                  text:
+                    'De link naar jouw snipper is gekopieërd naar jouw klembord'
+                });
+              }}
+            >
+              Share
+            </Button>
+          </div>}
       </div>
     );
   }
@@ -197,7 +223,8 @@ const mapStateToProps = state => ({
   user: state.user,
   suggestions: state.suggestions,
   modal: state.modal,
-  creation: state.creation
+  creation: state.creation,
+  toast: state.toast
 });
 
 export default connect(mapStateToProps, {
@@ -207,5 +234,6 @@ export default connect(mapStateToProps, {
   getRandomSuggestions,
   joinRoom,
   sendCreation,
-  addDescriptionToCreation
+  addDescriptionToCreation,
+  showToast
 })(Room);

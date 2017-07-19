@@ -27,3 +27,9 @@
 .question-text {
   display: flex;
 }
+
+.container {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}

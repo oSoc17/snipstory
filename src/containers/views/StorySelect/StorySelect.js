@@ -1,5 +1,8 @@
 import React from 'react';
 import { fetchRandomStories, selectStory } from '../../../redux/actions';
+import Spinner from '../../../components/spinner/Spinner';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Search } from 'react-feather';
@@ -20,11 +23,12 @@ class StorySelect extends React.Component {
     } = this.props;
 
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Spinner page size="large" />;
     }
 
     return (
       <div className="page">
+        <Navbar />
         <div className="container">
           <h1 className="story-title">
             Kies de persoon van wie je het verhaal wilt ontdekken
@@ -43,7 +47,7 @@ class StorySelect extends React.Component {
           <div className="random-stories row">
             {randomStories &&
               randomStories.map(story =>
-                <div className="col-md-6">
+                <div className="col-md-6" key={story.storyId}>
                   <div
                     className="story card"
                     onClick={e => {
@@ -51,7 +55,6 @@ class StorySelect extends React.Component {
                       selectStory(story);
                       history.push('/rooms/create');
                     }}
-                    key={story.storyId}
                   >
                     <img
                       className="card-img-top"
@@ -88,6 +91,7 @@ class StorySelect extends React.Component {
               {error}
             </div>}
         </div>
+        <Footer />
       </div>
     );
   }

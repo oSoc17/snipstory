@@ -59,7 +59,14 @@ export const actionTypes = {
   sendCreationStarted: 'SEND_CREATION_STARTED',
   sendCreationFulfilled: 'SEND_CREATION_REJECTED',
   sendCreationRejected: 'SEND_CREATION_FULFILLED',
-  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED'
+  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
+  fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
+  fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
+  fetchSnipperError: 'FETCH_SNIPPER_ERROR',
+  fetchSnippersStarted: 'FETCH_SNIPPERS_STARTED',
+  fetchSnippersFulfilled: 'FETCH_SNIPPERS_FULFILLED',
+  fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
+  snipperNotFound: 'SNIPPER_NOT_FOUND'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -644,3 +651,66 @@ export const addDescriptionToCreationFulfilled = descriptionData => ({
   type: actionTypes.addDescriptionToCreationFulfilled,
   description: descriptionData
 });
+
+export const fetchSnippersStarted = () => ({
+  type: actionTypes.fetchSnippersStarted
+});
+export const fetchSnippersRejected = error => ({
+  type: actionTypes.fetchSnippersError,
+  error
+});
+export const fetchSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchSnippersFulfilled,
+  snippers
+});
+
+export const fetchSnipperStarted = () => ({
+  type: actionTypes.fetchSnipperStarted
+});
+export const fetchSnipperRejected = error => ({
+  type: actionTypes.fetchSnipperError,
+  error
+});
+export const fetchSnipperFulfilled = snipper => ({
+  type: actionTypes.fetchSnipperFulfilled,
+  snipper
+});
+
+export const fetchSnipper = id => {
+  return dispatch => {
+    dispatch(fetchSnipperStarted());
+    firebaseDatabase
+      .ref(`/creations/${id}`)
+      .once('value')
+      .then(snipper => {
+        const val = snipper.val();
+        if (val) {
+          dispatch(fetchSnipperFulfilled(snipper.val()));
+        } else {
+          dispatch(snipperNotFound());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchSnipperRejected(error));
+      });
+  };
+};
+
+export const fetchSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase
+      .ref(`/creations`)
+      .once('value')
+      .then(snippers => {
+        const val = snippers.val();
+        const keys = Object.keys(val);
+        dispatch(fetchSnippersFulfilled(keys.map(snipperId => val[snipperId])));
+      })
+      .catch(error => {
+        dispatch(fetchSnippersRejected(error));
+      });
+  };
+};
+
+export const snipperNotFound = () => ({ type: actionTypes.snipperNotFound });

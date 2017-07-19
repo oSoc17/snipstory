@@ -22,21 +22,21 @@ class UploadBox extends React.Component {
   render() {
     return (
       <div className="upload container">
+        <h2>Voeg een foto of video van jouw snipper toe</h2>
+
         <div className="form-group">
-          <h2>Voeg een foto of video van jouw snipper toe</h2>
-          <div>
-            <input
-              type="file"
-              id="creationUpload"
-              name="creationUpload"
-              onChange={e => {
-                this.props.uploadFile(e.target.files[0]);
-              }}
-            />
-          </div>
-          {this.props.creation.photoURL &&
-            <img src={this.props.creation.photoURL} alt="upload" />}
+          <input
+            type="file"
+            id="creationUpload"
+            name="creationUpload"
+            onChange={e => {
+              this.props.uploadFile(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="creationUpload">+</label>
         </div>
+        {this.props.creation.photoURL &&
+          <img src={this.props.creation.photoURL} alt="upload" />}
         <div className="form-group">
           <label htmlFor="creators">Vul jullie naam in: </label>
           <br />

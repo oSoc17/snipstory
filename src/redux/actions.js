@@ -499,9 +499,7 @@ export const uploadFile = file => {
       .ref()
       .child('creations')
       .child('' + getState().room.classId)
-      .child(
-        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
-      )
+      .child(moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.uid)
       .put(file)
       .then(snapshot => {
         dispatch(uploadFileFulfilled(snapshot, getState().room));

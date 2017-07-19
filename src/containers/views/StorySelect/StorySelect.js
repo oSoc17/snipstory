@@ -5,7 +5,7 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { Search } from 'react-feather';
+//import { Search } from 'react-feather';
 
 class StorySelect extends React.Component {
   componentWillMount() {
@@ -30,7 +30,7 @@ class StorySelect extends React.Component {
         <Navbar />
         <div className="container">
           <h1>Kies de persoon van wie je het verhaal wilt ontdekken</h1>
-          <div className="input-group">
+          {/* <div className="input-group">
             <input
               type="text"
               className="form-control"
@@ -40,7 +40,7 @@ class StorySelect extends React.Component {
             <span className="input-group-addon" id="basic-addon1">
               <Search />
             </span>
-          </div>
+          </div> */}
           <div className="random-stories row">
             {randomStories &&
               randomStories.map(story =>

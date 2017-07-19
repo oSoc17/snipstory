@@ -37,9 +37,9 @@ class Room extends React.Component {
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
     return (
-      <div className="room">
-        <div className="story-information">
-          <img src={room.profilePicture} alt="" />
+      <div className="room container">
+        <div className="story-information container-fluid">
+          <img src={room.profilePicture} alt={room.name} />
           <h1>
             {room.name}
           </h1>
@@ -53,12 +53,13 @@ class Room extends React.Component {
           </h3>
           <div>
             Leeftijd
-            <div>
-              {moment(room.died, 'DD-MM-YYYY').diff(
-                moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                'years'
-              )}
-            </div>
+            <span>
+              {'' +
+                moment(room.died, 'DD-MM-YYYY').diff(
+                  moment(room.birthdate, 'DD-MM-YYYY').format(''),
+                  'years'
+                )}
+            </span>
           </div>
         </div>
         <div className="modules">

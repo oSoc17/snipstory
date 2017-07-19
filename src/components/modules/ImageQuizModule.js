@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageThumbnail from '../../components/imagethumbnail/ImageThumbnail';
 
 const selectAnswer = (event, module, handleChange) => {
   handleChange(
@@ -9,29 +10,32 @@ const selectAnswer = (event, module, handleChange) => {
 };
 
 const ImageQuizModule = ({ module, handleChange }) => {
-  // const confirmAnswer = module.answer === module.correction;
   return (
-    <div>
-      <p>
+    <article className="container module">
+      <p className="module-text">
         {module.text}
       </p>
+
+      <div>
+        <span>Welke foto past het best bij het verhaal volgens jullie?</span>
+        <img src="" alt="Placeholder or selected" />
+      </div>
+
       <div className="images">
         <div>
           {module.resources.map((resource, i) =>
-            <img
-              className="image"
-              key={i}
+            <ImageThumbnail
               id={i}
-              src={resource}
+              key={i}
+              imageSource={resource}
               onClick={e => {
                 selectAnswer(e, module, handleChange);
               }}
-              alt={'ImageQuiz' + i}
             />
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 export default ImageQuizModule;

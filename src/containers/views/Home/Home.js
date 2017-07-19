@@ -16,7 +16,24 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page">
+<<<<<<< HEAD
+        <nav className="nav-container">
+          <Navlink to="">Inspiratie</Navlink>
+
+          <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
+
+          <Button to="/story/select" size="small">
+            Start je verhaal hier
+          </Button>
+
+          <Navlink to="/#inspo">Snippers bekijken</Navlink>
+
+          <Navlink to="/teacher">Leerkracht</Navlink>
+        </nav>
+
+=======
         <Navbar />
+>>>>>>> 48d6e9765b2962a2726db1fae21e2105fb7b8ecf
         <header className="header-container">
           <img src={logo} className="logo" alt="logo" />
           <h1 className="header-title">
@@ -24,10 +41,6 @@ class Home extends React.Component {
             <span className="pink">leer</span>{' '}
             <span className="orange">maak</span>
           </h1>
-          <p className="header-paraf">
-            Hier kan je samen met je klasgenoten de geschiedenis ontdekken: lees
-            de verhalen, test je kennis en maak leuke werkjes!
-          </p>
         </header>
 
         <main>

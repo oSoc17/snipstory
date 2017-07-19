@@ -5,7 +5,12 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 //import { Search } from 'react-feather';
+=======
+import { Search } from 'react-feather';
+import './StorySelect.css';
+>>>>>>> 2981292503cec1447f8b095a9d6f4170b22bd6d3
 
 class StorySelect extends React.Component {
   componentWillMount() {
@@ -29,8 +34,15 @@ class StorySelect extends React.Component {
       <div className="page">
         <Navbar />
         <div className="container">
+<<<<<<< HEAD
           <h1>Kies de persoon van wie je het verhaal wilt ontdekken</h1>
           {/* <div className="input-group">
+=======
+          <h1 className="story-title">
+            Kies de persoon van wie je het verhaal wilt ontdekken
+          </h1>
+          <div className="input-group">
+>>>>>>> 2981292503cec1447f8b095a9d6f4170b22bd6d3
             <input
               type="text"
               className="form-control"

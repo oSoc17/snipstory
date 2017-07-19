@@ -16,24 +16,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="page">
-<<<<<<< HEAD
-        <nav className="nav-container">
-          <Navlink to="">Inspiratie</Navlink>
-
-          <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
-
-          <Button to="/story/select" size="small">
-            Start je verhaal hier
-          </Button>
-
-          <Navlink to="/#inspo">Snippers bekijken</Navlink>
-
-          <Navlink to="/teacher">Leerkracht</Navlink>
-        </nav>
-
-=======
         <Navbar />
->>>>>>> 48d6e9765b2962a2726db1fae21e2105fb7b8ecf
         <header className="header-container">
           <img src={logo} className="logo" alt="logo" />
           <h1 className="header-title">

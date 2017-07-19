@@ -26,7 +26,7 @@ class Home extends React.Component {
     return (
       <div className="page">
         <nav className="nav-container">
-          <Navlink to="">Inspiratie</Navlink>
+          <Navlink to="/#inspo">Inspiratie</Navlink>
 
           <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
 
@@ -36,7 +36,7 @@ class Home extends React.Component {
 
           <Navlink to="/#inspo">Snippers bekijken</Navlink>
 
-          <Navlink to="TeacherArea">Leerkracht</Navlink>
+          <Navlink to="/teacher">Leerkracht</Navlink>
         </nav>
 
         <header className="header-container">

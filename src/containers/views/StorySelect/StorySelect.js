@@ -3,6 +3,7 @@ import { fetchRandomStories, selectStory } from '../../../redux/actions';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Search } from 'react-feather';
+import './StorySelect.css';
 
 class StorySelect extends React.Component {
   componentWillMount() {
@@ -25,7 +26,9 @@ class StorySelect extends React.Component {
     return (
       <div className="page">
         <div className="container">
-          <h1>Kies de persoon van wie je het verhaal wilt ontdekken</h1>
+          <h1 className="story-title">
+            Kies de persoon van wie je het verhaal wilt ontdekken
+          </h1>
           <div className="input-group">
             <input
               type="text"

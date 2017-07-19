@@ -26,7 +26,7 @@ class Home extends React.Component {
     return (
       <div className="page">
         <nav className="nav-container">
-          <Navlink to="/#inspo">Inspiratie</Navlink>
+          <Navlink to="">Inspiratie</Navlink>
 
           <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
 
@@ -46,10 +46,6 @@ class Home extends React.Component {
             <span className="pink">leer</span>{' '}
             <span className="orange">maak</span>
           </h1>
-          <p className="header-paraf">
-            Hier kan je samen met je klasgenoten de geschiedenis ontdekken: lees
-            de verhalen, test je kennis en maak leuke werkjes!
-          </p>
         </header>
 
         <main>

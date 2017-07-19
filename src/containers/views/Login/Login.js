@@ -23,6 +23,10 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                 });
             })}
           >
+            {error &&
+              <div className="form-field__error">
+                {error}
+              </div>}
             <div className="input-field">
               <Field
                 name="email"
@@ -39,14 +43,14 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                 label="Wachtwoord"
               />
             </div>
-            {error &&
-              <div>
-                {error}
-              </div>}
 
             <div className="login-button-container">
-              <Button type="submit" disabled={pristine || submitting}>
-                <span>Inloggen</span>
+              <Button
+                className="login-button"
+                type="submit"
+                disabled={pristine || submitting}
+              >
+                <span className="login-text">Inloggen</span>
               </Button>
 
               <div className="test">

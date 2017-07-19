@@ -13,6 +13,7 @@
   box-shadow: 0 0 1rem 0.2rem rgba($brand-blue, .8);
   transition: all $transition-timing;
   border: none;
+  vertical-align: center;
   &--inverted {
     color: $primary-color;
     background-color: #fff;

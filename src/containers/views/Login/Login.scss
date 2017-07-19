@@ -43,9 +43,26 @@
 .submit {
   border: 1px solid black;
   margin-bottom: 3rem;
-  width: 100%;
 }
 
 .test {
   margin-top: 1.5rem;
+}
+
+.login-button {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.login-text {
+  margin-top: -0.6rem;
+}
+
+.form-field__error {
+  font-family: $brand-font-stack;
+  color: $alert-color;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
 }

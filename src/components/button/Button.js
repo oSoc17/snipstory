@@ -8,9 +8,11 @@ const Button = ({
   size = SIZES.MEDIUM,
   children = '',
   to,
+  className = '',
   ...props
 }) => {
-  const classes = ['button', `button--${size}`];
+  const incomingClasses = className.split(' ');
+  const classes = ['button', `button--${size}`, ...incomingClasses];
 
   if (inverted) {
     classes.push('button--inverted');

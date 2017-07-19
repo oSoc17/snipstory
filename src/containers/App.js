@@ -11,7 +11,7 @@ import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home/Home';
 import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
-import Register from './views/Register';
+import Register from './views/Register/Register';
 import CreateRoom from './views/CreateRoom';
 import StorySelect from './views/StorySelect';
 import Toast from '../components/toast/Toast';

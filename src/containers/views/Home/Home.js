@@ -26,7 +26,7 @@ class Home extends React.Component {
     return (
       <div className="page">
         <nav className="nav-container">
-          <Navlink to="">Inspiratie</Navlink>
+          <Navlink to="/#inspo">Inspiratie</Navlink>
 
           <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
 

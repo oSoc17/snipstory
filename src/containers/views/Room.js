@@ -6,7 +6,9 @@ import {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom
+  joinRoom,
+  sendCreation,
+  addDescriptionToCreation
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -20,6 +22,7 @@ import YoutubeModule from '../../components/modules/YoutubeModule';
 import FunFactModule from '../../components/modules/FunFactModule';
 import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
 import UploadBox from '../../components/uploadbox/UploadBox';
+import Button from '../../components/button/Button';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -32,7 +35,15 @@ class Room extends React.Component {
   }
 
   render() {
-    const { room, user, isFetchingData, suggestions } = this.props;
+    const {
+      room,
+      user,
+      creation,
+      isFetchingData,
+      suggestions,
+      sendCreation,
+      addDescriptionToCreation
+    } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -165,6 +176,17 @@ class Room extends React.Component {
         </div>
         <AppSuggestions {...suggestions} />
         <UploadBox />
+        <textarea
+          name="creation-description"
+          onChange={addDescriptionToCreation}
+          id="creation-description"
+          cols="30"
+          rows="10"
+        />
+        {creation.photoURL &&
+          !room.isSubmitted &&
+          <Button onClick={sendCreation}>Verzend</Button>}
+        {room.isSubmitted && <Button>Share</Button>}
       </div>
     );
   }
@@ -174,7 +196,8 @@ const mapStateToProps = state => ({
   room: state.room,
   user: state.user,
   suggestions: state.suggestions,
-  modal: state.modal
+  modal: state.modal,
+  creation: state.creation
 });
 
 export default connect(mapStateToProps, {
@@ -182,5 +205,7 @@ export default connect(mapStateToProps, {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom
+  joinRoom,
+  sendCreation,
+  addDescriptionToCreation
 })(Room);

@@ -51,28 +51,31 @@ class Room extends React.Component {
 
     return (
       <div className="room container">
-        <div className="story-information container-fluid">
-          <img src={room.profilePicture} alt={room.name} />
-          <h1>
-            {room.name}
-          </h1>
-          <h2>
-            {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
-              ' - ' +
-              moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
-          </h2>
-          <h3>
-            {room.nationality}
-          </h3>
-          <div>
-            Leeftijd
-            <span>
-              {'' +
-                moment(room.died, 'DD-MM-YYYY').diff(
-                  moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                  'years'
-                )}
-            </span>
+        <div className="story-information card" style={{ width: '550px' }}>
+          <img
+            className="card-img-top"
+            src={room.profilePicture}
+            alt={room.name}
+          />
+          <div className="card-block">
+            <h1 className="card-title">
+              {room.name}
+            </h1>
+            <p>
+              {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
+                ' - ' +
+                moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+            </p>
+            <p>
+              {room.nationality}
+            </p>
+          </div>
+          <div className="card-block">
+            Leeftijd{' '}
+            {moment(room.died, 'DD-MM-YYYY').diff(
+              moment(room.birthdate, 'DD-MM-YYYY').format(''),
+              'years'
+            )}
           </div>
         </div>
         <div className="modules">

@@ -18,14 +18,17 @@ const QuizModule = ({ module, handleChange }) => {
       </p>
 
       <div className="question">
-        <span className="questionmark">?</span>
-        <span>
-          {module.question}
-        </span>
+        <div className="question-text">
+          <span className="questionmark">?</span>
+          <span>
+            {module.question}
+          </span>
+        </div>
 
         <div className="buttons">
           {module.options.map((option, i) =>
             <Button
+              inverted
               key={i}
               onClick={_ => selectAnswer(module, i, handleChange)}
             >

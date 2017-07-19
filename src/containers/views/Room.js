@@ -6,7 +6,8 @@ import {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom
+  joinRoom,
+  sendCreation
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -33,7 +34,14 @@ class Room extends React.Component {
   }
 
   render() {
-    const { room, user, creation, isFetchingData, suggestions } = this.props;
+    const {
+      room,
+      user,
+      creation,
+      isFetchingData,
+      suggestions,
+      sendCreation
+    } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -168,9 +176,15 @@ class Room extends React.Component {
         <UploadBox />
         {creation.photoURL &&
           !room.isSubmitted &&
-          <Button onClick={_ => {} /* redirect to detail page*/}>
+          <Button
+            onClick={_ => {
+              sendCreation();
+            }}
+          >
             Verzend
           </Button>}
+        {room.isSubmitted &&
+          <Button to={'/snipper/' + creation.id}>Ga naar jou snipper!</Button>}
       </div>
     );
   }
@@ -190,5 +204,6 @@ export default connect(mapStateToProps, {
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
-  joinRoom
+  joinRoom,
+  sendCreation
 })(Room);

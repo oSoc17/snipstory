@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { uploadFile, addDescriptionToCreation } from '../../redux/actions';
+import {
+  uploadFile,
+  addDescriptionToCreation,
+  addCreatorsToCreation
+} from '../../redux/actions';
 
 class UploadBox extends React.Component {
   componentDidMount() {
@@ -34,7 +38,12 @@ class UploadBox extends React.Component {
             <img src={this.props.creation.photoURL} alt="upload" />}
         </div>
         <label htmlFor="creators">Vul jullie naam in: </label>
-        <input type="text" name="creators" id="creators" />
+        <input
+          type="text"
+          name="creators"
+          id="creators"
+          onChange={this.props.addCreatorsToCreation}
+        />
         <label htmlFor="creation-description">
           Wil je iets over je snipper schrijven?{' '}
         </label>
@@ -56,5 +65,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   uploadFile,
-  addDescriptionToCreation
+  addDescriptionToCreation,
+  addCreatorsToCreation
 })(UploadBox);

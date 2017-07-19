@@ -55,7 +55,11 @@ export const actionTypes = {
   joinRoomStarted: 'JOIN_ROOM_STARTED',
   joinRoomFulfilled: 'JOIN_ROOM_FULFILLED',
   joinRoomRejected: 'JOIN_ROOM_REJECTED',
-  setLocalUID: 'SET_LOCAL_UID'
+  setLocalUID: 'SET_LOCAL_UID',
+  sendCreationStarted: 'SEND_CREATION_STARTED',
+  sendCreationFulfilled: 'SEND_CREATION_REJECTED',
+  sendCreationRejected: 'SEND_CREATION_FULFILLED',
+  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -236,7 +240,6 @@ export const checkTeacherCodeRejected = errorString => ({
 
 export const createRoom = userName => {
   return (dispatch, getState) => {
-    console.log(getState());
     dispatch(createRoomStarted());
     firebaseAuth
       .signInAnonymously()
@@ -254,7 +257,6 @@ export const createRoom = userName => {
           .ref()
           .update(updates)
           .then(result => {
-            console.log(getState());
             dispatch(createRoomFulfilled(data));
             dispatch(push(`/rooms/${roomKey}`));
           })
@@ -492,7 +494,6 @@ export const getRandomSuggestionsFulfilled = suggestions => ({
 export const uploadFile = file => {
   return (dispatch, getState) => {
     dispatch(uploadFileStarted());
-    console.log(getState());
     firebaseStorage()
       .ref()
       .child('creations')
@@ -502,8 +503,7 @@ export const uploadFile = file => {
       )
       .put(file)
       .then(snapshot => {
-        console.log('Upload file snapshot:', snapshot);
-        dispatch(uploadFileFulfilled(snapshot));
+        dispatch(uploadFileFulfilled(snapshot, getState().room));
       })
       .catch(err => {
         dispatch(uploadFileRejected(err));
@@ -515,9 +515,12 @@ export const uploadFileStarted = () => ({
   type: actionTypes.uploadFileStarted
 });
 
-export const uploadFileFulfilled = snapshot => ({
+export const uploadFileFulfilled = (snapshot, room) => ({
   type: actionTypes.uploadFileFulfilled,
-  downloadURLs: snapshot.metadata.downloadURLs
+  photoURL: snapshot.metadata.downloadURLs[0],
+  contentType: snapshot.metadata.contentType.split('/')[0],
+  storyId: room.storyId,
+  creators: room.users.map(user => user.displayName)
 });
 
 export const uploadFileRejected = error => ({
@@ -532,7 +535,6 @@ export const setUserDisplayName = (displayName = 'newUser') => ({
 
 export const pushModifiedUserToFirebase = () => {
   return (dispatch, getState) => {
-    console.log('Push modified user to firebase state:', getState());
     dispatch(pushModifiedUserToFirebaseStarted());
     const val = {
       uid: getState().user.uid,
@@ -560,7 +562,6 @@ export const joinRoom = () => {
   return (dispatch, getState) => {
     dispatch(joinRoomStarted());
     if (!getState().user.isAuthorized) {
-      console.log('No user authorized');
       firebaseAuth
         .signInAnonymously()
         .then(user => {
@@ -568,7 +569,6 @@ export const joinRoom = () => {
         })
         .then(() => {
           let username = prompt('Vul uw naam in');
-          console.log(username);
           return username;
         })
         .then(nameValue => {
@@ -601,4 +601,46 @@ export const joinRoomRejected = err => ({
 export const setLocalUID = userId => ({
   type: actionTypes.setLocalUID,
   uid: userId
+});
+
+export const sendCreation = () => {
+  return (dispatch, getState) => {
+    dispatch(sendCreationStarted());
+    let creationId = firebaseDatabase.ref().child('creations').push().key;
+    let creationData = {
+      id: creationId,
+      description: getState().creation.description,
+      creators: getState().creation.creators,
+      photoURL: getState().creation.photoURL,
+      storyId: getState().creation.storyId
+    };
+    firebaseDatabase
+      .ref()
+      .child('creations')
+      .child(creationId)
+      .set(creationData, snapshot => {
+        dispatch(sendCreationFulfilled());
+      });
+  };
+};
+
+export const sendCreationStarted = () => ({
+  type: actionTypes.sendCreationStarted
+});
+export const sendCreationRejected = () => ({
+  type: actionTypes.sendCreationRejected
+});
+export const sendCreationFulfilled = () => ({
+  type: actionTypes.sendCreationFulfilled
+});
+
+export const addDescriptionToCreation = event => {
+  return (dispatch, getState) => {
+    dispatch(addDescriptionToCreationFulfilled(event.target.value));
+  };
+};
+
+export const addDescriptionToCreationFulfilled = descriptionData => ({
+  type: actionTypes.addDescriptionToCreationFulfilled,
+  description: descriptionData
 });

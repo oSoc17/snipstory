@@ -62,7 +62,7 @@ export const actionTypes = {
   addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
   fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
   fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
-  fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED'
+  fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED',
   fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
   fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
   fetchSnipperError: 'FETCH_SNIPPER_ERROR',
@@ -666,8 +666,8 @@ export const fetchKnutselTips = () => {
       })
       .catch(err => {
         dispatch(fetchKnutselTipsRejected(err));
-    });
-  }
+      });
+  };
 };
 
 export const fetchSnippersStarted = () => ({
@@ -739,8 +739,8 @@ export const fetchKnutselTipsFulfilled = knutselTips => ({
 export const fetchKnutselTipsRejected = err => ({
   type: actionTypes.fetchKnutselTipsRejected,
   error: err.message
-)};
-                                                
+});
+
 export const fetchSnippers = () => {
   return dispatch => {
     dispatch(fetchSnippersStarted());

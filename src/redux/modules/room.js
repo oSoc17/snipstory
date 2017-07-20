@@ -10,8 +10,7 @@ const initialState = {
   isLoading: false,
   isValidCode: false,
   isFetchingData: true,
-  isFetchingChanges: false,
-  isSubmitted: false
+  isFetchingChanges: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -77,10 +76,6 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.joinRoomRejected:
       return Object.assign({}, state, {
         error: action.error
-      });
-    case actionTypes.sendCreationFulfilled:
-      return Object.assign({}, state, {
-        isSubmitted: true
       });
     default:
       return state;

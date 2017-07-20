@@ -8,15 +8,14 @@ const initialState = {
   contentType: '',
   description: '',
   creators: '',
-  storyId: ''
+  storyId: '',
+  isSubmitted: false
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.uploadFileStarted:
-      return Object.assign({}, state, {
-        uploading: true
-      });
+      return Object.assign({}, state, { uploading: true });
     case actionTypes.uploadFileFulfilled:
       return Object.assign(
         {},
@@ -39,16 +38,13 @@ export const reducer = (state = initialState, action) => {
       });
     case actionTypes.sendCreationFulfilled:
       return Object.assign({}, state, {
-        ...action.creation
+        ...action.creation,
+        isSubmitted: true
       });
     case actionTypes.addDescriptionToCreationFulfilled:
-      return Object.assign({}, state, {
-        description: action.description
-      });
+      return Object.assign({}, state, { description: action.description });
     case actionTypes.addCreatorsToCreationFulfilled:
-      return Object.assign({}, state, {
-        creators: action.creators
-      });
+      return Object.assign({}, state, { creators: action.creators });
     default:
       return state;
   }

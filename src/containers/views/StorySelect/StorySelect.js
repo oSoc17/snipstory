@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 //import { Search } from 'react-feather';
 import './StorySelect.css';
+import StapLogo from './assets/stap01.svg';
 
 class StorySelect extends React.Component {
   componentWillMount() {
@@ -38,7 +39,7 @@ class StorySelect extends React.Component {
           step={1}
           title="Kies een persoon"
           description="Kies de persoon van wie je het verhaal wilt ontdekken"
-          image="https://placehold.it/300x300"
+          image={StapLogo}
         />
         <div className="container">
           {/* <div className="input-group">

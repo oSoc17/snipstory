@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchKnutselTips } from '../../redux/actions';
-import NavBar from '../../components/nav/Navbar';
-import Footer from '../../components/footer/Footer';
-import Difficulty from '../../components/difficulty/Difficulty';
+import { fetchKnutselTips } from '../../../redux/actions';
+import NavBar from '../../../components/nav/Navbar';
+import Button from '../../../components/button/Button';
+import Footer from '../../../components/footer/Footer';
+import Difficulty from '../../../components/difficulty/Difficulty';
+
+import StapLogo from './assets/stap03.svg';
+
+import StepIndicator from '../../../components/step-indicator/StepIndicator';
 
 class KnutselTips extends React.Component {
   componentWillMount() {
@@ -15,8 +20,16 @@ class KnutselTips extends React.Component {
     return (
       <div>
         <NavBar />
+        <StepIndicator
+          step={3}
+          title="Knutsel"
+          description="Nu is het jouw beurt! Maak een snipper over het verhaal dat je hebt gelezen"
+          image={StapLogo}
+        />
+        <Button to={'/story/share'}>Deel je knutselwerk</Button>
         <div>
           <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>
+
           <div className="knutseltips row">
             {knutseltips.tips.map((tip, i) =>
               <div

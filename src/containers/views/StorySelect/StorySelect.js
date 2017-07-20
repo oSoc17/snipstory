@@ -10,7 +10,6 @@ import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
-//import { Search } from 'react-feather';
 import './StorySelect.css';
 import StapLogo from './assets/stap01.svg';
 
@@ -56,41 +55,37 @@ class StorySelect extends React.Component {
           <div className="random-stories row">
             {randomStories &&
               randomStories.map(story =>
-                <div className="col-md-6" key={story.storyId}>
-                  <div
-                    className="story card"
-                    onClick={e => {
-                      e.preventDefault();
-                      selectStory(story);
-                      createRoom('');
-                    }}
-                  >
-                    <img
-                      className="card-img-top"
-                      src={story.profilePicture}
-                      alt={story.name}
-                    />
-                    <div className="card-block">
-                      <h3 className="card-title">
-                        <div>
-                          {story.name}
-                        </div>
-                        <small className="text-muted">
-                          {story.birthdate} - {story.died}
-                        </small>
-                      </h3>
-                      <p className="card-text">
-                        {story.nationality}
-                      </p>
-                    </div>
-                    <div className="card-footer">
-                      <small className="text-muted">
-                        {moment(story.died, 'DD-MM-YYYY').diff(
-                          moment(story.birthdate, 'DD-MM-YYYY').format(''),
-                          'years'
-                        ) + 'jaar oud'}
-                      </small>
-                    </div>
+                <div
+                  className="story card"
+                  key={story.storyId}
+                  onClick={e => {
+                    e.preventDefault();
+                    selectStory(story);
+                    createRoom('');
+                  }}
+                  style={{ margin: '1em', width: '20em' }}
+                >
+                  <img
+                    className="card-img-top img-fluid"
+                    src={story.profilePicture}
+                    alt={story.name}
+                  />
+                  <div className="card-block">
+                    <h3 className="card-title">
+                      {story.name}
+                    </h3>
+                    <p className="card-text">
+                      {story.birthdate} - {story.died}
+                    </p>
+                    <p className="card-text">
+                      {story.nationality}
+                    </p>
+                    <p className="card-text">
+                      {moment(story.died, 'DD-MM-YYYY').diff(
+                        moment(story.birthdate, 'DD-MM-YYYY').format(''),
+                        'years'
+                      ) + ' jaar oud'}
+                    </p>
                   </div>
                 </div>
               )}

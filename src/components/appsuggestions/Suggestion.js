@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Suggestion = props =>
-  <div>
+  <div className="suggestion col-md-6">
     <img src={props.image} alt="" height="50px" />
-    <span>
+    <span className="col-md-6">
       {props.name}
     </span>
   </div>;

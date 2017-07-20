@@ -16,6 +16,10 @@ const parseUrl = youtubeUrl => {
 
 const YoutubeModule = ({ module: { resources } }) => {
   const opts = { playerVars: { autoplay: 0 } };
-  return <YouTube videoId={parseUrl(resources[0])} opts={opts} />;
+  return (
+    <article className="container module">
+      <YouTube videoId={parseUrl(resources[0])} opts={opts} />
+    </article>
+  );
 };
 export default YoutubeModule;

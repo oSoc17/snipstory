@@ -5,15 +5,12 @@ import { history } from '../../redux/store';
 
 const Creations1 = ({ snipper }) => {
   return (
-    <article className="article-container-1">
-      <div
-        className="creations-container-1"
-        onClick={e => history.push(`/snippers/${snipper.id}`)}
-      >
+    <article className="">
+      <div className="" onClick={e => history.push(`/snippers/${snipper.id}`)}>
         <img
           src={snipper.photoURL}
           alt={`Snipper van ${snipper.creators}`}
-          className="img-mapping-1"
+          className="img-fluid"
         />
         <div>
           <h2 className="article-title">

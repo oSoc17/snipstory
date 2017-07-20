@@ -2,18 +2,19 @@ import React from 'react';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
-import Creations2 from '../../../components/creations2/Creations2';
-import Button from '../../../components/button/Button';
+
+import './Home.css';
+
+import logo from './assets/logo.svg';
+// import ht1 from './assets/ht-1.svg';
+// import ht2 from './assets/ht-2.svg';
+// import ht3 from './assets/ht-3.svg';
+// import ht4 from './assets/ht-4.svg';
 import Spinner from '../../../components/spinner/Spinner';
 import { fetchRandomSnippers } from '../../../redux/actions';
 import { connect } from 'react-redux';
 
 import './Home.css';
-
-import ht1 from './assets/ht-1.svg';
-import ht2 from './assets/ht-2.svg';
-import ht3 from './assets/ht-3.svg';
-import ht4 from './assets/ht-4.svg';
 
 class Home extends React.Component {
   componentWillMount() {
@@ -22,21 +23,19 @@ class Home extends React.Component {
   render() {
     const { randomSnippers, isLoading } = this.props;
     return (
-      <div className="page">
+      <div className="home page">
         <Navbar />
         <header className="header-container">
+          <img src={logo} alt="logo" className="logo" />
           <h1 className="header-title">
             <span className="blue">ontdek</span>{' '}
             <span className="pink">leer</span>{' '}
             <span className="orange">maak</span>
           </h1>
-          <Button to="/story/select" size="small">
-            Start je verhaal hier
-          </Button>
         </header>
 
         <main>
-          <section id="howTo" className="how-to-container">
+          {/* -    <section id="howTo" className="how-to-container">
             <div className="how-to-2-container">
               <div className="ht-mini-container">
                 <img src={ht1} className="ht-1-img" alt="how-to-1" />
@@ -75,20 +74,28 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {!randomSnippers || isLoading
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
                 <h2 className="creation-title">Snippers</h2>
-                <div className="creations-1">
-                  <Creations1 snipper={randomSnippers[0]} />
-                  <Creations2 snipper={randomSnippers[0]} />
+                <div className="row">
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[0]} />
+                  </div>
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[1]} />
+                  </div>
                 </div>
 
-                <div className="creations-2">
-                  <Creations1 snipper={randomSnippers[0]} />
-                  <Creations2 snipper={randomSnippers[0]} />
+                <div className="row">
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[2]} />
+                  </div>
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[3]} />
+                  </div>
                 </div>
               </section>}
         </main>

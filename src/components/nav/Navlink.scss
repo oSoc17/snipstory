@@ -4,9 +4,30 @@
   color: $brand-blue;
   font-family: $brand-font-stack;
   font-weight: 600;
-  font-size: 1.6rem;
 
   &:hover {
     border-bottom: 0.1em solid $brand-blue;
+  }
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.navbar-toggler {
+  background-color: white;
+}
+
+.nav-item {
+  &:hover {
+    border: none;
   }
 }

@@ -1,1 +1,21 @@
+@import '../variables.scss';
 
+.knutseltips {
+  max-width: 700px;
+  flex-wrap: wrap;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  .knutseltip {
+    display: flex;
+    align-items: center;
+    span {
+      background-color: $brand-blue;
+      border-radius: 25px;
+      padding: 1em;
+      color: white;
+      padding-left: 3em;
+      margin-left: -2.5em;
+      z-index: -1;
+    }
+  }
+}

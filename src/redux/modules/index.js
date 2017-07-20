@@ -9,6 +9,8 @@ import { reducer as suggestions } from './suggestions';
 import { reducer as classes } from './classes';
 import { reducer as creation } from './creation';
 import { reducer as knutseltips } from './knutseltips';
+import { reducer as snipper } from './snipper';
+import { reducer as snippers } from './snippers';
 
 export const rootReducer = combineReducers({
   user,
@@ -20,5 +22,7 @@ export const rootReducer = combineReducers({
   suggestions,
   classes,
   creation,
-  knutseltips
+  knutseltips,
+  snipper,
+  snippers
 });

@@ -7,7 +7,7 @@ const initialState = {
   photoURL: '',
   contentType: '',
   description: '',
-  creators: [],
+  creators: '',
   storyId: ''
 };
 
@@ -37,9 +37,17 @@ export const reducer = (state = initialState, action) => {
         uploading: false,
         error: action.error
       });
+    case actionTypes.sendCreationFulfilled:
+      return Object.assign({}, state, {
+        ...action.creation
+      });
     case actionTypes.addDescriptionToCreationFulfilled:
       return Object.assign({}, state, {
         description: action.description
+      });
+    case actionTypes.addCreatorsToCreationFulfilled:
+      return Object.assign({}, state, {
+        creators: action.creators
       });
     default:
       return state;

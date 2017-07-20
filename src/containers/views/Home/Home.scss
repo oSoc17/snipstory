@@ -2,21 +2,19 @@
 
 /*NAVIGATIE*/
 
-.nav-container {
-  height: $nav-bar-height;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 0 10px 2px rgba($brand-blue, .8);
-  background-color: white;
-  width: 100%;
+.navbar {
+  box-shadow: 0 0 10px 4px $brand-blue;
 }
 
 /*HEADER*/
 
+.page {
+  background: none;
+}
+
 .header-container {
   height: 100vh;
-  background-size: 100vw;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +26,7 @@
 }
 
 .logo {
-  width: 36rem;
+  width: 30rem;
 }
 
 .header-title {
@@ -206,7 +204,6 @@ footer {
 
 .effect {
   mix-blend-mode: color-burn;
-  height: 100%;
 }
 
 .logo1 {

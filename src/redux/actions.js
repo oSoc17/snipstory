@@ -63,6 +63,15 @@ export const actionTypes = {
   fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
   fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
   fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED'
+  fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
+  fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
+  fetchSnipperError: 'FETCH_SNIPPER_ERROR',
+  fetchSnippersStarted: 'FETCH_SNIPPERS_STARTED',
+  fetchSnippersFulfilled: 'FETCH_SNIPPERS_FULFILLED',
+  fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
+  fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
+  snipperNotFound: 'SNIPPER_NOT_FOUND',
+  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -501,9 +510,7 @@ export const uploadFile = file => {
       .ref()
       .child('creations')
       .child('' + getState().room.classId)
-      .child(
-        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
-      )
+      .child(moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.uid)
       .put(file)
       .then(snapshot => {
         dispatch(uploadFileFulfilled(snapshot, getState().room));
@@ -571,11 +578,7 @@ export const joinRoom = () => {
           dispatch(setLocalUID(user.uid));
         })
         .then(() => {
-          let username = prompt('Vul uw naam in');
-          return username;
-        })
-        .then(nameValue => {
-          dispatch(setUserDisplayName(nameValue));
+          dispatch(setUserDisplayName('Anonieme gebruiker'));
         })
         .then(() => {
           dispatch(pushModifiedUserToFirebase());
@@ -587,8 +590,7 @@ export const joinRoom = () => {
           dispatch(joinRoomRejected(err));
         });
     } else if (getState().user.displayName.trim().length === 0) {
-      let username = prompt('Vul uw naam in');
-      dispatch(setUserDisplayName(username));
+      dispatch(setUserDisplayName('Anonieme gebruiker'));
       dispatch(pushModifiedUserToFirebase());
     }
   };
@@ -626,7 +628,7 @@ export const sendCreation = () => {
       .child('creations')
       .child(creationId)
       .set(creationData, snapshot => {
-        dispatch(sendCreationFulfilled());
+        dispatch(sendCreationFulfilled(creationData));
       });
   };
 };
@@ -637,8 +639,9 @@ export const sendCreationStarted = () => ({
 export const sendCreationRejected = () => ({
   type: actionTypes.sendCreationRejected
 });
-export const sendCreationFulfilled = () => ({
-  type: actionTypes.sendCreationFulfilled
+export const sendCreationFulfilled = data => ({
+  type: actionTypes.sendCreationFulfilled,
+  creation: data
 });
 
 export const addDescriptionToCreation = event => {
@@ -663,6 +666,63 @@ export const fetchKnutselTips = () => {
       })
       .catch(err => {
         dispatch(fetchKnutselTipsRejected(err));
+    });
+  }
+};
+
+export const fetchSnippersStarted = () => ({
+  type: actionTypes.fetchSnippersStarted
+});
+export const fetchSnippersRejected = error => ({
+  type: actionTypes.fetchSnippersError,
+  error
+});
+export const fetchSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchSnippersFulfilled,
+  snippers
+});
+
+export const fetchSnipperStarted = () => ({
+  type: actionTypes.fetchSnipperStarted
+});
+export const fetchSnipperRejected = error => ({
+  type: actionTypes.fetchSnipperError,
+  error
+});
+export const fetchSnipperFulfilled = snipper => ({
+  type: actionTypes.fetchSnipperFulfilled,
+  snipper
+});
+
+export const fetchSnipper = id => {
+  return dispatch => {
+    dispatch(fetchSnipperStarted());
+    firebaseDatabase
+      .ref(`/creations/${id}`)
+      .once('value')
+      .then(snipper => {
+        const val = snipper.val();
+        if (!val) {
+          dispatch(snipperNotFound());
+          throw new Error('Snipper not foundsn');
+        }
+        return val;
+      })
+      .then(snipper => {
+        return Promise.all([
+          Promise.resolve(snipper),
+          firebaseDatabase
+            .ref(`/stories/${snipper.storyId}`)
+            .once('value')
+            .then(snapshot => snapshot.val())
+        ]);
+      })
+      .then(([snipper, story]) => {
+        console.log(snipper, story);
+        dispatch(fetchSnipperFulfilled({ ...snipper, story }));
+      })
+      .catch(error => {
+        dispatch(fetchSnipperRejected(error));
       });
   };
 };
@@ -679,4 +739,47 @@ export const fetchKnutselTipsFulfilled = knutselTips => ({
 export const fetchKnutselTipsRejected = err => ({
   type: actionTypes.fetchKnutselTipsRejected,
   error: err.message
+)};
+                                                
+export const fetchSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase
+      .ref(`/creations`)
+      .once('value')
+      .then(snippers => {
+        const val = snippers.val();
+        const keys = Object.keys(val);
+        dispatch(fetchSnippersFulfilled(keys.map(snipperId => val[snipperId])));
+      })
+      .catch(error => {
+        dispatch(fetchSnippersRejected(error));
+      });
+  };
+};
+
+export const fetchRandomSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
+      const val = snippers.val();
+      const keys = Object.keys(val);
+      dispatch(fetchRandomSnippersFulfilled(keys.map(id => val[id])));
+    });
+  };
+};
+export const fetchRandomSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchRandomSnippersFulfilled,
+  snippers
+});
+export const snipperNotFound = () => ({ type: actionTypes.snipperNotFound });
+export const addCreatorsToCreation = event => {
+  return (dispatch, getState) => {
+    dispatch(addCreatorsToCreationFulfilled(event.target.value));
+  };
+};
+
+export const addCreatorsToCreationFulfilled = creatorsData => ({
+  type: actionTypes.addCreatorsToCreationFulfilled,
+  creators: creatorsData
 });

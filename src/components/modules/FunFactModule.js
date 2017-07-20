@@ -1,10 +1,10 @@
 import React from 'react';
 
 const FunFactModule = ({ module: { text } }) =>
-  <div>
+  <article className="container module">
     <span>Weetje!</span>
     <p>
       {text}
     </p>
-  </div>;
+  </article>;
 export default FunFactModule;

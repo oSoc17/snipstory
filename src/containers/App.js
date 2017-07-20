@@ -19,6 +19,8 @@ import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room';
 import CreateStory from './views/CreateStory';
+import Snippers from './views/Snippers';
+import SnipperDetail from './views/SnipperDetail';
 import deepEqual from 'deep-equal';
 import './App.css';
 
@@ -77,6 +79,17 @@ class App extends Component {
               path="/knutseltips"
               exact
               render={props => <KnutselTips user={user} {...props} />}
+      />
+            <Route
+              path="/snippers"
+              exact
+              render={props => <Snippers user={user} {...props} />}
+            />
+            <Route
+              path="/snippers/:snipperId"
+              exact
+              render={props =>
+                <SnipperDetail showToast={showToast} user={user} {...props} />}
             />
             <ProtectedRoute
               path="/teacher/stories/create"

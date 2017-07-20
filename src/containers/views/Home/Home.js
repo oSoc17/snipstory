@@ -2,15 +2,14 @@ import React from 'react';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
-import Creations2 from '../../../components/creations2/Creations2';
 
 import './Home.css';
 
 import logo from './assets/logo.svg';
-import ht1 from './assets/ht-1.svg';
-import ht2 from './assets/ht-2.svg';
-import ht3 from './assets/ht-3.svg';
-import ht4 from './assets/ht-4.svg';
+// import ht1 from './assets/ht-1.svg';
+// import ht2 from './assets/ht-2.svg';
+// import ht3 from './assets/ht-3.svg';
+// import ht4 from './assets/ht-4.svg';
 
 class Home extends React.Component {
   render() {

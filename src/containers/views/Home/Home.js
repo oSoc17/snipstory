@@ -75,7 +75,18 @@ class Home extends React.Component {
               </div>
             </div>
           </section> */}
-
+          <section className="video-section">
+            <div className="container">
+              <iframe
+                title="Video over de werking van Snipstory"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/ZYMAVF64Bfo"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </div>
+          </section>
           {!randomSnippers || isLoading
             ? <Spinner page />
             : <section id="inspo" className="creations-container">

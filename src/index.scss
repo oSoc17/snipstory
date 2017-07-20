@@ -10,6 +10,10 @@ body {
   color: $text-color;
 }
 
+iframe {
+  border: none;
+}
+
 a {
   text-decoration: none;
   color: $primary-color;

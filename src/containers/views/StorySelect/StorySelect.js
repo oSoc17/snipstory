@@ -9,6 +9,7 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import StepIndicator from '../../../components/step-indicator/StepIndicator';
 //import { Search } from 'react-feather';
 import './StorySelect.css';
 
@@ -33,8 +34,13 @@ class StorySelect extends React.Component {
     return (
       <div className="page">
         <Navbar />
+        <StepIndicator
+          step={1}
+          title="Kies een persoon"
+          description="Kies de persoon van wie je het verhaal wilt ontdekken"
+          image="https://placehold.it/300x300"
+        />
         <div className="container">
-          <h1>Kies de persoon van wie je het verhaal wilt ontdekken</h1>
           {/* <div className="input-group">
             <input
               type="text"

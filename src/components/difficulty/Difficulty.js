@@ -1,5 +1,5 @@
 import React from 'react';
-import Bol from './Bol';
+import Bol from './bol';
 
 const Difficulty = props => {
   let data = [];

@@ -15,52 +15,36 @@ class KnutselTips extends React.Component {
     return (
       <div>
         <NavBar />
-        <div className="container text-center knutseltips">
-          <h1>Knutseltips</h1>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              flexWrap: 'wrap'
-            }}
-          >
+        <div>
+          <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>
+          <div className="knutseltips row">
             {knutseltips.tips.map((tip, i) =>
-              <div key={i}>
-                <div className="knutseltip row m-3">
-                  <div
-                    className="col"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-around',
-                      flexDirection: 'column'
-                    }}
-                  >
-                    <span className="d-inline-block tip-name">
-                      {tip.name}
-                    </span>
-                    <div
-                      className="knutseltip-image d-inline-block"
-                      style={{
-                        backgroundImage: 'url(' + tip.image + ')',
-                        height: '250px',
-                        width: '200px',
-                        backgroundSize: 'cover'
-                      }}
-                    />
-                  </div>
-                  <div className="col tip-information">
-                    <Difficulty amount={tip.difficulty} />
-                    <div style={{ textAlign: 'left' }}>
-                      {tip.text}
-                    </div>
-                    <div className="requirements">
-                      <h2>Benodigdheden:</h2>
-                      <p>
-                        {tip.requirements}
-                      </p>
-                    </div>
-                  </div>
+              <div
+                className="card knutseltip"
+                style={{ width: '20em', margin: '2em' }}
+              >
+                <img
+                  class="card-img-top"
+                  style={{ maxWidth: '100%' }}
+                  src={tip.image}
+                  alt={tip.name}
+                />
+                <div className="card-block">
+                  <h4 className="card-title">
+                    {tip.name}
+                  </h4>
+                  <p className="card-text">
+                    {tip.text}
+                  </p>
+                </div>
+                <div className="card-block">
+                  <Difficulty amount={tip.difficulty} />
+                </div>
+                <div className="card-block">
+                  <p>Benodigdheden:</p>
+                  <p className="card-text">
+                    {tip.requirements}
+                  </p>
                 </div>
               </div>
             )}

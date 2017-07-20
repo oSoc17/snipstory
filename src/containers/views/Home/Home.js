@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import './Home.css';
 
 class Home extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchRandomSnippers();
   }
   render() {

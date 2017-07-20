@@ -67,7 +67,8 @@ export const actionTypes = {
   fetchSnippersFulfilled: 'FETCH_SNIPPERS_FULFILLED',
   fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
   fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
-  snipperNotFound: 'SNIPPER_NOT_FOUND'
+  snipperNotFound: 'SNIPPER_NOT_FOUND',
+  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -506,9 +507,7 @@ export const uploadFile = file => {
       .ref()
       .child('creations')
       .child('' + getState().room.classId)
-      .child(
-        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
-      )
+      .child(moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.uid)
       .put(file)
       .then(snapshot => {
         dispatch(uploadFileFulfilled(snapshot, getState().room));
@@ -631,7 +630,7 @@ export const sendCreation = () => {
       .child('creations')
       .child(creationId)
       .set(creationData, snapshot => {
-        dispatch(sendCreationFulfilled());
+        dispatch(sendCreationFulfilled(creationData));
       });
   };
 };
@@ -642,8 +641,9 @@ export const sendCreationStarted = () => ({
 export const sendCreationRejected = () => ({
   type: actionTypes.sendCreationRejected
 });
-export const sendCreationFulfilled = () => ({
-  type: actionTypes.sendCreationFulfilled
+export const sendCreationFulfilled = data => ({
+  type: actionTypes.sendCreationFulfilled,
+  creation: data
 });
 
 export const addDescriptionToCreation = event => {
@@ -746,3 +746,13 @@ export const fetchRandomSnippersFulfilled = snippers => ({
   snippers
 });
 export const snipperNotFound = () => ({ type: actionTypes.snipperNotFound });
+export const addCreatorsToCreation = event => {
+  return (dispatch, getState) => {
+    dispatch(addCreatorsToCreationFulfilled(event.target.value));
+  };
+};
+
+export const addCreatorsToCreationFulfilled = creatorsData => ({
+  type: actionTypes.addCreatorsToCreationFulfilled,
+  creators: creatorsData
+});

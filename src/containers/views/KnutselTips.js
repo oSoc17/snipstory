@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchKnutselTips } from '../../redux/actions';
 import NavBar from '../../components/nav/Navbar';
 import Footer from '../../components/footer/Footer';
+import Difficulty from '../../components/difficulty/Difficulty';
 
 class KnutselTips extends React.Component {
   componentWillMount() {
@@ -49,7 +50,19 @@ class KnutselTips extends React.Component {
                     />
                   </div>
                   <div className="col">
-                    <div />
+                    <div>
+                      <Difficulty amount={tip.difficulty} />
+                    </div>
+                    <div>
+                      <h2>Benodigdheden:</h2>
+                      <ul>
+                        {tip.requirements.map((requirement, i) =>
+                          <li key={i}>
+                            {requirement}
+                          </li>
+                        )}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

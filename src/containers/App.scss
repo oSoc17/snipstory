@@ -6,6 +6,7 @@
   margin-top: 2em;
   margin-bottom: 2em;
   .knutseltip {
+    color: white;
     position: relative;
     width: 650px;
     height: 450px;
@@ -25,6 +26,9 @@
       border-radius: 15px;
       padding: 1em 2em;
       color: $brand-blue;
+    }
+    ul {
+      text-align: left;
     }
   }
 }

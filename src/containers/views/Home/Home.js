@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
+import YouTube from 'react-youtube';
 
 import './Home.css';
 
@@ -28,9 +29,7 @@ class Home extends React.Component {
         <header className="header-container">
           <img src={logo} alt="logo" className="logo" />
           <h1 className="header-title">
-            <span className="blue">ontdek</span>{' '}
-            <span className="pink">leer</span>{' '}
-            <span className="orange">maak</span>
+            <span className="blue">Knutsel met de geschiedenis</span>
           </h1>
         </header>
 
@@ -77,13 +76,16 @@ class Home extends React.Component {
           </section> */}
           <section className="video-section">
             <div className="container">
-              <iframe
-                title="Video over de werking van Snipstory"
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/ZYMAVF64Bfo"
-                frameBorder="0"
-                allowFullScreen
+              <YouTube
+                videoId="ZYMAVF64Bfo"
+                opts={{
+                  rel: 0,
+                  showinfo: 0,
+                  width: '100%',
+                  height: '100%',
+                  frameBorder: 0,
+                  allowFullScreen: true
+                }}
               />
             </div>
           </section>
@@ -97,8 +99,6 @@ class Home extends React.Component {
                     <Creations1 snipper={randomSnippers[0]} />
                   </div>
                   <div className="col-4">
-
-              
                     <Creations1 snipper={randomSnippers[1]} />
                   </div>
                 </div>
@@ -108,7 +108,6 @@ class Home extends React.Component {
                     <Creations1 snipper={randomSnippers[2]} />
                   </div>
                   <div className="col-4 ">
-
                     <Creations1 snipper={randomSnippers[3]} />
                   </div>
                 </div>

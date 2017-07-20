@@ -1,5 +1,4 @@
 import React from 'react';
-import './StepIndicator.css';
 const StepIndicator = ({ step, title, description, image }) => {
   return (
     <div className="step-indicator">

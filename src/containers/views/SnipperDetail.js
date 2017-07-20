@@ -6,7 +6,7 @@ import Spinner from '../../components/spinner/Spinner';
 import Button from '../../components/button/Button';
 import Navbar from '../../components/nav/Navbar';
 import Footer from '../../components/footer/Footer';
-import { ShareButtons } from 'react-share';
+import { ShareButtons, generateShareIcon } from 'react-share';
 import { Helmet } from 'react-helmet';
 
 const {
@@ -19,6 +19,14 @@ const {
   RedditShareButton
 } = ShareButtons;
 
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const GooglePlusIcon = generateShareIcon('google');
+const PinterestIcon = generateShareIcon('pinterest');
+const TelegramIcon = generateShareIcon('telegram');
+const WhatsappIcon = generateShareIcon('whatsapp');
+const RedditIcon = generateShareIcon('reddit');
+
 class SnipperDetail extends React.Component {
   componentWillMount() {
     const { fetchSnipper, match: { params: { snipperId } } } = this.props;
@@ -27,7 +35,6 @@ class SnipperDetail extends React.Component {
   render() {
     let { snipper, isLoading, notFound, showToast } = this.props;
     isLoading = false;
-    const title = `Snipper van ${snipper.creators}`;
 
     if (isLoading || !snipper) {
       return <Spinner page size="large" />;
@@ -35,6 +42,9 @@ class SnipperDetail extends React.Component {
     if (notFound) {
       return <Redirect to="/" />;
     }
+
+    const title = `Snipper van ${snipper.creators}`;
+    const href = window.location.href;
     return (
       <div className="page">
         <Helmet>
@@ -72,13 +82,27 @@ class SnipperDetail extends React.Component {
             </div>}
           <div className="snipper-share">
             <div className="social-share">
-              <FacebookShareButton />
-              <GooglePlusShareButton />
-              <TwitterShareButton />
-              <PinterestShareButton />
-              <WhatsappShareButton />
-              <RedditShareButton />
-              <TelegramShareButton />
+              <FacebookShareButton url={href}>
+                <FacebookIcon />
+              </FacebookShareButton>
+              <GooglePlusShareButton url={href}>
+                <GooglePlusIcon />
+              </GooglePlusShareButton>
+              <TwitterShareButton url={href}>
+                <TwitterIcon />
+              </TwitterShareButton>
+              <PinterestShareButton url={href}>
+                <PinterestIcon />
+              </PinterestShareButton>
+              <WhatsappShareButton url={href}>
+                <WhatsappIcon />
+              </WhatsappShareButton>
+              <RedditShareButton url={href}>
+                <RedditIcon />
+              </RedditShareButton>
+              <TelegramShareButton url={href}>
+                <TelegramIcon />
+              </TelegramShareButton>
             </div>
             <input
               ref={linkInput => {

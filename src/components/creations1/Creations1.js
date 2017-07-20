@@ -5,9 +5,9 @@ import './Creations1.css';
 
 const Creations1 = () => {
   return (
-    <article className="article-container-1">
-      <div className="creations-container-1">
-        <img src={TestPhoto} alt="" className="img-mapping-1" />
+    <article className="">
+      <div className="">
+        <img src={TestPhoto} alt="" className="img-fluid" />
         <div>
           <h2 className="article-title">
             Door Eli Lambert, Charlotte Roels, Olivia Severs & Noora de Grote

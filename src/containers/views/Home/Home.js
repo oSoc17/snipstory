@@ -15,25 +15,8 @@ import ht4 from './assets/ht-4.svg';
 class Home extends React.Component {
   render() {
     return (
-      <div className="page">
-<<<<<<< HEAD
-        <nav className="nav-container">
-          <Navlink to="">Inspiratie</Navlink>
-
-          <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
-
-          <Button to="/story/select" size="small">
-            Start je verhaal hier
-          </Button>
-
-          <Navlink to="/#inspo">Snippers bekijken</Navlink>
-
-          <Navlink to="/teacher">Leerkracht</Navlink>
-        </nav>
-
-=======
+      <div className="home page">
         <Navbar />
->>>>>>> 48d6e9765b2962a2726db1fae21e2105fb7b8ecf
         <header className="header-container">
           <img src={logo} className="logo" alt="logo" />
           <h1 className="header-title">
@@ -44,7 +27,7 @@ class Home extends React.Component {
         </header>
 
         <main>
-          <section id="howTo" className="how-to-container">
+          {/* -    <section id="howTo" className="how-to-container">
             <div className="how-to-2-container">
               <div className="ht-mini-container">
                 <img src={ht1} className="ht-1-img" alt="how-to-1" />
@@ -83,18 +66,26 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section id="inspo" className="creations-container">
             <h2 className="creation-title">Snippers</h2>
-            <div className="creations-1">
-              <Creations1 />
-              <Creations2 />
+            <div className="row">
+              <div className="col-6">
+                <Creations1 />
+              </div>
+              <div className="col-6">
+                <Creations1 />
+              </div>
             </div>
 
-            <div className="creations-2">
-              <Creations1 />
-              <Creations2 />
+            <div className="row">
+              <div className="col-6">
+                <Creations1 />
+              </div>
+              <div className="col-6">
+                <Creations1 />
+              </div>
             </div>
           </section>
         </main>

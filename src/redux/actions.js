@@ -576,11 +576,7 @@ export const joinRoom = () => {
           dispatch(setLocalUID(user.uid));
         })
         .then(() => {
-          let username = prompt('Vul uw naam in');
-          return username;
-        })
-        .then(nameValue => {
-          dispatch(setUserDisplayName(nameValue));
+          dispatch(setUserDisplayName('Anonieme gebruiker'));
         })
         .then(() => {
           dispatch(pushModifiedUserToFirebase());
@@ -592,8 +588,7 @@ export const joinRoom = () => {
           dispatch(joinRoomRejected(err));
         });
     } else if (getState().user.displayName.trim().length === 0) {
-      let username = prompt('Vul uw naam in');
-      dispatch(setUserDisplayName(username));
+      dispatch(setUserDisplayName('Anonieme gebruiker'));
       dispatch(pushModifiedUserToFirebase());
     }
   };

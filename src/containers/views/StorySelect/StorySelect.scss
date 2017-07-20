@@ -1,0 +1,39 @@
+@import '../../../variables.scss';
+
+.page {
+  background-image: url('./assets/bg.svg');
+  background-repeat: no-repeat;
+}
+
+.container {
+  width: 100%;
+}
+
+.story-title {
+  color: white;
+  font-family: $brand-font-stack;
+  font-size: 2.8rem;
+  text-align: center;
+  width: 50rem;
+}
+
+.input-group {
+  width: 26rem;
+  height: 3.6rem;
+}
+
+.form-control {
+  border-bottom-left-radius: 10rem;
+  border-top-left-radius: 10rem;
+  border-right: none;
+  font-family: $brand-font-stack;
+  color: $brand-blue;
+  height: 100%;
+}
+
+.input-group-addon {
+  border-bottom-right-radius: 10rem;
+  border-top-right-radius: 10rem;
+  border-left: none;
+  background-color: white;
+}

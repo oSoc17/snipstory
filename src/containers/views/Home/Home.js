@@ -17,7 +17,7 @@ import ht4 from './assets/ht-4.svg';
 
 class Home extends React.Component {
   componentWillMount() {
-    this.props.fetchRandomCreations();
+    this.props.fetchRandomSnippers();
   }
   render() {
     const { randomSnippers, isLoading } = this.props;

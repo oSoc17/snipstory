@@ -16,8 +16,13 @@ import ht3 from './assets/ht-3.svg';
 import ht4 from './assets/ht-4.svg';
 
 class Home extends React.Component {
+<<<<<<< Updated upstream
   componentDidMount() {
     this.props.fetchRandomSnippers();
+=======
+  componentWillMount() {
+    this.props.fetchRandomCreations();
+>>>>>>> Stashed changes
   }
   render() {
     const { randomSnippers, isLoading } = this.props;

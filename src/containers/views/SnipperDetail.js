@@ -65,7 +65,7 @@ class SnipperDetail extends React.Component {
               });
             }}
           >
-            Share
+            Deel
           </Button>
         </div>
         <Footer />

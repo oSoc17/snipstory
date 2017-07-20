@@ -7,7 +7,9 @@ import { reducer as toast } from './toast';
 import { reducer as modal } from './modal';
 import { reducer as suggestions } from './suggestions';
 import { reducer as classes } from './classes';
-import { reducer as upload } from './upload';
+import { reducer as creation } from './creation';
+import { reducer as snipper } from './snipper';
+import { reducer as snippers } from './snippers';
 
 export const rootReducer = combineReducers({
   user,
@@ -18,5 +20,7 @@ export const rootReducer = combineReducers({
   form,
   suggestions,
   classes,
-  upload
+  creation,
+  snipper,
+  snippers
 });

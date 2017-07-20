@@ -55,7 +55,20 @@ export const actionTypes = {
   joinRoomStarted: 'JOIN_ROOM_STARTED',
   joinRoomFulfilled: 'JOIN_ROOM_FULFILLED',
   joinRoomRejected: 'JOIN_ROOM_REJECTED',
-  setLocalUID: 'SET_LOCAL_UID'
+  setLocalUID: 'SET_LOCAL_UID',
+  sendCreationStarted: 'SEND_CREATION_STARTED',
+  sendCreationFulfilled: 'SEND_CREATION_REJECTED',
+  sendCreationRejected: 'SEND_CREATION_FULFILLED',
+  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
+  fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
+  fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
+  fetchSnipperError: 'FETCH_SNIPPER_ERROR',
+  fetchSnippersStarted: 'FETCH_SNIPPERS_STARTED',
+  fetchSnippersFulfilled: 'FETCH_SNIPPERS_FULFILLED',
+  fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
+  fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
+  snipperNotFound: 'SNIPPER_NOT_FOUND',
+  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -236,7 +249,6 @@ export const checkTeacherCodeRejected = errorString => ({
 
 export const createRoom = userName => {
   return (dispatch, getState) => {
-    console.log(getState());
     dispatch(createRoomStarted());
     firebaseAuth
       .signInAnonymously()
@@ -254,7 +266,6 @@ export const createRoom = userName => {
           .ref()
           .update(updates)
           .then(result => {
-            console.log(getState());
             dispatch(createRoomFulfilled(data));
             dispatch(push(`/rooms/${roomKey}`));
           })
@@ -492,18 +503,14 @@ export const getRandomSuggestionsFulfilled = suggestions => ({
 export const uploadFile = file => {
   return (dispatch, getState) => {
     dispatch(uploadFileStarted());
-    console.log(getState());
     firebaseStorage()
       .ref()
       .child('creations')
       .child('' + getState().room.classId)
-      .child(
-        moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.displayName
-      )
+      .child(moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.uid)
       .put(file)
       .then(snapshot => {
-        console.log('Upload file snapshot:', snapshot);
-        dispatch(uploadFileFulfilled(snapshot));
+        dispatch(uploadFileFulfilled(snapshot, getState().room));
       })
       .catch(err => {
         dispatch(uploadFileRejected(err));
@@ -515,9 +522,12 @@ export const uploadFileStarted = () => ({
   type: actionTypes.uploadFileStarted
 });
 
-export const uploadFileFulfilled = snapshot => ({
+export const uploadFileFulfilled = (snapshot, room) => ({
   type: actionTypes.uploadFileFulfilled,
-  downloadURLs: snapshot.metadata.downloadURLs
+  photoURL: snapshot.metadata.downloadURLs[0],
+  contentType: snapshot.metadata.contentType.split('/')[0],
+  storyId: room.storyId,
+  creators: room.users.map(user => user.displayName)
 });
 
 export const uploadFileRejected = error => ({
@@ -532,7 +542,6 @@ export const setUserDisplayName = (displayName = 'newUser') => ({
 
 export const pushModifiedUserToFirebase = () => {
   return (dispatch, getState) => {
-    console.log('Push modified user to firebase state:', getState());
     dispatch(pushModifiedUserToFirebaseStarted());
     const val = {
       uid: getState().user.uid,
@@ -560,19 +569,13 @@ export const joinRoom = () => {
   return (dispatch, getState) => {
     dispatch(joinRoomStarted());
     if (!getState().user.isAuthorized) {
-      console.log('No user authorized');
       firebaseAuth
         .signInAnonymously()
         .then(user => {
           dispatch(setLocalUID(user.uid));
         })
         .then(() => {
-          let username = prompt('Vul uw naam in');
-          console.log(username);
-          return username;
-        })
-        .then(nameValue => {
-          dispatch(setUserDisplayName(nameValue));
+          dispatch(setUserDisplayName('Anonieme gebruiker'));
         })
         .then(() => {
           dispatch(pushModifiedUserToFirebase());
@@ -584,8 +587,7 @@ export const joinRoom = () => {
           dispatch(joinRoomRejected(err));
         });
     } else if (getState().user.displayName.trim().length === 0) {
-      let username = prompt('Vul uw naam in');
-      dispatch(setUserDisplayName(username));
+      dispatch(setUserDisplayName('Anonieme gebruiker'));
       dispatch(pushModifiedUserToFirebase());
     }
   };
@@ -605,4 +607,147 @@ export const joinRoomRejected = err => ({
 export const setLocalUID = userId => ({
   type: actionTypes.setLocalUID,
   uid: userId
+});
+
+export const sendCreation = () => {
+  return (dispatch, getState) => {
+    dispatch(sendCreationStarted());
+    let creationId = firebaseDatabase.ref().child('creations').push().key;
+    let creationData = {
+      id: creationId,
+      description: getState().creation.description,
+      creators: getState().creation.creators,
+      photoURL: getState().creation.photoURL,
+      storyId: getState().creation.storyId
+    };
+    firebaseDatabase
+      .ref()
+      .child('creations')
+      .child(creationId)
+      .set(creationData, snapshot => {
+        dispatch(sendCreationFulfilled(creationData));
+      });
+  };
+};
+
+export const sendCreationStarted = () => ({
+  type: actionTypes.sendCreationStarted
+});
+export const sendCreationRejected = () => ({
+  type: actionTypes.sendCreationRejected
+});
+export const sendCreationFulfilled = data => ({
+  type: actionTypes.sendCreationFulfilled,
+  creation: data
+});
+
+export const addDescriptionToCreation = event => {
+  return (dispatch, getState) => {
+    dispatch(addDescriptionToCreationFulfilled(event.target.value));
+  };
+};
+
+export const addDescriptionToCreationFulfilled = descriptionData => ({
+  type: actionTypes.addDescriptionToCreationFulfilled,
+  description: descriptionData
+});
+
+export const fetchSnippersStarted = () => ({
+  type: actionTypes.fetchSnippersStarted
+});
+export const fetchSnippersRejected = error => ({
+  type: actionTypes.fetchSnippersError,
+  error
+});
+export const fetchSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchSnippersFulfilled,
+  snippers
+});
+
+export const fetchSnipperStarted = () => ({
+  type: actionTypes.fetchSnipperStarted
+});
+export const fetchSnipperRejected = error => ({
+  type: actionTypes.fetchSnipperError,
+  error
+});
+export const fetchSnipperFulfilled = snipper => ({
+  type: actionTypes.fetchSnipperFulfilled,
+  snipper
+});
+
+export const fetchSnipper = id => {
+  return dispatch => {
+    dispatch(fetchSnipperStarted());
+    firebaseDatabase
+      .ref(`/creations/${id}`)
+      .once('value')
+      .then(snipper => {
+        const val = snipper.val();
+        if (!val) {
+          dispatch(snipperNotFound());
+          throw new Error('Snipper not foundsn');
+        }
+        return val;
+      })
+      .then(snipper => {
+        return Promise.all([
+          Promise.resolve(snipper),
+          firebaseDatabase
+            .ref(`/stories/${snipper.storyId}`)
+            .once('value')
+            .then(snapshot => snapshot.val())
+        ]);
+      })
+      .then(([snipper, story]) => {
+        console.log(snipper, story);
+        dispatch(fetchSnipperFulfilled({ ...snipper, story }));
+      })
+      .catch(error => {
+        dispatch(fetchSnipperRejected(error));
+      });
+  };
+};
+
+export const fetchSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase
+      .ref(`/creations`)
+      .once('value')
+      .then(snippers => {
+        const val = snippers.val();
+        const keys = Object.keys(val);
+        dispatch(fetchSnippersFulfilled(keys.map(snipperId => val[snipperId])));
+      })
+      .catch(error => {
+        dispatch(fetchSnippersRejected(error));
+      });
+  };
+};
+
+export const fetchRandomSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
+      const val = snippers.val();
+      const keys = Object.keys(val);
+      dispatch(fetchRandomSnippersFulfilled(keys.map(id => val[id])));
+    });
+  };
+};
+export const fetchRandomSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchRandomSnippersFulfilled,
+  snippers
+});
+export const snipperNotFound = () => ({ type: actionTypes.snipperNotFound });
+export const addCreatorsToCreation = event => {
+  return (dispatch, getState) => {
+    dispatch(addCreatorsToCreationFulfilled(event.target.value));
+  };
+};
+
+export const addCreatorsToCreationFulfilled = creatorsData => ({
+  type: actionTypes.addCreatorsToCreationFulfilled,
+  creators: creatorsData
 });

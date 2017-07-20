@@ -10,14 +10,23 @@ import logo from './assets/logo.svg';
 // import ht2 from './assets/ht-2.svg';
 // import ht3 from './assets/ht-3.svg';
 // import ht4 from './assets/ht-4.svg';
+import Spinner from '../../../components/spinner/Spinner';
+import { fetchRandomSnippers } from '../../../redux/actions';
+import { connect } from 'react-redux';
+
+import './Home.css';
 
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.fetchRandomSnippers();
+  }
   render() {
+    const { randomSnippers, isLoading } = this.props;
     return (
       <div className="home page">
         <Navbar />
         <header className="header-container">
-          <img src={logo} className="logo" alt="logo" />
+          <img src={logo} alt="logo" className="logo" />
           <h1 className="header-title">
             <span className="blue">ontdek</span>{' '}
             <span className="pink">leer</span>{' '}
@@ -67,26 +76,28 @@ class Home extends React.Component {
             </div>
           </section> */}
 
-          <section id="inspo" className="creations-container">
-            <h2 className="creation-title">Snippers</h2>
-            <div className="row">
-              <div className="col-6">
-                <Creations1 />
-              </div>
-              <div className="col-6">
-                <Creations1 />
-              </div>
-            </div>
+          {!randomSnippers || isLoading
+            ? <Spinner page />
+            : <section id="inspo" className="creations-container">
+                <h2 className="creation-title">Snippers</h2>
+                <div className="row">
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[0]} />
+                  </div>
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[1]} />
+                  </div>
+                </div>
 
-            <div className="row">
-              <div className="col-6">
-                <Creations1 />
-              </div>
-              <div className="col-6">
-                <Creations1 />
-              </div>
-            </div>
-          </section>
+                <div className="row">
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[2]} />
+                  </div>
+                  <div className="col-6">
+                    <Creations1 snipper={randomSnippers[3]} />
+                  </div>
+                </div>
+              </section>}
         </main>
 
         <Footer />
@@ -94,5 +105,5 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = state => ({ ...state.snippers });
+export default connect(mapStateToProps, { fetchRandomSnippers })(Home);

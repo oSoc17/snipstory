@@ -1,12 +1,12 @@
 import React from 'react';
 
 const ImageSearchExerciseModule = ({ module: { text } }) =>
-  <div>
+  <article className="container module">
     <span>
       {text}
     </span>
     <div className="image-drop-box">
       {/* Uplaod box for image (drag & drop) */}
     </div>
-  </div>;
+  </article>;
 export default ImageSearchExerciseModule;

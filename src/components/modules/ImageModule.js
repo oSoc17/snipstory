@@ -1,12 +1,12 @@
 import React from 'react';
 
 const ImageModule = ({ module: { resources, text } }) =>
-  <div>
+  <article className="container module">
     <figure>
       <img alt={text.substring(0, 10)} src={resources[0]} />
       <figcaption>
         {text}
       </figcaption>
     </figure>
-  </div>;
+  </article>;
 export default ImageModule;

@@ -4,7 +4,11 @@ const initialState = {
   uploading: false,
   uploadFailed: false,
   error: null,
-  downloadURLs: []
+  photoURL: '',
+  contentType: '',
+  description: '',
+  creators: '',
+  storyId: ''
 };
 
 export const reducer = (state = initialState, action) => {
@@ -21,7 +25,10 @@ export const reducer = (state = initialState, action) => {
         {
           uploading: false,
           uploadFailed: false,
-          downloadURLs: action.downloadURLs
+          photoURL: action.photoURL,
+          contentType: action.contentType,
+          creators: action.creators,
+          storyId: action.storyId
         }
       );
     case actionTypes.uploadFileRejected:
@@ -29,6 +36,18 @@ export const reducer = (state = initialState, action) => {
         uploadFailed: true,
         uploading: false,
         error: action.error
+      });
+    case actionTypes.sendCreationFulfilled:
+      return Object.assign({}, state, {
+        ...action.creation
+      });
+    case actionTypes.addDescriptionToCreationFulfilled:
+      return Object.assign({}, state, {
+        description: action.description
+      });
+    case actionTypes.addCreatorsToCreationFulfilled:
+      return Object.assign({}, state, {
+        creators: action.creators
       });
     default:
       return state;

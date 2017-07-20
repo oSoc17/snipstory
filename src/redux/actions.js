@@ -60,6 +60,9 @@ export const actionTypes = {
   sendCreationFulfilled: 'SEND_CREATION_REJECTED',
   sendCreationRejected: 'SEND_CREATION_FULFILLED',
   addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
+  fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
+  fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
+  fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED',
   fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
   fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
   fetchSnipperError: 'FETCH_SNIPPER_ERROR',
@@ -362,7 +365,7 @@ export const fetchRoomData = () => {
 
     firebaseDatabase
       .ref()
-      .child('appsuggestions')
+      .child('suggestions')
       .once('value')
       .then(response => {
         dispatch(fetchSuggestionsFulfilled(response.val()));
@@ -652,6 +655,21 @@ export const addDescriptionToCreationFulfilled = descriptionData => ({
   description: descriptionData
 });
 
+export const fetchKnutselTips = () => {
+  return dispatch => {
+    dispatch(fetchKnutselTipsStarted());
+    firebaseDatabase
+      .ref('suggestions')
+      .once('value')
+      .then(snapshot => {
+        dispatch(fetchKnutselTipsFulfilled(snapshot.val()));
+      })
+      .catch(err => {
+        dispatch(fetchKnutselTipsRejected(err));
+      });
+  };
+};
+
 export const fetchSnippersStarted = () => ({
   type: actionTypes.fetchSnippersStarted
 });
@@ -708,6 +726,20 @@ export const fetchSnipper = id => {
       });
   };
 };
+
+export const fetchKnutselTipsStarted = () => ({
+  type: actionTypes.fetchKnutselTipsStarted
+});
+
+export const fetchKnutselTipsFulfilled = knutselTips => ({
+  type: actionTypes.fetchKnutselTipsFulfilled,
+  knutselTips: knutselTips
+});
+
+export const fetchKnutselTipsRejected = err => ({
+  type: actionTypes.fetchKnutselTipsRejected,
+  error: err.message
+});
 
 export const fetchSnippers = () => {
   return dispatch => {

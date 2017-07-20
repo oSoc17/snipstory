@@ -82,7 +82,8 @@ class App extends Component {
             <Route
               path="/snippers/:snipperId"
               exact
-              render={props => <SnipperDetail user={user} {...props} />}
+              render={props =>
+                <SnipperDetail showToast={showToast} user={user} {...props} />}
             />
             <ProtectedRoute
               path="/teacher/stories/create"

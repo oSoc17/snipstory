@@ -25,6 +25,8 @@ import Button from '../../components/button/Button';
 
 import StepIndicator from '../../components/step-indicator/StepIndicator';
 
+import './Room.css';
+
 class Room extends React.Component {
   handleChange(module) {
     this.props.updateModule(module);

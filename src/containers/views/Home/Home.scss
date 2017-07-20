@@ -1,5 +1,4 @@
 @import '../../../variables.scss';
-
 /*NAVIGATIE*/
 
 .navbar {
@@ -9,7 +8,17 @@
 /*HEADER*/
 
 .page {
-  background: none;
+  background: none !important;
+
+}
+
+.video-section {
+  padding: 4em;
+  height: 80vh;
+  background-color: $brand-blue;
+  .container {
+    height: 100%;
+  }
 }
 
 .header-container {
@@ -26,7 +35,9 @@
 }
 
 .logo {
-  width: 30rem;
+
+  width: 35vw;
+
 }
 
 .header-title {
@@ -180,6 +191,13 @@
   justify-content: center;
   align-items: baseline;
   margin-top: -30rem;
+}
+
+.creations-position {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 0rem;
+  margin-right: 0rem;
 }
 
 /*FOOTER*/

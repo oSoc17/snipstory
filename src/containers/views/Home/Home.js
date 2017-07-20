@@ -75,25 +75,40 @@ class Home extends React.Component {
               </div>
             </div>
           </section> */}
-
+          <section className="video-section">
+            <div className="container">
+              <iframe
+                title="Video over de werking van Snipstory"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/ZYMAVF64Bfo"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </div>
+          </section>
           {!randomSnippers || isLoading
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
                 <h2 className="creation-title">Snippers</h2>
-                <div className="row">
-                  <div className="col-6">
+
+                <div className="row creations-position">
+                  <div className="col-4 ">
                     <Creations1 snipper={randomSnippers[0]} />
                   </div>
-                  <div className="col-6">
+                  <div className="col-4">
+
+              
                     <Creations1 snipper={randomSnippers[1]} />
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="col-6">
+                <div className="row creations-position">
+                  <div className="col-4 ">
                     <Creations1 snipper={randomSnippers[2]} />
                   </div>
-                  <div className="col-6">
+                  <div className="col-4 ">
+
                     <Creations1 snipper={randomSnippers[3]} />
                   </div>
                 </div>

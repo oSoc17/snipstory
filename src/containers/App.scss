@@ -1,5 +1,4 @@
 @import '../variables.scss';
-
 .knutseltips {
   .card {
     background-color: $brand-blue;
@@ -48,12 +47,6 @@
   display: flex;
 }
 
-.container {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-}
-
 #creationUpload {
   width: 0.1px;
   height: 0.1px;
@@ -71,4 +64,9 @@
 
 #creationUpload + label:hover {
   font-size: 4em
+}
+
+.snipper {
+  background-color: $brand-blue;
+  color: white;
 }

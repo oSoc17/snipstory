@@ -15,6 +15,9 @@ const Footer = () => {
       <div className="partner-container">
         <div className="partner-mini-container row">
           <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+
+         
+
             <a href="https://www.west-vlaanderen.be/">
               <img className="effect img-fluid" src={logo1} alt="logo-1" />
             </a>
@@ -56,6 +59,7 @@ const Footer = () => {
             <a href="http://www.inflandersfields.be/">
               <img className="effect img-fluid" src={logo8} alt="logo-8" />
             </a>
+
           </div>
         </div>
       </div>

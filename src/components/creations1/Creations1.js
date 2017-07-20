@@ -5,6 +5,7 @@ import { history } from '../../redux/store';
 
 const Creations1 = ({ snipper }) => {
   return (
+
     <div>
       <div
         className="card card-container"
@@ -14,6 +15,7 @@ const Creations1 = ({ snipper }) => {
           src={snipper.photoURL}
           alt={`Snipper van ${snipper.creators}`}
           className="img-fluid card-img"
+
         />
         <div className="card-block">
           <h4 className="card-title">

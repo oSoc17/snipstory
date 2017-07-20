@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import './Home.css';
 
 class Home extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchRandomSnippers();
   }
   render() {
@@ -80,11 +80,14 @@ class Home extends React.Component {
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
                 <h2 className="creation-title">Snippers</h2>
+
                 <div className="row creations-position">
                   <div className="col-4 ">
                     <Creations1 snipper={randomSnippers[0]} />
                   </div>
                   <div className="col-4">
+
+              
                     <Creations1 snipper={randomSnippers[1]} />
                   </div>
                 </div>
@@ -94,6 +97,7 @@ class Home extends React.Component {
                     <Creations1 snipper={randomSnippers[2]} />
                   </div>
                   <div className="col-4 ">
+
                     <Creations1 snipper={randomSnippers[3]} />
                   </div>
                 </div>

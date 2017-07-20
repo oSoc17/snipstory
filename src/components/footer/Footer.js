@@ -12,17 +12,34 @@ const Footer = () => {
   return (
     <footer>
       <div className="partner-container">
-        <div className="partner-mini-container">
-          <img className="effect logo1" src={logo1} alt="logo-1" />
-          <img className="effect logo2" src={logo2} alt="logo-2" />
-          <img className="effect logo3" src={logo3} alt="logo-3" />
-          <img className="effect logo7" src={logo8} alt="logo-4" />
+        <div className="partner-mini-container row">
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect img-fluid" src={logo1} alt="logo-1" />
+          </div>
+
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect  img-fluid" src={logo2} alt="logo-2" />
+          </div>
+
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect  img-fluid" src={logo3} alt="logo-3" />
+          </div>
+
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect img-fluid" src={logo8} alt="logo-4" />
+          </div>
         </div>
 
         <div className="partner-mini-container">
-          <img className="effect logo6" src={logo7} alt="logo-5" />
-          <img className="effect logo4" src={logo5} alt="logo-6" />
-          <img className="effect logo5" src={logo6} alt="logo-7" />
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect img-fluid " src={logo7} alt="logo-5" />
+          </div>
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect img-fluid " src={logo5} alt="logo-6" />
+          </div>
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <img className="effect img-fluid " src={logo6} alt="logo-7" />
+          </div>
         </div>
       </div>
     </footer>

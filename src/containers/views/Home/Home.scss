@@ -14,9 +14,13 @@
 
 /*HEADER*/
 
+.page {
+  background: none;
+}
+
 .header-container {
   height: 100vh;
-  background-size: 100vw;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +210,6 @@ footer {
 
 .effect {
   mix-blend-mode: color-burn;
-  height: 100%;
 }
 
 .logo1 {

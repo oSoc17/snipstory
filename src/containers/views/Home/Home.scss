@@ -1,5 +1,4 @@
 @import '../../../variables.scss';
-
 /*NAVIGATIE*/
 
 .nav-container {
@@ -15,7 +14,7 @@
 /*HEADER*/
 
 .page {
-  background: none;
+  background: none !important;
 }
 
 .header-container {
@@ -32,7 +31,7 @@
 }
 
 .logo {
-  width: 8rem;
+  width: 35vw;
 }
 
 .header-title {
@@ -186,6 +185,13 @@
   justify-content: center;
   align-items: baseline;
   margin-top: -30rem;
+}
+
+.creations-position {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 0rem;
+  margin-right: 0rem;
 }
 
 /*FOOTER*/

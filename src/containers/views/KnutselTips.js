@@ -17,14 +17,14 @@ class KnutselTips extends React.Component {
         <NavBar />
         <div>
           <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>
-          <div className="knutseltips row">
+          <div className="knutseltips row" style={{ justifyContent: 'center' }}>
             {knutseltips.tips.map((tip, i) =>
               <div
                 className="card knutseltip"
-                style={{ width: '20em', margin: '2em' }}
+                style={{ width: '25em', margin: '2em' }}
               >
                 <img
-                  class="card-img-top"
+                  class="card-img-top image-fluid"
                   style={{ maxWidth: '100%' }}
                   src={tip.image}
                   alt={tip.name}

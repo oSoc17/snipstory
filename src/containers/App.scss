@@ -63,10 +63,15 @@
 }
 
 #creationUpload + label:hover {
-  font-size: 4em
+  font-size: 4em;
 }
 
 .snipper {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.story {
   background-color: $brand-blue;
   color: white;
 }

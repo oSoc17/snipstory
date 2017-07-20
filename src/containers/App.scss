@@ -12,16 +12,25 @@
     height: 450px;
     background-color: $brand-blue;
     border-radius: 15px;
+    .tip-name {
+      font-size: 1.5em;
+    }
     .knutseltip-image {
       border: thick solid $brand-orange;
-      // position: absolute;
-      // left: 5em;
-      // bottom: 3em;
+    }
+    .col.tip-information {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .requirements {
+      margin-bottom: 2em;
+      text-align: left;
+      p {
+        display: inline-block;
+      }
     }
     span {
-      // position: absolute;
-      // left: 5em;
-      // top: 2em;
       background-color: white;
       border-radius: 15px;
       padding: 1em 2em;
@@ -29,6 +38,19 @@
     }
     ul {
       text-align: left;
+    }
+    .difficulty {
+      margin-top: 2em;
+      text-align: center;
+      .difficulty-counter {
+        border: 3px solid $brand-red--lighter;
+        display: inline-block;
+        margin-left: 1em;
+      }
+      .difficulty-counter.filled {
+        background-color: $brand-red--lighter;
+        border: 3px solid transparent;
+      }
     }
   }
 }

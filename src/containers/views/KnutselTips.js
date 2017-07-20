@@ -36,7 +36,7 @@ class KnutselTips extends React.Component {
                       flexDirection: 'column'
                     }}
                   >
-                    <span className="d-inline-block">
+                    <span className="d-inline-block tip-name">
                       {tip.name}
                     </span>
                     <div
@@ -49,19 +49,16 @@ class KnutselTips extends React.Component {
                       }}
                     />
                   </div>
-                  <div className="col">
-                    <div>
-                      <Difficulty amount={tip.difficulty} />
+                  <div className="col tip-information">
+                    <Difficulty amount={tip.difficulty} />
+                    <div style={{ textAlign: 'left' }}>
+                      {tip.text}
                     </div>
-                    <div>
+                    <div className="requirements">
                       <h2>Benodigdheden:</h2>
-                      <ul>
-                        {tip.requirements.map((requirement, i) =>
-                          <li key={i}>
-                            {requirement}
-                          </li>
-                        )}
-                      </ul>
+                      <p>
+                        {tip.requirements}
+                      </p>
                     </div>
                   </div>
                 </div>

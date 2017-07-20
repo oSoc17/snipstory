@@ -3,27 +3,36 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
 import Creations2 from '../../../components/creations2/Creations2';
+import Button from '../../../components/button/Button';
+import Spinner from '../../../components/spinner/Spinner';
+import { fetchRandomSnippers } from '../../../redux/actions';
+import { connect } from 'react-redux';
 
 import './Home.css';
 
-import logo from './assets/logo.svg';
 import ht1 from './assets/ht-1.svg';
 import ht2 from './assets/ht-2.svg';
 import ht3 from './assets/ht-3.svg';
 import ht4 from './assets/ht-4.svg';
 
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.fetchRandomSnippers();
+  }
   render() {
+    const { randomSnippers, isLoading } = this.props;
     return (
       <div className="page">
         <Navbar />
         <header className="header-container">
-          <img src={logo} className="logo" alt="logo" />
           <h1 className="header-title">
             <span className="blue">ontdek</span>{' '}
             <span className="pink">leer</span>{' '}
             <span className="orange">maak</span>
           </h1>
+          <Button to="/story/select" size="small">
+            Start je verhaal hier
+          </Button>
         </header>
 
         <main>
@@ -68,18 +77,20 @@ class Home extends React.Component {
             </div>
           </section>
 
-          <section id="inspo" className="creations-container">
-            <h2 className="creation-title">Snippers</h2>
-            <div className="creations-1">
-              <Creations1 />
-              <Creations2 />
-            </div>
+          {!randomSnippers || isLoading
+            ? <Spinner page />
+            : <section id="inspo" className="creations-container">
+                <h2 className="creation-title">Snippers</h2>
+                <div className="creations-1">
+                  <Creations1 snipper={randomSnippers[0]} />
+                  <Creations2 snipper={randomSnippers[0]} />
+                </div>
 
-            <div className="creations-2">
-              <Creations1 />
-              <Creations2 />
-            </div>
-          </section>
+                <div className="creations-2">
+                  <Creations1 snipper={randomSnippers[0]} />
+                  <Creations2 snipper={randomSnippers[0]} />
+                </div>
+              </section>}
         </main>
 
         <Footer />
@@ -87,5 +98,5 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = state => ({ ...state.snippers });
+export default connect(mapStateToProps, { fetchRandomSnippers })(Home);

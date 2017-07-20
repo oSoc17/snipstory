@@ -13,6 +13,9 @@ import {
 import TeacherClasses from '../../components/teacher/TeacherClasses';
 import Spinner from '../../components/spinner/Spinner';
 
+import Navbar from '../../components/nav/Navbar';
+import Footer from '../../components/footer/Footer';
+
 class TeacherArea extends React.Component {
   componentWillMount() {
     this.props.listenForClassesChange();
@@ -32,7 +35,8 @@ class TeacherArea extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="page">
+        <Navbar />
         <h1>Leerkrachtenplatform</h1>
         <div>
           <Avatar
@@ -57,6 +61,7 @@ class TeacherArea extends React.Component {
               addClass={addClass}
               deleteClass={deleteClass}
             />}
+        <Footer />
       </div>
     );
   }

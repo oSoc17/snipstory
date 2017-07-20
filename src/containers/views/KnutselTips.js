@@ -25,19 +25,32 @@ class KnutselTips extends React.Component {
           >
             {knutseltips.tips.map((tip, i) =>
               <div key={i}>
-                <div className="knutseltip m-3">
+                <div className="knutseltip row m-3">
                   <div
-                    className="d-inline-block rounded-circle"
+                    className="col"
                     style={{
-                      backgroundImage: 'url(' + tip.image + ')',
-                      height: '100px',
-                      width: '100px',
-                      backgroundSize: 'cover'
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-around',
+                      flexDirection: 'column'
                     }}
-                  />
-                  <span className="d-inline-block">
-                    {tip.name}
-                  </span>
+                  >
+                    <span className="d-inline-block">
+                      {tip.name}
+                    </span>
+                    <div
+                      className="knutseltip-image d-inline-block"
+                      style={{
+                        backgroundImage: 'url(' + tip.image + ')',
+                        height: '250px',
+                        width: '200px',
+                        backgroundSize: 'cover'
+                      }}
+                    />
+                  </div>
+                  <div className="col">
+                    <div />
+                  </div>
                 </div>
               </div>
             )}

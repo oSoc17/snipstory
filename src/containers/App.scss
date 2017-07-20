@@ -6,16 +6,25 @@
   margin-top: 2em;
   margin-bottom: 2em;
   .knutseltip {
-    display: flex;
-    align-items: center;
+    position: relative;
+    width: 650px;
+    height: 450px;
+    background-color: $brand-blue;
+    border-radius: 15px;
+    .knutseltip-image {
+      border: thick solid $brand-orange;
+      // position: absolute;
+      // left: 5em;
+      // bottom: 3em;
+    }
     span {
-      background-color: $brand-blue;
-      border-radius: 25px;
-      padding: 1em;
-      color: white;
-      padding-left: 3em;
-      margin-left: -2.5em;
-      z-index: -1;
+      // position: absolute;
+      // left: 5em;
+      // top: 2em;
+      background-color: white;
+      border-radius: 15px;
+      padding: 1em 2em;
+      color: $brand-blue;
     }
   }
 }

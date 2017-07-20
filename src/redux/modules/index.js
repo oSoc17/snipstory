@@ -8,6 +8,7 @@ import { reducer as modal } from './modal';
 import { reducer as suggestions } from './suggestions';
 import { reducer as classes } from './classes';
 import { reducer as creation } from './creation';
+import { reducer as knutseltips } from './knutseltips';
 
 export const rootReducer = combineReducers({
   user,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
   form,
   suggestions,
   classes,
-  creation
+  creation,
+  knutseltips
 });

@@ -59,7 +59,10 @@ export const actionTypes = {
   sendCreationStarted: 'SEND_CREATION_STARTED',
   sendCreationFulfilled: 'SEND_CREATION_REJECTED',
   sendCreationRejected: 'SEND_CREATION_FULFILLED',
-  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED'
+  addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
+  fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
+  fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
+  fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -353,7 +356,7 @@ export const fetchRoomData = () => {
 
     firebaseDatabase
       .ref()
-      .child('appsuggestions')
+      .child('suggestions')
       .once('value')
       .then(response => {
         dispatch(fetchSuggestionsFulfilled(response.val()));
@@ -647,4 +650,33 @@ export const addDescriptionToCreation = event => {
 export const addDescriptionToCreationFulfilled = descriptionData => ({
   type: actionTypes.addDescriptionToCreationFulfilled,
   description: descriptionData
+});
+
+export const fetchKnutselTips = () => {
+  return dispatch => {
+    dispatch(fetchKnutselTipsStarted());
+    firebaseDatabase
+      .ref('suggestions')
+      .once('value')
+      .then(snapshot => {
+        dispatch(fetchKnutselTipsFulfilled(snapshot.val()));
+      })
+      .catch(err => {
+        dispatch(fetchKnutselTipsRejected(err));
+      });
+  };
+};
+
+export const fetchKnutselTipsStarted = () => ({
+  type: actionTypes.fetchKnutselTipsStarted
+});
+
+export const fetchKnutselTipsFulfilled = knutselTips => ({
+  type: actionTypes.fetchKnutselTipsFulfilled,
+  knutselTips: knutselTips
+});
+
+export const fetchKnutselTipsRejected = err => ({
+  type: actionTypes.fetchKnutselTipsRejected,
+  error: err.message
 });

@@ -13,6 +13,7 @@ import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
 import Register from './views/Register/Register';
 import CreateRoom from './views/CreateRoom';
+import KnutselTips from './views/KnutselTips';
 import StorySelect from './views/StorySelect/StorySelect';
 import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
@@ -71,6 +72,11 @@ class App extends Component {
               path="/rooms/:roomId"
               exact
               render={props => <Room user={user} {...props} />}
+            />
+            <Route
+              path="/knutseltips"
+              exact
+              render={props => <KnutselTips user={user} {...props} />}
             />
             <ProtectedRoute
               path="/teacher/stories/create"

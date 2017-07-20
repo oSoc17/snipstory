@@ -23,6 +23,8 @@ import AppSuggestions from '../../components/appsuggestions/AppSuggestions';
 import UploadBox from '../../components/uploadbox/UploadBox';
 import Button from '../../components/button/Button';
 
+import StepIndicator from '../../components/step-indicator/StepIndicator';
+
 class Room extends React.Component {
   handleChange(module) {
     this.props.updateModule(module);
@@ -47,6 +49,12 @@ class Room extends React.Component {
 
     return (
       <div className="room container">
+        <StepIndicator
+          step={2}
+          title="Ontdek het verhaal"
+          description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
+          image="https://placehold.it/300x300"
+        />
         <div className="story-information card" style={{ width: '550px' }}>
           <img
             className="card-img-top"

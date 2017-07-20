@@ -12,6 +12,15 @@
 
 }
 
+.video-section {
+  padding: 4em;
+  height: 80vh;
+  background-color: $brand-blue;
+  .container {
+    height: 100%;
+  }
+}
+
 .header-container {
   height: 100vh;
 

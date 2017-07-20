@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { fetchSnipper } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import Button from '../../components/button/Button';
+import Navbar from '../../components/nav/Navbar';
+import Footer from '../../components/footer/Footer';
 
 class SnipperDetail extends React.Component {
   componentWillMount() {
@@ -11,12 +13,8 @@ class SnipperDetail extends React.Component {
     fetchSnipper(snipperId);
   }
   render() {
-    let { snipper, isLoading, notFound } = this.props;
+    let { snipper, isLoading, notFound, showToast } = this.props;
     isLoading = false;
-    snipper = {
-      creators: ['1', '2'],
-      description: 'description'
-    };
 
     if (isLoading || !snipper) {
       return <Spinner page size="large" />;
@@ -24,15 +22,53 @@ class SnipperDetail extends React.Component {
     if (notFound) {
       return <Redirect to="/" />;
     }
-    const creators = snipper.creators.join(', ');
     return (
       <div className="page">
+        <Navbar />
         <div className="container">
-          <h1>Door {creators}</h1>{' '}
-          <img src={snipper.thumbnailURL} alt={`Snipper van ${creators}`} />
-          <p>{snipper.description}</p>
-          <Button onClick={() => null}>Share</Button>
+          <div className="snipper-info">
+            <h1>
+              Snipper van {snipper.creators}
+            </h1>
+            <img
+              src={snipper.photoURL}
+              alt={`Snipper van ${snipper.creators}`}
+            />
+            <p>
+              {snipper.description}
+            </p>
+          </div>
+          {snipper.story &&
+            <div className="story-info">
+              <p>
+                Gemaakt over het verhaal van {snipper.story.name}
+              </p>
+              <Button inverted to={`/story/select?id=${snipper.storyId}`}>
+                Ontdek dit verhaal zelf
+              </Button>
+            </div>}
+          <input
+            ref={linkInput => {
+              this.linkInput = linkInput;
+            }}
+            type="text"
+            readOnly
+            value={window.location.href}
+            onClick={e => e.target.select()}
+          />
+          <Button
+            onClick={_ => {
+              this.linkInput.select();
+              document.execCommand('copy');
+              showToast({
+                text: `De link is gekopieerd naar jouw klembord, stuur het naar je vrienden!`
+              });
+            }}
+          >
+            Share
+          </Button>
         </div>
+        <Footer />
       </div>
     );
   }

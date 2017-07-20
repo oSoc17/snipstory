@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchSnippers } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import Button from '../../components/button/Button';
+import Navbar from '../../components/nav/Navbar';
+import Footer from '../../components/footer/Footer';
 
 class Snippers extends React.Component {
   componentWillMount() {
@@ -15,33 +17,37 @@ class Snippers extends React.Component {
     }
     return (
       <div className="page">
+        <Navbar />
         <div className="container">
-          {snippers.map(snipper => {
-            const creators = Object.keys(snipper.creators)
-              .map(snipperId => snipper.creators[snipperId])
-              .join(', ');
-            return (
-              <div className="col-md-6" key={snipper.id}>
-                <div class="card">
-                  <img
-                    class="card-img-top"
-                    src={snipper.thumbnailURL}
-                    alt={`Snipper van ${creators}`}
-                  />
-                  <div class="card-block">
-                    <h2 class="card-title">
-                      Door {creators}
-                    </h2>
-                    <p class="card-text">
-                      {snipper.description}
-                    </p>
-                    <Button to={`/snippers/${snipper.id}`}>Toon snipper</Button>
+          <h1>Snippers</h1>
+          <div className="row">
+            {snippers.map(snipper => {
+              return (
+                <div className="col-md-6" key={snipper.id}>
+                  <div className="card">
+                    <img
+                      className="card-img-top"
+                      src={snipper.photoURL}
+                      alt={`Snipper van ${snipper.creators}`}
+                    />
+                    <div className="card-block">
+                      <h2 className="card-title">
+                        Door {snipper.creators}
+                      </h2>
+                      <p className="card-text">
+                        {snipper.description}
+                      </p>
+                      <Button to={`/snippers/${snipper.id}`}>
+                        Toon snipper
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }

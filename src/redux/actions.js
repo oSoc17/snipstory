@@ -65,6 +65,7 @@ export const actionTypes = {
   fetchSnipperError: 'FETCH_SNIPPER_ERROR',
   fetchSnippersStarted: 'FETCH_SNIPPERS_STARTED',
   fetchSnippersFulfilled: 'FETCH_SNIPPERS_FULFILLED',
+  fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
   fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
   snipperNotFound: 'SNIPPER_NOT_FOUND'
 };
@@ -688,11 +689,24 @@ export const fetchSnipper = id => {
       .once('value')
       .then(snipper => {
         const val = snipper.val();
-        if (val) {
-          dispatch(fetchSnipperFulfilled(snipper.val()));
-        } else {
+        if (!val) {
           dispatch(snipperNotFound());
+          throw new Error('Snipper not foundsn');
         }
+        return val;
+      })
+      .then(snipper => {
+        return Promise.all([
+          Promise.resolve(snipper),
+          firebaseDatabase
+            .ref(`/stories/${snipper.storyId}`)
+            .once('value')
+            .then(snapshot => snapshot.val())
+        ]);
+      })
+      .then(([snipper, story]) => {
+        console.log(snipper, story);
+        dispatch(fetchSnipperFulfilled({ ...snipper, story }));
       })
       .catch(error => {
         dispatch(fetchSnipperRejected(error));
@@ -717,4 +731,18 @@ export const fetchSnippers = () => {
   };
 };
 
+export const fetchRandomSnippers = () => {
+  return dispatch => {
+    dispatch(fetchSnippersStarted());
+    firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
+      const val = snippers.val();
+      const keys = Object.keys(val);
+      dispatch(fetchRandomSnippersFulfilled(keys.map(id => val[id])));
+    });
+  };
+};
+export const fetchRandomSnippersFulfilled = snippers => ({
+  type: actionTypes.fetchRandomSnippersFulfilled,
+  snippers
+});
 export const snipperNotFound = () => ({ type: actionTypes.snipperNotFound });

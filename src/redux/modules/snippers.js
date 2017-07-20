@@ -1,6 +1,7 @@
 import { actionTypes } from '../actions';
 
 const initialState = {
+  randomSnippers: null,
   isLoading: true,
   snippers: null,
   error: null
@@ -13,6 +14,11 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.fetchSnippersFulfilled:
       return Object.assign({}, state, {
         snippers: action.snippers,
+        isLoading: false
+      });
+    case actionTypes.fetchRandomSnippersFulfilled:
+      return Object.assign({}, state, {
+        randomSnippers: action.snippers,
         isLoading: false
       });
     case actionTypes.fetchSnippersError:

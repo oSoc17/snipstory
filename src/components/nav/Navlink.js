@@ -1,13 +1,20 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
+import { NavLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import './Navlink.css';
 
-const Navlink = ({ children = '', ...props }) => {
+const Navlink = ({ children = '', to, ...props }) => {
+  if (to.indexOf('#') !== -1) {
+    return (
+      <HashLink to={to} className="navlink" {...props}>
+        {children}
+      </HashLink>
+    );
+  }
   return (
-    <Link className="navlink" {...props}>
+    <NavLink className="navlink" to={to} activeClassName="active" {...props}>
       {children}
-    </Link>
+    </NavLink>
   );
 };
 

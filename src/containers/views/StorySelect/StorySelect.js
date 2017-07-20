@@ -1,5 +1,9 @@
 import React from 'react';
-import { fetchRandomStories, selectStory } from '../../../redux/actions';
+import {
+  fetchRandomStories,
+  selectStory,
+  createRoom
+} from '../../../redux/actions';
 import Spinner from '../../../components/spinner/Spinner';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
@@ -18,8 +22,8 @@ class StorySelect extends React.Component {
       isLoading,
       randomStories,
       error,
-      history,
-      selectStory
+      selectStory,
+      createRoom
     } = this.props;
 
     if (isLoading) {
@@ -51,7 +55,7 @@ class StorySelect extends React.Component {
                     onClick={e => {
                       e.preventDefault();
                       selectStory(story);
-                      history.push('/rooms/create');
+                      createRoom('');
                     }}
                   >
                     <img
@@ -99,6 +103,8 @@ const mapStateToProps = state => ({
   ...state.storyselect
 });
 
-export default connect(mapStateToProps, { fetchRandomStories, selectStory })(
-  StorySelect
-);
+export default connect(mapStateToProps, {
+  fetchRandomStories,
+  selectStory,
+  createRoom
+})(StorySelect);

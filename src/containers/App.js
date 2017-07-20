@@ -13,7 +13,7 @@ import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
 import Register from './views/Register/Register';
 import CreateRoom from './views/CreateRoom';
-import StorySelect from './views/StorySelect';
+import StorySelect from './views/StorySelect/StorySelect';
 import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room';

@@ -590,6 +590,10 @@ export const joinRoom = () => {
         .catch(err => {
           dispatch(joinRoomRejected(err));
         });
+    } else if (getState().user.displayName.trim().length === 0) {
+      let username = prompt('Vul uw naam in');
+      dispatch(setUserDisplayName(username));
+      dispatch(pushModifiedUserToFirebase());
     }
   };
 };

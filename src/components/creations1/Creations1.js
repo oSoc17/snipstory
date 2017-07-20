@@ -5,8 +5,7 @@ import { history } from '../../redux/store';
 
 const Creations1 = ({ snipper }) => {
   return (
-
-    <div>
+    <div class="button-test">
       <div
         className="card card-container"
         onClick={e => history.push(`/snippers/${snipper.id}`)}
@@ -15,7 +14,6 @@ const Creations1 = ({ snipper }) => {
           src={snipper.photoURL}
           alt={`Snipper van ${snipper.creators}`}
           className="img-fluid card-img"
-
         />
         <div className="card-block">
           <h4 className="card-title">

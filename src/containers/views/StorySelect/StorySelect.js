@@ -62,7 +62,7 @@ class StorySelect extends React.Component {
                     selectStory(story);
                     createRoom('');
                   }}
-                  style={{ margin: '2em', width: '20em' }}
+                  style={{ margin: '1em', width: '20em' }}
                 >
                   <img
                     className="card-img-top img-fluid"
@@ -83,7 +83,7 @@ class StorySelect extends React.Component {
                       {moment(story.died, 'DD-MM-YYYY').diff(
                         moment(story.birthdate, 'DD-MM-YYYY').format(''),
                         'years'
-                      ) + 'jaar oud'}
+                      ) + ' jaar oud'}
                     </p>
                   </div>
                 </div>

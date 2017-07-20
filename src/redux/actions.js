@@ -98,6 +98,7 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
+        console.log(snapshot.val());
         dispatch(fetchRandomStoriesFulfilled(snapshot.val()));
       })
       .catch(err => {

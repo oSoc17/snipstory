@@ -1,1 +1,54 @@
+.module {
+  margin: 7em 0;
+}
 
+.room {
+  margin-top: 3em;
+}
+
+.room .question {
+  background-color: #ffa49f;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.room .question .questionmark {
+  font-size: 5em;
+}
+
+.room .question button {
+  margin-bottom: -3em;
+}
+
+.question-text {
+  display: flex;
+}
+
+.container {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+#creationUpload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#creationUpload + label {
+  font-size: 3em;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+#creationUpload + label:hover {
+  font-size: 4em;
+}

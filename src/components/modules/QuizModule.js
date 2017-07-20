@@ -10,21 +10,34 @@ const selectAnswer = (module, index, handleChange) => {
 };
 
 const QuizModule = ({ module, handleChange }) => {
-  const confirmAnswer = module.answer === module.correction;
-
   return (
-    <div>
+    <article className="container module">
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
       <p>
         {module.text}
       </p>
-      {confirmAnswer && 'The right answer has been chosen'}
-      {module.options.map((option, i) =>
-        <Button key={i} onClick={_ => selectAnswer(module, i, handleChange)}>
-          {option}
-        </Button>
-      )}
-    </div>
+
+      <div className="question">
+        <div className="question-text">
+          <span className="questionmark">?</span>
+          <span>
+            {module.question}
+          </span>
+        </div>
+
+        <div className="buttons">
+          {module.options.map((option, i) =>
+            <Button
+              inverted
+              key={i}
+              onClick={_ => selectAnswer(module, i, handleChange)}
+            >
+              {option}
+            </Button>
+          )}
+        </div>
+      </div>
+    </article>
   );
 };
 

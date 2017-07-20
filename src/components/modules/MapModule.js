@@ -17,20 +17,22 @@ const MapModule = (
   zoom = 3
 ) => {
   return (
-    <div style={{ width: `100%`, height: '400px' }}>
-      <GoogleMapReact
-        defaultCenter={center}
-        defaultZoom={zoom}
-        onClick={e => {
-          addMarker(e, module, handleChange, index);
-        }}
-      >
-        {module.markers &&
-          module.markers.map((marker, index) =>
-            <Marker key={index} lat={marker.lat} lng={marker.lng} />
-          )}
-      </GoogleMapReact>
-    </div>
+    <article className="container module">
+      <div style={{ width: `100%`, height: '400px' }}>
+        <GoogleMapReact
+          defaultCenter={center}
+          defaultZoom={zoom}
+          onClick={e => {
+            addMarker(e, module, handleChange, index);
+          }}
+        >
+          {module.markers &&
+            module.markers.map((marker, index) =>
+              <Marker key={index} lat={marker.lat} lng={marker.lng} />
+            )}
+        </GoogleMapReact>
+      </div>
+    </article>
   );
 };
 

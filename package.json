@@ -2,7 +2,7 @@
   "name": "ishare",
   "version": "0.1.1",
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.6",
+    "bootstrap": "^4.0.0-alpha.6",
     "connected-react-router": "^4.2.3",
     "deep-equal": "^1.0.1",
     "firebase": "^4.1.3",

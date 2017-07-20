@@ -7,9 +7,7 @@ import {
   updateModule,
   getRandomSuggestions,
   joinRoom,
-  sendCreation,
-  addDescriptionToCreation,
-  showToast
+  sendCreation
 } from '../../redux/actions';
 import Spinner from '../../components/spinner/Spinner';
 import ImageModule from '../../components/modules/ImageModule';
@@ -42,36 +40,38 @@ class Room extends React.Component {
       creation,
       isFetchingData,
       suggestions,
-      sendCreation,
-      addDescriptionToCreation,
-      showToast
+      sendCreation
     } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
     return (
-      <div className="room">
-        <div className="story-information">
-          <img src={room.profilePicture} alt="" />
-          <h1>
-            {room.name}
-          </h1>
-          <h2>
-            {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
-              ' - ' +
-              moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
-          </h2>
-          <h3>
-            {room.nationality}
-          </h3>
-          <div>
-            Leeftijd
-            <div>
-              {moment(room.died, 'DD-MM-YYYY').diff(
-                moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                'years'
-              )}
-            </div>
+      <div className="room container">
+        <div className="story-information card" style={{ width: '550px' }}>
+          <img
+            className="card-img-top"
+            src={room.profilePicture}
+            alt={room.name}
+          />
+          <div className="card-block">
+            <h1 className="card-title">
+              {room.name}
+            </h1>
+            <p>
+              {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
+                ' - ' +
+                moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+            </p>
+            <p>
+              {room.nationality}
+            </p>
+          </div>
+          <div className="card-block">
+            Leeftijd{' '}
+            {moment(room.died, 'DD-MM-YYYY').diff(
+              moment(room.birthdate, 'DD-MM-YYYY').format(''),
+              'years'
+            )}
           </div>
         </div>
         <div className="modules">
@@ -178,41 +178,17 @@ class Room extends React.Component {
         </div>
         <AppSuggestions {...suggestions} />
         <UploadBox />
-        <textarea
-          name="creation-description"
-          onChange={addDescriptionToCreation}
-          id="creation-description"
-          cols="30"
-          rows="10"
-        />
         {creation.photoURL &&
           !room.isSubmitted &&
-          <Button onClick={sendCreation}>Verzend</Button>}
+          <Button
+            onClick={_ => {
+              sendCreation();
+            }}
+          >
+            Verzend
+          </Button>}
         {room.isSubmitted &&
-          <div>
-            <input
-              type="text"
-              ref={creationUrlInput => {
-                this.creationUrlInput = creationUrlInput;
-              }}
-              id="creation-url"
-              name="creation-url"
-              value={creation.photoURL}
-              readOnly
-            />
-            <Button
-              onClick={_ => {
-                this.creationUrlInput.select();
-                document.execCommand('copy');
-                showToast({
-                  text:
-                    'De link naar jouw snipper is gekopieërd naar jouw klembord'
-                });
-              }}
-            >
-              Share
-            </Button>
-          </div>}
+          <Button to={'/snipper/' + creation.id}>Ga naar jou snipper!</Button>}
       </div>
     );
   }
@@ -233,7 +209,5 @@ export default connect(mapStateToProps, {
   updateModule,
   getRandomSuggestions,
   joinRoom,
-  sendCreation,
-  addDescriptionToCreation,
-  showToast
+  sendCreation
 })(Room);

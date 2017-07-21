@@ -29,12 +29,7 @@ class KnutselTips extends React.Component {
         <Button to={'/story/share'}>Deel je knutselwerk</Button>
         <div>
           <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>
-<<<<<<< HEAD:src/containers/views/KnutselTips.js
           <div className="knutseltips row" style={{ justifyContent: 'center' }}>
-=======
-
-          <div className="knutseltips row">
->>>>>>> develop:src/containers/views/KnutselTips/KnutselTips.js
             {knutseltips.tips.map((tip, i) =>
               <div
                 className="card knutseltip"

@@ -186,6 +186,18 @@ class Room extends React.Component {
               }
             })}
         </div>
+        <div className="monument">
+          <div className="card">
+            <img className="card-img-top img-fluid" src="" alt=""/>
+            <div className="card-block">
+              <h4 className="card-title">Berks Cemetery Extension</h4>
+              <div className="card-text">Dit is het kerkhof waar Thomas Reddy ligt. ...</div>
+            </div>
+            <div className="card-block">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d464080.155903431!2d3.7196314851131245!3d50.837424137856935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dcd13a8343e7cb%3A0x165e0d20e0d33dbd!2sBerks+Cemetery+Extension!5e0!3m2!1sen!2sbe!4v1500664894963" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
         <AppSuggestions {...suggestions} />
         <UploadBox />
         {creation.photoURL &&

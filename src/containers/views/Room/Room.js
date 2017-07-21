@@ -181,6 +181,16 @@ class Room extends React.Component {
                 }
               })}
           </div>
+          {/*<div className="card monument" style={{width: '25em', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>*/}
+            {/*{room.monument.googleMapsEmbed}*/}
+            {/*<div className="card-block">*/}
+              {/*<img className="img-fluid img-thumbnail" src={room.monument.image} alt={room.monument.name} />*/}
+              {/*<h4 className="card-title">{room.monument.name}</h4>*/}
+              {/*<div className="card-text">*/}
+                {/*{monument.text}*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
           <div className="card monument" style={{width: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <iframe
               className="card-img-top"
@@ -198,9 +208,6 @@ class Room extends React.Component {
               <div className="card-text">
                 Dit is het kerkhof waar Thomas Reddy ligt. ...
               </div>
-            </div>
-            <div className="card-block">
-
             </div>
           </div>
           <AppSuggestions {...suggestions} />

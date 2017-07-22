@@ -1,5 +1,6 @@
 language: node_js
 node_js: node
+install: npm i -g eslint
 before_script: yarn build-css
 script:
  - yarn test

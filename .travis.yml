@@ -1,10 +1,10 @@
 language: node_js
 node_js: node
-before_script: npm run build-css
+before_script: yarn build-css
 script:
- - npm run test
- - npm run lint
-before_deploy: npm run build
+ - yarn test
+ - yarn lint
+before_deploy: yarn build
 deploy:
   provider: firebase
   skip_cleanup: true
@@ -12,4 +12,4 @@ deploy:
     branch: develop
   token:
     secure: "mOV5wAxFJPwQd5eIfq8Q/OOxeQBVUGf4SHUL7ZDoJw6DzAoX8GP37s9hhoD+tZQosKitZneIg6VzJ+B+I3C25plzMVDZ68nXmjIb7s10cUcha6haaF8yYqT/0rAkE+P9XOCJHFoP1c6JfWtMWyhXjUm1NQSdhtjT0bAr0eg9qJVguCoQr2QYGpfYQR2tsGSDBuPsuEKvMGETpEtVmss+mA2umkBV3AG/DieAbYLs+XAPz5OX2Jf8oS5ccluJGUyZNyyDZr9+8M/Go7NYvHbDbDQtlTT//cnf09zexcNc90FTb7Wyxu2yrRsSfqGildShmed1h/s5Qpt1Uemh5AQtRBDcClF+2BD5dwg4DUwQ9EyljxCu6ujbfqZHMxmsB95q4rXh+nAYFtc+tYkeo7tms57lluLQ/aaBOvLUyPOXhmIZ421roJnW7EKSDdQKaJr9BhFlPoWiBgG7c1IcHCwYsKIaeu9j4MCdgP4pojXe5J8cTN2WQCNlY287wfokfIiFs5p3NEDGZjas++abjHoZyCi87u7pu5jLCtclpIaYXUpH5LtPobCVqsktMgyL+8zNkZodBa7w4kGO0fpr17LfAed/ZpUF43jixL0LISRfBkB/Qz3flDt5QOvwxPZxf+M2gZMuKwEzRq1m8K+Yn6hgWNUzlw1mXSTzEEI1GEk+PsU="
-cache: npm
+cache: yarn

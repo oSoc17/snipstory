@@ -38,11 +38,7 @@ class StorySelect extends React.Component {
           step={1}
           title="Kies een persoon"
           description="Kies de persoon van wie je het verhaal wilt ontdekken"
-<<<<<<< HEAD
-          image="https://placehold.it/300x300"
-=======
           image={StapLogo}
->>>>>>> develop
         />
         <div className="container">
           {/* <div className="input-group">

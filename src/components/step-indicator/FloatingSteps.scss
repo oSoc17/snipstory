@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.floating-steps {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: 1rem;
+  background: #fff;
+  padding: 1em;
+  box-shadow: $box-shadow;
+  font-family: $brand-font-stack;
+}

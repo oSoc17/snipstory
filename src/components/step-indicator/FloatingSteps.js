@@ -1,30 +1,29 @@
 import React from 'react';
-import './StepIndicator.css';
-const StepIndicator = ({ step, title, description, image }) => {
+import './FloatingSteps.css';
+import { User, Search, Edit2, Share2 } from 'react-feather';
+
+const steps = [
+  { title: 'Kies', icon: User },
+  { title: 'Ontdek', icon: Search },
+  { title: 'Knutsel', icon: Edit2 },
+  { title: 'Deel', icon: Share2 }
+];
+
+const FloatingSteps = ({ activeStep }) => {
   return (
-    <div className="step-indicator">
-      <div className="container">
-        <div className="row">
-          <div className="step-number display-1 col-md-3">
-            {step}
+    <div className="floating-steps">
+      <div className="row">
+        {steps.map(step =>
+          <div className="col-sm-3 floating-step">
+            <step.icon className="floating-step__icon" />
+            <div className="floating-step__title">
+              {step.title}
+            </div>
           </div>
-          <div className="step-indicator__body col-md-6">
-            <h1 className="step-indicator__title">
-              {title}
-            </h1>
-            <p className="step-indicator__description">
-              {description}
-            </p>
-          </div>
-          <img
-            className="step-indicator__image col-md-3"
-            src={image}
-            alt={title}
-          />
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default StepIndicator;
+export default FloatingSteps;

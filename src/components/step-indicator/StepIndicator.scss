@@ -1,6 +1,21 @@
 @import '../../variables.scss';
 
 .step-indicator {
+  .step-number {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $brand-orange;
+    font-family: $brand-font-stack;
+    font-weight: 600;
+    width: 1.6em;
+    height: 1.6em;
+  }
+  .step-indicator__body {
+    border-left: .8em $brand-orange solid;
+  }
   background-color: $brand-blue;
+  padding: 2em 0;
   color: #fff;
 }

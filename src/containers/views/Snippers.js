@@ -18,29 +18,43 @@ class Snippers extends React.Component {
     return (
       <div className="page">
         <Navbar />
-        <div className="container">
-          <h1>Snippers</h1>
-          <div className="row">
+        <div>
+          <h1 style={{ textAlign: 'center' }}>Snippers</h1>
+          <div className="row" style={{ justifyContent: 'center' }}>
             {snippers.map(snipper => {
               return (
-                <div className="col-md-6" key={snipper.id}>
-                  <div className="card">
-                    <img
-                      className="card-img-top"
-                      src={snipper.photoURL}
-                      alt={`Snipper van ${snipper.creators}`}
-                    />
-                    <div className="card-block">
+                <div
+                  key={snipper.id}
+                  className="card snipper"
+                  style={{ width: '25em', margin: '2em' }}
+                >
+                  <img
+                    className="card-img-top img-fluid"
+                    src={snipper.photoURL}
+                    alt={`Snipper van ${snipper.creators}`}
+                  />
+                  <div
+                    className="card-block"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <div>
                       <h2 className="card-title">
                         Door {snipper.creators}
                       </h2>
-                      <p className="card-text">
+                      <p
+                        className="card-text"
+                        style={{ marginTop: '2em', marginBottom: '2em' }}
+                      >
                         {snipper.description}
                       </p>
-                      <Button to={`/snippers/${snipper.id}`}>
-                        Toon snipper
-                      </Button>
                     </div>
+                    <Button inverted to={`/snippers/${snipper.id}`}>
+                      Toon snipper
+                    </Button>
                   </div>
                 </div>
               );

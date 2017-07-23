@@ -5,26 +5,33 @@ import { history } from '../../redux/store';
 
 const Creations1 = ({ snipper }) => {
   return (
-    <article className="">
-      <div className="" onClick={e => history.push(`/snippers/${snipper.id}`)}>
+    <div class="button-test">
+      <div
+        className="card card-container"
+        onClick={e => history.push(`/snippers/${snipper.id}`)}
+      >
         <img
           src={snipper.photoURL}
           alt={`Snipper van ${snipper.creators}`}
-          className="img-fluid"
+          className="img-fluid card-img"
         />
-        <div>
-          <h2 className="article-title">
-            Door {snipper.creators}
-          </h2>
-          <p className="article-para">
+        <div className="card-block">
+          <h4 className="card-title">
             {snipper.description}
+          </h4>
+          <p className="card-text">
+            Door {snipper.creators}
           </p>
         </div>
       </div>
-      <Button inverted to={`/story/select?id=${snipper.storyId}`}>
+      <Button
+        className="button"
+        inverted
+        to={`/story/select?id=${snipper.storyId}`}
+      >
         Ontdek dit verhaal zelf
       </Button>
-    </article>
+    </div>
   );
 };
 

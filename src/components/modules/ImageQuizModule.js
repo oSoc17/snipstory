@@ -1,7 +1,9 @@
-import React from "react";
-import ImageThumbnail from "../../components/imagethumbnail/ImageThumbnail";
+import React from 'react';
+import ImageThumbnail from '../../components/imagethumbnail/ImageThumbnail';
 
 const selectAnswer = (event, module, handleChange) => {
+  console.log(module);
+  console.log(event.target);
   handleChange(
     Object.assign({}, module, {
       answer: parseInt(event.target.id, 10)
@@ -18,19 +20,22 @@ const ImageQuizModule = ({ module, handleChange }) => {
 
       <div>
         <span>Welke foto past het best bij het verhaal volgens jullie?</span>
-        {module.answer === module.correction
-          ? <img
-              style={{ border: "3px green solid" }}
-              className="img-fluid"
-              src={module.resources[module.answer]}
-              alt="selected"
-            />
-          : <img
-              style={{ border: "3px red solid" }}
-              className="img-fluid"
-              src={module.resources[module.answer]}
-              alt="selected"
-            />}
+        {module.answer !== undefined &&
+          module.answer === module.correction &&
+          <img
+            style={{ border: '3px solid green' }}
+            className="img-fluid"
+            src={module.resources[module.answer]}
+            alt="selected"
+          />}
+        {module.answer !== undefined &&
+          module.answer !== module.correction &&
+          <img
+            style={{ border: '3px solid red' }}
+            className="img-fluid"
+            src={module.resources[module.answer]}
+            alt="selected"
+          />}
       </div>
 
       <div className="images">

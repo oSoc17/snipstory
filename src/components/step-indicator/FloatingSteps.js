@@ -15,7 +15,10 @@ const FloatingSteps = ({ activeStep }) => {
       <div className="row">
         {steps.map(step =>
           <div className="col-sm-3 floating-step" key={step.title}>
-            <step.icon className="floating-step__icon" />
+            <div className="floating-step__icon">
+              <step.icon />
+            </div>
+
             <div className="floating-step__title">
               {step.title}
             </div>

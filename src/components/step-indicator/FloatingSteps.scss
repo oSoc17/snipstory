@@ -2,6 +2,9 @@
 
 .floating-steps {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   bottom: 0;
   left: 0;
   border-top-right-radius: 1rem;
@@ -9,4 +12,22 @@
   padding: 1em;
   box-shadow: $box-shadow;
   font-family: $brand-font-stack;
+  font-weight: 600;
+  color: $brand-blue;
+  .floating-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: $box-shadow;
+    &__icon {
+      display: flex;
+      border: red 1px solid;
+      padding: 1rem;
+      border-radius: 50%;
+      box-shadow: $box-shadow;
+    }
+    &--selected {
+    }
+  }
 }

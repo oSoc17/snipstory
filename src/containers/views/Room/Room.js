@@ -28,9 +28,9 @@ import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
-import StepIndicator from '../../../components/step-indicator/StepIndicator';
-import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
-import FloatingNext from '../../../components/step-indicator/FloatingNext';
+import StepIndicator from "../../../components/step-indicator/StepIndicator";
+import FloatingSteps from "../../../components/step-indicator/FloatingSteps";
+import FloatingNext from "../../../components/step-indicator/FloatingNext";
 
 class Room extends React.Component {
   handleChange(module) {
@@ -97,8 +97,10 @@ class Room extends React.Component {
                 this.inviteInput = inviteInput;
               }}
               onClick={e => e.target.select()}
+              className="form-field__input"
             />
             <Button
+              inverted
               onClick={_ => {
                 this.inviteInput.select();
                 document.execCommand('copy');
@@ -287,7 +289,7 @@ class Room extends React.Component {
             </div>
           </div>
           <AppSuggestions {...suggestions} />
-          <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <Button to={"/knutseltips"}>Knutsel iets bij dit verhaal</Button>
           <FloatingNext
             to={`/knutseltips?storyId=${room.storyId}`}
             nextStep="Knutsel"

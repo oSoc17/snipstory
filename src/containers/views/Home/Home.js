@@ -6,7 +6,7 @@ import YouTube from 'react-youtube';
 
 import './Home.css';
 
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 // import ht1 from './assets/ht-1.svg';
 // import ht2 from './assets/ht-2.svg';
 // import ht3 from './assets/ht-3.svg';

@@ -71,7 +71,11 @@ export const actionTypes = {
   fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
   fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
   snipperNotFound: 'SNIPPER_NOT_FOUND',
-  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED'
+  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED',
+  changeUsernameCurrentUserFulfilled: 'CHANGE_USERNAME_CURRENT_USER_FULFILLED',
+  updateUsersStarted: 'UPDATE_USERS_STARTED',
+  updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
+  updateUsersRejected: 'UPDATE_USERS_REJECTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -260,8 +264,7 @@ export const createRoom = userName => {
       .then(() => {
         const roomKey = firebaseDatabase.ref().child('rooms').push().key;
         const data = {
-          ...getState().room,
-          users: [getState().user]
+          ...getState().room
         };
         data.id = roomKey;
         let updates = {};
@@ -428,7 +431,8 @@ export const updateModule = module => {
       .child('modules')
       .child(module.id)
       .set({
-        ...module
+        ...module,
+        clickedBy: getState().user.uid
       })
       .then(snapshot => {
         dispatch(updateModuleFulfilled());
@@ -783,4 +787,53 @@ export const addCreatorsToCreation = event => {
 export const addCreatorsToCreationFulfilled = creatorsData => ({
   type: actionTypes.addCreatorsToCreationFulfilled,
   creators: creatorsData
+});
+
+export const changeUsernameCurrentUser = event => {
+  return (dispatch, getState) => {
+    const uid = getState().user.uid;
+    let users = getState().room.users;
+    users[uid] =  event.target.value;
+    dispatch(changeUsernameCurrentUserFulfilled(users));
+    dispatch(updateUsers());
+  }
+};
+
+export const changeUsernameCurrentUserFulfilled = users => ({
+  type: actionTypes.changeUsernameCurrentUserFulfilled,
+  newUsersArr: users
+});
+
+export const updateUsers = () => {
+  return (dispatch, getState) => {
+    dispatch(updateUsersStarted());
+    console.log("Room state:", getState().room);
+    firebaseDatabase
+      .ref()
+      .child('rooms/' + getState().room.id)
+      .set({
+        ...getState().room,
+        users: getState().room.users
+      })
+      .then(snapshot => {
+        console.log(snapshot.val());
+        dispatch(updateUsersFulfilled());
+      })
+      .catch(err => {
+        dispatch(updateUsersRejected(err.message));
+      });
+  };
+};
+
+export const updateUsersStarted = () => ({
+  type: actionTypes.updateUsersStarted
+});
+
+export const updateUsersFulfilled = () => ({
+  type: actionTypes.updateUsersFulfilled
+});
+
+export const updateUsersRejected = error => ({
+  type: actionTypes.updateUsersRejected,
+  error: error
 });

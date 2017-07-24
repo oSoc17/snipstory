@@ -1,7 +1,7 @@
-import React from "react";
-import moment from "moment";
-import { connect } from "react-redux";
-import { User } from "react-feather";
+import React from 'react';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { User } from 'react-feather';
 import {
   fetchRoomData,
   listenForRoomChange,
@@ -11,23 +11,23 @@ import {
   sendCreation,
   changeUsernameCurrentUser,
   showToast
-} from "../../../redux/actions";
-import { parse } from "query-string";
-import Spinner from "../../../components/spinner/Spinner";
-import ImageModule from "../../../components/modules/ImageModule";
-import ImageQuizModule from "../../../components/modules/ImageQuizModule";
-import MapModule from "../../../components/modules/MapModule";
-import QuizModule from "../../../components/modules/QuizModule";
-import SearchExerciseModule from "../../../components/modules/SearchExerciseModule";
-import TextblockModule from "../../../components/modules/TextblockModule";
-import VideoModule from "../../../components/modules/VideoModule";
-import YoutubeModule from "../../../components/modules/YoutubeModule";
-import FunFactModule from "../../../components/modules/FunFactModule";
-import AppSuggestions from "../../../components/appsuggestions/AppSuggestions";
-import Button from "../../../components/button/Button";
-import StapLogo from "./assets/stap02.svg";
-import Navbar from "../../../components/nav/Navbar";
-import Footer from "../../../components/footer/Footer";
+} from '../../../redux/actions';
+import { parse } from 'query-string';
+import Spinner from '../../../components/spinner/Spinner';
+import ImageModule from '../../../components/modules/ImageModule';
+import ImageQuizModule from '../../../components/modules/ImageQuizModule';
+import MapModule from '../../../components/modules/MapModule';
+import QuizModule from '../../../components/modules/QuizModule';
+import SearchExerciseModule from '../../../components/modules/SearchExerciseModule';
+import TextblockModule from '../../../components/modules/TextblockModule';
+import VideoModule from '../../../components/modules/VideoModule';
+import YoutubeModule from '../../../components/modules/YoutubeModule';
+import FunFactModule from '../../../components/modules/FunFactModule';
+import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
+import Button from '../../../components/button/Button';
+import StapLogo from './assets/stap02.svg';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
 
 import StepIndicator from "../../../components/step-indicator/StepIndicator";
 import FloatingSteps from "../../../components/step-indicator/FloatingSteps";
@@ -68,16 +68,16 @@ class Room extends React.Component {
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}
         />
-        <div className="container room" style={{ position: "relative" }}>
+        <div className="container room" style={{ position: 'relative' }}>
           <div
             className="users"
             style={{
-              position: "absolute",
-              right: "0",
-              top: "2em",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
+              position: 'absolute',
+              right: '0',
+              top: '2em',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
             }}
           >
             {Object.keys(room.users).length > 1 &&
@@ -85,7 +85,7 @@ class Room extends React.Component {
                 <h2>Mensen in dit verhaal</h2>
                 {Object.keys(room.users).map(key => {
                   return (
-                    <div key={key} style={{ verticalAlign: "center" }}>
+                    <div key={key} style={{ verticalAlign: 'center' }}>
                       <User />
                       {room.users[key]}
                     </div>
@@ -107,7 +107,7 @@ class Room extends React.Component {
               inverted
               onClick={_ => {
                 this.inviteInput.select();
-                document.execCommand("copy");
+                document.execCommand('copy');
                 showToast({
                   text: `De link is gekopieerd naar jouw klembord, stuur het naar je vrienden!`
                 });
@@ -116,7 +116,7 @@ class Room extends React.Component {
               Kopiëer
             </Button>
           </div>
-          <div className="story-information card" style={{ width: "550px" }}>
+          <div className="story-information card" style={{ width: '550px' }}>
             <img
               className="card-img-top"
               src={room.profilePicture}
@@ -127,19 +127,19 @@ class Room extends React.Component {
                 {room.name}
               </h1>
               <p>
-                {moment(room.birthdate, "DD-MM-YYYY").format("DD/MM/YYYY") +
-                  " - " +
-                  moment(room.died, "DD-MM-YYYY").format("DD/MM/YYYY")}
+                {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
+                  ' - ' +
+                  moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
               </p>
               <p>
                 {room.nationality}
               </p>
             </div>
             <div className="card-block">
-              Leeftijd{" "}
-              {moment(room.died, "DD-MM-YYYY").diff(
-                moment(room.birthdate, "DD-MM-YYYY").format(""),
-                "years"
+              Leeftijd{' '}
+              {moment(room.died, 'DD-MM-YYYY').diff(
+                moment(room.birthdate, 'DD-MM-YYYY').format(''),
+                'years'
               )}
             </div>
             <label htmlFor="personName">Wie ben jij?</label>
@@ -153,7 +153,7 @@ class Room extends React.Component {
             {room.modules &&
               room.modules.map((module, i) => {
                 switch (module.contentType.toLowerCase()) {
-                  case "image":
+                  case 'image':
                     return (
                       <ImageModule
                         index={i}
@@ -163,7 +163,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case "imagequiz":
+                  case 'imagequiz':
                     return (
                       <ImageQuizModule
                         index={i}
@@ -174,7 +174,7 @@ class Room extends React.Component {
                         handleChange={this.handleChange.bind(this)}
                       />
                     );
-                  case "map":
+                  case 'map':
                     return (
                       <MapModule
                         index={i}
@@ -185,7 +185,7 @@ class Room extends React.Component {
                         handleChange={this.handleChange.bind(this)}
                       />
                     );
-                  case "quiz":
+                  case 'quiz':
                     return (
                       <QuizModule
                         index={i}
@@ -196,7 +196,7 @@ class Room extends React.Component {
                         handleChange={this.handleChange.bind(this)}
                       />
                     );
-                  case "searchex":
+                  case 'searchex':
                     return (
                       <SearchExerciseModule
                         index={i}
@@ -206,7 +206,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case "textblock":
+                  case 'textblock':
                     return (
                       <TextblockModule
                         index={i}
@@ -216,7 +216,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case "video":
+                  case 'video':
                     return (
                       <VideoModule
                         index={i}
@@ -226,7 +226,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case "youtube":
+                  case 'youtube':
                     return (
                       <YoutubeModule
                         index={i}
@@ -236,7 +236,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case "funfact":
+                  case 'funfact':
                     return (
                       <FunFactModule
                         index={i}
@@ -264,10 +264,10 @@ class Room extends React.Component {
           <div
             className="card monument"
             style={{
-              width: "600px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center"
+              width: '600px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
             }}
           >
             <iframe

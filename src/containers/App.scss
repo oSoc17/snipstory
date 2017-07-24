@@ -47,25 +47,6 @@
   display: flex;
 }
 
-#creationUpload {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-#creationUpload + label {
-  font-size: 3em;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-
-#creationUpload + label:hover {
-  font-size: 4em;
-}
-
 .snipper {
   background-color: $brand-blue;
   color: white;
@@ -78,6 +59,8 @@
 
 .card.monument {
   background: $brand-blue;
+  border-radius: 25px;
+  border: 15px solid $brand-blue;
 }
 
 .users {
@@ -99,4 +82,44 @@
 
 .users button {
   cursor: pointer;
+}
+
+.uploadbox {
+  width: 100%;
+  height: 450px;
+  border: 5px dashed lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2em 0;
+  #creationUpload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  #creationUpload + label {
+    font-size: 3em;
+    cursor: pointer;
+    transition: 0.4s ease;
+  }
+  #creationUpload + label:hover {
+    transform: scale(2);
+    color: black;
+  }
+  #creationUpload + label:focus {
+    transform: scale(2);
+  }
+
+  input:focus + label {
+    transform: scale(2);
+  }
+
+  input:focus + label.upload-error {
+    transform: scale(2) rotate(45deg);
+    color: red;
+  }
 }

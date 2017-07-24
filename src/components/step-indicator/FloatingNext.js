@@ -1,16 +1,17 @@
 import React from 'react';
 import { ArrowRight } from 'react-feather';
+import { Link } from 'react-router-dom';
 import './FloatingNext.css';
 
-const FloatingNext = ({ nextStep }) => {
+const FloatingNext = ({ nextStep, to }) => {
   return (
     <div className="floating-next">
-      <button className="floating-next__inner">
+      <Link to={to} className="floating-next__inner">
         <span>
           {nextStep}
         </span>
         <ArrowRight />
-      </button>
+      </Link>
     </div>
   );
 };

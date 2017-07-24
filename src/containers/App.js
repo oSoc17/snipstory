@@ -83,7 +83,6 @@ class App extends Component {
             />
             <Route
               path="/knutseltips"
-              exact
               render={props => <KnutselTips user={user} {...props} />}
             />
             <Route

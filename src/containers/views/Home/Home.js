@@ -81,8 +81,6 @@ class Home extends React.Component {
                 width="640"
                 height="360"
                 frameBorder="0"
-                webkitallowfullscreen
-                mozallowfullscreen
                 allowFullScreen
               />
             </div>

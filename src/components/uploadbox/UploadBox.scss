@@ -1,0 +1,13 @@
+.upload.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.upload {
+  textarea {
+    width: 100%;
+    height: 450px;
+  }
+}

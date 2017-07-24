@@ -793,10 +793,10 @@ export const changeUsernameCurrentUser = event => {
   return (dispatch, getState) => {
     const uid = getState().user.uid;
     let users = getState().room.users;
-    users[uid] =  event.target.value;
+    users[uid] = event.target.value;
     dispatch(changeUsernameCurrentUserFulfilled(users));
     dispatch(updateUsers());
-  }
+  };
 };
 
 export const changeUsernameCurrentUserFulfilled = users => ({
@@ -807,7 +807,7 @@ export const changeUsernameCurrentUserFulfilled = users => ({
 export const updateUsers = () => {
   return (dispatch, getState) => {
     dispatch(updateUsersStarted());
-    console.log("Room state:", getState().room);
+    console.log('Room state:', getState().room);
     firebaseDatabase
       .ref()
       .child('rooms/' + getState().room.id)

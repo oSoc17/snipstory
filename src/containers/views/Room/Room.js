@@ -12,7 +12,6 @@ import {
   changeUsernameCurrentUser,
   showToast
 } from '../../../redux/actions';
-import { parse } from 'query-string';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
@@ -23,7 +22,6 @@ import TextblockModule from '../../../components/modules/TextblockModule';
 import VideoModule from '../../../components/modules/VideoModule';
 import YoutubeModule from '../../../components/modules/YoutubeModule';
 import FunFactModule from '../../../components/modules/FunFactModule';
-import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
 import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
@@ -51,7 +49,6 @@ class Room extends React.Component {
       room,
       user,
       isFetchingData,
-      suggestions,
       changeUsernameCurrentUser,
       showToast
     } = this.props;

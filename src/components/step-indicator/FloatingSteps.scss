@@ -10,8 +10,9 @@
   font-family: $brand-font-stack;
   font-weight: 600;
   color: $brand-blue;
-  * {
-    display: flex;
+  z-index: $z-index-modal;
+  .clickable {
+    cursor: pointer;
   }
   .floating-step {
     transition: all $transition-timing;

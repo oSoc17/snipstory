@@ -1,7 +1,7 @@
-import React from 'react';
-import moment from 'moment';
-import { connect } from 'react-redux';
-import {User} from 'react-feather';
+import React from "react";
+import moment from "moment";
+import { connect } from "react-redux";
+import { User } from "react-feather";
 import {
   fetchRoomData,
   listenForRoomChange,
@@ -9,25 +9,26 @@ import {
   getRandomSuggestions,
   joinRoom,
   sendCreation,
-  changeUsernameCurrentUser
-} from '../../../redux/actions';
-import Spinner from '../../../components/spinner/Spinner';
-import ImageModule from '../../../components/modules/ImageModule';
-import ImageQuizModule from '../../../components/modules/ImageQuizModule';
-import MapModule from '../../../components/modules/MapModule';
-import QuizModule from '../../../components/modules/QuizModule';
-import SearchExerciseModule from '../../../components/modules/SearchExerciseModule';
-import TextblockModule from '../../../components/modules/TextblockModule';
-import VideoModule from '../../../components/modules/VideoModule';
-import YoutubeModule from '../../../components/modules/YoutubeModule';
-import FunFactModule from '../../../components/modules/FunFactModule';
-import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
-import Button from '../../../components/button/Button';
-import StapLogo from './assets/stap02.svg';
-import Navbar from '../../../components/nav/Navbar';
-import Footer from '../../../components/footer/Footer';
+  changeUsernameCurrentUser,
+  showToast
+} from "../../../redux/actions";
+import Spinner from "../../../components/spinner/Spinner";
+import ImageModule from "../../../components/modules/ImageModule";
+import ImageQuizModule from "../../../components/modules/ImageQuizModule";
+import MapModule from "../../../components/modules/MapModule";
+import QuizModule from "../../../components/modules/QuizModule";
+import SearchExerciseModule from "../../../components/modules/SearchExerciseModule";
+import TextblockModule from "../../../components/modules/TextblockModule";
+import VideoModule from "../../../components/modules/VideoModule";
+import YoutubeModule from "../../../components/modules/YoutubeModule";
+import FunFactModule from "../../../components/modules/FunFactModule";
+import AppSuggestions from "../../../components/appsuggestions/AppSuggestions";
+import Button from "../../../components/button/Button";
+import StapLogo from "./assets/stap02.svg";
+import Navbar from "../../../components/nav/Navbar";
+import Footer from "../../../components/footer/Footer";
 
-import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import StepIndicator from "../../../components/step-indicator/StepIndicator";
 
 class Room extends React.Component {
   handleChange(module) {
@@ -40,7 +41,14 @@ class Room extends React.Component {
   }
 
   render() {
-    const { room, user, isFetchingData, suggestions, changeUsernameCurrentUser } = this.props;
+    const {
+      room,
+      user,
+      isFetchingData,
+      suggestions,
+      changeUsernameCurrentUser,
+      showToast
+    } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -53,18 +61,53 @@ class Room extends React.Component {
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}
         />
-        <div className="container room" style={{position: "relative"}}>
-          {Object.keys(room.users).length > 1 &&
-            <div className="users" style={{position: "absolute", right: "0", top: "2em"}}>
+        <div className="container room" style={{ position: "relative" }}>
+          <div
+            className="users"
+            style={{
+              position: "absolute",
+              right: "0",
+              top: "2em",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            {Object.keys(room.users).length > 1 &&
               <div>
-                {console.log(room.users)}
+                <h2>Mensen in dit verhaal</h2>
                 {Object.keys(room.users).map(key => {
-                  return (<div key={key} style={{verticalAlign: "center"}}><User />{room.users[key]}</div>);
+                  return (
+                    <div key={key} style={{ verticalAlign: "center" }}>
+                      <User />
+                      {room.users[key]}
+                    </div>
+                  );
                 })}
-              </div>
-            </div>
-          }
-          <div className="story-information card" style={{ width: '550px' }}>
+              </div>}
+            <h3>Nodig iemand uit om mee te werken:</h3>
+            <input
+              type="text"
+              value={window.location.href}
+              readOnly
+              ref={inviteInput => {
+                this.inviteInput = inviteInput;
+              }}
+              onClick={e => e.target.select()}
+            />
+            <Button
+              onClick={_ => {
+                this.inviteInput.select();
+                document.execCommand("copy");
+                showToast({
+                  text: `De link is gekopieerd naar jouw klembord, stuur het naar je vrienden!`
+                });
+              }}
+            >
+              Kopiëer
+            </Button>
+          </div>
+          <div className="story-information card" style={{ width: "550px" }}>
             <img
               className="card-img-top"
               src={room.profilePicture}
@@ -75,28 +118,33 @@ class Room extends React.Component {
                 {room.name}
               </h1>
               <p>
-                {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
-                  ' - ' +
-                  moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+                {moment(room.birthdate, "DD-MM-YYYY").format("DD/MM/YYYY") +
+                  " - " +
+                  moment(room.died, "DD-MM-YYYY").format("DD/MM/YYYY")}
               </p>
               <p>
                 {room.nationality}
               </p>
             </div>
             <div className="card-block">
-              Leeftijd{' '}
-              {moment(room.died, 'DD-MM-YYYY').diff(
-                moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                'years'
+              Leeftijd{" "}
+              {moment(room.died, "DD-MM-YYYY").diff(
+                moment(room.birthdate, "DD-MM-YYYY").format(""),
+                "years"
               )}
             </div>
-            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
+            <label htmlFor="personName">Wie ben jij?</label>
+            <input
+              type="text"
+              name="personName"
+              onChange={changeUsernameCurrentUser}
+            />
           </div>
           <div className="modules">
             {room.modules &&
               room.modules.map((module, i) => {
                 switch (module.contentType.toLowerCase()) {
-                  case 'image':
+                  case "image":
                     return (
                       <ImageModule
                         index={i}
@@ -106,7 +154,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case 'imagequiz':
+                  case "imagequiz":
                     return (
                       <ImageQuizModule
                         index={i}
@@ -117,7 +165,7 @@ class Room extends React.Component {
                         handleChange={this.handleChange.bind(this)}
                       />
                     );
-                  case 'map':
+                  case "map":
                     return (
                       <MapModule
                         index={i}
@@ -128,18 +176,18 @@ class Room extends React.Component {
                         handleChange={this.handleChange.bind(this)}
                       />
                     );
-                  case 'quiz':
+                  case "quiz":
                     return (
-                        <QuizModule
-                          index={i}
-                          key={i}
-                          module={module}
-                          users={room.users}
-                          user={user}
-                          handleChange={this.handleChange.bind(this)}
-                        />
+                      <QuizModule
+                        index={i}
+                        key={i}
+                        module={module}
+                        users={room.users}
+                        user={user}
+                        handleChange={this.handleChange.bind(this)}
+                      />
                     );
-                  case 'searchex':
+                  case "searchex":
                     return (
                       <SearchExerciseModule
                         index={i}
@@ -149,7 +197,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case 'textblock':
+                  case "textblock":
                     return (
                       <TextblockModule
                         index={i}
@@ -159,7 +207,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case 'video':
+                  case "video":
                     return (
                       <VideoModule
                         index={i}
@@ -169,7 +217,7 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case 'youtube':
+                  case "youtube":
                     return (
                       <YoutubeModule
                         index={i}
@@ -179,8 +227,8 @@ class Room extends React.Component {
                         user={user}
                       />
                     );
-                  case 'funfact':
-                  return (
+                  case "funfact":
+                    return (
                       <FunFactModule
                         index={i}
                         key={i}
@@ -195,7 +243,7 @@ class Room extends React.Component {
               })}
           </div>
           <AppSuggestions {...suggestions} />
-          <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <Button to={"/knutseltips"}>Knutsel iets bij dit verhaal</Button>
         </div>
         <Footer />
       </div>
@@ -219,5 +267,6 @@ export default connect(mapStateToProps, {
   getRandomSuggestions,
   joinRoom,
   sendCreation,
-  changeUsernameCurrentUser
+  changeUsernameCurrentUser,
+  showToast
 })(Room);

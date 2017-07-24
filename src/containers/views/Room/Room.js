@@ -1,14 +1,17 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import {User} from 'react-feather';
 import {
   fetchRoomData,
   listenForRoomChange,
   updateModule,
   getRandomSuggestions,
   joinRoom,
-  sendCreation
+  sendCreation,
+  changeUsernameCurrentUser
 } from '../../../redux/actions';
+import { parse } from 'query-string';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
@@ -26,6 +29,8 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
+import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -33,12 +38,16 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    this.props.joinRoom();
-    this.props.fetchRoomData();
+    const { joinRoom, fetchRoomData, location: { search } } = this.props;
+    joinRoom();
+    fetchRoomData();
+    const queryString = parse(search);
+    this.setState({ storyId: queryString.storyId });
   }
 
   render() {
-    const { room, user, isFetchingData, suggestions } = this.props;
+    const { storyId } = this.state;
+    const { room, user, isFetchingData, suggestions, changeUsernameCurrentUser } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -51,7 +60,17 @@ class Room extends React.Component {
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}
         />
-        <div className="container room">
+        <div className="container room" style={{position: "relative"}}>
+          {Object.keys(room.users).length > 1 &&
+            <div className="users" style={{position: "absolute", right: "0", top: "2em"}}>
+              <div>
+                {console.log(room.users)}
+                {Object.keys(room.users).map(key => {
+                  return (<div key={key} style={{verticalAlign: "center"}}><User />{room.users[key]}</div>);
+                })}
+              </div>
+            </div>
+          }
           <div className="story-information card" style={{ width: '550px' }}>
             <img
               className="card-img-top"
@@ -78,6 +97,7 @@ class Room extends React.Component {
                 'years'
               )}
             </div>
+            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
           </div>
           <div className="modules">
             {room.modules &&
@@ -117,14 +137,14 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                      <QuizModule
-                        index={i}
-                        key={i}
-                        module={module}
-                        users={room.users}
-                        user={user}
-                        handleChange={this.handleChange.bind(this)}
-                      />
+                        <QuizModule
+                          index={i}
+                          key={i}
+                          module={module}
+                          users={room.users}
+                          user={user}
+                          handleChange={this.handleChange.bind(this)}
+                        />
                     );
                   case 'searchex':
                     return (
@@ -167,7 +187,7 @@ class Room extends React.Component {
                       />
                     );
                   case 'funfact':
-                    return (
+                  return (
                       <FunFactModule
                         index={i}
                         key={i}
@@ -212,6 +232,11 @@ class Room extends React.Component {
           </div>
           <AppSuggestions {...suggestions} />
           <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <FloatingNext
+            to={`/knutseltips?storyId=${storyId}`}
+            nextStep="Knutsel"
+          />
+          <FloatingSteps activeStep={1} />
         </div>
         <Footer />
       </div>
@@ -234,5 +259,6 @@ export default connect(mapStateToProps, {
   updateModule,
   getRandomSuggestions,
   joinRoom,
-  sendCreation
+  sendCreation,
+  changeUsernameCurrentUser
 })(Room);

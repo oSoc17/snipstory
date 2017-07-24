@@ -8,6 +8,7 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 
 class Room extends React.Component {
   render() {
@@ -37,6 +38,7 @@ class Room extends React.Component {
             <Button to={'/snipper/' + creation.id}>
               Ga naar jou snipper!
             </Button>}
+          <FloatingSteps activeStep={3} />
         </div>
         <Footer />
       </div>

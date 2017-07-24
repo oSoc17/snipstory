@@ -7,7 +7,7 @@ const FloatingNext = ({ nextStep, to }) => {
   return (
     <div className="floating-next">
       <Link to={to} className="floating-next__inner">
-        <span>
+        <span className="floating-next__text">
           {nextStep}
         </span>
         <ArrowRight />

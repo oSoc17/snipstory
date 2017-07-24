@@ -3,10 +3,61 @@
 .floating-steps {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 15px;
   border-top-right-radius: 1rem;
   background: #fff;
-  padding: 1em;
   box-shadow: $box-shadow;
   font-family: $brand-font-stack;
+  font-weight: 600;
+  color: $brand-blue;
+  z-index: $z-index-modal;
+  .clickable {
+    cursor: pointer;
+  }
+  .floating-step {
+    transition: all $transition-timing;
+    padding: 1.6rem 1.6rem .8rem 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .checkmark {
+      display: none;
+    }
+    &__icon {
+      display: flex;
+      padding: 1rem;
+      border-radius: 50%;
+      box-shadow: $box-shadow;
+      margin-bottom: 1rem;
+    }
+    &--selected {
+      background-color: $brand-blue;
+      box-shadow: $box-shadow;
+      color: #fff;
+      border-top-right-radius: .5rem;
+      border-top-left-radius: .5rem;
+      transform: scale(1.1);
+    }
+    &--done {
+      .floating-step__icon {
+        position: relative;
+        color: #fff;
+        background-color: $brand-orange;
+        box-shadow: 0 2px 10px 2px $brand-orange;
+      }
+      .checkmark {
+        background: $brand-blue;
+        border-radius: 50%;
+        padding: .2rem;
+        position: absolute;
+        display: flex;
+        bottom: 0;
+        right: 0;
+        margin-right: -.4rem;
+        margin-bottom: -.4rem;
+      }
+      color: $brand-yellow;
+    }
+  }
 }

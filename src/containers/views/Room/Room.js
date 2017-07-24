@@ -12,7 +12,6 @@ import {
   changeUsernameCurrentUser,
   showToast
 } from '../../../redux/actions';
-import { parse } from 'query-string';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
@@ -29,9 +28,9 @@ import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
-import StepIndicator from "../../../components/step-indicator/StepIndicator";
-import FloatingSteps from "../../../components/step-indicator/FloatingSteps";
-import FloatingNext from "../../../components/step-indicator/FloatingNext";
+import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
+import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -39,11 +38,9 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    const { joinRoom, fetchRoomData, location: { search } } = this.props;
+    const { joinRoom, fetchRoomData } = this.props;
     joinRoom();
     fetchRoomData();
-    const queryString = parse(search);
-    this.setState({ storyId: queryString.storyId });
   }
 
   render() {
@@ -55,7 +52,6 @@ class Room extends React.Component {
       changeUsernameCurrentUser,
       showToast
     } = this.props;
-    const { storyId } = this.state;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -142,7 +138,7 @@ class Room extends React.Component {
                 'years'
               )}
             </div>
-            <label htmlFor="personName">Wie ben jij?</label>
+            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
             <input
               type="text"
               name="personName"
@@ -187,14 +183,14 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                      <QuizModule
-                        index={i}
-                        key={i}
-                        module={module}
-                        users={room.users}
-                        user={user}
-                        handleChange={this.handleChange.bind(this)}
-                      />
+                        <QuizModule
+                          index={i}
+                          key={i}
+                          module={module}
+                          users={room.users}
+                          user={user}
+                          handleChange={this.handleChange.bind(this)}
+                        />
                     );
                   case 'searchex':
                     return (
@@ -292,10 +288,8 @@ class Room extends React.Component {
               </div>
             </div>
           </div>
-          <AppSuggestions {...suggestions} />
-          <Button to={"/knutseltips"}>Knutsel iets bij dit verhaal</Button>
           <FloatingNext
-            to={`/knutseltips?storyId=${storyId}`}
+            to={`/knutseltips?storyId=${room.storyId}`}
             nextStep="Knutsel"
           />
           <FloatingSteps activeStep={1} />

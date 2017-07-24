@@ -2,11 +2,10 @@ import React from 'react';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
-import YouTube from 'react-youtube';
 
 import './Home.css';
 
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 // import ht1 from './assets/ht-1.svg';
 // import ht2 from './assets/ht-2.svg';
 // import ht3 from './assets/ht-3.svg';
@@ -76,16 +75,13 @@ class Home extends React.Component {
           </section> */}
           <section className="video-section">
             <div className="container">
-              <YouTube
-                videoId="ZYMAVF64Bfo"
-                opts={{
-                  rel: 0,
-                  showinfo: 0,
-                  width: '100%',
-                  height: '100%',
-                  frameBorder: 0,
-                  allowFullScreen: true
-                }}
+              <iframe
+                title="Wat is Snipstory?"
+                src="https://player.vimeo.com/video/226714616?color=3778FB&title=0&byline=0&portrait=0"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allowFullScreen
               />
             </div>
           </section>

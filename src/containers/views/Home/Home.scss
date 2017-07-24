@@ -24,8 +24,10 @@
   padding: 4em;
   height: 80vh;
   background-color: $brand-blue;
-  .container {
+  .container,
+  iframe {
     height: 100%;
+    width: 100%;
   }
 }
 

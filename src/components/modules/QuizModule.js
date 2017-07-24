@@ -9,7 +9,7 @@ const selectAnswer = (module, index, handleChange) => {
   );
 };
 
-const QuizModule = ({ module, handleChange }) => {
+const QuizModule = ({ module, handleChange, users }) => {
   return (
     <article className="container module">
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
@@ -24,6 +24,8 @@ const QuizModule = ({ module, handleChange }) => {
             {module.question}
           </span>
         </div>
+
+        <div>{users[module.clickedBy]}</div>
 
         <div className="buttons">
           {module.options.map((option, i) =>

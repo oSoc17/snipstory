@@ -43,7 +43,7 @@ class Room extends React.Component {
     const { room, user, isFetchingData, suggestions, changeUsernameCurrentUser } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
-    console.log("Room:", room);
+
     return (
       <div className="page">
         <Navbar />
@@ -54,15 +54,16 @@ class Room extends React.Component {
           image={StapLogo}
         />
         <div className="container room" style={{position: "relative"}}>
-          <div className="users" style={{position: "absolute", right: "0", top: "2em"}}>
-            {Object.keys(room.users).length > 1 &&
-            <div>
-              {Object.keys(room.users).map(key => {
-                return (<div style={{verticalAlign: "center"}}><User />{room.users[key]}</div>);
-              })}
+          {Object.keys(room.users).length > 1 &&
+            <div className="users" style={{position: "absolute", right: "0", top: "2em"}}>
+              <div>
+                {console.log(room.users)}
+                {Object.keys(room.users).map(key => {
+                  return (<div key={key} style={{verticalAlign: "center"}}><User />{room.users[key]}</div>);
+                })}
+              </div>
             </div>
-            }
-          </div>
+          }
           <div className="story-information card" style={{ width: '550px' }}>
             <img
               className="card-img-top"
@@ -89,7 +90,7 @@ class Room extends React.Component {
                 'years'
               )}
             </div>
-            <label htmlFor="personName">Wie ben jij?</label><input type="text" value={room.users[user.uid]} name="personName" onChange={changeUsernameCurrentUser}/>
+            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
           </div>
           <div className="modules">
             {room.modules &&
@@ -129,7 +130,6 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                      <div>
                         <QuizModule
                           index={i}
                           key={i}
@@ -138,8 +138,6 @@ class Room extends React.Component {
                           user={user}
                           handleChange={this.handleChange.bind(this)}
                         />
-                        {room.users[module.clickedBy]}
-                      </div>
                     );
                   case 'searchex':
                     return (
@@ -182,7 +180,7 @@ class Room extends React.Component {
                       />
                     );
                   case 'funfact':
-                    return (
+                  return (
                       <FunFactModule
                         index={i}
                         key={i}

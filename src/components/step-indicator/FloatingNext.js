@@ -1,29 +1,19 @@
 import React from 'react';
-const StepIndicator = ({ step, title, description, image }) => {
+import { ArrowRight } from 'react-feather';
+import { Link } from 'react-router-dom';
+import './FloatingNext.css';
+
+const FloatingNext = ({ nextStep, to }) => {
   return (
-    <div className="step-indicator">
-      <div className="container">
-        <div className="row">
-          <div className="step-number display-1 col-md-3">
-            {step}
-          </div>
-          <div className="step-indicator__body col-md-6">
-            <h1 className="step-indicator__title">
-              {title}
-            </h1>
-            <p className="step-indicator__description">
-              {description}
-            </p>
-          </div>
-          <img
-            className="step-indicator__image col-md-3"
-            src={image}
-            alt={title}
-          />
-        </div>
-      </div>
+    <div className="floating-next">
+      <Link to={to} className="floating-next__inner">
+        <span className="floating-next__text">
+          {nextStep}
+        </span>
+        <ArrowRight />
+      </Link>
     </div>
   );
 };
 
-export default StepIndicator;
+export default FloatingNext;

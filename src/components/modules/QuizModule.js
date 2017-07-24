@@ -32,6 +32,8 @@ const QuizModule = ({ module, handleChange, users }) => {
           {users[module.clickedBy]}
         </div>
 
+        <div>{users[module.clickedBy]}</div>
+
         <div className="buttons">
           {module.options.map((option, i) => {
             if (

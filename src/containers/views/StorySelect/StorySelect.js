@@ -9,6 +9,7 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import './StorySelect.css';
 import StapLogo from './assets/stap01.svg';
@@ -89,6 +90,7 @@ class StorySelect extends React.Component {
                   </div>
                 </div>
               )}
+            <FloatingSteps activeStep={0} />
           </div>
           {error &&
             <div className="error">

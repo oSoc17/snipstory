@@ -76,7 +76,27 @@
   color: white;
 }
 
+.card.monument {
+  background: $brand-blue;
+}
+
 .users {
-  border: 3px solid $brand-blue;
+  color: white;
+  border-radius: 25px;
+  background-color: $brand-blue;
   padding: 2em;
+}
+
+.users > div {
+  margin: 1em;
+}
+
+.users input {
+  width: 100%;
+  margin: 1em;
+  padding: 1em;
+}
+
+.users button {
+  cursor: pointer;
 }

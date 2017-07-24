@@ -6,6 +6,8 @@
 
 > Educational web app that teaches history based on human stories
 
+see it live on https://snipstory.be!
+
 ## Local development
 
 ### Install dependencies

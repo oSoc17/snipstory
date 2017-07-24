@@ -5,7 +5,7 @@ import { history } from '../../redux/store';
 
 const Creations1 = ({ snipper }) => {
   return (
-    <div class="button-test">
+    <div>
       <div
         className="card card-container"
         onClick={e => history.push(`/snippers/${snipper.id}`)}

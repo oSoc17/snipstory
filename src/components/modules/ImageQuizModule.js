@@ -1,5 +1,5 @@
-import React from 'react';
-import ImageThumbnail from '../../components/imagethumbnail/ImageThumbnail';
+import React from "react";
+import ImageThumbnail from "../../components/imagethumbnail/ImageThumbnail";
 
 const selectAnswer = (event, module, handleChange) => {
   console.log(module);

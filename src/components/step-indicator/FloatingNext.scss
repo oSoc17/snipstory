@@ -4,10 +4,15 @@
   &__inner {
     @include button-reset();
     font-family: $brand-font-stack;
+    font-weight: 600;
+    font-size: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+  }
+  &__text {
+    margin-right: .5rem;
   }
   position: fixed;
   bottom: 1rem;

@@ -31,6 +31,8 @@ import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
+import './Room.css';
+
 class Room extends React.Component {
   handleChange(module) {
     this.props.updateModule(module);
@@ -68,7 +70,7 @@ class Room extends React.Component {
             style={{
               position: 'absolute',
               right: '0',
-              top: '2em',
+              top: '0',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center'
@@ -76,7 +78,7 @@ class Room extends React.Component {
           >
             {Object.keys(room.users).length > 1 &&
               <div>
-                <h2>Mensen in dit verhaal</h2>
+                <h4>Mensen in dit verhaal</h4>
                 {Object.keys(room.users).map(key => {
                   return (
                     <div key={key} style={{ verticalAlign: 'center' }}>
@@ -86,7 +88,7 @@ class Room extends React.Component {
                   );
                 })}
               </div>}
-            <h3>Nodig iemand uit om mee te werken:</h3>
+            <h4>Nodig iemand uit om mee te werken:</h4>
             <input
               type="text"
               value={window.location.href}
@@ -120,7 +122,7 @@ class Room extends React.Component {
               <h1 className="card-title">
                 {room.name}
               </h1>
-              <p>
+              <p className="lead">
                 {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
                   ' - ' +
                   moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
@@ -128,20 +130,28 @@ class Room extends React.Component {
               <p>
                 {room.nationality}
               </p>
+              <p>
+                Leeftijd{': '}
+                {moment(room.died, 'DD-MM-YYYY').diff(
+                  moment(room.birthdate, 'DD-MM-YYYY').format(''),
+                  'years'
+                )}
+              </p>
             </div>
             <div className="card-block">
-              Leeftijd{' '}
-              {moment(room.died, 'DD-MM-YYYY').diff(
-                moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                'years'
-              )}
+              <label className="personName-label" htmlFor="personName">
+                Wie ben jij?
+              </label>
+              <input
+                className="form-field__input"
+                style={{ padding: '1em' }}
+                type="text"
+                name="personName"
+                id="personName"
+                onChange={changeUsernameCurrentUser}
+              />
             </div>
             <label htmlFor="personName">Wie ben jij?</label>
-            <input
-              type="text"
-              name="personName"
-              onChange={changeUsernameCurrentUser}
-            />
             <input
               type="text"
               name="personName"
@@ -250,45 +260,39 @@ class Room extends React.Component {
                 }
               })}
           </div>
-          {/*<div className="card monument" style={{width: '25em', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>*/}
-          {/*{room.monument.googleMapsEmbed}*/}
-          {/*<div className="card-block">*/}
-          {/*<img className="img-fluid img-thumbnail" src={room.monument.image} alt={room.monument.name} />*/}
-          {/*<h4 className="card-title">{room.monument.name}</h4>*/}
-          {/*<div className="card-text">*/}
-          {/*{monument.text}*/}
-          {/*</div>*/}
-          {/*</div>*/}
-          {/*</div>*/}
           <div
             className="card monument"
             style={{
-              width: '600px',
+              width: '45em',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center'
             }}
           >
-            <iframe
-              className="card-img-top"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d464080.155903431!2d3.7196314851131245!3d50.837424137856935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dcd13a8343e7cb%3A0x165e0d20e0d33dbd!2sBerks+Cemetery+Extension!5e0!3m2!1sen!2sbe!4v1500664894963"
-              width="600"
-              height="450"
-              frameBorder="0"
-              title="monument map"
-              style={{ border: 0 }}
-              allowFullScreen
+            <img
+              className="img-fluid card-img-top"
+              src={room.monument.image}
+              alt={room.monument.name}
             />
             <div className="card-block">
-              <img
-                className="img-fluid img-thumbnail"
-                src="https://upload.wikimedia.org/wikipedia/commons/8/89/Berks_Cemetery_Extension-5156.JPG"
-                alt="Berks Cemetery Extension"
-              />
-              <h4 className="card-title">Berks Cemetery Extension</h4>
-              <div className="card-text">
-                Dit is het kerkhof waar Thomas Reddy ligt. ...
+              <h4 className="card-title">
+                {room.monument.name}
+              </h4>
+              <div
+                className="card-text"
+                style={{ marginBottom: '1em', marginTop: '2em' }}
+              >
+                {room.monument.text}
               </div>
+              <iframe
+                src={room.monument.googleMapsEmbed}
+                width="100%"
+                height="350"
+                frameBorder="0"
+                title="monument map"
+                style={{ border: 0 }}
+                allowFullScreen
+              />
             </div>
           </div>
           <FloatingNext

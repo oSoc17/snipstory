@@ -1,0 +1,17 @@
+@import "../../../variables.scss";
+
+.story-information {
+  background: $brand-blue;
+  color: white;
+  padding: 1em;
+  border-radius: 25px;
+  img {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+  .card-block {
+    .personName-label {
+      font-size: 2rem;
+    }
+  }
+}

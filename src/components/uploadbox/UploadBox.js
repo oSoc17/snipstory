@@ -1,18 +1,34 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 import {
   uploadFile,
   addDescriptionToCreation,
   addCreatorsToCreation
-} from "../../redux/actions";
+} from '../../redux/actions';
+import Button from '../button/Button';
+import './UploadBox.css';
 
 class UploadBox extends React.Component {
   componentDidMount() {
-    document.addEventListener("dragover", e => e.preventDefault());
-    document.addEventListener("drop", e => {
+    document.addEventListener('dragover', e => e.preventDefault());
+    document.addEventListener('drop', e => e.preventDefault());
+    document
+      .getElementById('creationUploadBox')
+      .addEventListener('dragenter', e => {
+        e.preventDefault();
+        e.target.style.borderColor = 'green';
+      });
+    document
+      .getElementById('creationUploadBox')
+      .addEventListener('dragleave', e => {
+        e.preventDefault();
+        e.target.style.borderColor = 'lightgrey';
+      });
+    document.getElementById('creationUploadBox').addEventListener('drop', e => {
       e.preventDefault();
+      e.target.style.borderColor = 'lightgrey';
       const images = Array.from(e.dataTransfer.files).filter(file => {
-        return file.type.startsWith("image/") || file.type.startsWith("video/");
+        return file.type.startsWith('image/') || file.type.startsWith('video/');
       });
       const file = images[0];
       this.props.uploadFile(file);
@@ -22,47 +38,61 @@ class UploadBox extends React.Component {
   render() {
     return (
       <div className="upload container">
-        <h2>Voeg een foto of video van jouw snipper toe</h2>
-        <form>
-          <div className="form-group">
-            <input
-              type="file"
-              id="creationUpload"
-              name="creationUpload"
-              onChange={e => {
-                this.props.uploadFile(e.target.files[0]);
-              }}
-            />
-            <label htmlFor="creationUpload">+</label>
-          </div>
-          {this.props.creation.photoURL &&
-            <img src={this.props.creation.photoURL} alt="upload" />}
-          <div className="form-group">
-            <label htmlFor="creators">Vul jullie naam in: </label>
-            <br />
-            <input
-              className="form-field__input"
-              type="text"
-              name="creators"
-              id="creators"
-              onChange={this.props.addCreatorsToCreation}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="creation-description">
-              Wil je iets over je snipper schrijven?{" "}
-            </label>
-            <br />
-            <textarea
-              className="form-field__input"
-              name="creation-description"
-              onChange={this.props.addDescriptionToCreation}
-              id="creation-description"
-              cols="30"
-              rows="10"
-            />
-          </div>
-        </form>
+        {this.props.creation.photoURL
+          ? <img src={this.props.creation.photoURL} alt="upload" />
+          : <div className="form-group uploadbox" id="creationUploadBox">
+              <input
+                type="file"
+                id="creationUpload"
+                name="creationUpload"
+                onChange={e => {
+                  this.props.uploadFile(e.target.files[0]);
+                }}
+              />
+              {this.props.creation.error
+                ? <label className="upload-error" htmlFor="creationUpload">
+                    +
+                  </label>
+                : <label htmlFor="creationUpload">+</label>}
+              <span>
+                Sleep hier je gemaakte snipper of klik op de bovenstaande knop
+              </span>
+            </div>}
+        <div className="form-group">
+          <label htmlFor="creators">Vul jullie naam in: </label>
+          <br />
+          <input
+            style={{ padding: '1em' }}
+            className="form-field__input"
+            type="text"
+            name="creators"
+            id="creators"
+            onChange={this.props.addCreatorsToCreation}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="creation-description">
+            Wil je iets over je snipper schrijven?{' '}
+          </label>
+          <br />
+          <textarea
+            name="creation-description"
+            className="form-field__input"
+            onChange={this.props.addDescriptionToCreation}
+            id="creation-description"
+            cols="30"
+            rows="10"
+          />
+        </div>
+        {this.props.creation.photoURL &&
+          !this.props.creation.isSubmitted &&
+          <Button
+            onClick={_ => {
+              this.props.sendCreation();
+            }}
+          >
+            Verzend
+          </Button>}
       </div>
     );
   }

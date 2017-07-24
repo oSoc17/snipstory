@@ -24,16 +24,7 @@ class Room extends React.Component {
           image={StapLogo}
         />
         <div className="container">
-          <UploadBox />
-          {creation.photoURL &&
-            !creation.isSubmitted &&
-            <Button
-              onClick={_ => {
-                sendCreation();
-              }}
-            >
-              Verzend
-            </Button>}
+          <UploadBox sendCreation={sendCreation} />
           {creation.isSubmitted &&
             <Button to={'/snipper/' + creation.id}>
               Ga naar jou snipper!

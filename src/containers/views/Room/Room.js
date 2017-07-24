@@ -11,6 +11,7 @@ import {
   sendCreation,
   changeUsernameCurrentUser
 } from '../../../redux/actions';
+import { parse } from 'query-string';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
@@ -28,6 +29,8 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
+import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -35,11 +38,15 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    this.props.joinRoom();
-    this.props.fetchRoomData();
+    const { joinRoom, fetchRoomData, location: { search } } = this.props;
+    joinRoom();
+    fetchRoomData();
+    const queryString = parse(search);
+    this.setState({ storyId: queryString.storyId });
   }
 
   render() {
+    const { storyId } = this.state;
     const { room, user, isFetchingData, suggestions, changeUsernameCurrentUser } = this.props;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
@@ -196,6 +203,11 @@ class Room extends React.Component {
           </div>
           <AppSuggestions {...suggestions} />
           <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <FloatingNext
+            to={`/knutseltips?storyId=${storyId}`}
+            nextStep="Knutsel"
+          />
+          <FloatingSteps activeStep={1} />
         </div>
         <Footer />
       </div>

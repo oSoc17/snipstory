@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.floating-next {
+  &__inner {
+    @include button-reset();
+    font-family: $brand-font-stack;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 4rem;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+}

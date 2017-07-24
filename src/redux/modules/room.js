@@ -7,6 +7,7 @@ const initialState = {
   error: '',
   modules: null,
   tags: null,
+  users: [],
   isLoading: false,
   isValidCode: false,
   isFetchingData: true,
@@ -74,6 +75,14 @@ export const reducer = (state = initialState, action) => {
         error: action.error
       });
     case actionTypes.joinRoomRejected:
+      return Object.assign({}, state, {
+        error: action.error
+      });
+    case actionTypes.changeUsernameCurrentUserFulfilled:
+      return Object.assign({}, state, {
+        users: action.newUsersArr
+      });
+    case actionTypes.updateUsersRejected:
       return Object.assign({}, state, {
         error: action.error
       });

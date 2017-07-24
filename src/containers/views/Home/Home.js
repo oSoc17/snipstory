@@ -29,7 +29,7 @@ class Home extends React.Component {
         <header className="header-container">
           <img src={logo} alt="logo" className="logo" />
           <h1 className="header-title">
-            <span className="blue">Knutsel met de geschiedenis</span>
+            <span className="blue">Knutsel met geschiedenis</span>
           </h1>
         </header>
 

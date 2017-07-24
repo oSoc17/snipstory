@@ -1,6 +1,7 @@
 import React from 'react';
 import Navlink from './Navlink';
 import Button from '../button/Button';
+import Navlogo from '../../containers/views/Home/assets/menu-logo.png';
 import './Navlink.css';
 
 const Navbar = () => {
@@ -20,6 +21,14 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
+          <li>
+            <Navlink to="/">
+              <img src={Navlogo} alt="nav logo" width="80px" />
+            </Navlink>
+          </li>
+          <li className="nav-item">
+            <Navlink to="/snippers">Snippers bekijken</Navlink>
+          </li>
           <li className="nav-item active">
             <Navlink to="/knutseltips">Knutseltips</Navlink>
           </li>
@@ -27,9 +36,6 @@ const Navbar = () => {
             <Button to="/story/select" size="small">
               Start je verhaal hier
             </Button>
-          </li>
-          <li className="nav-item">
-            <Navlink to="/snippers">Snippers bekijken</Navlink>
           </li>
         </ul>
       </div>

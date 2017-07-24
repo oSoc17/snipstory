@@ -90,7 +90,7 @@ class StorySelect extends React.Component {
                   </div>
                 </div>
               )}
-            <FloatingSteps activeStep={0} />
+            <FloatingSteps clickable={false} activeStep={0} />
           </div>
           {error &&
             <div className="error">

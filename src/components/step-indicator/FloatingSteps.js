@@ -1,6 +1,7 @@
 import React from 'react';
 import './FloatingSteps.css';
 import { User, Search, Edit2, Share2, Check } from 'react-feather';
+import { history } from '../../redux/store';
 
 const steps = [
   { title: 'Kies', icon: User },
@@ -9,11 +10,14 @@ const steps = [
   { title: 'Deel', icon: Share2 }
 ];
 
-const FloatingSteps = ({ activeStep }) => {
+const FloatingSteps = ({ clickable = true, activeStep, storyId = 1 }) => {
   return (
     <div className="floating-steps row">
       {steps.map((step, i) => {
         const classes = [];
+        if (clickable && (i !== activeStep) & (i !== 1)) {
+          classes.push('clickable');
+        }
         if (i === activeStep) {
           classes.push('floating-step--selected');
         } else if (i < activeStep) {
@@ -23,6 +27,21 @@ const FloatingSteps = ({ activeStep }) => {
           <div
             className={`col-sm-3 floating-step ${classes.join(' ')}`}
             key={step.title}
+            onClick={_ => {
+              if (clickable && i !== activeStep && i !== 1) {
+                switch (i) {
+                  case 0:
+                    history.push(`/story/select?storyId=${storyId}`);
+                    break;
+                  case 2:
+                    history.push(`/knutseltips?storyId=${storyId}`);
+                    break;
+                  default:
+                    history.push(`/story/share?storyId=${storyId}`);
+                    break;
+                }
+              }
+            }}
           >
             <div className="floating-step__icon">
               <step.icon />

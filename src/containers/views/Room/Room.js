@@ -12,7 +12,6 @@ import {
   changeUsernameCurrentUser,
   showToast
 } from '../../../redux/actions';
-import { parse } from 'query-string';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
@@ -39,11 +38,9 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    const { joinRoom, fetchRoomData, location: { search } } = this.props;
+    const { joinRoom, fetchRoomData } = this.props;
     joinRoom();
     fetchRoomData();
-    const queryString = parse(search);
-    this.setState({ storyId: queryString.storyId });
   }
 
   render() {
@@ -55,7 +52,6 @@ class Room extends React.Component {
       changeUsernameCurrentUser,
       showToast
     } = this.props;
-    const { storyId } = this.state;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -293,7 +289,7 @@ class Room extends React.Component {
           <AppSuggestions {...suggestions} />
           <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
           <FloatingNext
-            to={`/knutseltips?storyId=${storyId}`}
+            to={`/knutseltips?storyId=${room.storyId}`}
             nextStep="Knutsel"
           />
           <FloatingSteps activeStep={1} />

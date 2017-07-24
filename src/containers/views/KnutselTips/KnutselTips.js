@@ -18,10 +18,11 @@ class KnutselTips extends React.Component {
   };
 
   componentWillMount() {
-    const { fetchKnutselTips, location: { search } } = this.props;
-    fetchKnutselTips();
+    const { knutseltips, fetchKnutselTips, location: { search } } = this.props;
+    if (!knutseltips.tips) {
+      fetchKnutselTips();
+    }
     const queryParams = parse(search);
-    console.log(queryParams);
     this.setState({ storyId: queryParams.storyId });
   }
 
@@ -42,7 +43,7 @@ class KnutselTips extends React.Component {
         {knutseltips.isFetching
           ? <Spinner page size="large" />
           : <div>
-              <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>
+              {!storyId && <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>}
               <div
                 className="knutseltips row"
                 style={{ justifyContent: 'center' }}

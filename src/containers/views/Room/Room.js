@@ -12,26 +12,26 @@ import {
   changeUsernameCurrentUser,
   showToast
 } from "../../../redux/actions";
-import { parse } from 'query-string';
-import Spinner from '../../../components/spinner/Spinner';
-import ImageModule from '../../../components/modules/ImageModule';
-import ImageQuizModule from '../../../components/modules/ImageQuizModule';
-import MapModule from '../../../components/modules/MapModule';
-import QuizModule from '../../../components/modules/QuizModule';
-import SearchExerciseModule from '../../../components/modules/SearchExerciseModule';
-import TextblockModule from '../../../components/modules/TextblockModule';
-import VideoModule from '../../../components/modules/VideoModule';
-import YoutubeModule from '../../../components/modules/YoutubeModule';
-import FunFactModule from '../../../components/modules/FunFactModule';
-import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
-import Button from '../../../components/button/Button';
-import StapLogo from './assets/stap02.svg';
-import Navbar from '../../../components/nav/Navbar';
-import Footer from '../../../components/footer/Footer';
+import { parse } from "query-string";
+import Spinner from "../../../components/spinner/Spinner";
+import ImageModule from "../../../components/modules/ImageModule";
+import ImageQuizModule from "../../../components/modules/ImageQuizModule";
+import MapModule from "../../../components/modules/MapModule";
+import QuizModule from "../../../components/modules/QuizModule";
+import SearchExerciseModule from "../../../components/modules/SearchExerciseModule";
+import TextblockModule from "../../../components/modules/TextblockModule";
+import VideoModule from "../../../components/modules/VideoModule";
+import YoutubeModule from "../../../components/modules/YoutubeModule";
+import FunFactModule from "../../../components/modules/FunFactModule";
+import AppSuggestions from "../../../components/appsuggestions/AppSuggestions";
+import Button from "../../../components/button/Button";
+import StapLogo from "./assets/stap02.svg";
+import Navbar from "../../../components/nav/Navbar";
+import Footer from "../../../components/footer/Footer";
 
-import StepIndicator from '../../../components/step-indicator/StepIndicator';
-import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
-import FloatingNext from '../../../components/step-indicator/FloatingNext';
+import StepIndicator from "../../../components/step-indicator/StepIndicator";
+import FloatingSteps from "../../../components/step-indicator/FloatingSteps";
+import FloatingNext from "../../../components/step-indicator/FloatingNext";
 
 class Room extends React.Component {
   handleChange(module) {
@@ -101,8 +101,10 @@ class Room extends React.Component {
                 this.inviteInput = inviteInput;
               }}
               onClick={e => e.target.select()}
+              className="form-field__input"
             />
             <Button
+              inverted
               onClick={_ => {
                 this.inviteInput.select();
                 document.execCommand("copy");
@@ -185,14 +187,14 @@ class Room extends React.Component {
                     );
                   case "quiz":
                     return (
-                        <QuizModule
-                          index={i}
-                          key={i}
-                          module={module}
-                          users={room.users}
-                          user={user}
-                          handleChange={this.handleChange.bind(this)}
-                        />
+                      <QuizModule
+                        index={i}
+                        key={i}
+                        module={module}
+                        users={room.users}
+                        user={user}
+                        handleChange={this.handleChange.bind(this)}
+                      />
                     );
                   case "searchex":
                     return (
@@ -250,16 +252,24 @@ class Room extends React.Component {
               })}
           </div>
           {/*<div className="card monument" style={{width: '25em', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>*/}
-            {/*{room.monument.googleMapsEmbed}*/}
-            {/*<div className="card-block">*/}
-              {/*<img className="img-fluid img-thumbnail" src={room.monument.image} alt={room.monument.name} />*/}
-              {/*<h4 className="card-title">{room.monument.name}</h4>*/}
-              {/*<div className="card-text">*/}
-                {/*{monument.text}*/}
-              {/*</div>*/}
-            {/*</div>*/}
+          {/*{room.monument.googleMapsEmbed}*/}
+          {/*<div className="card-block">*/}
+          {/*<img className="img-fluid img-thumbnail" src={room.monument.image} alt={room.monument.name} />*/}
+          {/*<h4 className="card-title">{room.monument.name}</h4>*/}
+          {/*<div className="card-text">*/}
+          {/*{monument.text}*/}
           {/*</div>*/}
-          <div className="card monument" style={{width: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          {/*</div>*/}
+          {/*</div>*/}
+          <div
+            className="card monument"
+            style={{
+              width: "600px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
             <iframe
               className="card-img-top"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d464080.155903431!2d3.7196314851131245!3d50.837424137856935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dcd13a8343e7cb%3A0x165e0d20e0d33dbd!2sBerks+Cemetery+Extension!5e0!3m2!1sen!2sbe!4v1500664894963"
@@ -271,7 +281,11 @@ class Room extends React.Component {
               allowFullScreen
             />
             <div className="card-block">
-              <img className="img-fluid img-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Berks_Cemetery_Extension-5156.JPG" alt="Berks Cemetery Extension" />
+              <img
+                className="img-fluid img-thumbnail"
+                src="https://upload.wikimedia.org/wikipedia/commons/8/89/Berks_Cemetery_Extension-5156.JPG"
+                alt="Berks Cemetery Extension"
+              />
               <h4 className="card-title">Berks Cemetery Extension</h4>
               <div className="card-text">
                 Dit is het kerkhof waar Thomas Reddy ligt. ...
@@ -279,7 +293,7 @@ class Room extends React.Component {
             </div>
           </div>
           <AppSuggestions {...suggestions} />
-          <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <Button to={"/knutseltips"}>Knutsel iets bij dit verhaal</Button>
           <FloatingNext
             to={`/knutseltips?storyId=${storyId}`}
             nextStep="Knutsel"

@@ -22,7 +22,6 @@ import TextblockModule from '../../../components/modules/TextblockModule';
 import VideoModule from '../../../components/modules/VideoModule';
 import YoutubeModule from '../../../components/modules/YoutubeModule';
 import FunFactModule from '../../../components/modules/FunFactModule';
-import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
 import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
@@ -48,7 +47,6 @@ class Room extends React.Component {
       room,
       user,
       isFetchingData,
-      suggestions,
       changeUsernameCurrentUser,
       showToast
     } = this.props;
@@ -138,7 +136,12 @@ class Room extends React.Component {
                 'years'
               )}
             </div>
-            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
+            <label htmlFor="personName">Wie ben jij?</label>
+            <input
+              type="text"
+              name="personName"
+              onChange={changeUsernameCurrentUser}
+            />
             <input
               type="text"
               name="personName"
@@ -183,14 +186,14 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                        <QuizModule
-                          index={i}
-                          key={i}
-                          module={module}
-                          users={room.users}
-                          user={user}
-                          handleChange={this.handleChange.bind(this)}
-                        />
+                      <QuizModule
+                        index={i}
+                        key={i}
+                        module={module}
+                        users={room.users}
+                        user={user}
+                        handleChange={this.handleChange.bind(this)}
+                      />
                     );
                   case 'searchex':
                     return (

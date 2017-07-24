@@ -1,5 +1,7 @@
-import React from "react";
-import Button from "../button/Button";
+import React from 'react';
+import { Check } from 'react-feather';
+import Button from '../button/Button';
+import './QuizModule.css';
 
 const selectAnswer = (module, index, handleChange) => {
   handleChange(
@@ -10,71 +12,65 @@ const selectAnswer = (module, index, handleChange) => {
 };
 
 const QuizModule = ({ module, handleChange, users }) => {
+  const isCorrectAnswerChosen = module.correction === module.answer;
+  const isWrongAnswerChosen =
+    module.answer && module.correction === module.answer;
   return (
-    <article className="container module">
+    <article className="container module module--quiz">
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
       <p>
         {module.text}
       </p>
 
       <div className="question">
-        {module.correction === module.answer
-          ? <div>
-              {module.correctMessage}
+        {isCorrectAnswerChosen && <div className="question__right">Juist!</div>}
+        {isWrongAnswerChosen &&
+          <div className="question__wrong">Oeps! Probeer het nog eens.</div>}
+        {isCorrectAnswerChosen
+          ? <div className="question__body">
+              <div className="question__correct">
+                {module.correctMessage}
+              </div>
             </div>
-          : <div className="question-text">
-              <span className="questionmark">?</span>
-              <span>
+          : <div className="question__body row">
+              <div className="question__mark col-md-2">?</div>
+              <div className="question__text col-md-10">
                 {module.question}
-              </span>
+              </div>
             </div>}
-        <div>
-          {users[module.clickedBy]}
-        </div>
-
-        <div>{users[module.clickedBy]}</div>
-
-        <div className="buttons">
-          {module.options.map((option, i) => {
-            if (
-              module.answer === module.correction &&
-              module.correction === i &&
-              module.answer === i
-            ) {
+        {module.clickedBy !== '' &&
+          isCorrectAnswerChosen &&
+          <div className="question__answer--correct">
+            <div className="question__answer--correct__inner" />
+            <div className="question__answered-by">
+              <div className="question__answered-by__icon">
+                <Check size={16} />
+              </div>
+              <div className="question__answered-by__text">
+                Opgelost door {users[module.clickedBy]}
+              </div>
+            </div>
+          </div>}
+        {!isCorrectAnswerChosen &&
+          <div className="question__answers">
+            {module.options.map((option, i) => {
+              const isWrongAnswerSelected = module.answer === i;
               return (
                 <Button
+                  size="small"
+                  style={{ borderRadius: '1rem' }}
                   inverted
-                  key={i}
-                  onClick={_ => selectAnswer(module, i, handleChange)}
-                  style={{ backgroundColor: "green" }}
-                >
-                  {option}
-                </Button>
-              );
-            } else if (module.correction !== i && module.answer === i) {
-              return (
-                <Button
-                  inverted
-                  key={i}
-                  onClick={_ => selectAnswer(module, i, handleChange)}
-                  style={{ backgroundColor: "red" }}
-                >
-                  {option}
-                </Button>
-              );
-            } else {
-              return (
-                <Button
-                  inverted
+                  className={`question__answer${isWrongAnswerSelected
+                    ? ' question__answer--wrong'
+                    : ''}`}
                   key={i}
                   onClick={_ => selectAnswer(module, i, handleChange)}
                 >
                   {option}
                 </Button>
               );
-            }
-          })}
-        </div>
+            })}
+          </div>}
       </div>
     </article>
   );

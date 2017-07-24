@@ -17,6 +17,11 @@ iframe {
 a {
   text-decoration: none;
   color: $primary-color;
+  &:hover,
+  &:focus {
+    color: initial;
+    text-decoration: none;
+  }
 }
 
 h1,
@@ -27,6 +32,10 @@ h5,
 h6 {
   font-family: $brand-font-stack;
   font-weight: 600;
+}
+
+button {
+  cursor: pointer;
 }
 
 .primary {

@@ -1,0 +1,41 @@
+@import '../../variables.scss';
+
+.question {
+  font-family: $brand-font-stack;
+  font-weight: 600;
+  background-color: $brand-red--lighter;
+  border-radius: 2rem;
+  color: white;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  &__body {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  &__text {
+    font-size: 24px;
+  }
+  &__mark {
+    font-size: 10rem;
+    line-height: 12rem;
+  }
+
+  &__answer {
+    &--wrong {
+      background-color: $brand-red;
+      color: #fff;
+    }
+  }
+
+  &__answers {
+    margin-bottom: -2.4rem;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -138,7 +138,7 @@ class Room extends React.Component {
                 'years'
               )}
             </div>
-            <label htmlFor="personName">Wie ben jij?</label>
+            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
             <input
               type="text"
               name="personName"
@@ -183,14 +183,14 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                      <QuizModule
-                        index={i}
-                        key={i}
-                        module={module}
-                        users={room.users}
-                        user={user}
-                        handleChange={this.handleChange.bind(this)}
-                      />
+                        <QuizModule
+                          index={i}
+                          key={i}
+                          module={module}
+                          users={room.users}
+                          user={user}
+                          handleChange={this.handleChange.bind(this)}
+                        />
                     );
                   case 'searchex':
                     return (

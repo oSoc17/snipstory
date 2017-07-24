@@ -1,5 +1,5 @@
-import React from 'react';
-import ImageThumbnail from '../../components/imagethumbnail/ImageThumbnail';
+import React from "react";
+import ImageThumbnail from "../../components/imagethumbnail/ImageThumbnail";
 
 const selectAnswer = (event, module, handleChange) => {
   handleChange(
@@ -18,7 +18,19 @@ const ImageQuizModule = ({ module, handleChange }) => {
 
       <div>
         <span>Welke foto past het best bij het verhaal volgens jullie?</span>
-        <img src="" alt="Placeholder or selected" />
+        {module.answer === module.correction
+          ? <img
+              style={{ border: "3px green solid" }}
+              className="img-fluid"
+              src={module.resources[module.answer]}
+              alt="selected"
+            />
+          : <img
+              style={{ border: "3px red solid" }}
+              className="img-fluid"
+              src={module.resources[module.answer]}
+              alt="selected"
+            />}
       </div>
 
       <div className="images">

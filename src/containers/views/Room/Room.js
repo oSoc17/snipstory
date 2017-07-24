@@ -12,23 +12,26 @@ import {
   changeUsernameCurrentUser,
   showToast
 } from "../../../redux/actions";
-import Spinner from "../../../components/spinner/Spinner";
-import ImageModule from "../../../components/modules/ImageModule";
-import ImageQuizModule from "../../../components/modules/ImageQuizModule";
-import MapModule from "../../../components/modules/MapModule";
-import QuizModule from "../../../components/modules/QuizModule";
-import SearchExerciseModule from "../../../components/modules/SearchExerciseModule";
-import TextblockModule from "../../../components/modules/TextblockModule";
-import VideoModule from "../../../components/modules/VideoModule";
-import YoutubeModule from "../../../components/modules/YoutubeModule";
-import FunFactModule from "../../../components/modules/FunFactModule";
-import AppSuggestions from "../../../components/appsuggestions/AppSuggestions";
-import Button from "../../../components/button/Button";
-import StapLogo from "./assets/stap02.svg";
-import Navbar from "../../../components/nav/Navbar";
-import Footer from "../../../components/footer/Footer";
+import { parse } from 'query-string';
+import Spinner from '../../../components/spinner/Spinner';
+import ImageModule from '../../../components/modules/ImageModule';
+import ImageQuizModule from '../../../components/modules/ImageQuizModule';
+import MapModule from '../../../components/modules/MapModule';
+import QuizModule from '../../../components/modules/QuizModule';
+import SearchExerciseModule from '../../../components/modules/SearchExerciseModule';
+import TextblockModule from '../../../components/modules/TextblockModule';
+import VideoModule from '../../../components/modules/VideoModule';
+import YoutubeModule from '../../../components/modules/YoutubeModule';
+import FunFactModule from '../../../components/modules/FunFactModule';
+import AppSuggestions from '../../../components/appsuggestions/AppSuggestions';
+import Button from '../../../components/button/Button';
+import StapLogo from './assets/stap02.svg';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
 
-import StepIndicator from "../../../components/step-indicator/StepIndicator";
+import StepIndicator from '../../../components/step-indicator/StepIndicator';
+import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
+import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
 class Room extends React.Component {
   handleChange(module) {
@@ -36,8 +39,11 @@ class Room extends React.Component {
   }
 
   componentWillMount() {
-    this.props.joinRoom();
-    this.props.fetchRoomData();
+    const { joinRoom, fetchRoomData, location: { search } } = this.props;
+    joinRoom();
+    fetchRoomData();
+    const queryString = parse(search);
+    this.setState({ storyId: queryString.storyId });
   }
 
   render() {
@@ -49,6 +55,7 @@ class Room extends React.Component {
       changeUsernameCurrentUser,
       showToast
     } = this.props;
+    const { storyId } = this.state;
 
     if (isFetchingData || !room.modules) return <Spinner page size="large" />;
 
@@ -178,14 +185,14 @@ class Room extends React.Component {
                     );
                   case "quiz":
                     return (
-                      <QuizModule
-                        index={i}
-                        key={i}
-                        module={module}
-                        users={room.users}
-                        user={user}
-                        handleChange={this.handleChange.bind(this)}
-                      />
+                        <QuizModule
+                          index={i}
+                          key={i}
+                          module={module}
+                          users={room.users}
+                          user={user}
+                          handleChange={this.handleChange.bind(this)}
+                        />
                     );
                   case "searchex":
                     return (
@@ -243,7 +250,12 @@ class Room extends React.Component {
               })}
           </div>
           <AppSuggestions {...suggestions} />
-          <Button to={"/knutseltips"}>Knutsel iets bij dit verhaal</Button>
+          <Button to={'/knutseltips'}>Knutsel iets bij dit verhaal</Button>
+          <FloatingNext
+            to={`/knutseltips?storyId=${storyId}`}
+            nextStep="Knutsel"
+          />
+          <FloatingSteps activeStep={1} />
         </div>
         <Footer />
       </div>

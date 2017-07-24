@@ -32,11 +32,12 @@ class KnutselTips extends React.Component {
           <div className="knutseltips row" style={{ justifyContent: 'center' }}>
             {knutseltips.tips.map((tip, i) =>
               <div
+                key={i}
                 className="card knutseltip"
                 style={{ width: '25em', margin: '2em' }}
               >
                 <img
-                  class="card-img-top image-fluid"
+                  className="card-img-top image-fluid"
                   style={{ maxWidth: '100%' }}
                   src={tip.image}
                   alt={tip.name}

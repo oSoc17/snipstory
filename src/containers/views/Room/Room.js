@@ -32,6 +32,8 @@ import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
+import './Room.css';
+
 class Room extends React.Component {
   handleChange(module) {
     this.props.updateModule(module);
@@ -70,7 +72,7 @@ class Room extends React.Component {
             style={{
               position: 'absolute',
               right: '0',
-              top: '2em',
+              top: '0',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center'
@@ -78,7 +80,7 @@ class Room extends React.Component {
           >
             {Object.keys(room.users).length > 1 &&
               <div>
-                <h2>Mensen in dit verhaal</h2>
+                <h4>Mensen in dit verhaal</h4>
                 {Object.keys(room.users).map(key => {
                   return (
                     <div key={key} style={{ verticalAlign: 'center' }}>
@@ -88,7 +90,7 @@ class Room extends React.Component {
                   );
                 })}
               </div>}
-            <h3>Nodig iemand uit om mee te werken:</h3>
+            <h4>Nodig iemand uit om mee te werken:</h4>
             <input
               type="text"
               value={window.location.href}
@@ -122,7 +124,7 @@ class Room extends React.Component {
               <h1 className="card-title">
                 {room.name}
               </h1>
-              <p>
+              <p className="lead">
                 {moment(room.birthdate, 'DD-MM-YYYY').format('DD/MM/YYYY') +
                   ' - ' +
                   moment(room.died, 'DD-MM-YYYY').format('DD/MM/YYYY')}
@@ -130,20 +132,27 @@ class Room extends React.Component {
               <p>
                 {room.nationality}
               </p>
+              <p>
+                Leeftijd{': '}
+                {moment(room.died, 'DD-MM-YYYY').diff(
+                  moment(room.birthdate, 'DD-MM-YYYY').format(''),
+                  'years'
+                )}
+              </p>
             </div>
             <div className="card-block">
-              Leeftijd{' '}
-              {moment(room.died, 'DD-MM-YYYY').diff(
-                moment(room.birthdate, 'DD-MM-YYYY').format(''),
-                'years'
-              )}
+              <label className="personName-label" htmlFor="personName">
+                Wie ben jij?
+              </label>
+              <input
+                className="form-field__input"
+                style={{ padding: '1em' }}
+                type="text"
+                name="personName"
+                id="personName"
+                onChange={changeUsernameCurrentUser}
+              />
             </div>
-            <label htmlFor="personName">Wie ben jij?</label><input type="text" name="personName" onChange={changeUsernameCurrentUser}/>
-            <input
-              type="text"
-              name="personName"
-              onChange={changeUsernameCurrentUser}
-            />
           </div>
           <div className="modules">
             {room.modules &&
@@ -183,14 +192,14 @@ class Room extends React.Component {
                     );
                   case 'quiz':
                     return (
-                        <QuizModule
-                          index={i}
-                          key={i}
-                          module={module}
-                          users={room.users}
-                          user={user}
-                          handleChange={this.handleChange.bind(this)}
-                        />
+                      <QuizModule
+                        index={i}
+                        key={i}
+                        module={module}
+                        users={room.users}
+                        user={user}
+                        handleChange={this.handleChange.bind(this)}
+                      />
                     );
                   case 'searchex':
                     return (

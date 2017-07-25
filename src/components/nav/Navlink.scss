@@ -5,9 +5,16 @@
   font-family: $brand-font-stack;
   font-weight: 600;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    color: $brand-blue;
     border-bottom: 0.1em solid $brand-blue;
   }
+}
+
+.nav-logo .navlink:hover,
+.nav-logo .navlink:focus {
+  border-bottom: none;
 }
 
 .navbar-nav {
@@ -27,6 +34,10 @@
 }
 
 .nav-item {
+  .button:hover,
+  .button:focus {
+    color: #fff;
+  }
   &:hover {
     border: none;
   }

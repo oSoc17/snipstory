@@ -21,7 +21,7 @@ const Navbar = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li>
+          <li className="nav-item nav-logo">
             <Navlink to="/">
               <img src={Navlogo} alt="nav logo" width="80px" />
             </Navlink>
@@ -40,8 +40,9 @@ const Navbar = () => {
         </ul>
       </div>
     </nav>
+  );
 
-    /*
+  /*
     <nav className="nav-container">
       <Navlink to="/#inspo">Inspiratie</Navlink>
       <Navlink to="/#howTo">Hoe werkt Snipstory?</Navlink>
@@ -51,7 +52,6 @@ const Navbar = () => {
       <Navlink to="/#inspo">Snippers bekijken</Navlink>
       <Navlink to="/teacher">Leerkracht</Navlink>
     </nav> */
-  );
 };
 
 export default Navbar;

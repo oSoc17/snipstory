@@ -25,26 +25,23 @@
   margin-top: 3em;
 }
 
-.room .question {
-  background-color: #ffa49f;
-  border-radius: 25px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+#creationUpload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
-.room .question .questionmark {
-  font-size: 5em;
+#creationUpload + label {
+  font-size: 3em;
+  cursor: pointer;
+  transition: 0.4s ease;
 }
 
-.room .question button {
-  margin-bottom: -3em;
-}
-
-.question-text {
-  display: flex;
+#creationUpload + label:hover {
+  font-size: 4em;
 }
 
 .snipper {

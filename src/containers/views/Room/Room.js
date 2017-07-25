@@ -64,7 +64,7 @@ class Room extends React.Component {
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}
         />
-        <div className="container room" style={{ position: 'relative' }}>
+        <div className=" room " style={{ position: 'relative' }}>
           <div
             className="users"
             style={{
@@ -158,7 +158,7 @@ class Room extends React.Component {
               onChange={changeUsernameCurrentUser}
             />
           </div>
-          <div className="modules">
+          <div className="modules content-container">
             {room.modules &&
               room.modules.map((module, i) => {
                 switch (module.contentType.toLowerCase()) {

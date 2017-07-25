@@ -15,3 +15,22 @@
     }
   }
 }
+
+.test {
+  border: 1px solid red;
+}
+
+.modules .module:nth-child(2n + 1) {
+  background-color: $brand-blue;
+}
+
+.room {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.module {
+  width: 100%;
+  padding: 5rem 0rem;
+}

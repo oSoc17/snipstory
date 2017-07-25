@@ -14,7 +14,7 @@ const selectAnswer = (module, index, handleChange) => {
 const QuizModule = ({ module, handleChange, users }) => {
   const isCorrectAnswerChosen = module.correction === module.answer;
   const isWrongAnswerChosen =
-    module.answer && module.correction === module.answer;
+    module.answer !== undefined && module.correction !== module.answer;
   return (
     <article className="container module module--quiz">
       {module.resources && <img src={module.resources[0]} alt="QuizImage" />}
@@ -23,11 +23,16 @@ const QuizModule = ({ module, handleChange, users }) => {
       </p>
 
       <div className="question">
-        {isCorrectAnswerChosen && <div className="question__right">Juist!</div>}
+        {isCorrectAnswerChosen &&
+          <div className="question__notification question__notification--right">
+            Juist!
+          </div>}
         {isWrongAnswerChosen &&
-          <div className="question__wrong">Oeps! Probeer het nog eens.</div>}
+          <div className="question__notification question__notification--wrong">
+            Oeps! Probeer het nog eens.
+          </div>}
         {isCorrectAnswerChosen
-          ? <div className="question__body">
+          ? <div className="question__body row">
               <div className="question__correct">
                 {module.correctMessage}
               </div>
@@ -38,7 +43,9 @@ const QuizModule = ({ module, handleChange, users }) => {
                 {module.question}
               </div>
             </div>}
-        {module.clickedBy !== '' &&
+        {module.clickedBy &&
+          users[module.clickedBy] &&
+          users[module.clickedBy].trim().length > 0 &&
           isCorrectAnswerChosen &&
           <div className="question__answer--correct">
             <div className="question__answer--correct__inner" />
@@ -51,26 +58,38 @@ const QuizModule = ({ module, handleChange, users }) => {
               </div>
             </div>
           </div>}
-        {!isCorrectAnswerChosen &&
-          <div className="question__answers">
-            {module.options.map((option, i) => {
-              const isWrongAnswerSelected = module.answer === i;
-              return (
-                <Button
-                  size="small"
-                  style={{ borderRadius: '1rem' }}
-                  inverted
-                  className={`question__answer${isWrongAnswerSelected
-                    ? ' question__answer--wrong'
-                    : ''}`}
-                  key={i}
-                  onClick={_ => selectAnswer(module, i, handleChange)}
-                >
-                  {option}
-                </Button>
-              );
-            })}
-          </div>}
+        {isCorrectAnswerChosen
+          ? <div className="question__answers">
+              <Button
+                size="small"
+                style={{ borderRadius: '1rem' }}
+                inverted
+                className="question__answer question__answer--right"
+                onClick={() => null}
+              >
+                {module.options[module.answer]}
+              </Button>
+            </div>
+          : <div className="question__answers">
+              {module.options.map((option, i) => {
+                const isWrongAnswerSelected =
+                  module.answer === i && isWrongAnswerChosen;
+                return (
+                  <Button
+                    size="small"
+                    style={{ borderRadius: '1rem' }}
+                    inverted
+                    className={`question__answer${isWrongAnswerSelected
+                      ? ' question__answer--wrong'
+                      : ''}`}
+                    key={i}
+                    onClick={_ => selectAnswer(module, i, handleChange)}
+                  >
+                    {option}
+                  </Button>
+                );
+              })}
+            </div>}
       </div>
     </article>
   );

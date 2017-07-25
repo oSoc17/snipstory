@@ -2,8 +2,8 @@ import { actionTypes } from '../actions';
 
 const initialState = {
   error: '',
-  tips: [],
-  isFetching: false
+  tips: null,
+  isFetching: true
 };
 
 export const reducer = (state = initialState, action) => {

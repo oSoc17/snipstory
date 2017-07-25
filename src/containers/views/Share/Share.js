@@ -24,9 +24,18 @@ class Room extends React.Component {
           image={StapLogo}
         />
         <div className="container">
-          <UploadBox sendCreation={sendCreation} />
+          <UploadBox />
+          {this.props.creation.photoURL &&
+            !this.props.creation.isSubmitted &&
+            <Button
+              onClick={_ => {
+                sendCreation();
+              }}
+            >
+              Verzend
+            </Button>}
           {creation.isSubmitted &&
-            <Button to={'/snipper/' + creation.id}>
+            <Button to={'/snippers/' + creation.id}>
               Ga naar jou snipper!
             </Button>}
           <FloatingSteps activeStep={3} />

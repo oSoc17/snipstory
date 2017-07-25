@@ -14,15 +14,21 @@
   transition: all $transition-timing;
   border: none;
   vertical-align: center;
-  &--inverted {
-    color: $primary-color;
-    background-color: #fff;
-  }
 
   &:hover,
   &:focus {
+    color: #fff;
     box-shadow: $box-shadow;
     transform: translateY(-.1rem);
+  }
+
+  &--inverted {
+    color: $primary-color;
+    background-color: #fff;
+    &:hover,
+    &:focus {
+      color: $primary-color;
+    }
   }
 
   &:disabled {

@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { User } from 'react-feather';
 import {
@@ -182,12 +181,6 @@ class Room extends React.Component {
                 onChange={changeUsernameCurrentUser}
               />
             </div>
-            <label htmlFor="personName">Wie ben jij?</label>
-            <input
-              type="text"
-              name="personName"
-              onChange={changeUsernameCurrentUser}
-            />
           </div>
           <div className="modules content-container">
             {room.modules &&
@@ -309,7 +302,14 @@ class Room extends React.Component {
               <h4 className="card-title">
                 {room.monument.name}
               </h4>
+<<<<<<< HEAD
               <div className="card-text monument-text">
+=======
+              <div
+                className="card-text monument-text"
+                style={{ marginBottom: '1em', marginTop: '2em' }}
+              >
+>>>>>>> develop
                 {room.monument.text}
               </div>
               <iframe

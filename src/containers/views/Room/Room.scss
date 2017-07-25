@@ -23,10 +23,13 @@
   }
 }
 
+<<<<<<< HEAD
 .modules {
   width: 100%;
 }
 
+=======
+>>>>>>> develop
 .modules .module:nth-child(2n + 1) {
   background-color: $brand-blue;
   color: white;
@@ -48,10 +51,15 @@
 .quiz-module-text {
   font-size: 1.2rem;
   font-family: $brand-font-stack;
+<<<<<<< HEAD
   padding: 2rem;
   border-radius: 2.5rem;
   font-weight: 600;
   margin-left: 3rem;
+=======
+
+  font-weight: 600;
+>>>>>>> develop
 }
 
 .quiz-module-text:nth-child(2n + 1) {
@@ -60,18 +68,28 @@
   width: 5rem;
 }
 
+<<<<<<< HEAD
 .module--quiz {
   width: 100%;
 }
 
+=======
+>>>>>>> develop
 .question {
   width: 80vw;
   text-align: center;
 }
 
 .img-mask {
+<<<<<<< HEAD
   width: 40rem;
   clip-path: url(#myClip);
+=======
+  clip-path: url(#myClip);
+  border: 1px solid red;
+
+  overflow: hidden;
+>>>>>>> develop
 }
 
 .path-border {
@@ -92,6 +110,7 @@
   fill: white;
   margin-right: 1rem;
 }
+<<<<<<< HEAD
 
 .module-text {
   width: 40rem;
@@ -102,3 +121,5 @@
 .monument-text {
   margin-bottom: 4rem;
 }
+=======
+>>>>>>> develop

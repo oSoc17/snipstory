@@ -5,7 +5,6 @@ import {
   addDescriptionToCreation,
   addCreatorsToCreation
 } from '../../redux/actions';
-import Button from '../button/Button';
 import './UploadBox.css';
 
 class UploadBox extends React.Component {
@@ -27,10 +26,10 @@ class UploadBox extends React.Component {
     document.getElementById('creationUploadBox').addEventListener('drop', e => {
       e.preventDefault();
       e.target.style.borderColor = 'lightgrey';
-      const images = Array.from(e.dataTransfer.files).filter(file => {
+      const files = Array.from(e.dataTransfer.files).filter(file => {
         return file.type.startsWith('image/') || file.type.startsWith('video/');
       });
-      const file = images[0];
+      const file = files[0];
       this.props.uploadFile(file);
     });
   }
@@ -39,13 +38,19 @@ class UploadBox extends React.Component {
     return (
       <div className="upload container">
         {this.props.creation.photoURL
-          ? <img src={this.props.creation.photoURL} alt="upload" />
+          ? <div>
+              {this.props.creation.fileType === 'image' &&
+                <img src={this.props.creation.photoURL} alt="upload" />}
+              {this.props.creation.fileType === 'video' &&
+                <video autoPlay controls src={this.props.creation.photoURL} />}
+            </div>
           : <div className="form-group uploadbox" id="creationUploadBox">
               <input
                 type="file"
                 id="creationUpload"
                 name="creationUpload"
                 onChange={e => {
+                  console.log('Update started...');
                   this.props.uploadFile(e.target.files[0]);
                 }}
               />
@@ -84,15 +89,6 @@ class UploadBox extends React.Component {
             rows="10"
           />
         </div>
-        {this.props.creation.photoURL &&
-          !this.props.creation.isSubmitted &&
-          <Button
-            onClick={_ => {
-              this.props.sendCreation();
-            }}
-          >
-            Verzend
-          </Button>}
       </div>
     );
   }

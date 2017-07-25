@@ -181,12 +181,6 @@ class Room extends React.Component {
                 onChange={changeUsernameCurrentUser}
               />
             </div>
-            <label htmlFor="personName">Wie ben jij?</label>
-            <input
-              type="text"
-              name="personName"
-              onChange={changeUsernameCurrentUser}
-            />
           </div>
           <div className="modules content-container">
             {room.modules &&

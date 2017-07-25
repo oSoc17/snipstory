@@ -2,8 +2,13 @@ import { actionTypes } from '../actions';
 
 const initialState = {
   error: '',
+<<<<<<< HEAD
   tips: null,
   isFetching: true
+=======
+  tips: [],
+  isFetching: false
+>>>>>>> 4779bd47826f1e44538921fb7e1c9af8af75e75f
 };
 
 export const reducer = (state = initialState, action) => {

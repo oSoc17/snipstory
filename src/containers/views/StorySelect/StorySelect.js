@@ -7,7 +7,6 @@ import {
 import Spinner from '../../../components/spinner/Spinner';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';

@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { User } from 'react-feather';
 import {

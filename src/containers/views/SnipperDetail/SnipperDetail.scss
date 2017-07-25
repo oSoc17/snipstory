@@ -1,0 +1,54 @@
+@import "../../../variables.scss";
+
+.snipper-detail-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .creators {
+    width: 100%;
+    background: $brand-blue;
+    color: white;
+    padding: 5rem;
+    text-align: center;
+    word-wrap: normal;
+  }
+  .snipper-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 3rem;
+    color: white;
+    img {
+      max-height: 35em;
+      outline: 10px $brand-blue solid;
+    }
+    .snipper-description {
+      background: $brand-blue;
+      padding: 2em;
+      font-size: 2rem;
+      border-top-right-radius: 2.5rem;
+      border-bottom-right-radius: 2.5rem;
+    }
+  }
+
+  .snipper-share {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .social-share {
+      .SocialMediaShareButton {
+        display: inline-block;
+        margin: 1em;
+      }
+    }
+    input {
+      margin: 1em;
+      padding: 1em;
+    }
+    button {
+      min-width: 250px;
+      margin: 1em;
+    }
+  }
+}

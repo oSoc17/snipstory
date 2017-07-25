@@ -43,7 +43,7 @@ class Snippers extends React.Component {
                   >
                     <div>
                       <h2 className="card-title">
-                        Door {snipper.creators}
+                        Geknutseld door {snipper.creators}
                       </h2>
                       <p
                         className="card-text"

@@ -20,7 +20,7 @@ const Creations1 = ({ snipper }) => {
             {snipper.description}
           </h4>
           <p className="card-text">
-            Door {snipper.creators}
+            Geknutseld door {snipper.creators}
           </p>
         </div>
       </div>

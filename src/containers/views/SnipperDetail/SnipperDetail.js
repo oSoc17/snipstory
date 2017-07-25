@@ -16,14 +16,12 @@ const {
   GooglePlusShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-  // PinterestShareButton,
   RedditShareButton
 } = ShareButtons;
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
-// const PinterestIcon = generateShareIcon('pinterest');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
 const RedditIcon = generateShareIcon('reddit');
@@ -44,7 +42,7 @@ class SnipperDetail extends React.Component {
       return <Redirect to="/" />;
     }
 
-    const title = `Snipper gemaakt door ${snipper.creators}`;
+    const title = `Snipper geknutseld door ${snipper.creators}`;
     const href = window.location.href;
     return (
       <div className="page">
@@ -98,9 +96,6 @@ class SnipperDetail extends React.Component {
               <TwitterShareButton url={href}>
                 <TwitterIcon />
               </TwitterShareButton>
-              {/*<PinterestShareButton url={href}>*/}
-              {/*<PinterestIcon />*/}
-              {/*</PinterestShareButton>*/}
               <WhatsappShareButton url={href}>
                 <WhatsappIcon />
               </WhatsappShareButton>
@@ -122,6 +117,8 @@ class SnipperDetail extends React.Component {
               onClick={e => e.target.select()}
             />
             <Button
+              size="small"
+              inverted
               onClick={_ => {
                 this.linkInput.select();
                 document.execCommand('copy');

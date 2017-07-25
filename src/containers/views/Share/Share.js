@@ -26,7 +26,7 @@ class Room extends React.Component {
         <div className="container">
           <UploadBox sendCreation={sendCreation} />
           {creation.isSubmitted &&
-            <Button to={'/snipper/' + creation.id}>
+            <Button to={'/snippers/' + creation.id}>
               Ga naar jou snipper!
             </Button>}
           <FloatingSteps activeStep={3} />

@@ -9,6 +9,7 @@ const initialState = {
   description: '',
   creators: '',
   storyId: '',
+  fileType: '',
   isSubmitted: false
 };
 
@@ -27,7 +28,8 @@ export const reducer = (state = initialState, action) => {
           photoURL: action.photoURL,
           contentType: action.contentType,
           creators: action.creators,
-          storyId: action.storyId
+          storyId: action.storyId,
+          fileType: action.fileType
         }
       );
     case actionTypes.uploadFileRejected:

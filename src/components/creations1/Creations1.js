@@ -10,13 +10,13 @@ const Creations1 = ({ snipper }) => {
         className="card card-container"
         onClick={e => history.push(`/snippers/${snipper.id}`)}
       >
-        {this.props.creation.fileType === 'video'
-          ? <video autoPlay controls src={this.props.creation.photoURL} />
+        {snipper.fileType === 'video'
+          ? <video autoPlay controls src={snipper.photoURL} />
           : <img
               src={snipper.photoURL}
               alt={`Snipper van ${snipper.creators}`}
               className="img-fluid card-img"
-            />}}
+            />}
         <div className="card-block">
           <h4 className="card-title">
             {snipper.description}

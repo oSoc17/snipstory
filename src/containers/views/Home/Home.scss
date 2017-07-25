@@ -24,10 +24,39 @@
   padding: 4em;
   height: 80vh;
   background-color: $brand-blue;
-  .container,
-  iframe {
+  display: flex;
+  justify-content: center;
+  .container {
+    padding: 0;
+  }
+  iframe,
+  .video-placeholder {
+    display: flex;
     height: 100%;
-    width: 100%;
+    width: calc((80vh - 8em) * (16 / 9));
+  }
+
+  .video-placeholder {
+    top: 0;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
+  .video-play {
+    @include button-reset();
+    cursor: pointer;
+    border-radius: 8rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $brand-blue;
+    color: #fff;
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
@@ -264,4 +293,26 @@ footer {
 .module-text {
   font-family: $brand-font-stack;
   font-size: 1.5rem;
+}
+
+.fade-out {
+  animation: fade-out $transition-timing--long ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

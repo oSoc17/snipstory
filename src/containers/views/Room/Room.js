@@ -114,7 +114,7 @@ class Room extends React.Component {
           </div>
           <div className="story-information card" style={{ width: '550px' }}>
             <img
-              className="card-img-top"
+              className="card-img-top-2"
               src={room.profilePicture}
               alt={room.name}
             />
@@ -309,10 +309,7 @@ class Room extends React.Component {
               <h4 className="card-title">
                 {room.monument.name}
               </h4>
-              <div
-                className="card-text monument-text"
-                style={{ marginBottom: '1em', marginTop: '2em' }}
-              >
+              <div className="card-text monument-text">
                 {room.monument.text}
               </div>
               <iframe

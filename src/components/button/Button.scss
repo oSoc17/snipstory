@@ -10,7 +10,7 @@
   background-color: $primary-color;
   border-radius: 4em;
   color: #fff;
-  box-shadow: 0 0 1rem 0.2rem rgba($brand-blue, .8);
+  box-shadow: $box-shadow;
   transition: all $transition-timing;
   border: none;
   vertical-align: center;
@@ -22,6 +22,7 @@
   &:hover,
   &:focus {
     box-shadow: $box-shadow;
+    transform: translateY(-.1rem);
   }
 
   &:disabled {

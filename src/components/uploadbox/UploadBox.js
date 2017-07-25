@@ -90,15 +90,6 @@ class UploadBox extends React.Component {
             rows="10"
           />
         </div>
-        {this.props.creation.photoURL &&
-          !this.props.creation.isSubmitted &&
-          <Button
-            onClick={_ => {
-              this.props.sendCreation();
-            }}
-          >
-            Verzend
-          </Button>}
       </div>
     );
   }

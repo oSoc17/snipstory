@@ -6,9 +6,9 @@
   background-color: white;
   font-size: 1.5rem;
   border-radius: 4em;
-  box-shadow: 0 0 1rem 0.2rem rgba($primary-color, .8);
+  // box-shadow: 0 0 1rem 0.2rem rgba($primary-color, .8);
   transition: all $transition-timing;
-  border: none;
+  border: 3px $brand-blue solid;
   width: 25rem;
   height: 5rem;
   padding: 2rem;

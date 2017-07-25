@@ -9,7 +9,26 @@
 
 .page {
   background: none !important;
+}
 
+.video-section {
+  padding: 4em;
+  height: 80vh;
+  background-color: $brand-blue;
+  .container {
+    height: 100%;
+  }
+}
+
+.video-section {
+  padding: 4em;
+  height: 80vh;
+  background-color: $brand-blue;
+  .container,
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .header-container {
@@ -26,9 +45,7 @@
 }
 
 .logo {
-
   width: 35vw;
-
 }
 
 .header-title {
@@ -168,7 +185,7 @@
   font-weight: 700;
   text-align: center;
   margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-bottom: -2rem;
 }
 
 .creations-1 {
@@ -197,22 +214,21 @@ footer {
   background-color: $brand-blue;
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
-  padding-bottom: 5rem;
 }
 
 .partner-container {
-  width: 91rem;
+  width: 70vw;
+  margin-top: 1rem;
 }
 
 .partner-mini-container {
-  padding-top: 3rem;
   display: flex;
   justify-content: space-between;
 }
 
 .effect {
   mix-blend-mode: color-burn;
+  transform: scale(0.7);
 }
 
 .logo1 {
@@ -241,4 +257,11 @@ footer {
 
 .logo7 {
   width: 10rem;
+}
+
+/*DIRTY SHIT, NEEDS TO DELETED*/
+
+.module-text {
+  font-family: $brand-font-stack;
+  font-size: 1.5rem;
 }

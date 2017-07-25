@@ -60,6 +60,9 @@ export const actionTypes = {
   sendCreationFulfilled: 'SEND_CREATION_REJECTED',
   sendCreationRejected: 'SEND_CREATION_FULFILLED',
   addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
+  fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
+  fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
+  fetchKnutselTipsRejected: 'FETCH_KNUTSEL_TIPS_REJECTED',
   fetchSnipperStarted: 'FETCH_SNIPPER_STARTED',
   fetchSnipperFulfilled: 'FETCH_SNIPPER_FULFILLED',
   fetchSnipperError: 'FETCH_SNIPPER_ERROR',
@@ -68,7 +71,11 @@ export const actionTypes = {
   fetchRandomSnippersFulfilled: 'FETCH_RANDOM_SNIPPERS_FULFILLED',
   fetchSnippersError: 'FETCH_SNIPPERS_ERROR',
   snipperNotFound: 'SNIPPER_NOT_FOUND',
-  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED'
+  addCreatorsToCreationFulfilled: 'ADD_CREATORS_TO_CREATION_FULFILLED',
+  changeUsernameCurrentUserFulfilled: 'CHANGE_USERNAME_CURRENT_USER_FULFILLED',
+  updateUsersStarted: 'UPDATE_USERS_STARTED',
+  updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
+  updateUsersRejected: 'UPDATE_USERS_REJECTED'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -95,6 +102,7 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
+        console.log(snapshot.val());
         dispatch(fetchRandomStoriesFulfilled(snapshot.val()));
       })
       .catch(err => {
@@ -256,8 +264,7 @@ export const createRoom = userName => {
       .then(() => {
         const roomKey = firebaseDatabase.ref().child('rooms').push().key;
         const data = {
-          ...getState().room,
-          users: [getState().user]
+          ...getState().room
         };
         data.id = roomKey;
         let updates = {};
@@ -362,7 +369,7 @@ export const fetchRoomData = () => {
 
     firebaseDatabase
       .ref()
-      .child('appsuggestions')
+      .child('suggestions')
       .once('value')
       .then(response => {
         dispatch(fetchSuggestionsFulfilled(response.val()));
@@ -424,7 +431,8 @@ export const updateModule = module => {
       .child('modules')
       .child(module.id)
       .set({
-        ...module
+        ...module,
+        clickedBy: getState().user.uid
       })
       .then(snapshot => {
         dispatch(updateModuleFulfilled());
@@ -652,6 +660,21 @@ export const addDescriptionToCreationFulfilled = descriptionData => ({
   description: descriptionData
 });
 
+export const fetchKnutselTips = () => {
+  return dispatch => {
+    dispatch(fetchKnutselTipsStarted());
+    firebaseDatabase
+      .ref('suggestions')
+      .once('value')
+      .then(snapshot => {
+        dispatch(fetchKnutselTipsFulfilled(snapshot.val()));
+      })
+      .catch(err => {
+        dispatch(fetchKnutselTipsRejected(err));
+      });
+  };
+};
+
 export const fetchSnippersStarted = () => ({
   type: actionTypes.fetchSnippersStarted
 });
@@ -709,6 +732,20 @@ export const fetchSnipper = id => {
   };
 };
 
+export const fetchKnutselTipsStarted = () => ({
+  type: actionTypes.fetchKnutselTipsStarted
+});
+
+export const fetchKnutselTipsFulfilled = knutselTips => ({
+  type: actionTypes.fetchKnutselTipsFulfilled,
+  knutselTips: knutselTips
+});
+
+export const fetchKnutselTipsRejected = err => ({
+  type: actionTypes.fetchKnutselTipsRejected,
+  error: err.message
+});
+
 export const fetchSnippers = () => {
   return dispatch => {
     dispatch(fetchSnippersStarted());
@@ -750,4 +787,53 @@ export const addCreatorsToCreation = event => {
 export const addCreatorsToCreationFulfilled = creatorsData => ({
   type: actionTypes.addCreatorsToCreationFulfilled,
   creators: creatorsData
+});
+
+export const changeUsernameCurrentUser = event => {
+  return (dispatch, getState) => {
+    const uid = getState().user.uid;
+    let users = getState().room.users;
+    users[uid] = event.target.value;
+    dispatch(changeUsernameCurrentUserFulfilled(users));
+    dispatch(updateUsers());
+  };
+};
+
+export const changeUsernameCurrentUserFulfilled = users => ({
+  type: actionTypes.changeUsernameCurrentUserFulfilled,
+  newUsersArr: users
+});
+
+export const updateUsers = () => {
+  return (dispatch, getState) => {
+    dispatch(updateUsersStarted());
+    console.log('Room state:', getState().room);
+    firebaseDatabase
+      .ref()
+      .child('rooms/' + getState().room.id)
+      .set({
+        ...getState().room,
+        users: getState().room.users
+      })
+      .then(snapshot => {
+        console.log(snapshot.val());
+        dispatch(updateUsersFulfilled());
+      })
+      .catch(err => {
+        dispatch(updateUsersRejected(err.message));
+      });
+  };
+};
+
+export const updateUsersStarted = () => ({
+  type: actionTypes.updateUsersStarted
+});
+
+export const updateUsersFulfilled = () => ({
+  type: actionTypes.updateUsersFulfilled
+});
+
+export const updateUsersRejected = error => ({
+  type: actionTypes.updateUsersRejected,
+  error: error
 });

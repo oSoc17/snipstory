@@ -7,11 +7,11 @@ const initialState = {
   error: '',
   modules: null,
   tags: null,
+  users: [],
   isLoading: false,
   isValidCode: false,
   isFetchingData: true,
-  isFetchingChanges: false,
-  isSubmitted: false
+  isFetchingChanges: false
 };
 
 export const reducer = (state = initialState, action) => {
@@ -78,9 +78,13 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         error: action.error
       });
-    case actionTypes.sendCreationFulfilled:
+    case actionTypes.changeUsernameCurrentUserFulfilled:
       return Object.assign({}, state, {
-        isSubmitted: true
+        users: action.newUsersArr
+      });
+    case actionTypes.updateUsersRejected:
+      return Object.assign({}, state, {
+        error: action.error
       });
     default:
       return state;

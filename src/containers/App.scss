@@ -1,37 +1,28 @@
+@import '../variables.scss';
+.knutseltips {
+  .card {
+    background-color: $brand-blue;
+    color: white;
+  }
+  .difficulty {
+    .difficulty-counter {
+      border: 3px solid $brand-red--lighter;
+      display: inline-block;
+      margin-left: 1em;
+    }
+    .difficulty-counter.filled {
+      background-color: $brand-red--lighter;
+      border: 3px solid transparent;
+    }
+  }
+}
+
 .module {
   margin: 7em 0;
 }
 
 .room {
   margin-top: 3em;
-}
-
-.room .question {
-  background-color: #ffa49f;
-  border-radius: 25px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.room .question .questionmark {
-  font-size: 5em;
-}
-
-.room .question button {
-  margin-bottom: -3em;
-}
-
-.question-text {
-  display: flex;
-}
-
-.container {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
 }
 
 #creationUpload {
@@ -51,4 +42,81 @@
 
 #creationUpload + label:hover {
   font-size: 4em;
+}
+
+.snipper {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.story {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.card.monument {
+  background: $brand-blue;
+  border-radius: 25px;
+  border: 15px solid $brand-blue;
+}
+
+.users {
+  color: white;
+  border-radius: 25px;
+  background-color: $brand-blue;
+  padding: 2em;
+}
+
+.users > div {
+  margin: 1em;
+}
+
+.users input {
+  width: 100%;
+  margin: 1em;
+  padding: 1em;
+}
+
+.users button {
+  cursor: pointer;
+}
+
+.uploadbox {
+  width: 100%;
+  height: 450px;
+  border: 5px dashed lightgrey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2em 0;
+  #creationUpload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  #creationUpload + label {
+    font-size: 3em;
+    cursor: pointer;
+    transition: 0.4s ease;
+  }
+  #creationUpload + label:hover {
+    transform: scale(2);
+    color: black;
+  }
+  #creationUpload + label:focus {
+    transform: scale(2);
+  }
+
+  input:focus + label {
+    transform: scale(2);
+  }
+
+  input:focus + label.upload-error {
+    transform: scale(2) rotate(45deg);
+    color: red;
+  }
 }

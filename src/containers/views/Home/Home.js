@@ -5,7 +5,7 @@ import Creations1 from '../../../components/creations1/Creations1';
 
 import './Home.css';
 
-import logo from './assets/logo.svg';
+import logo from './assets/logo.png';
 // import ht1 from './assets/ht-1.svg';
 // import ht2 from './assets/ht-2.svg';
 // import ht3 from './assets/ht-3.svg';
@@ -28,9 +28,7 @@ class Home extends React.Component {
         <header className="header-container">
           <img src={logo} alt="logo" className="logo" />
           <h1 className="header-title">
-            <span className="blue">ontdek</span>{' '}
-            <span className="pink">leer</span>{' '}
-            <span className="orange">maak</span>
+            <span className="blue">Knutsel met geschiedenis</span>
           </h1>
         </header>
 
@@ -75,7 +73,18 @@ class Home extends React.Component {
               </div>
             </div>
           </section> */}
-
+          <section className="video-section">
+            <div className="container">
+              <iframe
+                title="Wat is Snipstory?"
+                src="https://player.vimeo.com/video/226714616?color=3778FB&title=0&byline=0&portrait=0"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </div>
+          </section>
           {!randomSnippers || isLoading
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
@@ -86,8 +95,6 @@ class Home extends React.Component {
                     <Creations1 snipper={randomSnippers[0]} />
                   </div>
                   <div className="col-4">
-
-              
                     <Creations1 snipper={randomSnippers[1]} />
                   </div>
                 </div>
@@ -97,7 +104,6 @@ class Home extends React.Component {
                     <Creations1 snipper={randomSnippers[2]} />
                   </div>
                   <div className="col-4 ">
-
                     <Creations1 snipper={randomSnippers[3]} />
                   </div>
                 </div>

@@ -16,14 +16,14 @@ const {
   GooglePlusShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-  PinterestShareButton,
+  // PinterestShareButton,
   RedditShareButton
 } = ShareButtons;
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
-const PinterestIcon = generateShareIcon('pinterest');
+// const PinterestIcon = generateShareIcon('pinterest');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
 const RedditIcon = generateShareIcon('reddit');
@@ -62,14 +62,19 @@ class SnipperDetail extends React.Component {
           <meta name="twitter:card" content="summary_large_image" />
         </Helmet>
         <Navbar />
-        <div className="container snipper-detail-page">
-          <div className="snipper-info">
-            <h1>
-              Snipper gemaakt door {snipper.creators}
+        <div className="snipper-detail-page">
+          <div className="creators">
+            <h1 className="container">
+              Snipper geknutseld door {snipper.creators}
             </h1>
+          </div>
+
+          <div className="snipper-info">
             <img src={snipper.photoURL} className="img-fluid" alt={title} />
             <div className="snipper-description">
-              <h3>Beschrijving</h3>
+              <h3>
+                Deze snipper gaat over {snipper.story.name}
+              </h3>
               <p>
                 {snipper.description}
               </p>
@@ -83,10 +88,6 @@ class SnipperDetail extends React.Component {
             </div>}
           <div className="snipper-share">
             <h2>Deel deze snipper!</h2>
-            <p>
-              Deel je snipper snel met een van de knoppen of door de link te
-              gebruiken
-            </p>
             <div className="social-share">
               <FacebookShareButton url={href}>
                 <FacebookIcon />

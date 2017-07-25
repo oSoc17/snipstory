@@ -12,6 +12,8 @@ import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
 
+import './KnutselTips.css';
+
 class KnutselTips extends React.Component {
   state = {
     storyId: null
@@ -42,20 +44,40 @@ class KnutselTips extends React.Component {
           />}
         {knutseltips.isFetching
           ? <Spinner page size="large" />
-          : <div>
+          : <div className="page">
               {!storyId && <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>}
               <div
-                className="knutseltips row"
-                style={{ justifyContent: 'center' }}
+                className="knutseltips"
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center'
+                }}
               >
                 {knutseltips.tips.map((tip, i) =>
                   <div
                     key={i}
                     className="card knutseltip"
                     style={{ width: '25em', margin: '2em' }}
+                    onClick={e => {
+                      e.preventDefault();
+                      if (e.currentTarget.getElementsByClassName('hidden')[0]) {
+                        let classes = e.currentTarget.getElementsByClassName(
+                          'info'
+                        )[0].classList;
+                        classes.remove('hidden');
+                        e.currentTarget.style.height = 'auto';
+                      } else {
+                        let classes = e.currentTarget.getElementsByClassName(
+                          'info'
+                        )[0].classList;
+                        classes.add('hidden');
+                        e.currentTarget.style.height = '400px';
+                      }
+                    }}
                   >
                     <img
-                      className="card-img-top image-fluid"
+                      className="card-img-top img-fluid"
                       style={{ maxWidth: '100%' }}
                       src={tip.image}
                       alt={tip.name}
@@ -64,15 +86,13 @@ class KnutselTips extends React.Component {
                       <h4 className="card-title">
                         {tip.name}
                       </h4>
+                    </div>
+                    <div className="card-block info hidden">
                       <p className="card-text">
                         {tip.text}
                       </p>
-                    </div>
-                    <div className="card-block">
                       <Difficulty amount={tip.difficulty} />
-                    </div>
-                    <div className="card-block">
-                      <p>Benodigdheden:</p>
+                      <p className="card-text">Benodigdheden:</p>
                       <p className="card-text">
                         {tip.requirements}
                       </p>

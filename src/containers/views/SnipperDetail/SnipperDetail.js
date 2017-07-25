@@ -16,14 +16,12 @@ const {
   GooglePlusShareButton,
   TelegramShareButton,
   WhatsappShareButton,
-  PinterestShareButton,
   RedditShareButton
 } = ShareButtons;
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 const GooglePlusIcon = generateShareIcon('google');
-const PinterestIcon = generateShareIcon('pinterest');
 const TelegramIcon = generateShareIcon('telegram');
 const WhatsappIcon = generateShareIcon('whatsapp');
 const RedditIcon = generateShareIcon('reddit');
@@ -44,7 +42,7 @@ class SnipperDetail extends React.Component {
       return <Redirect to="/" />;
     }
 
-    const title = `Snipper van ${snipper.creators}`;
+    const title = `Snipper geknutseld door ${snipper.creators}`;
     const href = window.location.href;
     return (
       <div className="page">
@@ -62,27 +60,32 @@ class SnipperDetail extends React.Component {
           <meta name="twitter:card" content="summary_large_image" />
         </Helmet>
         <Navbar />
-        <div className="container">
-          <div className="snipper-info">
-            <h1>
-              Snipper van {snipper.creators}
+        <div className="snipper-detail-page">
+          <div className="creators">
+            <h1 className="container">
+              Snipper geknutseld door {snipper.creators}
             </h1>
-            <img className="img-fluid" src={snipper.photoURL} alt={title} />
-            <p>
-              {snipper.description}
-            </p>
+          </div>
+
+          <div className="snipper-info">
+            <img src={snipper.photoURL} className="img-fluid" alt={title} />
+            <div className="snipper-description">
+              <h3>
+                Deze snipper gaat over {snipper.story.name}
+              </h3>
+              <p>
+                {snipper.description}
+              </p>
+            </div>
           </div>
           {snipper.story &&
             <div className="story-info">
-              <p>
-                Gemaakt over het verhaal van {snipper.story.name}
-              </p>
               <Button inverted to={`/story/select?id=${snipper.storyId}`}>
-                Ontdek dit verhaal zelf
+                Ontdek het verhaal van {snipper.story.name} zelf
               </Button>
             </div>}
           <div className="snipper-share">
-            <h2>Deel deze snipper met je vrienden!</h2>
+            <h2>Deel deze snipper!</h2>
             <div className="social-share">
               <FacebookShareButton url={href}>
                 <FacebookIcon />
@@ -93,9 +96,6 @@ class SnipperDetail extends React.Component {
               <TwitterShareButton url={href}>
                 <TwitterIcon />
               </TwitterShareButton>
-              <PinterestShareButton url={href}>
-                <PinterestIcon />
-              </PinterestShareButton>
               <WhatsappShareButton url={href}>
                 <WhatsappIcon />
               </WhatsappShareButton>
@@ -110,9 +110,9 @@ class SnipperDetail extends React.Component {
               ref={linkInput => {
                 this.linkInput = linkInput;
               }}
+              className="form-field__input"
               type="text"
               readOnly
-              className="form-field__input"
               value={window.location.href}
               onClick={e => e.target.select()}
             />
@@ -127,7 +127,7 @@ class SnipperDetail extends React.Component {
                 });
               }}
             >
-              Kopieer link
+              Kopieer
             </Button>
           </div>
         </div>

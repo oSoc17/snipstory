@@ -26,13 +26,6 @@ const Creations1 = ({ snipper }) => {
           </p>
         </div>
       </div>
-      <Button
-        className="button"
-        inverted
-        to={`/story/select?id=${snipper.storyId}`}
-      >
-        Ontdek dit verhaal zelf
-      </Button>
     </div>
   );
 };

@@ -15,3 +15,65 @@
     }
   }
 }
+
+.modules .module:nth-child(2n + 1) {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.room {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.module {
+  width: 100%;
+  padding: 3rem 0rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.quiz-module-text {
+  font-size: 1.2rem;
+  font-family: $brand-font-stack;
+
+  font-weight: 600;
+}
+
+.quiz-module-text:nth-child(2n + 1) {
+  background-color: white;
+  color: $brand-blue;
+  width: 5rem;
+}
+
+.question {
+  width: 80vw;
+  text-align: center;
+}
+
+.img-mask {
+  clip-path: url(#myClip);
+  border: 1px solid red;
+
+  overflow: hidden;
+}
+
+.path-border {
+  border: 1rem solid $brand-blue;
+  width: 40rem;
+  height: 100%;
+}
+
+.monument {
+  margin-bottom: 6rem;
+}
+
+.test {
+  border: 1px solid black;
+}
+
+.story-information svg {
+  fill: white;
+  margin-right: 1rem;
+}

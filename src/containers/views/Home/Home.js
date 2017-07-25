@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
+import Button from '../../../components/button/Button';
 
 import './Home.css';
 
@@ -119,6 +120,11 @@ class Home extends React.Component {
               </div>
             </div>
           </section>
+          <section className="button-section">
+            <Button inverted to="/story/select">
+              Start je verhaal hier
+            </Button>
+          </section>
           {!randomSnippers || isLoading
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
@@ -142,6 +148,11 @@ class Home extends React.Component {
                   </div>
                 </div>
               </section>}
+          <section className="button-section">
+            <Button inverted to="/story/select">
+              Start je verhaal hier
+            </Button>
+          </section>
         </main>
 
         <Footer />

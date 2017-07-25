@@ -5,7 +5,6 @@ import {
   addDescriptionToCreation,
   addCreatorsToCreation
 } from '../../redux/actions';
-import Button from '../button/Button';
 import './UploadBox.css';
 
 class UploadBox extends React.Component {

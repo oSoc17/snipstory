@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { fetchSnipper } from '../../redux/actions';
-import Spinner from '../../components/spinner/Spinner';
-import Button from '../../components/button/Button';
-import Navbar from '../../components/nav/Navbar';
-import Footer from '../../components/footer/Footer';
+import { fetchSnipper } from '../../../redux/actions';
+import Spinner from '../../../components/spinner/Spinner';
+import Button from '../../../components/button/Button';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
 import { ShareButtons, generateShareIcon } from 'react-share';
 import { Helmet } from 'react-helmet';
+import './SnipperDetail.css';
 
 const {
   FacebookShareButton,
@@ -66,7 +67,7 @@ class SnipperDetail extends React.Component {
             <h1>
               Snipper van {snipper.creators}
             </h1>
-            <img src={snipper.photoURL} alt={title} />
+            <img className="img-fluid" src={snipper.photoURL} alt={title} />
             <p>
               {snipper.description}
             </p>
@@ -81,6 +82,7 @@ class SnipperDetail extends React.Component {
               </Button>
             </div>}
           <div className="snipper-share">
+            <h2>Deel deze snipper met je vrienden!</h2>
             <div className="social-share">
               <FacebookShareButton url={href}>
                 <FacebookIcon />
@@ -110,10 +112,13 @@ class SnipperDetail extends React.Component {
               }}
               type="text"
               readOnly
+              className="form-field__input"
               value={window.location.href}
               onClick={e => e.target.select()}
             />
             <Button
+              size="small"
+              inverted
               onClick={_ => {
                 this.linkInput.select();
                 document.execCommand('copy');

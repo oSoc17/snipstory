@@ -1,0 +1,17 @@
+.social-share {
+  display: flex;
+  width: 100%;
+  margin: 2rem auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.SocialMediaShareButton {
+  border-radius: 50%;
+}
+
+.snipper-share {
+  .form-field__input {
+    margin-right: 1rem;
+  }
+}

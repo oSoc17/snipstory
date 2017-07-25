@@ -129,6 +129,13 @@ class Home extends React.Component {
             ? <Spinner page />
             : <section id="inspo" className="creations-container">
                 <h2 className="creation-title">Snippers</h2>
+                <div className="container">
+                  <p className="creation-description">
+                    Snippers zijn de werkjes van anderen over de geschiedenis.
+                    Wil je zelf een Snipper maken? Lees dan een verhaal en laat
+                    je inspireren!
+                  </p>
+                </div>
 
                 <div className="row creations-position">
                   <div className="col-4 ">

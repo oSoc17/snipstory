@@ -62,7 +62,7 @@ class UploadBox extends React.Component {
                     {this.props.creation.error}
                   </label>
                 : <label id="upload-button" htmlFor="creationUpload">
-                    Zend je snipper!
+                    Upload je snipper!
                   </label>}
               <span />
             </div>}

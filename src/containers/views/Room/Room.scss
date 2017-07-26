@@ -27,10 +27,15 @@
 
 .card-block {
   background-color: $brand-blue;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+}
+
+
+.card-block--story-head {
   border-top-right-radius: 2.5rem;
   border-bottom-right-radius: 2.5rem;
   padding-left: 13rem;
-
 }
 
 .block-width {

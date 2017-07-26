@@ -77,7 +77,7 @@ class Room extends React.Component {
             }}
           />
           <div className="story-information card">
-            <div className="card-block block-width">
+            <div className="card-block block-width card-block--story-head">
               <h1 className="card-title">
                 {room.name}
               </h1>

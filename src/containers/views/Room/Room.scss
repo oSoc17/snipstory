@@ -27,10 +27,21 @@
 
 .card-block {
   background-color: $brand-blue;
+<<<<<<< HEAD
   border-top-right-radius: 2.5rem;
   border-bottom-right-radius: 2.5rem;
   padding-left: 13rem;
 
+=======
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+}
+
+.card-block--story-head {
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  padding-left: 13rem;
+>>>>>>> develop
 }
 
 .block-width {
@@ -40,7 +51,10 @@
   padding-bottom: 2rem;
   margin-right: 10rem;
   margin-left: -10rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 }
 
 .personName-label {

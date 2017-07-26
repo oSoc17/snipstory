@@ -102,7 +102,6 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
-        console.log(snapshot.val());
         dispatch(fetchRandomStoriesFulfilled(snapshot.val()));
       })
       .catch(err => {
@@ -731,7 +730,6 @@ export const fetchSnipper = id => {
         ]);
       })
       .then(([snipper, story]) => {
-        console.log(snipper, story);
         dispatch(fetchSnipperFulfilled({ ...snipper, story }));
       })
       .catch(error => {
@@ -815,7 +813,6 @@ export const changeUsernameCurrentUserFulfilled = users => ({
 export const updateUsers = () => {
   return (dispatch, getState) => {
     dispatch(updateUsersStarted());
-    console.log('Room state:', getState().room);
     firebaseDatabase
       .ref()
       .child('rooms/' + getState().room.id)
@@ -824,7 +821,6 @@ export const updateUsers = () => {
         users: getState().room.users
       })
       .then(snapshot => {
-        console.log(snapshot.val());
         dispatch(updateUsersFulfilled());
       })
       .catch(err => {

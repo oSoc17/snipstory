@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { User } from 'react-feather';
 import {
   fetchRoomData,
   listenForRoomChange,
@@ -21,7 +20,6 @@ import TextblockModule from '../../../components/modules/TextblockModule';
 import VideoModule from '../../../components/modules/VideoModule';
 import YoutubeModule from '../../../components/modules/YoutubeModule';
 import FunFactModule from '../../../components/modules/FunFactModule';
-import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
@@ -29,10 +27,12 @@ import Footer from '../../../components/footer/Footer';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
+import WorkTogether from '../../../components/work-together/WorkTogether';
 
 import './Room.css';
 
 class Room extends React.Component {
+  state = { workTogetherExpanded: false };
   handleChange(module) {
     this.props.updateModule(module);
   }
@@ -65,7 +65,11 @@ class Room extends React.Component {
         />
         <div className=" room ">
           <div className="story-information card">
+<<<<<<< HEAD
             <div className="card-block block-width">
+=======
+            <div className="card-block block-width card-block--story-head">
+>>>>>>> develop
               <h1 className="card-title">
                 {room.name}
               </h1>
@@ -120,6 +124,7 @@ class Room extends React.Component {
               className="card-img-top-2"
               src={room.profilePicture}
               alt={room.name}
+<<<<<<< HEAD
             />
           </div>
 
@@ -229,6 +234,23 @@ class Room extends React.Component {
               Kopiëer
             </Button>
           </div>
+=======
+            />
+          </div>
+
+          <WorkTogether
+            users={room.users}
+            showToast={showToast}
+            expanded={this.state.workTogetherExpanded}
+            changeUsernameCurrentUser={changeUsernameCurrentUser}
+            onExpand={() => {
+              this.setState(prevState => ({
+                ...prevState,
+                workTogetherExpanded: !prevState.workTogetherExpanded
+              }));
+            }}
+          />
+>>>>>>> develop
 
           <div className="modules content-container">
             {room.modules &&

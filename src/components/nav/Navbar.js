@@ -26,12 +26,8 @@ const Navbar = ({ fixed = true }) => {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item nav-logo">
             <Navlink to="/">
-<<<<<<< feature/css-fixes
-              <img src={Navlogo} alt="nav logo" width="80px" /> Snipstory
-=======
               <img src={Navlogo} alt="nav logo" width="80px" />
               <span>Snipstory</span>
->>>>>>> develop
             </Navlink>
           </li>
           <li className="nav-item">

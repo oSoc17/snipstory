@@ -23,6 +23,10 @@ class Snippers extends React.Component {
           <h1 className="snippers-title" style={{ textAlign: 'center' }}>
             Snippers
           </h1>
+          <p className="creation-description">
+            Snippers zijn de werkjes van anderen over de geschiedenis. Wil je
+            zelf een Snipper maken? Lees dan een verhaal!
+          </p>
           <div className="row" style={{ justifyContent: 'center' }}>
             {snippers.map(snipper => {
               return (

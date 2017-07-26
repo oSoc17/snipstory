@@ -153,8 +153,7 @@ class Home extends React.Component {
                 <div className="container">
                   <p className="creation-description">
                     Snippers zijn de werkjes van anderen over de geschiedenis.
-                    Wil je zelf een Snipper maken? Lees dan een verhaal en laat
-                    je inspireren!
+                    Wil je zelf een Snipper maken? Lees dan een verhaal!
                   </p>
                 </div>
 

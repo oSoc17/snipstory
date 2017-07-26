@@ -29,7 +29,7 @@ class Room extends React.Component {
           description="Deel je creatie met de wereld! Upload een foto of video van je knutselwerk"
           image={StapLogo}
         />
-        <div className="container">
+        <div className="container share-container">
           <UploadBox />
           {this.props.creation.photoURL &&
             !this.props.creation.isSubmitted &&

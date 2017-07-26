@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../button/Button';
-import { User, Minimize } from 'react-feather';
+import { User } from 'react-feather';
 import './WorkTogether.css';
 
 import bednet from './assets/bednet.png';

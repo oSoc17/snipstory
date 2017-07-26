@@ -43,6 +43,12 @@ class UploadBox extends React.Component {
                       Upload je snipper!
                     </label>
                   </div>}
+              {this.props.creation.error &&
+                <div>
+                  <p className="error-text">
+                    {this.props.creation.error}
+                  </p>
+                </div>}
             </div>}
 
         <div className="form-group">

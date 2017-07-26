@@ -75,7 +75,8 @@ export const actionTypes = {
   changeUsernameCurrentUserFulfilled: 'CHANGE_USERNAME_CURRENT_USER_FULFILLED',
   updateUsersStarted: 'UPDATE_USERS_STARTED',
   updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
-  updateUsersRejected: 'UPDATE_USERS_REJECTED'
+  updateUsersRejected: 'UPDATE_USERS_REJECTED',
+  clearState: 'CLEAR_STATE'
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -840,4 +841,8 @@ export const updateUsersFulfilled = () => ({
 export const updateUsersRejected = error => ({
   type: actionTypes.updateUsersRejected,
   error: error
+});
+
+export const clearState = () => ({
+  type: actionTypes.clearState
 });

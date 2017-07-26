@@ -47,6 +47,8 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { description: action.description });
     case actionTypes.addCreatorsToCreationFulfilled:
       return Object.assign({}, state, { creators: action.creators });
+    case actionTypes.clearState:
+      return initialState;
     default:
       return state;
   }

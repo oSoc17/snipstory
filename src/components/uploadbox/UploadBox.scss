@@ -27,6 +27,14 @@
   }
 }
 
+.upload-error {
+  background: $brand-red;
+}
+
+.error-text {
+  background: $brand-red;
+  padding: 1rem;
+}
 
 #upload-button {
   @include button-reset();

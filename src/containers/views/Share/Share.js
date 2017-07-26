@@ -10,9 +10,13 @@ import Footer from '../../../components/footer/Footer';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 
-import "./Share.css";
+import './Share.css';
 
 class Room extends React.Component {
+  componentWillUnmount() {
+    this.props.clearState();
+  }
+
   render() {
     const { creation, sendCreation } = this.props;
 

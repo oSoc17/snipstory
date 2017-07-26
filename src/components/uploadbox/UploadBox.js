@@ -6,66 +6,45 @@ import {
   addCreatorsToCreation
 } from '../../redux/actions';
 import './UploadBox.css';
+import Snipper from '../spinner/Spinner';
 
 class UploadBox extends React.Component {
-  componentDidMount() {
-    document.addEventListener('dragover', e => e.preventDefault());
-    document.addEventListener('drop', e => e.preventDefault());
-    document
-      .getElementById('creationUploadBox')
-      .addEventListener('dragenter', e => {
-        e.preventDefault();
-        e.target.style.borderColor = 'green';
-      });
-    document
-      .getElementById('creationUploadBox')
-      .addEventListener('dragleave', e => {
-        e.preventDefault();
-        e.target.style.borderColor = 'lightgrey';
-      });
-    document.getElementById('creationUploadBox').addEventListener('drop', e => {
-      e.preventDefault();
-      e.target.style.borderColor = 'lightgrey';
-      const files = Array.from(e.dataTransfer.files).filter(file => {
-        return file.type.startsWith('image/') || file.type.startsWith('video/');
-      });
-      const file = files[0];
-      this.props.uploadFile(file);
-    });
-  }
-
   render() {
     return (
       <div className="upload container">
-        {this.props.creation.photoURL
-          ? <div>
-              {this.props.creation.fileType === 'image' &&
-                <img src={this.props.creation.photoURL} alt="upload" />}
-              {this.props.creation.fileType === 'video' &&
-                <video autoPlay controls src={this.props.creation.photoURL} />}
-            </div>
-          : <div className="form-group uploadbox" id="creationUploadBox">
-              <input
-                type="file"
-                id="creationUpload"
-                name="creationUpload"
-                onChange={e => {
-                  this.props.uploadFile(e.target.files[0]);
-                }}
-              />
-              {this.props.creation.error
-                ? <label
-                    className="upload-error"
-                    id="upload-button"
-                    htmlFor="creationUpload"
-                  >
-                    {this.props.creation.error}
-                  </label>
-                : <label id="upload-button" htmlFor="creationUpload">
-                    Upload je snipper!
-                  </label>}
-              <span />
+        {this.props.creation.uploading
+          ? <Snipper />
+          : <div>
+              {this.props.creation.photoURL
+                ? <div>
+                    {this.props.creation.fileType === 'video'
+                      ? <video
+                          className="img-fluid"
+                          autoPlay
+                          controls
+                          src={this.props.creation.photoURL}
+                        />
+                      : <img
+                          className="img-fluid"
+                          src={this.props.creation.photoURL}
+                          alt="upload"
+                        />}
+                  </div>
+                : <div>
+                    <input
+                      type="file"
+                      id="creationUpload"
+                      name="creationUpload"
+                      onChange={e => {
+                        this.props.uploadFile(e.target.files[0]);
+                      }}
+                    />
+                    <label id="upload-button" htmlFor="creationUpload">
+                      Upload je snipper!
+                    </label>
+                  </div>}
             </div>}
+
         <div className="form-group">
           <label htmlFor="creators">Vul jullie naam in: </label>
           <br />
@@ -80,7 +59,7 @@ class UploadBox extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="creation-description">
-            Wil je iets over je snipper schrijven?{' '}
+            Wil je iets over je snipper schrijven?
           </label>
           <br />
           <textarea

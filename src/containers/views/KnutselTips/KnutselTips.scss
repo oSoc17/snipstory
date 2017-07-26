@@ -1,15 +1,5 @@
 @import "../../../variables.scss";
 
-.creation-title {
-  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #3274ff;
-  font-size: 6rem;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 5rem;
-  margin-bottom: 2rem; }
-
-
 .knutseltips {
   overflow: hidden;
   .card.knutseltip {
@@ -19,12 +9,27 @@
     border-radius: 2.5rem;
     border: 1rem solid $brand-blue;
     img {
-      border-top-left-radius: 2.5rem;
-      border-top-right-radius: 2.5rem;
+      border-top-left-radius: 1.8rem;
+      border-top-right-radius: 1.8rem;
+    }
+    transition: 0.5s;
+    &:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 1rem 0.2rem rgba($brand-blue--light, .8);
     }
   }
   .hidden {
     height: 0;
     opacity: 0;
   }
+}
+
+.tip-difficulty {
+  font-family: $brand-font-stack;
+  font-weight: 500;
+  margin-bottom: -.2rem;
+}
+
+.tip-difficulty-card {
+  margin-bottom: 2rem;
 }

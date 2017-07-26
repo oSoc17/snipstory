@@ -1,9 +1,4 @@
 @import '../../../variables.scss';
-/*NAVIGATIE*/
-
-.navbar {
-  box-shadow: 0 0 10px 4px $brand-blue;
-}
 
 /*HEADER*/
 
@@ -85,7 +80,7 @@
 .header-title {
   font-family: $brand-font-stack;
   color: $brand-blue;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -160,8 +155,8 @@
 }
 
 .ht-1-border {
-  border-left: 1rem solid $brand-red--light;
-  padding-left: 2rem;
+  border-left: .5rem solid $brand-red--light;
+  padding-left: 1.5rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -169,18 +164,18 @@
 }
 
 .ht-2-border {
-  border-right: 1rem solid $brand-yellow;
+  border-right: .5rem solid $brand-yellow;
   display: flex;
   flex-flow: column;
   justify-content: center;
   text-align: right;
-  padding-right: 1.8rem;
+  padding-right: 1.5rem;
   margin-right: 3rem;
 }
 
 .ht-3-border {
-  border-left: 1rem solid $brand-red--lighter;
-  padding-left: 2rem;
+  border-left: .5rem solid $brand-red--lighter;
+  padding-left: 1.5rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -188,13 +183,12 @@
 }
 
 .ht-4-border {
-  border-right: 1rem solid $brand-orange;
-  padding-left: 2rem;
+  border-right: .5rem solid $brand-orange;
   display: flex;
   flex-flow: column;
   justify-content: center;
   text-align: right;
-  padding-right: 1.8rem;
+  padding-right: 1.5rem;
   margin-right: 3rem;
 }
 
@@ -208,11 +202,10 @@
 .creation-title {
   font-family: $brand-font-stack;
   color: $brand-blue;
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 700;
   text-align: center;
   margin-top: 5rem;
-  margin-bottom: 2rem;
 }
 
 .creations-1 {
@@ -252,9 +245,9 @@
 
 .creation-description {
   font-family: $brand-font-stack;
-  font-size: 24px;
+  font-size: 1.4rem;
   color: $brand-blue;
-  padding: 2rem 4rem;
+  padding: 2rem 8rem;
   text-align: center;
 }
 

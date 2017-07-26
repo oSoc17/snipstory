@@ -142,7 +142,7 @@ class Home extends React.Component {
             </div>
           </section> */}
           <section className="button-section">
-            <Button inverted to="/story/select">
+            <Button size="small" inverted to="/story/select">
               Start je verhaal hier
             </Button>
           </section>
@@ -179,7 +179,7 @@ class Home extends React.Component {
                 </div>
               </section>}
           <section className="button-section button-section--white">
-            <Button to="/story/select">Start je verhaal hier</Button>
+            <Button size="small" to="/story/select">Start je verhaal hier</Button>
           </section>
         </main>
 

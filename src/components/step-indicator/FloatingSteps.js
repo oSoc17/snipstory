@@ -12,7 +12,7 @@ const steps = [
 
 const FloatingSteps = ({ clickable = true, activeStep, storyId = 1 }) => {
   return (
-    <div className="floating-steps row">
+    <div className="floating-steps">
       {steps.map((step, i) => {
         const classes = [];
         if (clickable && (i !== activeStep) & (i !== 1)) {
@@ -25,7 +25,7 @@ const FloatingSteps = ({ clickable = true, activeStep, storyId = 1 }) => {
         }
         return (
           <div
-            className={`col-sm-3 floating-step ${classes.join(' ')}`}
+            className={`floating-step ${classes.join(' ')}`}
             key={step.title}
             onClick={_ => {
               if (clickable && i !== activeStep && i !== 1) {

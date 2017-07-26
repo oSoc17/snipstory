@@ -10,7 +10,7 @@ const FloatingNext = ({ nextStep, to }) => {
         <span className="floating-next__text">
           {nextStep}
         </span>
-        <ArrowRight />
+        <ArrowRight size={30} />
       </Link>
     </div>
   );

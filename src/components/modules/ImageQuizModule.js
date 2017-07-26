@@ -14,9 +14,11 @@ const selectAnswer = (event, module, handleChange) => {
 const ImageQuizModule = ({ module, handleChange }) => {
   return (
     <article className="container module">
-      <p className="module-text">
-        {module.text}
-      </p>
+      <div className="module-text">
+        <p>
+          {module.text}
+        </p>
+      </div>
 
       <div>
         <span className="quiz-module-text">

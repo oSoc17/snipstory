@@ -28,11 +28,17 @@ class Snippers extends React.Component {
                   className="card snipper"
                   style={{ width: '25em', margin: '2em' }}
                 >
-                  <img
-                    className="card-img-top img-fluid"
-                    src={snipper.photoURL}
-                    alt={`Snipper van ${snipper.creators}`}
-                  />
+                  {snipper.fileType === 'video'
+                    ? <video
+                        controls
+                        src={snipper.photoURL}
+                        className="card-img-top img-fluid"
+                      />
+                    : <img
+                        src={snipper.photoURL}
+                        alt={`Snipper van ${snipper.creators}`}
+                        className="img-fluid card-img-top"
+                      />}
                   <div
                     className="card-block"
                     style={{
@@ -43,7 +49,7 @@ class Snippers extends React.Component {
                   >
                     <div>
                       <h2 className="card-title">
-                        Door {snipper.creators}
+                        Geknutseld door {snipper.creators}
                       </h2>
                       <p
                         className="card-text"

@@ -57,8 +57,8 @@ export const actionTypes = {
   joinRoomRejected: 'JOIN_ROOM_REJECTED',
   setLocalUID: 'SET_LOCAL_UID',
   sendCreationStarted: 'SEND_CREATION_STARTED',
-  sendCreationFulfilled: 'SEND_CREATION_REJECTED',
-  sendCreationRejected: 'SEND_CREATION_FULFILLED',
+  sendCreationFulfilled: 'SEND_CREATION_FULFILLED',
+  sendCreationRejected: 'SEND_CREATION_REJECTED',
   addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
   fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
   fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
@@ -634,7 +634,11 @@ export const sendCreation = type => {
       creators: getState().creation.creators,
       photoURL: getState().creation.photoURL,
       storyId: getState().creation.storyId,
+<<<<<<< HEAD
       type: getState().creation.type
+=======
+      fileType: getState().creation.fileType
+>>>>>>> develop
     };
     firebaseDatabase
       .ref()

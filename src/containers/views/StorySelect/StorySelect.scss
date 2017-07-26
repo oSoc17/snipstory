@@ -4,6 +4,17 @@
   background-image: url('./assets/bg.svg');
   background-repeat: no-repeat;
 }
+.story.card {
+  cursor: pointer !important;
+  transition: 0.5s;
+  svg {
+    fill: white;
+    margin-right: 10px;
+  }
+  &:hover {
+    transform: scale(1.04);
+  }
+}
 
 .story-title {
   color: white;

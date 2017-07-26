@@ -13,10 +13,18 @@
   &__text {
     margin-right: .5rem;
   }
+  &:hover,
+  &:focus {
+    .floating-next__inner {
+      color: $primary-color;
+    }
+    transform: translateY(-.1rem);
+  }
   position: fixed;
   bottom: 1rem;
   right: 1rem;
   border-radius: 4rem;
   background-color: #fff;
   box-shadow: $box-shadow;
+  transition: all $transition-timing;
 }

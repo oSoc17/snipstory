@@ -10,18 +10,25 @@
   background-color: $primary-color;
   border-radius: 4em;
   color: #fff;
-  box-shadow: 0 0 1rem 0.2rem rgba($brand-blue, .8);
+  box-shadow: $box-shadow;
   transition: all $transition-timing;
   border: none;
   vertical-align: center;
-  &--inverted {
-    color: $primary-color;
-    background-color: #fff;
-  }
 
   &:hover,
   &:focus {
+    color: #fff;
     box-shadow: $box-shadow;
+    transform: translateY(-.1rem);
+  }
+
+  &--inverted {
+    color: $primary-color;
+    background-color: #fff;
+    &:hover,
+    &:focus {
+      color: $primary-color;
+    }
   }
 
   &:disabled {

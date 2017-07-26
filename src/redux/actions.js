@@ -57,8 +57,8 @@ export const actionTypes = {
   joinRoomRejected: 'JOIN_ROOM_REJECTED',
   setLocalUID: 'SET_LOCAL_UID',
   sendCreationStarted: 'SEND_CREATION_STARTED',
-  sendCreationFulfilled: 'SEND_CREATION_REJECTED',
-  sendCreationRejected: 'SEND_CREATION_FULFILLED',
+  sendCreationFulfilled: 'SEND_CREATION_FULFILLED',
+  sendCreationRejected: 'SEND_CREATION_REJECTED',
   addDescriptionToCreationFulfilled: 'ADD_DESCRIPTION_TO_CREATION_FULFILLED',
   fetchKnutselTipsStarted: 'FETCH_KNUTSEL_TIPS_STARTED',
   fetchKnutselTipsFulfilled: 'FETCH_KNUTSEL_TIPS_FULFILLED',
@@ -518,7 +518,13 @@ export const uploadFile = file => {
       .child(moment().format('YYYYMMDD_hhmmss') + '_' + getState().user.uid)
       .put(file)
       .then(snapshot => {
-        dispatch(uploadFileFulfilled(snapshot, getState().room));
+        dispatch(
+          uploadFileFulfilled(
+            snapshot,
+            getState().room,
+            file.type.split('/')[0]
+          )
+        );
       })
       .catch(err => {
         dispatch(uploadFileRejected(err));
@@ -530,12 +536,13 @@ export const uploadFileStarted = () => ({
   type: actionTypes.uploadFileStarted
 });
 
-export const uploadFileFulfilled = (snapshot, room) => ({
+export const uploadFileFulfilled = (snapshot, room, type) => ({
   type: actionTypes.uploadFileFulfilled,
   photoURL: snapshot.metadata.downloadURLs[0],
   contentType: snapshot.metadata.contentType.split('/')[0],
   storyId: room.storyId,
-  creators: room.users.map(user => user.displayName)
+  creators: room.users.map(user => user.displayName),
+  fileType: type
 });
 
 export const uploadFileRejected = error => ({
@@ -617,7 +624,7 @@ export const setLocalUID = userId => ({
   uid: userId
 });
 
-export const sendCreation = () => {
+export const sendCreation = type => {
   return (dispatch, getState) => {
     dispatch(sendCreationStarted());
     let creationId = firebaseDatabase.ref().child('creations').push().key;
@@ -626,7 +633,8 @@ export const sendCreation = () => {
       description: getState().creation.description,
       creators: getState().creation.creators,
       photoURL: getState().creation.photoURL,
-      storyId: getState().creation.storyId
+      storyId: getState().creation.storyId,
+      fileType: getState().creation.fileType
     };
     firebaseDatabase
       .ref()

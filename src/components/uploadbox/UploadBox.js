@@ -50,18 +50,21 @@ class UploadBox extends React.Component {
                 id="creationUpload"
                 name="creationUpload"
                 onChange={e => {
-                  console.log('Update started...');
                   this.props.uploadFile(e.target.files[0]);
                 }}
               />
               {this.props.creation.error
-                ? <label className="upload-error" htmlFor="creationUpload">
-                    +
+                ? <label
+                    className="upload-error"
+                    id="upload-button"
+                    htmlFor="creationUpload"
+                  >
+                    {this.props.creation.error}
                   </label>
-                : <label htmlFor="creationUpload">+</label>}
-              <span>
-                Sleep hier je gemaakte snipper of klik op de bovenstaande knop
-              </span>
+                : <label id="upload-button" htmlFor="creationUpload">
+                    Upload je snipper!
+                  </label>}
+              <span />
             </div>}
         <div className="form-group">
           <label htmlFor="creators">Vul jullie naam in: </label>

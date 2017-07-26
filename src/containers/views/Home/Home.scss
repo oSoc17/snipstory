@@ -108,6 +108,9 @@
   background-color: $brand-blue;
   display: flex;
   justify-content: center;
+  .row {
+    cursor: pointer;
+  }
 }
 
 .how-to-2-container {

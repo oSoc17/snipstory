@@ -4,6 +4,7 @@ import Footer from '../../../components/footer/Footer';
 import Creations1 from '../../../components/creations1/Creations1';
 import Button from '../../../components/button/Button';
 import { X } from 'react-feather';
+import { history } from '../../../redux/store';
 
 import './Home.css';
 
@@ -80,7 +81,13 @@ class Home extends React.Component {
         <main>
           <section id="howTo" className="how-to-container">
             <div className="how-to-2-container container">
-              <div className="ht-mini-container row">
+              <div
+                className="ht-mini-container row"
+                onClick={e => {
+                  e.preventDefault();
+                  history.push('/story/select');
+                }}
+              >
                 <img src={ht1} className="ht-1-img" alt="how-to-1" />
                 <div className="ht-1-border">
                   <h2 className="ht-title">Ontdek</h2>
@@ -91,7 +98,13 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              <div className="ht-mini-2-container row">
+              <div
+                className="ht-mini-2-container row"
+                onClick={e => {
+                  e.preventDefault();
+                  history.push('/story/select');
+                }}
+              >
                 <img src={ht2} className="ht-2-img" alt="how-to-2" />
                 <div className="ht-2-border">
                   <h2 className="ht-title">Leer</h2>
@@ -101,7 +114,13 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              <div className="ht-mini-container row">
+              <div
+                className="ht-mini-container row"
+                onClick={e => {
+                  e.preventDefault();
+                  history.push('/knutseltips');
+                }}
+              >
                 <img src={ht3} className="ht-3-img" alt="how-to-3" />
                 <div className="ht-3-border">
                   <h2 className="ht-title">Maak</h2>
@@ -109,7 +128,13 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              <div className="ht-mini-2-container row">
+              <div
+                className="ht-mini-2-container row"
+                onClick={e => {
+                  e.preventDefault();
+                  history.push('/knutseltips');
+                }}
+              >
                 <img src={ht4} className="ht-4-img" alt="how-to-4" />
                 <div className="ht-4-border">
                   <h2 className="ht-title">Deel</h2>
@@ -118,29 +143,6 @@ class Home extends React.Component {
               </div>
             </div>
           </section>
-          {/* <section className="video-section">
-            <div className="container">
-
-              <div
-                className={`video-placeholder${this.state.thumbFadeout
-                  ? ' fade-out'
-                  : ''}`}
-                style={{
-                  backgroundImage: `url(${thumbnail})`,
-                  zIndex: this.state.videoShown ? -1 : 2
-                }}
-              >
-                <button
-                  onClick={this.playVideo.bind(this)}
-                  className="video-play"
-                >
-                  <div className="video-play__icon">
-                    <Play style={{ paddingLeft: '.1rem' }} size={128} />
-                  </div>
-                </button>
-              </div>
-            </div>
-          </section> */}
           <section className="button-section">
             <Button size="small" inverted to="/story/select">
               Start je verhaal hier
@@ -153,8 +155,7 @@ class Home extends React.Component {
                 <div className="container">
                   <p className="creation-description">
                     Snippers zijn de werkjes van anderen over de geschiedenis.
-                    Wil je zelf een Snipper maken? Lees dan een verhaal en laat
-                    je inspireren!
+                    Wil je zelf een Snipper maken? Lees dan een verhaal!
                   </p>
                 </div>
 

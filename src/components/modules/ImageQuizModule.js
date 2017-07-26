@@ -38,6 +38,14 @@ const ImageQuizModule = ({ module, handleChange }) => {
             src={module.resources[module.answer]}
             alt="selected"
           />}
+        {module.answer === undefined &&
+          <img
+            width="640px"
+            height="320px"
+            src="https://firebasestorage.googleapis.com/v0/b/ishare-c35bb.appspot.com/o/placeholder.jpg?alt=media&token=dea06660-c97d-4fbd-bf70-7991cfbc8281"
+            className="img-fluid img-mask"
+            alt="placeholder"
+          />}
       </div>
 
       <div className="images">

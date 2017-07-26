@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  max-width: 80rem;
+  max-width: 60rem;
   &__correct {
     text-align: center;
     font-size: 21px;
@@ -49,6 +49,7 @@
     align-items: center;
   }
   &__text {
+    text-align: left;
     font-size: 24px;
   }
   &__mark {
@@ -104,4 +105,19 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+.question-picture-container {
+  display: flex;
+  align-items: center;
+}
+
+.quiz-text {
+  font-size: 1.5rem;
+  font-family: $brand-font-stack;
+  width: 40rem;
+}
+
+.path-border {
+  border: 1rem solid $brand-blue;
 }

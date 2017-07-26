@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { User } from 'react-feather';
 import {
   fetchRoomData,
   listenForRoomChange,
@@ -21,7 +20,6 @@ import TextblockModule from '../../../components/modules/TextblockModule';
 import VideoModule from '../../../components/modules/VideoModule';
 import YoutubeModule from '../../../components/modules/YoutubeModule';
 import FunFactModule from '../../../components/modules/FunFactModule';
-import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap02.svg';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
@@ -29,10 +27,12 @@ import Footer from '../../../components/footer/Footer';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
+import WorkTogether from '../../../components/work-together/WorkTogether';
 
 import './Room.css';
 
 class Room extends React.Component {
+  state = { workTogetherExpanded: false };
   handleChange(module) {
     this.props.updateModule(module);
   }
@@ -65,12 +65,7 @@ class Room extends React.Component {
         />
         <div className=" room ">
           <div className="story-information card">
-            <img
-              className="card-img-top-2"
-              src={room.profilePicture}
-              alt={room.name}
-            />
-            <div className="card-block block-width">
+            <div className="card-block block-width card-block--story-head">
               <h1 className="card-title">
                 {room.name}
               </h1>
@@ -121,66 +116,26 @@ class Room extends React.Component {
                 {room.nationality}
               </p>
             </div>
+            <img
+              className="card-img-top-2"
+              src={room.profilePicture}
+              alt={room.name}
+            />
           </div>
-          <div
-            className="users"
-            style={{
-              position: 'absolute',
-              right: '0',
-              top: '0',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
+
+          <WorkTogether
+            users={room.users}
+            showToast={showToast}
+            expanded={this.state.workTogetherExpanded}
+            changeUsernameCurrentUser={changeUsernameCurrentUser}
+            onExpand={() => {
+              this.setState(prevState => ({
+                ...prevState,
+                workTogetherExpanded: !prevState.workTogetherExpanded
+              }));
             }}
-          >
-            {Object.keys(room.users).length > 1 &&
-              <div>
-                <h4>Mensen in dit verhaal</h4>
-                {Object.keys(room.users).map(key => {
-                  return (
-                    <div key={key} style={{ verticalAlign: 'center' }}>
-                      <User />
-                      {room.users[key]}
-                    </div>
-                  );
-                })}
-              </div>}
-            <h4>Nodig iemand uit om mee te werken:</h4>
-            <input
-              type="text"
-              value={window.location.href}
-              readOnly
-              ref={inviteInput => {
-                this.inviteInput = inviteInput;
-              }}
-              onClick={e => e.target.select()}
-              className="form-field__input"
-            />
-            <Button
-              inverted
-              onClick={_ => {
-                this.inviteInput.select();
-                document.execCommand('copy');
-                showToast({
-                  text: `De link is gekopieerd naar jouw klembord, stuur het naar je vrienden!`
-                });
-              }}
-            >
-              Kopiëer
-            </Button>
-          </div>
-          <div className="card-block">
-            <label className="personName-label" htmlFor="personName">
-              Wie ben jij?
-            </label>
-            <input
-              className="form-field__input"
-              type="text"
-              name="personName"
-              id="personName"
-              onChange={changeUsernameCurrentUser}
-            />
-          </div>
+          />
+
           <div className="modules content-container">
             {room.modules &&
               room.modules.map((module, i) => {

@@ -1,14 +1,15 @@
 @import "../../../variables.scss";
 .card-img-top-2 {
-  border-radius: 2.5rem;
+  border-radius: 25rem;
   width: 30rem;
-  height: 100%;
+  border: 1rem solid $brand-blue;
 }
 
 .story-information {
   color: white;
   display: flex;
-  flex-flow: row;
+
+  flex-flow: row-reverse;
   align-items: center;
   justify-content: center;
   border: none;
@@ -19,10 +20,23 @@
 
 .card-block {
   background-color: $brand-blue;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+}
+
+.card-block--story-head {
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  padding-left: 13rem;
 }
 
 .block-width {
   width: 50rem;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-right: 10rem;
+  margin-left: -10rem;
 }
 
 .personName-label {

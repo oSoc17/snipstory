@@ -21,6 +21,9 @@
 }
 
 .button-section {
+  &--white {
+    background-color: #fff;
+  }
   padding: 2em 2em 4em 2em;
   background-color: $brand-blue;
   display: flex;
@@ -243,57 +246,6 @@
   justify-content: space-around;
   margin-left: 0rem;
   margin-right: 0rem;
-}
-
-/*FOOTER*/
-
-footer {
-  background-color: $brand-blue;
-  display: flex;
-  justify-content: center;
-}
-
-.partner-container {
-  width: 70vw;
-  margin-top: 1rem;
-}
-
-.partner-mini-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.effect {
-  mix-blend-mode: color-burn;
-  transform: scale(0.7);
-}
-
-.logo1 {
-  width: 20rem;
-}
-
-.logo2 {
-  width: 10rem;
-}
-
-.logo3 {
-  width: 10rem;
-}
-
-.logo4 {
-  width: 20rem;
-}
-
-.logo5 {
-  width: 30rem;
-}
-
-.logo6 {
-  width: 10rem;
-}
-
-.logo7 {
-  width: 10rem;
 }
 
 /*DIRTY SHIT, NEEDS TO DELETED*/

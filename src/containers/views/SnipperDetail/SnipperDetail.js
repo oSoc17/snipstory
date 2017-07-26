@@ -76,14 +76,15 @@ class SnipperDetail extends React.Component {
               <p>
                 {snipper.description}
               </p>
+              {snipper.story &&
+                <div className="story-info">
+                  <Button inverted to={`/story/select?id=${snipper.storyId}`}>
+                    Ontdek het verhaal van {snipper.story.name} zelf
+                  </Button>
+                </div>}
             </div>
           </div>
-          {snipper.story &&
-            <div className="story-info">
-              <Button inverted to={`/story/select?id=${snipper.storyId}`}>
-                Ontdek het verhaal van {snipper.story.name} zelf
-              </Button>
-            </div>}
+
           <div className="snipper-share">
             <h2>Deel deze snipper!</h2>
             <div className="social-share">

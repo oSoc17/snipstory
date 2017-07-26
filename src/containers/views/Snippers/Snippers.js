@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSnippers } from '../../redux/actions';
-import Spinner from '../../components/spinner/Spinner';
-import Button from '../../components/button/Button';
-import Navbar from '../../components/nav/Navbar';
-import Footer from '../../components/footer/Footer';
+import { history } from '../../../redux/store';
+import { fetchSnippers } from '../../../redux/actions';
+import Spinner from '../../../components/spinner/Spinner';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
+import './Snippers.css';
 
 class Snippers extends React.Component {
   componentWillMount() {
@@ -19,7 +20,9 @@ class Snippers extends React.Component {
       <div className="page">
         <Navbar />
         <div>
-          <h1 style={{ textAlign: 'center' }}>Snippers</h1>
+          <h1 className="snippers-title" style={{ textAlign: 'center' }}>
+            Snippers
+          </h1>
           <div className="row" style={{ justifyContent: 'center' }}>
             {snippers.map(snipper => {
               return (
@@ -27,6 +30,9 @@ class Snippers extends React.Component {
                   key={snipper.id}
                   className="card snipper"
                   style={{ width: '25em', margin: '2em' }}
+                  onClick={_ => {
+                    history.push('/snippers/' + snipper.id);
+                  }}
                 >
                   {snipper.fileType === 'video'
                     ? <video
@@ -58,9 +64,6 @@ class Snippers extends React.Component {
                         {snipper.description}
                       </p>
                     </div>
-                    <Button inverted to={`/snippers/${snipper.id}`}>
-                      Toon snipper
-                    </Button>
                   </div>
                 </div>
               );

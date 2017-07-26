@@ -19,7 +19,7 @@ import Toast from '../components/toast/Toast';
 import Spinner from '../components/spinner/Spinner';
 import Room from './views/Room/Room';
 import CreateStory from './views/CreateStory';
-import Snippers from './views/Snippers';
+import Snippers from './views/Snippers/Snippers';
 import SnipperDetail from './views/SnipperDetail/SnipperDetail';
 import Share from './views/Share/Share';
 import deepEqual from 'deep-equal';

@@ -18,9 +18,11 @@
     align-items: center;
     margin: 3rem;
     color: white;
-    img {
+    img,
+    video {
       max-height: 35em;
-      outline: 10px $brand-blue solid;
+      border-radius: 4.5rem;
+      border: 10px $brand-blue solid;
     }
     .snipper-description {
       background: $brand-blue;

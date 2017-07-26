@@ -68,7 +68,15 @@ class SnipperDetail extends React.Component {
           </div>
 
           <div className="snipper-info">
-            <img src={snipper.photoURL} className="img-fluid" alt={title} />
+            <div className="media-container">
+              {snipper.fileType === 'video'
+                ? <video autoPlay controls src={snipper.photoURL} />
+                : <img
+                    src={snipper.photoURL}
+                    alt={`Snipper van ${snipper.creators}`}
+                    className="img-fluid"
+                  />}
+            </div>
             <div className="snipper-description">
               <h3>
                 Deze snipper gaat over {snipper.story.name}
@@ -76,14 +84,15 @@ class SnipperDetail extends React.Component {
               <p>
                 {snipper.description}
               </p>
+              {snipper.story &&
+                <div className="story-info">
+                  <Button size="small" inverted to={`/story/select?id=${snipper.storyId}`}>
+                    Ontdek het verhaal van {snipper.story.name} zelf
+                  </Button>
+                </div>}
             </div>
           </div>
-          {snipper.story &&
-            <div className="story-info">
-              <Button inverted to={`/story/select?id=${snipper.storyId}`}>
-                Ontdek het verhaal van {snipper.story.name} zelf
-              </Button>
-            </div>}
+
           <div className="snipper-share">
             <h2>Deel deze snipper!</h2>
             <div className="social-share">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendCreation } from '../../../redux/actions';
+import { sendCreation, clearState } from '../../../redux/actions';
 import UploadBox from '../../../components/uploadbox/UploadBox';
 import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap04.svg';
@@ -57,5 +57,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  sendCreation
+  sendCreation,
+  clearState
 })(Room);

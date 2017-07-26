@@ -4,9 +4,13 @@ import Button from '../button/Button';
 import Navlogo from '../../containers/views/Home/assets/menu-logo.png';
 import './Navlink.css';
 
-const Navbar = () => {
+const Navbar = ({ fixed = true }) => {
   return (
-    <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav
+      className={`navbar navbar-toggleable-md ${fixed
+        ? 'fixed-top'
+        : ''} navbar-light bg-faded`}
+    >
       <button
         className="navbar-toggler navbar-toggler-right"
         type="button"
@@ -18,7 +22,6 @@ const Navbar = () => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item nav-logo">

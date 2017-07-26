@@ -1,17 +1,106 @@
 @import "../../../variables.scss";
+.card-img-top-2 {
+  border-radius: 2.5rem;
+  width: 30rem;
+  height: 100%;
+}
 
 .story-information {
-  background: $brand-blue;
   color: white;
-  padding: 1em;
-  border-radius: 25px;
-  img {
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-  }
-  .card-block {
-    .personName-label {
-      font-size: 2rem;
-    }
-  }
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-weight: 500;
+  margin-top: 5rem;
+  margin-bottom: 5.5rem;
+}
+
+.card-block {
+  background-color: $brand-blue;
+}
+
+.block-width {
+  width: 50rem;
+}
+
+.personName-label {
+  font-size: 2rem;
+}
+
+.modules {
+  width: 100%;
+}
+
+.modules .module:nth-child(2n + 1) {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.room {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.module {
+  width: 100%;
+  padding: 3rem 0rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.quiz-module-text {
+  font-size: 1.2rem;
+  font-family: $brand-font-stack;
+  padding: 2rem;
+  border-radius: 2.5rem;
+  font-weight: 600;
+  margin-left: 3rem;
+}
+
+.quiz-module-text:nth-child(2n + 1) {
+  background-color: white;
+  color: $brand-blue;
+  width: 5rem;
+}
+
+.module--quiz {
+  width: 100%;
+}
+
+.question {
+  width: 80vw;
+  text-align: center;
+}
+
+.img-mask {
+  width: 40rem;
+  clip-path: url(#myClip);
+}
+
+.path-border {
+  border: 1rem solid $brand-blue;
+  width: 40rem;
+  height: 100%;
+}
+
+.monument {
+  margin-bottom: 6rem;
+}
+
+.story-information svg {
+  fill: white;
+  margin-right: 1rem;
+}
+
+.module-text {
+  width: 40rem;
+  margin-right: 40rem;
+  margin-bottom: -10rem;
+}
+
+.monument-text {
+  margin-bottom: 4rem;
 }

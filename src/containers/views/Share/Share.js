@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendCreation } from '../../../redux/actions';
+import { sendCreation, clearState } from '../../../redux/actions';
 import UploadBox from '../../../components/uploadbox/UploadBox';
 import Button from '../../../components/button/Button';
 import StapLogo from './assets/stap04.svg';
@@ -10,9 +10,13 @@ import Footer from '../../../components/footer/Footer';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 
-import "./Share.css";
+import './Share.css';
 
 class Room extends React.Component {
+  componentWillUnmount() {
+    this.props.clearState();
+  }
+
   render() {
     const { creation, sendCreation } = this.props;
 
@@ -53,5 +57,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  sendCreation
+  sendCreation,
+  clearState
 })(Room);

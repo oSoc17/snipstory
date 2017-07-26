@@ -155,10 +155,8 @@ class Home extends React.Component {
                   </div>
                 </div>
               </section>}
-          <section className="button-section">
-            <Button inverted to="/story/select">
-              Start je verhaal hier
-            </Button>
+          <section className="button-section button-section--white">
+            <Button to="/story/select">Start je verhaal hier</Button>
           </section>
         </main>
 

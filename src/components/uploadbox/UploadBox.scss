@@ -9,6 +9,12 @@
   z-index: -1;
 }
 
+.label-text {
+  font-weight: 600;
+  font-family: $brand-font-stack;
+  color: $brand-blue--darker;
+}
+
 .upload {
   margin: 3rem;
   display: flex;
@@ -40,7 +46,7 @@
   @include button-reset();
   cursor: pointer;
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 600;
   font-family: $brand-font-stack;
   padding: 1.2em 2.4em;

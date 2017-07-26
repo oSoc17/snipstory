@@ -20,13 +20,16 @@ class Snippers extends React.Component {
       <div className="page">
         <Navbar />
         <div>
-          <h1 className="snippers-title" style={{ textAlign: 'center' }}>
+          <h1 className="creation-title" style={{ textAlign: 'center' }}>
             Snippers
           </h1>
-          <p className="creation-description">
-            Snippers zijn de werkjes van anderen over de geschiedenis. Wil je
-            zelf een Snipper maken? Lees dan een verhaal!
-          </p>
+          <div className="container">
+            <p className="creation-description">
+              Snippers zijn de werkjes van anderen over de geschiedenis.
+              Wil je zelf een Snipper maken? Lees dan een verhaal en laat
+              je inspireren!
+            </p>
+          </div>
           <div className="row" style={{ justifyContent: 'center' }}>
             {snippers.map(snipper => {
               return (
@@ -63,7 +66,7 @@ class Snippers extends React.Component {
                       </h2>
                       <p
                         className="card-text"
-                        style={{ marginTop: '2em', marginBottom: '2em' }}
+
                       >
                         {snipper.description}
                       </p>

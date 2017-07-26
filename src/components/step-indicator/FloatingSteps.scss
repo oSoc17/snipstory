@@ -3,7 +3,10 @@
 .floating-steps {
   position: fixed;
   bottom: 0;
-  left: 15px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   border-top-right-radius: 1rem;
   background: #fff;
   box-shadow: $box-shadow;
@@ -15,28 +18,27 @@
     cursor: pointer;
   }
   .floating-step {
+    width: 100%;
     transition: all $transition-timing;
-    padding: 1.6rem 1.6rem .8rem 1.6rem;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     .checkmark {
       display: none;
     }
     &__icon {
       display: flex;
+      margin-right: .8rem;
       padding: 1rem;
       border-radius: 50%;
       box-shadow: $box-shadow;
-      margin-bottom: 1rem;
     }
     &--selected {
       background-color: $brand-blue;
       box-shadow: $box-shadow;
       color: #fff;
-      border-top-right-radius: .5rem;
-      border-top-left-radius: .5rem;
+      border-radius: .5rem;
       transform: scale(1.1);
     }
     &--done {

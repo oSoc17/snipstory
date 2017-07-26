@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+
+.card-container {
+  border: none;
+  background-color: $brand-blue;
+  margin-bottom: 2rem;
+  cursor: pointer;
+
+  padding: 0.75rem 0.75rem 0rem 0.75rem;
+  border-radius: 2.5rem;
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 1rem 0.2rem rgba($brand-blue--light, .8);
+  }
+}
+
+.card-img {
+  border-top-left-radius: 1.8rem;
+  border-top-right-radius: 1.8rem;
+}
+
+.card-title {
+  color: white;
+  font-family: $brand-font-stack;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  padding-bottom: .8rem;
+}
+
+.card-text {
+  font-family: $font-stack;
+  color: white;
+  font-size: 1rem;
+  padding-bottom: 1rem;
+}
+
+.button {
+  text-align: center;
+}
+
+.button-test {
+  display: flex;
+  border: 1px solid black;
+}

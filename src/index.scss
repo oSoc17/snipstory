@@ -1,7 +1,43 @@
-@import './variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
+@import './bootstrap.scss';
 
-* {
+body {
   margin: 0;
   padding: 0;
   font-family: $font-stack;
+  font-display: swap;
+  box-sizing: border-box;
+  color: $text-color;
+}
+
+iframe {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+  &:hover,
+  &:focus {
+    color: initial;
+    text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $brand-font-stack;
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary {
+  background-color: $primary-color;
 }

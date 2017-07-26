@@ -1,0 +1,21 @@
+@import '../../../variables.scss';
+
+.register-title {
+  color: $brand-blue;
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: $brand-font-stack;
+  font-weight: 600;
+}
+
+.name-container {
+  display: flex;
+}
+
+.password-container {
+  display: flex;
+}
+
+.etc-container {
+  display: flex;
+}

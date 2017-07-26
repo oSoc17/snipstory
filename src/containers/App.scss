@@ -1,1 +1,67 @@
+@import '../variables.scss';
+.knutseltips {
+  .card {
+    background-color: $brand-blue;
+    color: white;
+  }
+  .difficulty {
+    .difficulty-counter {
+      border: 3px solid $brand-red--lighter;
+      display: inline-block;
+      margin-left: 1em;
+    }
+    .difficulty-counter.filled {
+      background-color: $brand-red--lighter;
+      border: 3px solid transparent;
+    }
+  }
+}
 
+.module {
+  margin: 7em 0;
+}
+
+.room {
+  margin-top: 3em;
+}
+
+.snipper {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.story {
+  background-color: $brand-blue;
+  color: white;
+}
+
+.card.monument {
+  background: $brand-blue;
+  border-radius: 25px;
+  border: 15px solid $brand-blue;
+}
+
+.users {
+  color: white;
+  border-radius: 25px;
+  background-color: $brand-blue;
+  padding: 2em;
+}
+
+.users > div {
+  margin: 1em;
+}
+
+.users input {
+  width: 100%;
+  margin: 1em;
+  padding: 1em;
+}
+
+.users button {
+  cursor: pointer;
+}
+
+.app {
+  padding-top: $nav-bar-height - 3.2rem;
+}

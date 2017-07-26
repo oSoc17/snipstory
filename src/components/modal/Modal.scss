@@ -1,0 +1,59 @@
+@import '../../variables.scss';
+
+.modal {
+  border-radius: $material-border-radius;
+  background: #fff;
+  box-shadow: $material-box-shadow;
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  min-width: 12em;
+  max-width: 40em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation: fade-in $transition-timing--long forwards ease-in;
+  &:focus {
+    outline: none;
+  }
+
+  &__main {
+    padding: 1.2em;
+  }
+  &__header {
+    margin-bottom: 1em;
+  }
+  &__title {
+    font-weight: 400;
+  }
+  &__actions {
+    padding: .4em;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__action {
+    color: $primary-color;
+    margin-left: .4em;
+  }
+  &__body * {
+    color: $text-color--light;
+  }
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(#000, .5);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,40 @@
+@import '../../variables.scss';
+
+.step-indicator {
+  .step-number {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $brand-orange;
+    font-family: $brand-font-stack;
+    font-weight: 600;
+    font-size: 3rem;
+    height: 6rem;
+    width: 6rem;
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__body {
+    border-left: .8rem $brand-orange solid;
+    padding-left: .8rem;
+    .step-indicator__title {
+      font-family: $brand-font-stack;
+    }
+  }
+  &__image {
+    width: 10rem;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+  }
+  background-color: $brand-blue;
+  padding: 2em 0;
+  color: #fff;
+}

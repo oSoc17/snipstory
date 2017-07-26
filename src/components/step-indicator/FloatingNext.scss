@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.floating-next {
+  &__inner {
+    @include button-reset();
+    font-family: $brand-font-stack;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    padding: 1rem 2rem;
+  }
+  &__text {
+    margin-right: .5rem;
+  }
+  &:hover,
+  &:focus {
+    .floating-next__inner {
+      color: $primary-color;
+    }
+    transform: translateY(-.1rem);
+  }
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 4rem;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  transition: all $transition-timing;
+}

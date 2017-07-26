@@ -1,0 +1,51 @@
+@import '../../variables.scss';
+
+.navlink {
+  color: $brand-blue;
+  font-family: $brand-font-stack;
+  font-weight: 600;
+
+  &:hover,
+  &:focus {
+    color: $brand-blue;
+    border-bottom: 0.2em solid $brand-blue;
+  }
+}
+
+.nav-logo .navlink:hover,
+.nav-logo .navlink:focus {
+  border-bottom: none;
+  span {
+    border-bottom: 0.1em solid $brand-blue;
+  }
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.navbar {
+  box-shadow: 0 0 40px 4px $brand-blue--darker;
+}
+
+.navbar-toggler {
+  background-color: white;
+}
+
+.nav-item {
+  .button:hover,
+  .button:focus {
+    color: #fff;
+  }
+  &:hover {
+    border: none;
+  }
+}

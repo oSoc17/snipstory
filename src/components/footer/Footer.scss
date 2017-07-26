@@ -1,0 +1,39 @@
+@import '../../variables.scss';
+
+footer {
+  background-color: $brand-blue;
+  display: flex;
+  justify-content: center;
+}
+
+.partner-container {
+  width: 70vw;
+  margin-top: 1rem;
+  padding: 1rem;
+
+  img {
+    object-fit: cover;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.partner-title {
+  color: #0000FF;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.partner-mini-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.effect {
+  mix-blend-mode: color-burn;
+  transform: scale(0.7);
+}

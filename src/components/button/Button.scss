@@ -1,0 +1,74 @@
+@import '../../variables.scss';
+
+.button {
+  @include button-reset();
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: $brand-font-stack;
+  padding: 1.2em 2.4em;
+  background-color: $primary-color;
+  border-radius: 4em;
+  color: #fff;
+  box-shadow: $box-shadow;
+  transition: all $transition-timing;
+  border: none;
+  vertical-align: center;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    box-shadow: $box-shadow;
+    transform: translateY(-.1rem);
+  }
+
+  &--inverted {
+    color: $primary-color;
+    background-color: #fff;
+    &:hover,
+    &:focus {
+      color: $primary-color;
+    }
+  }
+
+  &:disabled {
+    background-color: #aaa;
+    box-shadow: 0 0 10px 2px rgba(#888, .8);
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: 0 0 10px 2px rgba(#888, .8);
+    }
+  }
+  &--small {
+    font-size: 15px;
+  }
+
+  &--large {
+    font-size: 24px;
+  }
+
+  &--extra-large {
+    font-size: 36px;
+  }
+  &--flat {
+    @include button-reset();
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: .6em;
+    min-width: 2em;
+
+    &:hover,
+    &:focus {
+      border-radius: $material-border-radius;
+      background-color: rgba(#999, .26);
+    }
+
+    &:disabled {
+      color: rgba(#000, .26);
+    }
+  }
+
+  * + * {
+    margin-left: .5em;
+  }
+}

@@ -86,7 +86,7 @@ class SnipperDetail extends React.Component {
               </p>
               {snipper.story &&
                 <div className="story-info">
-                  <Button inverted to={`/story/select?id=${snipper.storyId}`}>
+                  <Button size="small" inverted to={`/story/select?id=${snipper.storyId}`}>
                     Ontdek het verhaal van {snipper.story.name} zelf
                   </Button>
                 </div>}

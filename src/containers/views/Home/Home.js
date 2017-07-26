@@ -7,16 +7,16 @@ import Button from '../../../components/button/Button';
 import './Home.css';
 
 import logo from './assets/logo.png';
-// import ht1 from './assets/ht-1.svg';
-// import ht2 from './assets/ht-2.svg';
-// import ht3 from './assets/ht-3.svg';
-// import ht4 from './assets/ht-4.svg';
+import ht1 from './assets/ht-1.svg';
+import ht2 from './assets/ht-2.svg';
+import ht3 from './assets/ht-3.svg';
+import ht4 from './assets/ht-4.svg';
 
-import thumbnail from './assets/thumb.png';
+// import thumbnail from './assets/thumb.png';
 import Spinner from '../../../components/spinner/Spinner';
 import { fetchRandomSnippers } from '../../../redux/actions';
 import { connect } from 'react-redux';
-import { Play } from 'react-feather';
+// import { Play } from 'react-feather';
 
 import './Home.css';
 
@@ -48,7 +48,7 @@ class Home extends React.Component {
         </header>
 
         <main>
-          {/* -    <section id="howTo" className="how-to-container">
+          <section id="howTo" className="how-to-container">
             <div className="how-to-2-container">
               <div className="ht-mini-container">
                 <img src={ht1} className="ht-1-img" alt="how-to-1" />
@@ -87,8 +87,8 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-          </section> */}
-          <section className="video-section">
+          </section>
+          {/* <section className="video-section">
             <div className="container">
               <iframe
                 id="vimeo-video"
@@ -119,7 +119,7 @@ class Home extends React.Component {
                 </button>
               </div>
             </div>
-          </section>
+          </section> */}
           <section className="button-section">
             <Button inverted to="/story/select">
               Start je verhaal hier

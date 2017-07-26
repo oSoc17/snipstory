@@ -16,7 +16,8 @@ import './KnutselTips.css';
 
 class KnutselTips extends React.Component {
   state = {
-    storyId: null
+    storyId: null,
+    openedTip: null
   };
 
   componentWillMount() {
@@ -45,7 +46,7 @@ class KnutselTips extends React.Component {
         {knutseltips.isFetching
           ? <Spinner page size="large" />
           : <div className="page">
-              {!storyId && <h1 style={{ textAlign: 'center' }}>Knutseltips</h1>}
+              {!storyId && <h1 className="creation-title" style={{ textAlign: 'center' }}>Knutseltips</h1>}
               <div
                 className="knutseltips"
                 style={{
@@ -58,21 +59,20 @@ class KnutselTips extends React.Component {
                   <div
                     key={i}
                     className="card knutseltip"
-                    style={{ width: '25em', margin: '2em' }}
+                    style={{
+                      width: '25em',
+                      margin: '2em',
+                      height: this.state.openedTip !== i ? '400px' : 'auto'
+                    }}
                     onClick={e => {
                       e.preventDefault();
-                      if (e.currentTarget.getElementsByClassName('hidden')[0]) {
-                        let classes = e.currentTarget.getElementsByClassName(
-                          'info'
-                        )[0].classList;
-                        classes.remove('hidden');
-                        e.currentTarget.style.height = 'auto';
+                      let parent = e.currentTarget;
+                      if (this.state.openedTip === i) {
+                        this.setState({ openedTip: null });
                       } else {
-                        let classes = e.currentTarget.getElementsByClassName(
-                          'info'
-                        )[0].classList;
-                        classes.add('hidden');
-                        e.currentTarget.style.height = '400px';
+                        this.setState({ openedTip: i }, () => {
+                          window.scrollTo(0, parent.offsetTop - 95);
+                        });
                       }
                     }}
                   >
@@ -87,7 +87,11 @@ class KnutselTips extends React.Component {
                         {tip.name}
                       </h4>
                     </div>
-                    <div className="card-block info hidden">
+                    <div
+                      className={`${this.state.openedTip !== i
+                        ? 'hidden'
+                        : ''} card-block info`}
+                    >
                       <p className="card-text">
                         {tip.text}
                       </p>

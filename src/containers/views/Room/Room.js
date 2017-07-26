@@ -64,18 +64,6 @@ class Room extends React.Component {
           image={StapLogo}
         />
         <div className=" room ">
-          <WorkTogether
-            users={room.users}
-            showToast={showToast}
-            expanded={this.state.workTogetherExpanded}
-            changeUsernameCurrentUser={changeUsernameCurrentUser}
-            onExpand={() => {
-              this.setState(prevState => ({
-                ...prevState,
-                workTogetherExpanded: !prevState.workTogetherExpanded
-              }));
-            }}
-          />
           <div className="story-information card">
             <div className="card-block block-width card-block--story-head">
               <h1 className="card-title">
@@ -134,18 +122,19 @@ class Room extends React.Component {
               alt={room.name}
             />
           </div>
-          <div className="card-block">
-            <label className="personName-label" htmlFor="personName">
-              Wie ben jij?
-            </label>
-            <input
-              className="form-field__input"
-              type="text"
-              name="personName"
-              id="personName"
-              onChange={changeUsernameCurrentUser}
-            />
-          </div>
+
+          <WorkTogether
+            users={room.users}
+            showToast={showToast}
+            expanded={this.state.workTogetherExpanded}
+            changeUsernameCurrentUser={changeUsernameCurrentUser}
+            onExpand={() => {
+              this.setState(prevState => ({
+                ...prevState,
+                workTogetherExpanded: !prevState.workTogetherExpanded
+              }));
+            }}
+          />
 
           <div className="modules content-container">
             {room.modules &&

@@ -63,26 +63,26 @@ class Room extends React.Component {
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}
         />
-        <div className=" room " style={{ position: 'relative' }}>
+        <div className=" room ">
           <WorkTogether
-            users={room.users}
-            showToast={showToast}
-            expanded={this.state.workTogetherExpanded}
-            changeUsernameCurrentUser={changeUsernameCurrentUser}
-            onExpand={() => {
-              this.setState(prevState => ({
-                ...prevState,
-                workTogetherExpanded: !prevState.workTogetherExpanded
-              }));
-            }}
-          />
-          <div className="story-information card" style={{ width: '550px' }}>
+              users={room.users}
+              showToast={showToast}
+              expanded={this.state.workTogetherExpanded}
+              changeUsernameCurrentUser={changeUsernameCurrentUser}
+              onExpand={() => {
+                this.setState(prevState => ({
+                  ...prevState,
+                  workTogetherExpanded: !prevState.workTogetherExpanded
+                }));
+              }}
+            />
+            <div className="story-information card">
             <img
-              className="card-img-top"
+              className="card-img-top-2"
               src={room.profilePicture}
               alt={room.name}
             />
-            <div className="card-block">
+            <div className="card-block block-width">
               <h1 className="card-title">
                 {room.name}
               </h1>
@@ -133,19 +133,65 @@ class Room extends React.Component {
                 {room.nationality}
               </p>
             </div>
-            <div className="card-block">
-              <label className="personName-label" htmlFor="personName">
-                Wie ben jij?
-              </label>
-              <input
-                className="form-field__input"
-                style={{ padding: '1em' }}
-                type="text"
-                name="personName"
-                id="personName"
-                onChange={changeUsernameCurrentUser}
-              />
-            </div>
+          </div>
+          <div
+            className="users"
+            style={{
+              position: 'absolute',
+              right: '0',
+              top: '0',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            {Object.keys(room.users).length > 1 &&
+              <div>
+                <h4>Mensen in dit verhaal</h4>
+                {Object.keys(room.users).map(key => {
+                  return (
+                    <div key={key} style={{ verticalAlign: 'center' }}>
+                      <User />
+                      {room.users[key]}
+                    </div>
+                  );
+                })}
+              </div>}
+            <h4>Nodig iemand uit om mee te werken:</h4>
+            <input
+              type="text"
+              value={window.location.href}
+              readOnly
+              ref={inviteInput => {
+                this.inviteInput = inviteInput;
+              }}
+              onClick={e => e.target.select()}
+              className="form-field__input"
+            />
+            <Button
+              inverted
+              onClick={_ => {
+                this.inviteInput.select();
+                document.execCommand('copy');
+                showToast({
+                  text: `De link is gekopieerd naar jouw klembord, stuur het naar je vrienden!`
+                });
+              }}
+            >
+              Kopiëer
+            </Button>
+          </div>
+          <div className="card-block">
+            <label className="personName-label" htmlFor="personName">
+              Wie ben jij?
+            </label>
+            <input
+              className="form-field__input"
+              type="text"
+              name="personName"
+              id="personName"
+              onChange={changeUsernameCurrentUser}
+            />
           </div>
           <div className="modules content-container">
             {room.modules &&
@@ -267,10 +313,7 @@ class Room extends React.Component {
               <h4 className="card-title">
                 {room.monument.name}
               </h4>
-              <div
-                className="card-text monument-text"
-                style={{ marginBottom: '1em', marginTop: '2em' }}
-              >
+              <div className="card-text monument-text">
                 {room.monument.text}
               </div>
               <iframe

@@ -21,8 +21,14 @@
   justify-content: center;
   border: none;
   font-weight: 500;
-  margin-top: 5rem;
-  margin-bottom: 5.5rem;
+  width: auto;
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 5.5rem;
+  }
 }
 
 .card-block {
@@ -42,7 +48,6 @@
 
   padding-top: 2rem;
   padding-bottom: 2rem;
-  margin-right: 10rem;
   margin-left: -10rem;
 }
 
@@ -124,4 +129,16 @@
 
 .monument-text {
   margin-bottom: 4rem;
+}
+
+.article-centering {
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-centering {
+  margin-right: 0rem;
+  margin-bottom: 0rem;
+  width: 40rem;
 }

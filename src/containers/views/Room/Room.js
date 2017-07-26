@@ -65,11 +65,6 @@ class Room extends React.Component {
         />
         <div className=" room ">
           <div className="story-information card">
-            <img
-              className="card-img-top-2"
-              src={room.profilePicture}
-              alt={room.name}
-            />
             <div className="card-block block-width">
               <h1 className="card-title">
                 {room.name}
@@ -121,6 +116,11 @@ class Room extends React.Component {
                 {room.nationality}
               </p>
             </div>
+            <img
+              className="card-img-top-2"
+              src={room.profilePicture}
+              alt={room.name}
+            />
           </div>
           <div
             className="users"
@@ -169,18 +169,7 @@ class Room extends React.Component {
               Kopiëer
             </Button>
           </div>
-          <div className="card-block">
-            <label className="personName-label" htmlFor="personName">
-              Wie ben jij?
-            </label>
-            <input
-              className="form-field__input"
-              type="text"
-              name="personName"
-              id="personName"
-              onChange={changeUsernameCurrentUser}
-            />
-          </div>
+
           <div className="modules content-container">
             {room.modules &&
               room.modules.map((module, i) => {

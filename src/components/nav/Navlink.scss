@@ -15,6 +15,9 @@
 .nav-logo .navlink:hover,
 .nav-logo .navlink:focus {
   border-bottom: none;
+  span {
+    border-bottom: 0.1em solid $brand-blue;
+  }
 }
 
 .navbar-nav {

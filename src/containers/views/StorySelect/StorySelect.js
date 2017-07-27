@@ -7,6 +7,7 @@ import {
 import Spinner from '../../../components/spinner/Spinner';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
+import Button from '../../../components/button/Button';
 import { connect } from 'react-redux';
 import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import StepIndicator from '../../../components/step-indicator/StepIndicator';
@@ -112,6 +113,15 @@ class StorySelect extends React.Component {
                   </div>
                 </div>
               )}
+
+            <Button
+              onClick={e => {
+                e.preventDefault();
+                this.props.fetchRandomStories();
+              }}
+            >
+              Krijg 3 andere personen
+            </Button>
             <FloatingSteps clickable={false} activeStep={0} />
           </div>
           {error &&

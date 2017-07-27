@@ -43,6 +43,8 @@ class Snippers extends React.Component {
                 >
                   {snipper.fileType === 'video'
                     ? <video
+                        autoPlay
+                        loop
                         src={snipper.photoURL}
                         className="card-img-top img-fluid"
                       />

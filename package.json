@@ -1,6 +1,8 @@
 {
-  "name": "ishare",
+  "name": "snipstory",
   "version": "0.2.0",
+  "repository": "oSoc17/snipstory",
+  "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "connected-react-router": "^4.2.3",

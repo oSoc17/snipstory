@@ -27,6 +27,7 @@ const Navbar = ({ fixed = true }) => {
           <li className="nav-item nav-logo">
             <Navlink to="/">
               <img src={Navlogo} alt="nav logo" width="80px" />
+              <span>Snipstory</span>
             </Navlink>
           </li>
           <li className="nav-item">

@@ -27,14 +27,35 @@
     .snipper-description {
       background: $brand-blue;
       padding: 2em;
-      font-size: 2rem;
+      font-size: 1.2rem;
       border-top-right-radius: 2.5rem;
       border-bottom-right-radius: 2.5rem;
     }
   }
 
+  .snipper-share-title {
+    color: $brand-blue;
+  }
+
+  .snipper-by {
+    font-size: 2rem;
+    padding: 0 8rem;
+    line-height: 3rem;
+  }
+
+  .snipper-about {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .snipper-descr {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
   .snipper-share {
     margin-top: 3rem;
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;

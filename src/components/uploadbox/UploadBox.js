@@ -52,7 +52,7 @@ class UploadBox extends React.Component {
             </div>}
 
         <div className="form-group">
-          <label htmlFor="creators">Vul jullie naam in: </label>
+          <label htmlFor="creators" className="label-text">Vul jullie naam in: </label>
           <br />
           <input
             style={{ padding: '1em' }}
@@ -60,21 +60,23 @@ class UploadBox extends React.Component {
             type="text"
             name="creators"
             id="creators"
+            placeholder="Typ hier jullie naam"
             onChange={this.props.addCreatorsToCreation}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="creation-description">
-            Wil je iets over je snipper schrijven?
+          <label className="label-text" htmlFor="creation-description">
+            Wil je iets over je snipper schrijven?{' '}
           </label>
           <br />
           <textarea
             name="creation-description"
-            className="form-field__input"
+            className="form-field__input form-field__descr"
             onChange={this.props.addDescriptionToCreation}
             id="creation-description"
             cols="30"
             rows="10"
+            placeholder="Typ hier iets over jullie werkje"
           />
         </div>
       </div>

@@ -8,13 +8,16 @@
   &:hover,
   &:focus {
     color: $brand-blue;
-    border-bottom: 0.1em solid $brand-blue;
+    border-bottom: 0.2em solid $brand-blue;
   }
 }
 
 .nav-logo .navlink:hover,
 .nav-logo .navlink:focus {
   border-bottom: none;
+  span {
+    border-bottom: 0.1em solid $brand-blue;
+  }
 }
 
 .navbar-nav {
@@ -27,6 +30,10 @@
 
 .navbar {
   background-color: white;
+}
+
+.navbar {
+  box-shadow: 0 0 40px 4px $brand-blue--darker;
 }
 
 .navbar-toggler {

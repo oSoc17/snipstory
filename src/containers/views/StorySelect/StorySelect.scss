@@ -13,7 +13,13 @@
   }
   &:hover {
     transform: scale(1.04);
+    box-shadow: 0 0 1rem 0.2rem rgba($brand-blue--light, .8);
   }
+}
+
+.random-stories {
+  margin: 3rem 0;
+  justify-content: center;
 }
 
 .story-title {

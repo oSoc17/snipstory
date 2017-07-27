@@ -62,7 +62,7 @@ class SnipperDetail extends React.Component {
         <Navbar />
         <div className="snipper-detail-page">
           <div className="creators">
-            <h1 className="container">
+            <h1 className="container snipper-by">
               Snipper geknutseld door {snipper.creators}
             </h1>
           </div>
@@ -78,10 +78,10 @@ class SnipperDetail extends React.Component {
                   />}
             </div>
             <div className="snipper-description">
-              <h3>
+              <h3 className="snipper-about">
                 Deze snipper gaat over {snipper.story.name}
               </h3>
-              <p>
+              <p className="snipper-descr">
                 {snipper.description}
               </p>
               {snipper.story &&
@@ -94,7 +94,7 @@ class SnipperDetail extends React.Component {
           </div>
 
           <div className="snipper-share">
-            <h2>Deel deze snipper!</h2>
+            <h2 className="snipper-share-title">Deel deze snipper!</h2>
             <div className="social-share">
               <FacebookShareButton url={href}>
                 <FacebookIcon />
@@ -136,7 +136,7 @@ class SnipperDetail extends React.Component {
                 });
               }}
             >
-              Kopieer
+              Kopieer deze link
             </Button>
           </div>
         </div>

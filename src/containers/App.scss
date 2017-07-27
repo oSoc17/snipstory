@@ -1,21 +1,4 @@
 @import '../variables.scss';
-.knutseltips {
-  .card {
-    background-color: $brand-blue;
-    color: white;
-  }
-  .difficulty {
-    .difficulty-counter {
-      border: 3px solid $brand-red--lighter;
-      display: inline-block;
-      margin-left: 1em;
-    }
-    .difficulty-counter.filled {
-      background-color: $brand-red--lighter;
-      border: 3px solid transparent;
-    }
-  }
-}
 
 .module {
   margin: 7em 0;

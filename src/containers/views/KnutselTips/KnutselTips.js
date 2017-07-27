@@ -46,7 +46,10 @@ class KnutselTips extends React.Component {
         {knutseltips.isFetching
           ? <Spinner page size="large" />
           : <div className="page">
-              {!storyId && <h1 className="creation-title" style={{ textAlign: 'center' }}>Knutseltips</h1>}
+              {!storyId &&
+                <h1 className="creation-title" style={{ textAlign: 'center' }}>
+                  Knutseltips
+                </h1>}
               <div
                 className="knutseltips"
                 style={{
@@ -83,9 +86,9 @@ class KnutselTips extends React.Component {
                       alt={tip.name}
                     />
                     <div className="card-block">
-                      <h4 className="card-title">
+                      <h2 className="card-title">
                         {tip.name}
-                      </h4>
+                      </h2>
                     </div>
                     <div
                       className={`${this.state.openedTip !== i
@@ -97,8 +100,12 @@ class KnutselTips extends React.Component {
                       </p>
                       <Difficulty amount={tip.difficulty} />
                       <p className="card-text">
-                        Benodigdheden:<br/>
-                        {tip.requirements}
+                        <h3 className="knutseltip__requirements__title">
+                          Benodigdheden
+                        </h3>
+                        <p>
+                          {tip.requirements}
+                        </p>
                       </p>
                     </div>
                   </div>

@@ -99,14 +99,14 @@ class KnutselTips extends React.Component {
                         {tip.text}
                       </p>
                       <Difficulty amount={tip.difficulty} />
-                      <p className="card-text">
+                      <div className="card-text">
                         <h3 className="knutseltip__requirements__title">
                           Benodigdheden
                         </h3>
                         <p>
                           {tip.requirements}
                         </p>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 )}

@@ -12,7 +12,7 @@ const Navbar = ({ fixed = true }) => {
         : ''} navbar-light bg-faded`}
     >
       <button
-        className="navbar-toggler navbar-toggler-right"
+        className="navbar-toggler navbar-toggler-right align-middle"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -22,14 +22,16 @@ const Navbar = ({ fixed = true }) => {
       >
         <span className="navbar-toggler-icon" />
       </button>
+
+      <div className="navbar-brand nav-logo">
+        <Navlink to="/">
+          <img src={Navlogo} alt="nav logo" width="80px" />
+          <span>Snipstory</span>
+        </Navlink>
+      </div>
+
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item nav-logo">
-            <Navlink to="/">
-              <img src={Navlogo} alt="nav logo" width="80px" />
-              <span>Snipstory</span>
-            </Navlink>
-          </li>
           <li className="nav-item">
             <Navlink to="/snippers">Snippers bekijken</Navlink>
           </li>

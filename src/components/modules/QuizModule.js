@@ -19,9 +19,12 @@ const QuizModule = ({ module, handleChange, users }) => {
     <article className="container module module--quiz">
       <div className="question-picture-container ">
         {module.resources &&
-          <img
-            src={module.resources[0]}
-            alt="QuizImage"
+          <div
+            style={{
+              backgroundImage: `url(${module.resources[0]})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover'
+            }}
             className="img-mask"
           />}
         <p className="quiz-text">

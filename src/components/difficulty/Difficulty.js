@@ -12,7 +12,7 @@ const Difficulty = props => {
 
   return (
     <div className="difficulty tip-difficulty-card">
-      <p className="card-text tip-difficulty">Moeilijkheidsgraad:</p>
+      <h3 className="card-text tip-difficulty">Moeilijkheidsgraad</h3>
       {data}
     </div>
   );

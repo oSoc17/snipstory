@@ -7,6 +7,10 @@
 .story.card {
   cursor: pointer !important;
   transition: 0.5s;
+  img {
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem;
+  }
   svg {
     fill: white;
     margin-right: 10px;

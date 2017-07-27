@@ -75,7 +75,7 @@ class Room extends React.Component {
                 <p className="card-text">
                   {room.description}
                 </p>
-                <p className="card-text">
+                <p className="card-text card-text--icon">
                   <svg
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ class Room extends React.Component {
                   </svg>{' '}
                   {getReadableDate(room.birthdate)}
                 </p>
-                <p className="card-text">
+                <p className="card-text card-text--icon">
                   <svg
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ class Room extends React.Component {
                   </svg>
                   {getReadableDate(room.died)}
                 </p>
-                <p className="card-text">
+                <p className="card-text card-text--icon">
                   <svg
                     style={{ transform: 'scale(0.8)' }}
                     version="1.1"

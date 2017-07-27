@@ -5,6 +5,7 @@ import {
 } from '../helpers/firebase';
 import { push } from 'connected-react-router';
 import moment from 'moment';
+import { shuffle } from '../helpers/RandomHelpers';
 
 export const actionTypes = {
   listenToFirebaseAuth: 'LISTEN_FIREBASE_AUTH',
@@ -103,7 +104,9 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
-        dispatch(fetchRandomStoriesFulfilled(snapshot.val()));
+        let randomStories = shuffle(snapshot.val());
+
+        dispatch(fetchRandomStoriesFulfilled(randomStories.splice(0, 3)));
       })
       .catch(err => {
         dispatch(fetchRandomStoriesRejected(err));
@@ -776,7 +779,9 @@ export const fetchRandomSnippers = () => {
     firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
       const val = snippers.val();
       const keys = Object.keys(val);
-      dispatch(fetchRandomSnippersFulfilled(keys.map(id => val[id])));
+      let randomSnippers = shuffle(keys.map(key => val[key]));
+      // keys.map(id => val[id])
+      dispatch(fetchRandomSnippersFulfilled(randomSnippers.splice(0, 4)));
     });
   };
 };

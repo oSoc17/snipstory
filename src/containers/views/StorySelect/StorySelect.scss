@@ -11,9 +11,15 @@
     border-top-left-radius: 2.5rem;
     border-top-right-radius: 2.5rem;
   }
-  svg {
-    fill: white;
-    margin-right: 10px;
+  .card-text--icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    svg {
+      fill: white;
+      margin-right: 10px;
+      width: 36px;
+    }
   }
   &:hover {
     transform: scale(1.04);

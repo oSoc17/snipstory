@@ -8,7 +8,6 @@
 .story-information {
   color: white;
   display: flex;
-
   flex-flow: row-reverse;
   align-items: center;
   justify-content: center;
@@ -109,6 +108,9 @@
 
 .monument {
   margin-bottom: 6rem;
+  .card-block {
+    width: 100%;
+  }
 }
 
 .story-information svg {

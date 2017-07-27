@@ -25,9 +25,9 @@ class Snippers extends React.Component {
           </h1>
           <div className="container">
             <p className="creation-description">
-              Snippers zijn de werkjes van anderen over de geschiedenis.
-              Wil je zelf een Snipper maken? Lees dan een verhaal en laat
-              je inspireren!
+              Snippers zijn de werkjes van anderen over de geschiedenis. Wil je
+              zelf een Snipper maken? Lees dan een verhaal en laat je
+              inspireren!
             </p>
           </div>
           <div className="row" style={{ justifyContent: 'center' }}>
@@ -43,7 +43,8 @@ class Snippers extends React.Component {
                 >
                   {snipper.fileType === 'video'
                     ? <video
-                        controls
+                        autoPlay
+                        loop
                         src={snipper.photoURL}
                         className="card-img-top img-fluid"
                       />
@@ -64,10 +65,7 @@ class Snippers extends React.Component {
                       <h2 className="card-title">
                         Geknutseld door {snipper.creators}
                       </h2>
-                      <p
-                        className="card-text"
-
-                      >
+                      <p className="card-text">
                         {snipper.description}
                       </p>
                     </div>

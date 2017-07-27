@@ -3,6 +3,7 @@ import Navlink from './Navlink';
 import Button from '../button/Button';
 import Navlogo from '../../containers/views/Home/assets/menu-logo.png';
 import './Navlink.css';
+import { Menu } from 'react-feather';
 
 const Navbar = ({ fixed = true }) => {
   return (
@@ -20,16 +21,18 @@ const Navbar = ({ fixed = true }) => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon" />
+        <Menu color="#3274ff" size="36" />
       </button>
+
+      <div className="navbar-brand nav-logo">
+        <Navlink to="/">
+          <img src={Navlogo} alt="nav logo" width="80px" />
+          <span>Snipstory</span>
+        </Navlink>
+      </div>
+
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item nav-logo">
-            <Navlink to="/">
-              <img src={Navlogo} alt="nav logo" width="80px" />
-              <span>Snipstory</span>
-            </Navlink>
-          </li>
           <li className="nav-item">
             <Navlink to="/snippers">Snippers bekijken</Navlink>
           </li>

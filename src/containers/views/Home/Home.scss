@@ -82,6 +82,7 @@
   color: $brand-blue;
   font-size: 2rem;
   font-weight: 700;
+  text-align: center;
 }
 
 .header-paraf {
@@ -250,7 +251,6 @@
   font-family: $brand-font-stack;
   font-size: 1.4rem;
   color: $brand-blue;
-  padding: 2rem 8rem;
   text-align: center;
 }
 
@@ -269,5 +269,21 @@
   }
   to {
     opacity: 0;
+  }
+}
+@media (min-width: 30rem) {
+  .creation-description {
+    padding: 2rem 1rem;
+  }
+}
+@media (min-width: 60rem) {
+  .creation-description {
+    padding: 2rem 4rem;
+  }
+}
+
+@media (min-width: 90rem) {
+  .creation-description {
+    padding: 2rem 8rem;
   }
 }

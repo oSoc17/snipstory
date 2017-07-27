@@ -10,7 +10,13 @@ const Creations1 = ({ snipper }) => {
         onClick={e => history.push(`/snippers/${snipper.id}`)}
       >
         {snipper.fileType === 'video'
-          ? <video autoPlay controls src={snipper.photoURL} />
+          ? <video
+              className="img-fluid card-img"
+              autoPlay
+              loop
+              muted
+              src={snipper.photoURL}
+            />
           : <img
               src={snipper.photoURL}
               alt={`Snipper van ${snipper.creators}`}

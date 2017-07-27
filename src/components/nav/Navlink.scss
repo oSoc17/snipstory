@@ -31,10 +31,15 @@
 .navbar {
   background-color: white;
   justify-content: center;
-}
-
-.navbar {
   box-shadow: 0 0 40px 4px $brand-blue--darker;
+  &-toggler {
+    border-color: transparent !important;
+  }
+  .show {
+    .nav-item + .nav-item {
+      margin-top: 1rem;
+    }
+  }
 }
 
 .navbar-toggler {

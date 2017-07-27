@@ -20,16 +20,16 @@
   .floating-step {
     width: 100%;
     transition: all $transition-timing;
+    flex-direction: column;
     padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
-    flex-direction: row;
     .checkmark {
       display: none;
     }
     &__icon {
       display: flex;
-      margin-right: .8rem;
+      margin-bottom: .8rem;
       padding: 1rem;
       border-radius: 50%;
       box-shadow: $box-shadow;
@@ -60,6 +60,18 @@
         margin-bottom: -.4rem;
       }
       color: $brand-yellow;
+    }
+  }
+}
+
+@media (min-width: 90rem) {
+  .floating-steps {
+    .floating-step {
+      flex-direction: row;
+      &__icon {
+        margin-right: .8rem;
+        margin-bottom: 0;
+      }
     }
   }
 }

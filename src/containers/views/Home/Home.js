@@ -161,26 +161,28 @@ class Home extends React.Component {
 
                 <div className="container">
                   <div className="row creations-position">
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <Creations1 snipper={randomSnippers[0]} />
                     </div>
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <Creations1 snipper={randomSnippers[1]} />
                     </div>
                   </div>
 
                   <div className="row creations-position">
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <Creations1 snipper={randomSnippers[2]} />
                     </div>
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <Creations1 snipper={randomSnippers[3]} />
                     </div>
                   </div>
                 </div>
               </section>}
           <section className="button-section button-section--white">
-            <Button size="small" to="/story/select">Start je verhaal hier</Button>
+            <Button size="small" to="/story/select">
+              Start je verhaal hier
+            </Button>
           </section>
         </main>
 

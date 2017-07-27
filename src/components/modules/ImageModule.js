@@ -3,7 +3,14 @@ import React from 'react';
 const ImageModule = ({ module: { resources, text } }) =>
   <article className="container module">
     <figure>
-      <img alt={text.substring(0, 10)} src={resources[0]} />
+      <div
+        style={{
+          backgroundImage: `url(${resources[0]})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}
+        className="img-mask"
+      />
       <figcaption>
         {text}
       </figcaption>

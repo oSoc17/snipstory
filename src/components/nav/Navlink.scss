@@ -34,10 +34,16 @@
 
 .navbar {
   background-color: white;
-}
-
-.navbar {
+  justify-content: center;
   box-shadow: 0 0 40px 4px $brand-blue--darker;
+  &-toggler {
+    border-color: transparent !important;
+  }
+  .show {
+    .nav-item + .nav-item {
+      margin-top: 1rem;
+    }
+  }
 }
 
 .navbar-toggler {

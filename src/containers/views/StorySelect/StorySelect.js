@@ -42,17 +42,6 @@ class StorySelect extends React.Component {
           image={StapLogo}
         />
         <div className="container">
-          {/* <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Zoek hier een persoon of thema"
-              aria-describedby="basic-addon1"
-            />
-            <span className="input-group-addon" id="basic-addon1">
-              <Search />
-            </span>
-          </div> */}
           <div className="random-stories row">
             {randomStories &&
               randomStories.map(story =>
@@ -78,7 +67,7 @@ class StorySelect extends React.Component {
                     <p className="card-text">
                       {story.description}
                     </p>
-                    <p className="card-text">
+                    <p className="card-text card-text--icon">
                       <svg
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +80,7 @@ class StorySelect extends React.Component {
                       </svg>{' '}
                       {getReadableDate(story.birthdate)}
                     </p>
-                    <p className="card-text">
+                    <p className="card-text card-text--icon">
                       <svg
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +93,7 @@ class StorySelect extends React.Component {
                       </svg>
                       {getReadableDate(story.died)}
                     </p>
-                    <p className="card-text">
+                    <p className="card-text card-text--icon">
                       <svg
                         style={{ transform: 'scale(0.8)' }}
                         version="1.1"

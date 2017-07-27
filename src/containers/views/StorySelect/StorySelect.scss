@@ -7,9 +7,15 @@
 .story.card {
   cursor: pointer !important;
   transition: 0.5s;
-  svg {
-    fill: white;
-    margin-right: 10px;
+  .card-text--icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    svg {
+      fill: white;
+      margin-right: 10px;
+      width: 36px;
+    }
   }
   &:hover {
     transform: scale(1.04);

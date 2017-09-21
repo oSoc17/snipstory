@@ -27,3 +27,5 @@ npm start
 ```
 npm run build
 ```
+## Designs
+https://github.com/oSoc17/snipstory-design

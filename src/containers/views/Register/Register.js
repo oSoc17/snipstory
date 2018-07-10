@@ -32,13 +32,6 @@ const Register = ({
       type="text"
       component={FormField}
       label="Website homepage" />
-      <Field
-      name="institution"
-      label={selectedTypeOfUsers == "contentPartner" ?
-        "Institution": "School"}
-      type="text"
-      component={FormField}
-      />
     </div>
   );
 
@@ -47,21 +40,22 @@ const Register = ({
       <h1 className="register-title">Registreer</h1>
       <div>
         <form
-          onSubmit={handleSubmit(({ name, email, password, typeOfUser, ...rest }) => {
-            if (typeOfUser == 'teacher'){}
+          onSubmit={handleSubmit(
+            ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
+            if (typeOfUser != "contentPartner"){
+              rest = {};
+            }
 
             return firebaseAuth
               .createUserWithEmailAndPassword(email, password)
               .then(user => {
-                if (typeOfUser != "contentPartner"){
-                  rest = {};
-                }
 
                 return firebaseDatabase
                   .ref(`/users/${user.uid}`)
                   .set({ ...user.providerData[0],
                     displayName: name,
                     typeOfUser,
+                    institution,
                     ...rest
                   })
                   .then(_ => {
@@ -146,12 +140,11 @@ const Register = ({
             </div>
             <div>
               <Field
-                name="school"
-                component={FormField}
-                type="text"
-                label="School"
-                required
-              />
+              name="institution"
+              label={selectedTypeOfUsers == "contentPartner" ?
+              "Institution": "School"}
+              type="text"
+              component={FormField} />
             </div>
           </div>
           <div>

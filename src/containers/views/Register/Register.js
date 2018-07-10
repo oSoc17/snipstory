@@ -1,13 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import {
   firebaseAuth,
-  googleAuthProvider,
   firebaseDatabase
 } from '../../../helpers/firebase';
-import GoogleLogo from '../Login/assets/google.svg';
 import FormField from '../../../components/form/FormField';
 import './Register.css';
 
@@ -17,20 +16,54 @@ const Register = ({
   handleSubmit,
   history,
   error,
+  change,
+  selectedTypeOfUsers,
   ...props
 }) => {
+  const ContentPartnerOnly = (
+    <div>
+      <Field 
+      name="contact"
+      type="text"
+      label="Contact coordinates"
+      component={FormField} />
+      <Field
+      name="homepage"
+      type="text"
+      component={FormField}
+      label="Website homepage" />
+      <Field
+      name="institution"
+      label={selectedTypeOfUsers == "contentPartner" ?
+        "Institution": "School"}
+      type="text"
+      component={FormField}
+      />
+    </div>
+  );
+
   return (
     <div>
       <h1 className="register-title">Registreer</h1>
       <div>
         <form
-          onSubmit={handleSubmit(({ name, email, password }) => {
+          onSubmit={handleSubmit(({ name, email, password, typeOfUser, ...rest }) => {
+            if (typeOfUser == 'teacher'){}
+
             return firebaseAuth
               .createUserWithEmailAndPassword(email, password)
               .then(user => {
+                if (typeOfUser != "contentPartner"){
+                  rest = {};
+                }
+
                 return firebaseDatabase
                   .ref(`/users/${user.uid}`)
-                  .set({ ...user.providerData[0], displayName: name })
+                  .set({ ...user.providerData[0],
+                    displayName: name,
+                    typeOfUser,
+                    ...rest
+                  })
                   .then(_ => {
                     history.push('/teacher');
                   });
@@ -55,21 +88,30 @@ const Register = ({
           <div className="name-container">
             <div>
               <Field
-                name="firstname"
+                name="name"
                 component={FormField}
                 type="text"
                 label="Voornaam"
                 required
               />
             </div>
+          </div>
+
+          <div>
             <div>
               <Field
-                name="lastname"
-                component={FormField}
-                type="text"
-                label="Naam"
+                name="typeOfUser"
+                component="select"
+                label="Type of account"
+                onChange={(e, value) => {
+                  change('typeOfUser', value);
+                  console.log(value)
+                }}
                 required
-              />
+              >
+                <option value="teacher">Teacher</option>
+                <option value="contentPartner">Content Partner</option>
+              </Field>
             </div>
           </div>
 
@@ -112,6 +154,10 @@ const Register = ({
               />
             </div>
           </div>
+          <div>
+            {selectedTypeOfUsers == 'contentPartner' ? 
+                (ContentPartnerOnly): undefined}
+          </div>
           {error &&
             <div>
               {error}
@@ -125,15 +171,6 @@ const Register = ({
             Registreer
           </Button>
         </form>
-        <Button
-          onClick={() => {
-            firebaseAuth.signInWithRedirect(googleAuthProvider);
-            history.push('/teacher');
-          }}
-        >
-          <img src={GoogleLogo} alt="Google logo" />
-          <span>Registreer met Google</span>
-        </Button>
       </div>
       <div>
         <span>Heb je al een account?</span>
@@ -150,4 +187,11 @@ const validate = ({ password, password1, email }) => {
   }
   return errors;
 };
-export default reduxForm({ form: 'login', validate })(Register);
+
+const formName = 'login';
+const selector = formValueSelector(formName);
+
+const RegisterForm = reduxForm({ form: formName, validate })(Register);
+export default connect(state => ({
+  selectedTypeOfUsers: selector(state, 'typeOfUser')
+}))(RegisterForm);

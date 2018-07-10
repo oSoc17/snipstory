@@ -2,11 +2,11 @@ import firebase from 'firebase';
 
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyAmVHUHVmO5OS1-pKcLP_YkPwffWFhdIu0',
-  authDomain: 'ishare-c35bb.firebaseapp.com',
-  databaseURL: 'https://ishare-c35bb.firebaseio.com',
-  projectId: 'ishare-c35bb',
-  storageBucket: 'ishare-c35bb.appspot.com',
+  apiKey: 'AIzaSyCp0nRqtsjwrR3W_49LzHkM4ghOsNglBGU',
+  authDomain: 'snipstory-dev.firebaseapp.com',
+  databaseURL: 'https://snipstory-dev.firebaseio.com',
+  projectId: 'snipstory-dev',
+  storageBucket: 'snipstory-dev.appspot.com',
   messagingSenderId: '530521724254'
 };
 

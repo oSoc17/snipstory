@@ -94,6 +94,8 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Naam personage"
+                            placeholder="vb. Gerard Vanoosthuyze"
+                            required
                         />
                     </div>
                     <div>
@@ -102,6 +104,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Korte omschrijving"
+                            placeholder=""
                             required
                         />
                     </div>
@@ -111,6 +114,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Bron"
+                            placeholder=""
                             required
                         />
                     </div>
@@ -120,6 +124,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Geboorte datum"
+                            placeholder="vb. 24/05/1905"
                             required
                         />
                     </div>
@@ -129,6 +134,8 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Datum van overlijden"
+                            placeholder="vb. 21/04/1963"
+
                             required
                         />
                     </div>
@@ -138,6 +145,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="number"
                             label="Leeftijd"
+                            placeholder="vb. 23"
                             required
                         />
                     </div>
@@ -147,6 +155,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Geschikte leerjaar"
+                            placeholder="vb. 3-4e leerjaar"
                             required
                         />
                     </div>
@@ -172,6 +181,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Knutseltips"
+                            placeholder="vb. monument maken in plasticine"
                             required
                         />
                     </div>
@@ -181,6 +191,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Linked website"
+                            placeholder="vb. www.museum.be"
                             required
                         />
                     </div>
@@ -190,6 +201,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Nationaliteit"
+                            placeholder="vb. Belg"
                             required
                         />
                     </div>

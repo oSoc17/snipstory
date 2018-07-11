@@ -1,0 +1,27 @@
+footer {
+  background-color: #3274ff;
+  display: flex;
+  justify-content: center; }
+
+.partner-container {
+  width: 70vw;
+  margin-top: 1rem;
+  padding: 1rem; }
+  .partner-container img {
+    object-fit: cover; }
+  .partner-container .logo {
+    display: flex;
+    align-items: center; }
+
+.partner-title {
+  color: #0000FF;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center; }
+
+.partner-mini-container {
+  display: flex;
+  justify-content: space-between; }
+
+.effect {
+  transform: scale(0.7); }

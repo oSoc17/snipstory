@@ -1,0 +1,27 @@
+.article-container-2 {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-left: 4rem;
+  margin-right: 4rem; }
+
+.creations-container-2 {
+  width: 52rem;
+  background-color: #3274ff;
+  border-radius: 5rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-bottom: 3rem; }
+
+.img-mapping-2 {
+  width: 49rem;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  margin-top: 1.5rem; }
+
+.title-2 {
+  margin-left: 3.5rem; }
+
+.para-2 {
+  margin-right: 4rem; }

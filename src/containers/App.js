@@ -24,6 +24,7 @@ import SnipperDetail from './views/SnipperDetail/SnipperDetail';
 import Share from './views/Share/Share';
 import deepEqual from 'deep-equal';
 import ScrollToTop from '../components/util/ScrollToTop';
+import AddStories from './views/AddStories/AddStories'
 import './App.css';
 
 class App extends Component {
@@ -62,6 +63,11 @@ class App extends Component {
                 path="/teacher/register"
                 exact
                 render={props => <Register user={user} {...props} />}
+              />
+              <Route
+                path="/teacher/addstory"
+                exact
+                render={props => <AddStories user={user} {...props} />}
               />
               <Route
                 path="/story/select"

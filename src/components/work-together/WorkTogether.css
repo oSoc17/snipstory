@@ -1,0 +1,39 @@
+.work-together {
+  background-color: #3274ff;
+  border-radius: 2.5rem;
+  padding: 3rem 2rem;
+  position: relative;
+  margin-bottom: 2rem; }
+  .work-together__button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -1rem; }
+  .work-together__inner {
+    color: #fff;
+    max-width: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1rem; }
+    .work-together__inner * + * {
+      margin-top: 1rem; }
+  .work-together__text {
+    text-align: center; }
+  .work-together .bednet-logo {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: -2rem;
+    margin-left: -2rem;
+    box-shadow: 0 2px 10px 2px #5faaff; }
+    .work-together .bednet-logo__img {
+      width: 2.5rem;
+      height: 2.5rem; }
+  .work-together .form-field__input {
+    font-size: 16px; }

@@ -1,0 +1,26 @@
+.register-title {
+  color: #3274ff;
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 600; }
+
+.name-container {
+  display: flex; }
+
+.password-container {
+  display: flex; }
+
+.etc-container {
+  display: flex; }
+
+.register-box{
+  position: relative;
+  width: 66%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background: #fff;
+  box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+  padding: 3rem;
+}

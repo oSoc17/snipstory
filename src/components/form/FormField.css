@@ -18,3 +18,6 @@
 .form-field__descr {
   border-radius: 2rem;
   padding: 1rem 1.5rem; }
+label{
+  display: block;
+}

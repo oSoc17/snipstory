@@ -8,6 +8,7 @@ const FormField = ({
   meta: { asyncValidating, touched, error }
 }) =>
   <div className="form-field">
+    <label>{label}</label>
     <input
       className="form-field__input"
       {...input}

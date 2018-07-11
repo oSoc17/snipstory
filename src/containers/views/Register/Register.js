@@ -9,6 +9,9 @@ import {
 } from '../../../helpers/firebase';
 import FormField from '../../../components/form/FormField';
 import './Register.css';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer.js';
+
 
 const Register = ({
   pristine,
@@ -36,139 +39,143 @@ const Register = ({
   );
 
   return (
-    <div>
-      <h1 className="register-title">Registreer</h1>
-      <div>
-        <form
-          onSubmit={handleSubmit(
-            ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
-            if (typeOfUser != "contentPartner"){
-              rest = {};
-            }
-
-            return firebaseAuth
-              .createUserWithEmailAndPassword(email, password)
-              .then(user => {
-
-                return firebaseDatabase
-                  .ref(`/users/${user.uid}`)
-                  .set({ ...user.providerData[0],
-                    displayName: name,
-                    typeOfUser,
-                    institution,
-                    ...rest
-                  })
-                  .then(_ => {
-                    history.push('/teacher');
-                  });
-              })
-              .catch(err => {
-                if (err.code === 400 || err.code === 'auth/weak-password') {
-                  throw new SubmissionError({
-                    _error: 'Paswoord is niet sterk genoeg'
-                  });
-                } else if (err.code === 'auth/email-already-in-use') {
-                  throw new SubmissionError({
-                    email:
-                      'Er is al een account geregistreerd met dit e-mailadres'
-                  });
+    <div className="page">
+      <Navbar/>
+      <div className="register-box">
+          <h1 className="register-title">Registreer</h1>
+          <div>
+            <form
+              onSubmit={handleSubmit(
+                ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
+                if (typeOfUser != "contentPartner"){
+                  rest = {};
                 }
-                throw new SubmissionError({
-                  _error: 'Er is iets fout gegaan, probeer het opnieuw'
-                });
-              });
-          })}
-        >
-          <div className="name-container">
-            <div>
-              <Field
-                name="name"
-                component={FormField}
-                type="text"
-                label="Voornaam"
-                required
-              />
-            </div>
-          </div>
 
-          <div>
-            <div>
-              <Field
-                name="typeOfUser"
-                component="select"
-                label="Type of account"
-                onChange={(e, value) => {
-                  change('typeOfUser', value);
-                  console.log(value)
-                }}
-                required
+                return firebaseAuth
+                  .createUserWithEmailAndPassword(email, password)
+                  .then(user => {
+
+                    return firebaseDatabase
+                      .ref(`/users/${user.uid}`)
+                      .set({ ...user.providerData[0],
+                        displayName: name,
+                        typeOfUser,
+                        institution,
+                        ...rest
+                      })
+                      .then(_ => {
+                        history.push('/teacher');
+                      });
+                  })
+                  .catch(err => {
+                    if (err.code === 400 || err.code === 'auth/weak-password') {
+                      throw new SubmissionError({
+                        _error: 'Paswoord is niet sterk genoeg'
+                      });
+                    } else if (err.code === 'auth/email-already-in-use') {
+                      throw new SubmissionError({
+                        email:
+                          'Er is al een account geregistreerd met dit e-mailadres'
+                      });
+                    }
+                    throw new SubmissionError({
+                      _error: 'Er is iets fout gegaan, probeer het opnieuw'
+                    });
+                  });
+              })}
+            >
+              <div className="name-container">
+                <div>
+                  <Field
+                    name="name"
+                    component={FormField}
+                    type="text"
+                    label="Voornaam"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <Field
+                    name="typeOfUser"
+                    component="select"
+                    label="Type of account"
+                    onChange={(e, value) => {
+                      change('typeOfUser', value);
+                      console.log(value)
+                    }}
+                    required
+                  >
+                    <option value="teacher">Teacher</option>
+                    <option value="contentPartner">Content Partner</option>
+                  </Field>
+                </div>
+              </div>
+
+              <div className="password-container">
+                <div>
+                  <Field 
+                    name="password"
+                    component={FormField}
+                    type="password"
+                    label="Wachtwoord"
+                  />
+                </div>
+                <div>
+                  <Field
+                    name="password1"
+                    component={FormField}
+                    type="password"
+                    label="Wachtwoord herhalen"
+                  />
+                </div>
+              </div>
+
+              <div className="etc-container">
+                <div>
+                  <Field
+                    name="email"
+                    component={FormField}
+                    type="email"
+                    label="Email"
+                    required
+                  />
+                </div>
+                <div>
+                  <Field
+                  name="institution"
+                  label={selectedTypeOfUsers == "contentPartner" ?
+                  "Institution": "School"}
+                  type="text"
+                  component={FormField} />
+                </div>
+              </div>
+              <div>
+                {selectedTypeOfUsers == 'contentPartner' ? 
+                    (ContentPartnerOnly): undefined}
+              </div>
+              {error &&
+                <div>
+                  {error}
+                </div>}
+
+              <Button
+                className="test"
+                type="submit"
+                disabled={pristine || submitting}
               >
-                <option value="teacher">Teacher</option>
-                <option value="contentPartner">Content Partner</option>
-              </Field>
-            </div>
-          </div>
-
-          <div className="password-container">
-            <div>
-              <Field
-                name="password"
-                component={FormField}
-                type="password"
-                label="Wachtwoord"
-              />
-            </div>
-            <div>
-              <Field
-                name="password1"
-                component={FormField}
-                type="password"
-                label="Wachtwoord herhalen"
-              />
-            </div>
-          </div>
-
-          <div className="etc-container">
-            <div>
-              <Field
-                name="email"
-                component={FormField}
-                type="email"
-                label="Email"
-                required
-              />
-            </div>
-            <div>
-              <Field
-              name="institution"
-              label={selectedTypeOfUsers == "contentPartner" ?
-              "Institution": "School"}
-              type="text"
-              component={FormField} />
-            </div>
+                Registreer
+              </Button>
+            </form>
           </div>
           <div>
-            {selectedTypeOfUsers == 'contentPartner' ? 
-                (ContentPartnerOnly): undefined}
+            <span>Heb je al een account?</span>
+            <Link to="/teacher/login">Log hier in!</Link>
           </div>
-          {error &&
-            <div>
-              {error}
-            </div>}
-
-          <Button
-            className="test"
-            type="submit"
-            disabled={pristine || submitting}
-          >
-            Registreer
-          </Button>
-        </form>
-      </div>
-      <div>
-        <span>Heb je al een account?</span>
-        <Link to="/teacher/login">Log hier in!</Link>
-      </div>
+        </div>
+        <Footer/>
     </div>
   );
 };

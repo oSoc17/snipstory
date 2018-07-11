@@ -5,7 +5,8 @@ const FormField = ({
   input,
   label,
   type,
-  meta: { asyncValidating, touched, error }
+  meta: { asyncValidating, touched, error },
+  required = false
 }) =>
   <div className="form-field">
     <label>{label}</label>
@@ -14,6 +15,7 @@ const FormField = ({
       {...input}
       type={type}
       placeholder={label}
+      required={required}
     />
     {touched &&
       error &&

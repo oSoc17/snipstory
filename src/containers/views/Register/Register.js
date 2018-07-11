@@ -25,7 +25,7 @@ const Register = ({
 }) => {
   const ContentPartnerOnly = (
     <div>
-      <Field 
+      <Field
       name="contact"
       type="text"
       label="Contact coordinates"
@@ -96,7 +96,7 @@ const Register = ({
                 </div>
               </div>
 
-              <div>
+              <div className="toggle-container">
                 <div>
                   <Field
                     name="typeOfUser"

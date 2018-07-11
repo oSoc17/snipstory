@@ -13,3 +13,14 @@
 
 .etc-container {
   display: flex; }
+
+.register-box{
+  position: relative;
+  width: 66%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background: #fff;
+  box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+  padding: 3rem;
+}

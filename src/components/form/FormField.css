@@ -1,0 +1,16 @@
+.form-field__input {
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: black;
+  background-color: white;
+  font-size: 1rem;
+  border-radius: 4rem;
+  transition: all 0.2s;
+  border: 3px #3274ff solid;
+  width: 25rem;
+  height: 3.5rem; }
+  .form-field__input::placeholder {
+    color: #5faaff; }
+
+.form-field__descr {
+  border-radius: 2rem;
+  padding: 1rem 1.5rem; }

@@ -1,0 +1,46 @@
+.module {
+  margin: 7em 0; }
+
+*:focus {
+  outline-color: #3274ff !important; }
+
+.card {
+  border-radius: 2.5rem; }
+  .card img {
+    border: 0.5rem #3274ff solid; }
+
+.room {
+  margin-top: 3em; }
+
+.snipper {
+  background-color: #3274ff;
+  color: white; }
+
+.story {
+  background-color: #3274ff;
+  color: white; }
+
+.card.monument {
+  background: #3274ff;
+  border-radius: 25px;
+  border: 15px solid #3274ff; }
+
+.users {
+  color: white;
+  border-radius: 25px;
+  background-color: #3274ff;
+  padding: 2em; }
+
+.users > div {
+  margin: 1em; }
+
+.users input {
+  width: 100%;
+  margin: 1em;
+  padding: 1em; }
+
+.users button {
+  cursor: pointer; }
+
+.app {
+  padding-top: 6rem; }

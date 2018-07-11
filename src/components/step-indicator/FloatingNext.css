@@ -1,0 +1,26 @@
+.floating-next {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 4rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 2px #5faaff;
+  transition: all 0.2s; }
+  .floating-next__inner {
+    border: none;
+    background-color: transparent;
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    padding: 1rem 2rem; }
+    .floating-next__inner:focus {
+      outline: none; }
+  .floating-next__text {
+    margin-right: .5rem; }
+  .floating-next:hover, .floating-next:focus {
+    transform: translateY(-0.1rem); }
+    .floating-next:hover .floating-next__inner, .floating-next:focus .floating-next__inner {
+      color: #3274ff; }

@@ -53,6 +53,8 @@ class AddStories extends React.Component {
 
     render() {
         const {
+            pristine,
+            submitting,
             user,
             logout
         } = this.props;
@@ -65,8 +67,10 @@ class AddStories extends React.Component {
                 <p> Hi, {user.displayName}</p>
             </div>
 
-            <form onSubmit={this.props.handleSubmit((id,...fields) => {
-                firebaseDatabase.ref('stories').child(id).set({
+            <form onSubmit={this.props.handleSubmit(({id,...fields}) => {
+                let o = firebaseDatabase.ref('stories/');
+
+                o.child(id).set({
                     id,
                     general: {
                         ...fields
@@ -90,7 +94,6 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="text"
                             label="Naam personage"
-                            required
                         />
                     </div>
                     <div>
@@ -199,7 +202,7 @@ class AddStories extends React.Component {
                         />
                     </div>
 
-                    <Button>Voeg een verhaal toe</Button>
+                    <Button type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
 
                 <Button onClick={logout}>Uitloggen</Button>
             </div>

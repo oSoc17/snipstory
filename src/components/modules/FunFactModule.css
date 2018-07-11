@@ -1,0 +1,24 @@
+.funfact-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+
+.fact-title {
+  background-color: #ff645c;
+  color: white;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 1rem 2rem;
+  border-radius: 2.5rem;
+  font-size: 2.5rem;
+  margin-right: 60rem;
+  margin-bottom: -2rem;
+  z-index: 1; }
+
+.fact-text {
+  font-size: 1.9rem;
+  background-color: #ffa92e;
+  color: white;
+  text-align: center;
+  padding: 5rem;
+  border-radius: 2.5rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }

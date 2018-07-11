@@ -1,0 +1,29 @@
+.step-indicator {
+  background-color: #3274ff;
+  padding: 2em 0;
+  color: #fff; }
+  .step-indicator .step-number {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffaa2e;
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 600;
+    font-size: 3rem;
+    height: 6rem;
+    width: 6rem; }
+    .step-indicator .step-number__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+  .step-indicator__body {
+    border-left: 0.8rem #ffaa2e solid;
+    padding-left: .8rem; }
+    .step-indicator__body .step-indicator__title {
+      font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+  .step-indicator__image {
+    width: 10rem; }
+  .step-indicator__main {
+    display: flex;
+    align-items: center; }

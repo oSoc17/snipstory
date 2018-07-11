@@ -1,0 +1,116 @@
+.card-img-top-2 {
+  border-radius: 25rem;
+  width: 30rem;
+  border: 1rem solid #3274ff; }
+
+.story-information {
+  color: white;
+  display: flex;
+  flex-flow: row-reverse;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-weight: 500;
+  width: auto; }
+  .story-information__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 5.5rem; }
+
+.card-block {
+  background-color: #3274ff;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem; }
+
+.card-block--story-head {
+  border-top-right-radius: 2.5rem;
+  border-bottom-right-radius: 2.5rem;
+  padding-left: 13rem; }
+
+.block-width {
+  width: 50rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-left: -10rem; }
+
+.personName-label {
+  font-size: 2rem; }
+
+.modules {
+  width: 100%; }
+
+.modules .module:nth-child(2n + 1) {
+  background-color: #3274ff;
+  color: white; }
+
+.room {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center; }
+
+.module {
+  width: 100%;
+  padding: 3rem 0rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+
+.quiz-module-text {
+  font-size: 1.2rem;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  padding: 2rem;
+  border-radius: 2.5rem;
+  font-weight: 600;
+  margin-left: 3rem; }
+
+.quiz-module-text:nth-child(2n + 1) {
+  background-color: white;
+  color: #3274ff;
+  width: 5rem; }
+
+.module--quiz {
+  width: 100%; }
+
+.question {
+  width: 80vw;
+  text-align: center; }
+
+.img-mask {
+  width: 40rem;
+  clip-path: url(#myClip);
+  height: 500px;
+  min-height: 500px; }
+
+.path-border {
+  border: 1rem solid #3274ff;
+  width: 40rem;
+  height: 100%; }
+
+.monument {
+  margin-bottom: 6rem; }
+  .monument .card-block {
+    width: 100%; }
+
+.story-information svg {
+  fill: white;
+  margin-right: 1rem; }
+
+.module-text {
+  width: 40rem;
+  margin-right: 40rem;
+  margin-bottom: -10rem; }
+
+.monument-text {
+  margin-bottom: 4rem; }
+
+.article-centering {
+  flex-flow: row;
+  justify-content: center;
+  align-items: center; }
+
+.text-centering {
+  margin-right: 0rem;
+  margin-bottom: 0rem;
+  width: 40rem; }

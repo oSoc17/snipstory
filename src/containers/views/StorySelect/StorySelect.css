@@ -1,0 +1,51 @@
+.page {
+  background-image: url("./assets/bg.svg");
+  background-repeat: no-repeat; }
+
+.story.card {
+  cursor: pointer !important;
+  transition: 0.5s; }
+  .story.card img {
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem; }
+  .story.card .card-text--icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; }
+    .story.card .card-text--icon svg {
+      fill: white;
+      margin-right: 10px;
+      width: 36px; }
+  .story.card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 1rem 0.2rem rgba(95, 170, 255, 0.8); }
+
+.random-stories {
+  margin: 3rem 0;
+  justify-content: center; }
+
+.story-title {
+  color: white;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 2.8rem;
+  text-align: center;
+  width: 50rem;
+  margin: 0 auto; }
+
+.input-group {
+  width: 26rem;
+  height: 3.6rem; }
+
+.form-control {
+  border-bottom-left-radius: 10rem;
+  border-top-left-radius: 10rem;
+  border-right: none;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #3274ff;
+  height: 100%; }
+
+.input-group-addon {
+  border-bottom-right-radius: 10rem;
+  border-top-right-radius: 10rem;
+  border-left: none;
+  background-color: white; }
